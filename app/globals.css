@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --red: #941b2b;
+  --red-dark: #6f1020;
+  --navy: #10233f;
+  --navy-soft: #1c365a;
+  --gold: #d6aa49;
+  --paper: #f6f7f9;
+  --ink: #172033;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+a,
+input,
+select,
+textarea {
+  outline-offset: 3px;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+.font-display {
+  font-family: Georgia, "Times New Roman", serif;
+}
+.card-shadow {
+  box-shadow: 0 12px 32px rgba(16, 35, 63, 0.07);
+}
+.soft-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  scrollbar-width: none;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-rise {
+  animation: rise 0.35s ease-out both;
+}

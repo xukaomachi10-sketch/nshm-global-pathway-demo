@@ -1,0 +1,669 @@
+
+
+===== PAGE 1 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+TRƯỜNG NGÔI SAO HOÀNG MAI 
+Đức - Trí - Thể - Nhân - Hòa | Chân - Chính - Chăm - Chuyên - Chất 
+SOP.HT-03 
+QUY TRÌNH XÂY DỰNG VÀ TRIỂN KHAI 
+CHƯƠNG TRÌNH HƯỚNG NGHIỆP CHO HỌC SINH THPT 
+Bộ quy trình HT - Hợp tác Quốc tế & Đối tác 
+Meta-OS NSHM-XQ | Bản sửa đổi theo cấu trúc chuẩn 20 mục | Năm học 2026-2027 
+Trường Nội dung 
+Mã SOP SOP.HT-03 
+Phiên bản hoàn chỉnh v3.0 - Chỉnh sửa từ “Tư vấn và Hướng nghiệp học sinh” thành “Xây dựng và triển khai chương trình 
+hướng nghiệp cho học sinh THPT” 
+Owner Phòng Hợp tác Quốc tế & Hướng nghiệp 
+Accountable BGH phụ trách THPT/Hợp tác Quốc tế & Hướng nghiệp 
+Mức bảo mật Nội bộ hạn chế - dữ liệu học sinh, khảo sát định hướng, hồ sơ hướng nghiệp và dashboard chỉ chia sẻ 
+theo phân quyền 
+Trạng thái Đề xuất pilot/ban hành nội bộ sau rà soát của BGH, Phòng CL, PC/CN và các đơn vị liên quan 
+ 
+Bảng sửa đổi/bổ sung trọng yếu so với bản SOP.HT-03 v2.1 
+Nhóm bổ sung Nội dung hoàn thiện 
+Đổi trọng tâm Chuyển từ quy trình tư vấn cá nhân sang quy trình xây dựng, triển khai, đo lường và cải tiến chương trình 
+hướng nghiệp THPT cấp trường/khối/lớp. 
+Quản trị chương trình Bổ sung chu trình năm học, phân tầng hỗ trợ, chương trình khung theo khối 10-11-12, kế hoạch truyền 
+thông và quản lý nguồn lực. 
+Liên thông SOP Liên thông với SOP.HT-01, SOP.HT-02, SOP.HT-04, SOP.HT-05 và các bộ GD, CL, TL, TT, PC, CN, HS. 
+Dữ liệu & dashboard Bổ sung baseline định hướng, hồ sơ dữ liệu theo khối/lớp, dashboard chương trình, chỉ số tham gia, hài 
+lòng, action evidence và CAPA. 
+Kiểm soát rủi ro Bổ sung kiểm soát đối tác/mentor, consent, bảo mật dữ liệu, phân quyền, điểm dừng khi phát hiện yếu tố 
+tâm lý hoặc rủi ro truyền thông. 
+Biểu mẫu Chuẩn hóa 03 biểu mẫu bắt buộc và các phụ lục vận hành chương trình hướng nghiệp THPT. 
+ 
+ 
+
+===== PAGE 2 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+I. TUYÊN BỐ VẬN HÀNH 
+SOP.HT-03 là quy trình chuẩn hóa việc xây dựng và triển khai chương trình hướng nghiệp cho học sinh THPT tại Trường Ngôi 
+Sao Hoàng Mai. Quy trình này bảo đảm chương trình hướng nghiệp được thiết kế có mục tiêu, có dữ liệu đầu vào, có chuẩn 
+đầu ra theo khối lớp, có hoạt động trải nghiệm/mentor phù hợp, có đánh giá tác động và có cải tiến sau mỗi chu kỳ. 
+Chương trình hướng nghiệp THPT không chỉ là các buổi tư vấn đơn lẻ. Đây là hệ thống hoạt động liên tục trong năm học, kết 
+nối học thuật, trải nghiệm nghề nghiệp, đại học, du học, portfolio, mentor, CMHS, cựu học sinh và đối tác nhằm giúp học sinh 
+hiểu bản thân, hiểu lựa chọn tương lai và có kế hoạch hành động cụ thể. 
+Nguyên tắc lõi: Mục tiêu rõ - Dữ liệu thật - Thiết kế theo chuẩn đầu ra - Triển khai an toàn - Kết nối đúng nguồn lực - Minh 
+chứng phát triển - Đo lường bằng dữ liệu - Cải tiến bằng CAPA. 
+Ranh giới chuyên môn: SOP này không thay thế tư vấn tâm lý chuyên sâu, tư vấn đại học/du học chi tiết, xử lý hồ sơ tuyển 
+sinh/visa/học bổng, trị liệu chuyên môn hoặc dịch vụ của đối tác bên ngoài. Mọi thông tin chương trình và khuyến nghị định 
+hướng chỉ có giá trị hỗ trợ ra quyết định, không phải cam kết kết quả trúng tuyển, học bổng, nghề nghiệp hoặc thu nhập 
+tương lai. 
+1. KIỂM SOÁT TÀI LIỆU 
+Trường kiểm soát Nội dung chuẩn hóa 
+Mã SOP SOP.HT-03 
+Tên SOP Quy trình xây dựng và triển khai chương trình hướng nghiệp cho học sinh THPT 
+Bộ quy trình HT - Hợp tác Quốc tế & Đối tác 
+Lớp Meta-OS Lớp mở rộng - Hệ sinh thái đối tác, hướng nghiệp, đại học, du học và phát triển học sinh 
+Phiên bản v3.0 - bản hoàn chỉnh theo template Meta-OS NSHM-XQ 
+Owner / Responsible (R) Trưởng phòng Hợp tác Quốc tế & Hướng nghiệp; cán bộ phụ trách hướng nghiệp THPT; nhóm triển khai 
+chương trình theo khối/lớp 
+Accountable (A) BGH phụ trách THPT/Hợp tác Quốc tế & Hướng nghiệp; Trưởng phòng HTQT & HN chịu trách nhiệm vận hành, 
+chất lượng chương trình và dữ liệu hướng nghiệp 
+Program Owner Cán bộ phụ trách chương trình hướng nghiệp THPT theo năm học; chịu trách nhiệm kế hoạch, tiến độ, minh 
+chứng, báo cáo và cải tiến 
+Data Owner / Data Steward Trưởng phòng HTQT & HN là Data Owner; cán bộ HTQT & HN/CL/CN được phân quyền là Data Steward phụ 
+trách lưu trữ, ẩn danh, dashboard và phân quyền dữ liệu 
+Phối hợp chính BGH THPT, GVCN, GVBM/Tổ chuyên môn, Phòng Giáo dục/Học thuật, Phòng CL, Phòng TT, CMHS, mentor, cựu 
+học sinh, đối tác đại học/doanh nghiệp 
+Phối hợp khi cần Phòng TL, PC, CN, HS/CSHS, Y tế, AT, đối tác du học/đại học/chuyên gia được phê duyệt 
+Chu kỳ rà soát Tối thiểu 01 lần/năm học; rà soát sau mỗi chương trình lớn, sau phản hồi nghiêm trọng, sự cố dữ liệu hoặc 
+thay đổi định hướng chiến lược THPT 
+Phân loại mật Nội bộ hạn chế. Dữ liệu cá nhân học sinh, hồ sơ khảo sát, phản hồi CMHS/GV, dashboard chưa ẩn danh và 
+thông tin mentor/đối tác là dữ liệu hạn chế/nhạy cảm 
+Trạng thái áp dụng Áp dụng bắt buộc cho mọi chương trình hướng nghiệp THPT do Phòng HTQT & HN chủ trì hoặc phối hợp triển 
+khai 
+ 
+Lịch sử sửa đổi 
+Phiên bản Nội dung thay đổi Người/đơn vị phụ trách Trạng thái 
+v2.1 Bản SOP.HT-03 tư vấn và hướng nghiệp học sinh theo cấu trúc 20 
+mục 
+Phòng HTQT & HN Đã có bản nền 
+v3.0 Chuyển đổi thành quy trình xây dựng và triển khai chương trình 
+hướng nghiệp cho học sinh THPT; bổ sung quản trị chương trình, 
+chu kỳ năm học, khung nội dung, dashboard, RASCI, KPI/SLA, CAPA 
+Phòng HTQT & HN + BGH THPT + 
+CL + PC/CN 
+Đề xuất ban hành/pilot 
+ 
+2. MỤC ĐÍCH 
+SOP.HT-03 thiết lập chuẩn vận hành thống nhất để chương trình hướng nghiệp THPT được xây dựng, phê duyệt, triển khai, 
+đo lường và cải tiến theo dữ liệu, bảo đảm phù hợp với chiến lược giáo dục của Trường Ngôi Sao Hoàng Mai và nhu cầu phát 
+triển của học sinh lớp 10, 11, 12. 
+Mục tiêu Diễn giải vận hành 
+Thiết kế có mục tiêu Mỗi chương trình hướng nghiệp phải xác định rõ đối tượng, chuẩn đầu ra, chủ đề, nguồn lực, dữ liệu đầu vào và tiêu 
+chí thành công. 
+Cá nhân hóa theo khối/lớp Chương trình phân tầng theo khối 10, 11, 12 và có cơ chế chuyển từ hoạt động phổ quát sang tư vấn cá 
+nhân/portfolio/đại học/du học khi cần. 
+Kết nối nguồn lực chất lượng Kết nối học sinh với mentor, CMHS chuyên gia, cựu học sinh, trường đại học, doanh nghiệp, dự án, cuộc thi, 
+UniConnect và JobConnect phù hợp. 
+Tạo minh chứng phát triển Mỗi chương trình hướng tới action evidence: bài phản tư, nhật ký trải nghiệm, sản phẩm dự án, portfolio entry, kế 
+hoạch hành động hoặc hồ sơ định hướng. 
+
+===== PAGE 3 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+Mục tiêu Diễn giải vận hành 
+Đảm bảo an toàn & bảo mật Kiểm soát dữ liệu học sinh, hình ảnh, câu chuyện cá nhân, đối tác/mentor, truyền thông và tình huống phát sinh yếu 
+tố tâm lý. 
+Quản trị bằng dashboard Theo dõi tỷ lệ tham gia, hài lòng, rõ định hướng, action evidence, chuyển tuyến, phản hồi, rủi ro và CAPA. 
+Cải tiến liên tục Sau mỗi học kỳ/năm học, phân tích dữ liệu và phản hồi để cập nhật chương trình, nguồn lực, biểu mẫu, đối tác và 
+cách triển khai. 
+ 
+3. PHẠM VI ÁP DỤNG 
+Phạm vi Quy định 
+Đối tượng áp dụng Học sinh THPT khối 10, 11, 12; CMHS; GVCN/GVBM; BGH THPT; Phòng HTQT & HN; mentor/đối tác; các bộ phận 
+liên quan. 
+Loại hoạt động Khảo sát định hướng, workshop hướng nghiệp, ngày hội nghề nghiệp, UniConnect, JobConnect, mentor talk, 
+project-based career exploration, tư vấn nhóm, chuyển tuyến tư vấn cá nhân. 
+Mạch nội dung Hiểu bản thân; hiểu ngành/nghề; lựa chọn môn học/tổ hợp; trải nghiệm nghề nghiệp; phát triển năng lực; 
+portfolio; đại học/du học; kế hoạch hành động cá nhân. 
+Không thuộc phạm vi Tham vấn tâm lý chuyên sâu, can thiệp khủng hoảng, xử lý hồ sơ tuyển sinh/visa/học bổng, ký kết MOU/hợp 
+đồng, quản lý portfolio chuyên sâu, cam kết kết quả trúng tuyển/học bổng/nghề nghiệp. 
+ 
+3.1. Phân tầng hỗ trợ hướng nghiệp THPT 
+Tầng hỗ trợ Đối tượng Ví dụ hoạt động Điều kiện chuyển SOP/luồng 
+Tầng 1 - Phổ quát Toàn khối/lớp hoặc toàn THPT Workshop định hướng ngành/nghề, khảo sát 
+baseline, UniConnect/JobConnect chung, ngày hội 
+hướng nghiệp, bản tin nghề nghiệp 
+Nếu học sinh cần cá nhân hóa, 
+chuyển tư vấn cá nhân hoặc hồ sơ 
+ICDP 
+Tầng 2 - Theo nhóm mục 
+tiêu 
+Nhóm học sinh có cùng nhóm ngành 
+hoặc nhu cầu 
+Nhóm STEM, Business, Social Sciences, Art/Design, 
+Medicine, Law, Education; nhóm cần portfolio, dự 
+án, mentor 
+Nếu cần portfolio/đại học/du học 
+chuyên sâu, chuyển SOP.HT-
+04/SOP.HT-05 
+Tầng 3 - Cá nhân/chuyển 
+gửi 
+Học sinh có định hướng chưa rõ, 
+xung đột lựa chọn, nhu cầu riêng 
+hoặc rủi ro 
+Tư vấn 1:1, lập ICDP, kết nối mentor phù hợp, follow-
+up 4-8 tuần 
+Nếu có yếu tố tâm lý/nguy cơ an 
+toàn, chuyển Bộ TL; nếu có yếu tố 
+pháp lý/dữ liệu, chuyển PC/CN 
+ 
+3.2. Chuẩn đầu ra hướng nghiệp theo khối THPT 
+Khối Chuẩn đầu ra tối thiểu Minh chứng khuyến nghị 
+Khối 10 Học sinh nhận diện sở thích, điểm mạnh, giá trị cá nhân; xác định 1-3 
+nhóm ngành/nghề quan tâm; lựa chọn hoạt động trải nghiệm nền tảng. 
+Phiếu khảo sát định hướng, bài phản tư, kế hoạch trải 
+nghiệm học kỳ, danh mục hoạt động/CLB/dự án phù 
+hợp. 
+Khối 11 Học sinh làm rõ nhóm ngành/trường/quốc gia hoặc lĩnh vực nghề nghiệp; 
+có kế hoạch phát triển năng lực, dự án, mentor, portfolio hoặc trải nghiệm 
+nghề nghiệp. 
+ICDP, portfolio entry, nhật ký mentor, sản phẩm dự án, 
+báo cáo trải nghiệm JobConnect/UniConnect. 
+Khối 12 Học sinh chốt hướng ngành/trường/phương thức xét tuyển chính; có kế 
+hoạch hoàn thiện hồ sơ đại học/du học theo SOP liên quan. 
+Bảng lựa chọn ngành/trường, mốc hồ sơ, kế hoạch 
+thi/chứng chỉ, phiếu chuyển SOP.HT-05 nếu cần. 
+ 
+4. CĂN CỨ 
+Căn cứ Áp dụng vào SOP.HT-03 
+Meta-OS NSHM-XQ Cấu trúc 20 mục, lưu đồ 10 bước MỤC-HIỆN-BÊN-CẦU-THIẾT-HỒ-THỬ-HUẤN-THỰC-ĐO, RASCI, KPI/SLA, hồ sơ, bảo 
+mật, audit/CAPA. 
+Bộ HT - Hợp tác Quốc tế & Đối tác Tinh thần vận hành: Kết nối tinh hoa - Cộng hưởng giá trị - Vươn tầm quốc tế. 
+Triết lý và văn hóa NSHM Đức - Trí - Thể - Nhân - Hòa; Chân - Chính - Chăm - Chuyên - Chất; học sinh THPT với biểu tượng Thuyền buồm - 
+khát vọng chinh phục và vươn ra thế giới. 
+Chương trình GDPT và hoạt động 
+trải nghiệm hướng nghiệp 
+Định hướng phát triển phẩm chất, năng lực, hoạt động trải nghiệm và hoạt động trải nghiệm hướng nghiệp trong 
+nhà trường. 
+Quy định nội bộ NSHM Quy định bảo mật, phối hợp CMHS, tổ chức sự kiện/trải nghiệm, truyền thông, làm việc với đối tác, lưu trữ hồ sơ 
+và phân quyền dữ liệu. 
+SOP liên quan SOP.HT-01, SOP.HT-02, SOP.HT-04, SOP.HT-05; các SOP thuộc GD, CL, TL, TT, PC, CN, HS khi phát sinh giao thoa. 
+ISO tham chiếu ISO 21001, ISO 9001, ISO 10002, ISO 10015, ISO 26000, ISO 27001, ISO 31000. 
+ 
+5. THUẬT NGỮ 
+Thuật ngữ Định nghĩa vận hành 
+Chương trình hướng nghiệp 
+THPT 
+Hệ thống hoạt động có mục tiêu, kế hoạch, nội dung, nguồn lực, đánh giá và cải tiến nhằm hỗ trợ học sinh THPT định 
+hướng học tập, nghề nghiệp và tương lai. 
+Career Readiness Mức độ sẵn sàng của học sinh về nhận thức bản thân, hiểu biết ngành/nghề, năng lực học tập, trải nghiệm, hồ sơ và 
+kế hoạch hành động. 
+Career Cluster Nhóm ngành/nghề có đặc điểm năng lực, môi trường làm việc hoặc lộ trình học tập tương đồng. 
+ICDP Individual Career Development Plan - Kế hoạch phát triển hướng nghiệp cá nhân. 
+
+===== PAGE 4 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+Thuật ngữ Định nghĩa vận hành 
+Action Evidence Minh chứng phát triển sau chương trình: bài phản tư, nhật ký trải nghiệm, sản phẩm dự án, portfolio entry, kế hoạch 
+hành động, chứng chỉ hoặc báo cáo. 
+UniConnect Hoạt động kết nối học sinh với đại học, khoa/ngành, chương trình đào tạo, phương thức tuyển sinh. 
+JobConnect Hoạt động kết nối học sinh với nghề nghiệp, doanh nghiệp, chuyên gia, dự án thực tế, môi trường làm việc. 
+Mentor Người cố vấn nghề nghiệp/học thuật được Nhà trường phê duyệt hoặc kết nối. 
+Mentor Briefing Hoạt động hướng dẫn mentor/đối tác về mục tiêu, phạm vi, bảo mật và chuẩn ứng xử trước khi làm việc với học 
+sinh. 
+Consent Sự đồng ý của HS/CMHS đối với việc tham gia, chia sẻ dữ liệu, sử dụng hình ảnh/câu chuyện hoặc kết nối mentor/đối 
+tác trong phạm vi được phê duyệt. 
+RASCI Ma trận phân vai Responsible - Accountable - Support - Consulted - Informed. 
+KPI/SLA Chỉ số hiệu quả và cam kết thời hạn xử lý. 
+CAPA Corrective and Preventive Action - hành động khắc phục và phòng ngừa sau sai lệch hoặc rủi ro. 
+ 
+6. ĐẦU VÀO 
+Nhóm đầu vào Nội dung Nguồn dữ liệu Mức bảo mật 
+Dữ liệu học sinh Lớp, khối, hệ học, định hướng ban đầu, nhu cầu tham 
+gia chương trình 
+HS, GVCN, hệ thống trường Nội bộ hạn chế 
+Dữ liệu học tập Điểm học tập, môn mạnh/yếu, chứng chỉ, kết quả 
+khảo sát/đánh giá 
+GVCN, GVBM, CL, học vụ Nhạy cảm 
+Dữ liệu hoạt động CLB, dự án, cuộc thi, vai trò lãnh đạo, trải nghiệm đã 
+tham gia 
+HS, GVCN, HTQT & HN, TT Nội bộ hạn chế 
+Dữ liệu định hướng Sở thích nghề nghiệp, nhóm ngành quan tâm, quốc 
+gia/trường quan tâm 
+Khảo sát, phiếu tự đánh giá, tư vấn cá 
+nhân 
+Nhạy cảm 
+Nhu cầu CMHS Kỳ vọng, băn khoăn, điều kiện hỗ trợ, mức độ đồng 
+thuận 
+CMHS, GVCN Nhạy cảm 
+Nguồn lực chương trình Mentor, chuyên gia, trường đại học, doanh nghiệp, 
+cựu HS, CMHS chuyên gia, đối tác 
+HTQT & HN, HT-01, đối tác Nội bộ hạn chế 
+Ràng buộc vận hành Thời khóa biểu, địa điểm, ngân sách, an toàn, truyền 
+thông, pháp lý, bảo mật 
+BGH, HC/CS, TC, AT, PC/CN, TT Tùy loại dữ liệu 
+Dữ liệu phản hồi năm trước Mức hài lòng, tỷ lệ tham gia, action evidence, CAPA, 
+đề xuất cải tiến 
+Dashboard, báo cáo, khảo sát Nội bộ hạn chế 
+ 
+Điều kiện kích hoạt SOP: SOP.HT-03 được kích hoạt khi Nhà trường xây dựng kế hoạch hướng nghiệp năm học; tổ chức hoạt 
+động hướng nghiệp theo khối/lớp; phát triển UniConnect/JobConnect; kết nối mentor/đối tác; triển khai khảo sát định 
+hướng; hoặc cần cải tiến chương trình hướng nghiệp sau dữ liệu phản hồi. 
+7. ĐẦU RA 
+Nhóm đầu ra Sản phẩm/hồ sơ 
+Kế hoạch chương trình Kế hoạch chương trình hướng nghiệp THPT theo năm học/học kỳ/khối/lớp; mục tiêu, chủ đề, lịch triển khai, nguồn 
+lực, ngân sách nếu có. 
+Khung nội dung Bản đồ chủ đề hướng nghiệp theo khối 10-11-12; chuẩn đầu ra; module 
+workshop/mentor/UniConnect/JobConnect. 
+Hồ sơ phê duyệt Phiếu đề xuất/kế hoạch, checklist kiểm soát, phê duyệt BGH/đơn vị liên quan. 
+Minh chứng triển khai Danh sách tham gia, tài liệu chương trình, hình ảnh/video được phép, biên bản, feedback, sản phẩm học sinh. 
+Hồ sơ cá nhân hóa Danh sách học sinh cần tư vấn cá nhân/chuyển SOP, ICDP hoặc phiếu chuyển tuyến khi cần. 
+Dashboard chương trình Dữ liệu tham gia, hài lòng, rõ định hướng, action evidence, chuyển tuyến, phản hồi, rủi ro, CAPA. 
+Báo cáo kết quả Báo cáo tổng hợp học kỳ/năm học, bài học kinh nghiệm, đề xuất cải tiến chương trình. 
+CAPA Hành động khắc phục/phòng ngừa đối với sai lệch, phản hồi tiêu cực, rủi ro dữ liệu, đối tác/mentor hoặc lỗi vận 
+hành. 
+ 
+8. BÊN LIÊN QUAN 
+Bên liên quan Vai trò 
+Học sinh THPT Chủ thể trung tâm; tham gia khảo sát, hoạt động, phản hồi, action evidence và kế hoạch phát triển cá nhân. 
+CMHS Phối hợp cung cấp thông tin, tham gia chương trình khi phù hợp, hỗ trợ học sinh thực hiện kế hoạch định hướng. 
+Phòng HTQT & Hướng nghiệp Chủ trì thiết kế, triển khai, điều phối, kết nối nguồn lực, đo dữ liệu, báo cáo và CAPA. 
+BGH THPT/BGH phụ trách HT Định hướng chiến lược, phê duyệt kế hoạch, xử lý escalation và bảo đảm nguồn lực. 
+GVCN Cung cấp dữ liệu lớp, truyền thông tới học sinh/CMHS, theo dõi sau chương trình, đề xuất học sinh cần hỗ trợ cá 
+nhân. 
+GVBM/Tổ chuyên môn Cung cấp dữ liệu năng lực môn học, phối hợp định hướng nhóm ngành, đề xuất hoạt động học thuật/dự án. 
+Phòng CL Rà soát KPI/SLA, chất lượng hồ sơ, dashboard, audit/CAPA. 
+Phòng TL Tham vấn/chuyển tuyến khi phát hiện yếu tố tâm lý, áp lực, xung đột nghiêm trọng hoặc nguy cơ mất an toàn. 
+Phòng TT Truyền thông chương trình, câu chuyện học sinh, vinh danh; kiểm soát thông tin/hình ảnh theo consent. 
+Phòng PC/CN Rà soát pháp lý, bảo mật, dữ liệu cá nhân, hợp đồng/MOU/đối tác và phân quyền hệ thống. 
+Mentor/đối tác/cựu HS/CMHS 
+chuyên gia 
+Chia sẻ nghề nghiệp, đại học, trải nghiệm, dự án và cơ hội học tập theo phạm vi được phê duyệt. 
+
+===== PAGE 5 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+ 
+9. RASCI 
+Bước chính HTQT & HN BGH GVCN GVBM/Tổ 
+CM CL TL TT PC/CN HS/CMHS Mentor/ĐT 
+1. Xác định mục tiêu năm học/chủ đề A/R A C C C I I I C C 
+2. Khảo sát nhu cầu & dữ liệu hiện trạng A/R I S S C C I C R I 
+3. Thiết kế khung chương trình A/R C/A C C C C C C I C 
+4. Lựa chọn nguồn lực/mentor/đối tác A/R C/A I C I I C C I S/R 
+5. Phê duyệt kế hoạch R A I I C C C C I I 
+6. Truyền thông & đăng ký tham gia R I S I I I A/R C R I 
+7. Triển khai chương trình A/R I S S I C S I R S/R 
+8. Thu minh chứng & phản hồi A/R I S I C C S I R C 
+9. Báo cáo, dashboard, chuyển tuyến A/R A S C C C/R I C I I 
+10. Audit/CAPA & cải tiến A/R A C C A/R C C C I C 
+ 
+Nguyên tắc: Mỗi hoạt động hướng nghiệp phải có 01 Program Owner, 01 người phê duyệt, 01 đầu mối dữ liệu và danh sách người 
+được thông báo. Mentor/đối tác không được tự ý trao đổi riêng, thu thập dữ liệu hoặc truyền thông học sinh ngoài phạm vi được 
+Nhà trường phê duyệt. 
+10. QUY TRÌNH 
+10.1. Lưu đồ 10 bước chuẩn Meta-OS 
+Bước Tên bước Nội dung vận hành Đầu ra 
+1 MỤC Xác định mục tiêu, chuẩn đầu ra, đối tượng, phạm vi và tiêu chí thành công của chương trình hướng 
+nghiệp THPT. 
+Biên bản mục tiêu/đề xuất chương 
+trình 
+2 HIỆN Thu thập dữ liệu hiện trạng: khảo sát định hướng, nhu cầu HS/CMHS/GVCN, dữ liệu năm trước, nguồn lực 
+và ràng buộc. 
+Báo cáo hiện trạng/Gap 
+3 BÊN Xác định các bên liên quan, Program Owner, Data Owner, mentor/đối tác, người phê duyệt và RASCI. Stakeholder Map/RASCI 
+4 CẦU Chuẩn hóa yêu cầu chương trình: nội dung, cấp độ, khối lớp, đầu vào/đầu ra, bảo mật, truyền thông, an 
+toàn. 
+Requirement List/CTQ 
+5 THIẾT Thiết kế chương trình, lịch triển khai, hoạt động, tài liệu, nguồn lực, kịch bản, phương án đo lường. Kế hoạch/To-Be Flow 
+6 HỒ Chuẩn bị hồ sơ, biểu mẫu, checklist, consent, tài liệu truyền thông, danh sách tham gia, thư mời 
+mentor/đối tác. 
+Form Pack/Checklist 
+7 THỬ Rà soát chéo/pilot với nhóm nhỏ hoặc rà soát nội bộ trước triển khai chính thức. Pilot/Review Log 
+8 HUẤN Briefing cho GVCN, mentor/đối tác, cán bộ triển khai; hướng dẫn vai trò và bảo mật dữ liệu. Training/Briefing Record 
+9 THỰC Triển khai chương trình theo kế hoạch; kiểm soát điểm danh, thời gian, nội dung, an toàn, truyền thông và 
+phát sinh. 
+Go-Live Evidence/Issue Log 
+10 ĐO Đo KPI/SLA, thu phản hồi, cập nhật dashboard, báo cáo, CAPA và đề xuất cải tiến. KPI Report/CAPA/Release Notes 
+ 
+10.2. Chu kỳ vận hành chương trình hướng nghiệp THPT theo năm học 
+Thời điểm Việc cần làm Đầu ra 
+Tháng 7-8 Rà soát dữ liệu năm trước, cập nhật nhu cầu chiến lược THPT, xác định chủ đề trọng tâm 
+theo khối 10-11-12. 
+Báo cáo baseline, đề xuất 
+khung chương trình năm học 
+Đầu năm học Khảo sát định hướng học sinh; phân tích nhóm ngành quan tâm; lập kế hoạch chương 
+trình theo học kỳ/khối/lớp. 
+Dashboard baseline, kế hoạch 
+năm học 
+Học kỳ I Triển khai module phổ quát và nhóm mục tiêu: hiểu bản thân, ngành nghề, đại học, 
+mentor, trải nghiệm nghề nghiệp. 
+Minh chứng triển khai, danh 
+sách follow-up 
+Giữa năm học Rà soát tiến độ, đo mức độ rõ định hướng, phân loại học sinh cần tư vấn cá 
+nhân/portfolio/đại học/du học. 
+Báo cáo giữa năm, danh sách 
+chuyển SOP 
+Học kỳ II Triển khai module nâng cao, dự án/portfolio/JobConnect/UniConnect, chốt action 
+evidence. 
+Sản phẩm học sinh, phản hồi, 
+dashboard 
+Cuối năm học Tổng kết dữ liệu, đánh giá tác động, CAPA, cập nhật khung chương trình năm sau. Báo cáo năm học, kế hoạch cải 
+tiến 
+ 
+10.3. Quy trình triển khai một chương trình/hoạt động hướng nghiệp cụ thể 
+Bước Nội dung công việc Đơn vị thực hiện SLA/Thời hạn Hồ sơ/đầu ra 
+1 Đề xuất chủ đề, mục tiêu, đối tượng, chuẩn đầu ra và giá trị trải 
+nghiệm của chương trình. 
+HTQT & HN/GVCN/BGH Trước triển khai tối thiểu 20 ngày 
+làm việc 
+Phiếu đề xuất/kế hoạch 
+2 Thu thập dữ liệu nhu cầu học sinh, khối/lớp, CMHS, GVCN, GVBM và 
+dữ liệu chương trình trước đó. 
+HTQT & HN + GVCN + CL 10-15 ngày làm việc Bảng dữ liệu nhu cầu 
+3 Thiết kế nội dung, lịch, hình thức, đối tượng, mentor/đối tác, ngân 
+sách, truyền thông, checklist rủi ro. 
+HTQT & HN 07-10 ngày làm việc Kế hoạch chi tiết 
+4 Rà soát chất lượng, bảo mật, pháp lý, truyền thông, dữ liệu và an 
+toàn chương trình. 
+CL, PC/CN, TT, AT/TL khi cần 03-05 ngày làm việc Checklist rà soát 
+5 Phê duyệt kế hoạch và phân công RASCI. BGH/Trưởng phòng HTQT & HN Trước triển khai tối thiểu 05 ngày Kế hoạch được duyệt 
+6 Truyền thông tới học sinh/CMHS/GVCN; mở đăng ký; chuẩn bị 
+consent nếu có chia sẻ dữ liệu/hình ảnh. 
+HTQT & HN + TT + GVCN 03-05 ngày làm việc Thông báo, danh sách đăng 
+ký 
+7 Briefing mentor/đối tác/GVCN/nhân sự triển khai về mục tiêu, phạm 
+vi, bảo mật, kịch bản và điểm kiểm soát. 
+HTQT & HN Trước triển khai tối thiểu 01 ngày Biên bản briefing 
+8 Triển khai chương trình, điểm danh, ghi nhận sự cố, thu minh chứng 
+và bảo đảm đúng kịch bản đã duyệt. 
+HTQT & HN + đơn vị phối hợp Theo lịch Danh sách tham gia, minh 
+chứng 
+9 Thu phản hồi, bài phản tư/action evidence, phân loại học sinh cần hỗ 
+trợ tiếp theo. 
+HTQT & HN + GVCN + CL Trong 03-07 ngày sau hoạt động Feedback, action evidence, 
+danh sách follow-up 
+
+===== PAGE 6 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+Bước Nội dung công việc Đơn vị thực hiện SLA/Thời hạn Hồ sơ/đầu ra 
+10 Báo cáo kết quả, cập nhật dashboard, CAPA và đề xuất cải tiến. HTQT & HN + CL + BGH Trong 10 ngày làm việc sau hoạt 
+động 
+Báo cáo kết quả/CAPA 
+ 
+11. ĐIỂM KIỂM SOÁT 
+Nhóm kiểm soát Yêu cầu bắt buộc 
+Mục tiêu chương trình Không triển khai nếu chưa rõ đối tượng, chuẩn đầu ra, tiêu chí thành công và người chịu trách nhiệm. 
+Dữ liệu đầu vào Kế hoạch phải dựa trên dữ liệu khảo sát, nhu cầu học sinh/CMHS/GVCN hoặc định hướng chiến lược THPT. 
+Phê duyệt Mọi chương trình chính thức phải có kế hoạch được phê duyệt trước khi truyền thông/triển khai. 
+Đối tác/mentor Chỉ sử dụng mentor/đối tác được duyệt; phải briefing về mục tiêu, phạm vi, bảo mật, chuẩn ứng xử. 
+Bảo mật & consent Dữ liệu/hình ảnh/câu chuyện học sinh chỉ dùng đúng mục đích, đúng phạm vi và có đồng ý khi cần. 
+An toàn học sinh Nếu phát hiện dấu hiệu tâm lý, xung đột nghiêm trọng, an toàn cá nhân hoặc truyền thông nhạy cảm thì 
+dừng/điều chỉnh/chuyển tuyến. 
+Truyền thông Thông tin chương trình phải thống nhất, không phóng đại kết quả, không cam kết tuyển sinh/học bổng/nghề 
+nghiệp. 
+Minh chứng Mỗi chương trình phải có danh sách tham gia, tài liệu, phản hồi, ảnh/minh chứng được phép, báo cáo kết quả. 
+Đóng vòng phản hồi Mọi phản hồi tiêu cực, sự cố, trễ SLA hoặc sai lệch phải được phân loại, xử lý và ghi nhận CAPA nếu cần. 
+ 
+Điểm dừng bắt buộc 
+Tình huống Hành động bắt buộc 
+Chưa có phê duyệt kế hoạch Không truyền thông/triển khai chính thức. 
+Mentor/đối tác chưa được duyệt hoặc chưa briefing Không kết nối học sinh. 
+Thiếu consent khi sử dụng hình ảnh/câu chuyện/dữ 
+liệu cá nhân 
+Không chia sẻ/truyền thông. 
+Phát hiện dấu hiệu tâm lý nghiêm trọng hoặc nguy 
+cơ mất an toàn 
+Dừng hoạt động liên quan học sinh đó; chuyển Phòng TL/BGH theo mức độ. 
+Nội dung chương trình vượt phạm vi hoặc có yếu tố 
+thương mại chưa duyệt 
+Chuyển BGH/PC xem xét trước khi triển khai. 
+Sự cố dữ liệu hoặc truyền thông nhạy cảm Escalation mức Cam/Đỏ và kích hoạt CAPA. 
+ 
+12. RỦI RO VÀ BIỆN PHÁP KIỂM SOÁT 
+Rủi ro Mức ảnh hưởng Biện pháp kiểm soát 
+Chương trình thiết kế cảm tính, không dựa trên dữ liệu Cao Bắt buộc khảo sát/baseline, xác định chuẩn đầu ra, rà soát CL trước triển 
+khai. 
+Chủ đề không phù hợp độ tuổi/khối lớp Trung bình/Cao Áp dụng khung chủ đề theo khối 10-11-12, tham vấn GVCN/GVBM/BGH. 
+Thông tin ngành/nghề/đại học lỗi thời Cao Cập nhật nguồn tham chiếu theo học kỳ; kiểm chứng thông tin trước 
+truyền thông. 
+Mentor/đối tác tư vấn thiên lệch hoặc quảng bá dịch vụ Cao Phê duyệt danh sách mentor, briefing, giám sát nội dung, không giới 
+thiệu dịch vụ thương mại khi chưa duyệt. 
+Lộ dữ liệu cá nhân/hình ảnh/câu chuyện học sinh Rất cao Phân quyền, consent, tối thiểu hóa dữ liệu, không dùng kênh cá nhân, 
+nhật ký chia sẻ dữ liệu. 
+Học sinh bị áp lực định hướng hoặc xung đột với CMHS Cao Không áp đặt, có kênh tư vấn cá nhân, chuyển TL/GVCN/BGH khi cần. 
+Chương trình đông học sinh nhưng thiếu kiểm soát điểm 
+danh/an toàn 
+Cao Danh sách tham gia, phân công giám sát, kịch bản an toàn, phối hợp AT/Y 
+tế khi cần. 
+Truyền thông sai hoặc phóng đại kết quả chương trình Cao TT rà soát nội dung, dùng dữ liệu đã xác minh, không cam kết kết quả 
+tuyển sinh/học bổng/nghề nghiệp. 
+Sau chương trình không có follow-up/action evidence Trung bình Bắt buộc thu phản hồi, bài phản tư/sản phẩm, phân loại học sinh cần hỗ 
+trợ tiếp. 
+Phản hồi tiêu cực không được xử lý Trung bình/Cao Ghi nhận, phân loại, phản hồi đúng SLA, RCA/CAPA. 
+ 
+13. KPI/SLA 
+Mã chỉ số Chỉ số Ngưỡng mục tiêu Tần suất Owner dữ liệu 
+KPI.HT03-01 Tỷ lệ chương trình có kế hoạch/phê duyệt trước triển khai 100% Theo chương trình HTQT & HN 
+KPI.HT03-02 Tỷ lệ chương trình có chuẩn đầu ra và tiêu chí đo lường 100% Theo chương trình HTQT & HN/CL 
+KPI.HT03-03 Tỷ lệ học sinh THPT tham gia tối thiểu 01 hoạt động hướng 
+nghiệp/năm 
+≥ 90% Năm học HTQT & HN/GVCN 
+KPI.HT03-04 Mức hài lòng của học sinh/CMHS sau chương trình ≥ 85% Theo chương trình/học kỳ HTQT & HN/CL 
+KPI.HT03-05 Tỷ lệ học sinh có action evidence sau hoạt động trọng điểm ≥ 70% Theo chương trình HTQT & HN/GVCN 
+KPI.HT03-06 Tỷ lệ học sinh được phân loại follow-up/chuyển SOP khi cần ≥ 95% Học kỳ HTQT & HN/GVCN 
+KPI.HT03-07 Tỷ lệ mentor/đối tác được briefing trước khi làm việc với học sinh 100% Theo chương trình HTQT & HN 
+KPI.HT03-08 Số sự cố lộ lọt dữ liệu cá nhân/hình ảnh chưa được phép 0 Năm học HTQT & HN/PC/CN 
+SLA.HT03-01 Hoàn thành kế hoạch chương trình trước ngày triển khai ≥ 20 ngày làm việc Theo chương trình Program Owner 
+SLA.HT03-02 Gửi thông báo chương trình tới GVCN/HS/CMHS ≥ 03 ngày làm việc trước 
+chương trình 
+Theo chương trình HTQT & HN/TT 
+SLA.HT03-03 Hoàn thành báo cáo kết quả sau chương trình ≤ 10 ngày làm việc Theo chương trình Program Owner 
+SLA.HT03-04 Phản hồi phản ánh/khiếu nại liên quan chương trình ≤ 48 giờ làm việc Theo ca HTQT & HN/BGH 
+ 
+
+===== PAGE 7 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+14. BIỂU MẪU 
+Mã biểu mẫu Tên biểu mẫu Mục đích 
+BM.SOP.HT-03.01 Kế hoạch chương trình hướng nghiệp THPT Ghi nhận mục tiêu, đối tượng, chuẩn đầu ra, nội dung, nguồn 
+lực, lịch triển khai, rủi ro, phê duyệt. 
+BM.SOP.HT-03.02 Checklist kiểm soát triển khai chương trình hướng 
+nghiệp THPT 
+Kiểm tra dữ liệu đầu vào, phê duyệt, mentor/đối tác, consent, 
+truyền thông, an toàn, hồ sơ minh chứng. 
+BM.SOP.HT-03.03 Báo cáo kết quả chương trình hướng nghiệp THPT 
+và CAPA 
+Tổng hợp kết quả, KPI/SLA, phản hồi, action evidence, danh 
+sách follow-up, rủi ro, CAPA. 
+ 
+Biểu mẫu/phụ lục khuyến nghị bổ sung 
+Mã Tên biểu mẫu/phụ lục 
+BM.SOP.HT-03.04 Phiếu khảo sát nhu cầu và baseline định hướng nghề nghiệp THPT 
+BM.SOP.HT-03.05 Phiếu đăng ký/tham gia chương trình hướng nghiệp 
+BM.SOP.HT-03.06 Phiếu phản hồi sau chương trình 
+BM.SOP.HT-03.07 Phiếu chuyển tiếp tư vấn cá nhân/portfolio/đại học/du học/tâm lý 
+BM.SOP.HT-03.08 Phiếu đồng ý chia sẻ thông tin/hình ảnh/kết nối mentor 
+PL.HT03-01 Khung chương trình hướng nghiệp THPT theo khối 10-11-12 
+PL.HT03-02 Bộ câu hỏi phản tư/action evidence sau hoạt động 
+PL.HT03-03 Checklist briefing mentor/đối tác 
+PL.HT03-04 Dashboard dữ liệu chương trình hướng nghiệp THPT 
+PL.HT03-05 Kịch bản xử lý tình huống ngoại lệ 
+ 
+15. HỒ SƠ LƯU TRỮ 
+Hồ sơ Nơi lưu Thời hạn lưu Phân quyền 
+Kế hoạch chương trình Thư mục SOP.HT-03/Năm học/Chương 
+trình 
+Tối thiểu 03 năm HTQT & HN, BGH, CL 
+Checklist kiểm soát Thư mục chương trình Tối thiểu 03 năm HTQT & HN, CL, PC/CN khi cần 
+Danh sách tham gia Thư mục chương trình/lớp/khối Tối thiểu 03 năm HTQT & HN, GVCN, BGH theo phân quyền 
+Phiếu consent Thư mục chương trình/hồ sơ học sinh Tối thiểu 03 năm HTQT & HN, PC/CN khi cần 
+Tài liệu truyền thông/tài liệu học sinh Thư mục chương trình Tối thiểu 03 năm HTQT & HN, TT 
+Feedback/action evidence Thư mục chương trình/lớp/khối Theo năm học; chọn lọc 
+lưu 03 năm 
+HTQT & HN, GVCN, BGH theo phân quyền 
+Báo cáo kết quả/CAPA Dashboard Meta-OS/Thư mục HT03 Tối thiểu 05 năm BGH, HTQT & HN, CL 
+Nhật ký chia sẻ dữ liệu Thư mục bảo mật/PC-CN/HTQT Theo quy định dữ liệu Data Owner, PC/CN, BGH 
+ 
+Quy tắc đặt tên hồ sơ: SOP.HT-03_[Năm học]_[Khối/Lớp]_[Tên chương trình]_[Loại hồ sơ]_[Ngày]. Ví dụ: SOP.HT-03_2026-
+2027_K11_JobConnect_AI_Finance_BaoCaoKetQua_20261120. 
+16. BẢO MẬT 
+Mức bảo mật Loại thông tin Người được truy cập 
+Mức 1 - Công khai nội bộ Lịch chương trình, chủ đề chung, thông báo tham gia, tài liệu định hướng 
+không cá nhân hóa 
+HS, CMHS, GV theo phạm vi thông báo 
+Mức 2 - Nội bộ hạn chế Kế hoạch chương trình, danh sách tham gia, báo cáo tổng hợp, dashboard 
+đã ẩn danh 
+BGH, HTQT & HN, GVCN, CL, TT theo nhiệm vụ 
+Mức 3 - Dữ liệu nhạy cảm Hồ sơ định hướng cá nhân, điểm số, sở thích, phản hồi CMHS/GVCN/GVBM, 
+action evidence cá nhân 
+HTQT & HN, BGH, GVCN được phân quyền 
+Mức 4 - Bảo mật cao Xung đột gia đình, dữ liệu tâm lý, nguy cơ tự hại, khiếu nại nghiêm trọng, sự 
+cố dữ liệu/truyền thông 
+BGH, TL, PC/CN, HTQT & HN theo chỉ định 
+ 
+Nguyên tắc bảo mật: chỉ thu thập dữ liệu phục vụ mục tiêu chương trình; tối thiểu hóa dữ liệu chia sẻ; mentor/đối tác không được 
+truy cập hồ sơ học sinh nếu chưa được phê duyệt; không dùng tài khoản cá nhân để gửi hồ sơ; mọi chia sẻ dữ liệu mức 3-4 phải có 
+mục đích, người phê duyệt, người nhận và nhật ký chia sẻ. 
+17. ESCALATION 
+Mức Tình huống Người xử lý Thời hạn phản ứng 
+Xanh Vấn đề nhỏ trong triển khai: thay đổi lịch nhỏ, thiếu thông tin không 
+ảnh hưởng chất lượng, phản hồi thông thường 
+Program Owner/HTQT & HN Theo SLA thường kỳ 
+Vàng Nguy cơ trễ kế hoạch, tỷ lệ đăng ký thấp, mentor đổi lịch, phản hồi chưa 
+hài lòng, thiếu minh chứng 
+Trưởng phòng HTQT & HN, GVCN, đơn vị liên 
+quan 
+≤ 03 ngày làm việc 
+Cam Xung đột HS-CMHS, nội dung nhạy cảm, dấu hiệu áp lực tâm lý, phản 
+ánh CMHS, nghi ngờ sai thông tin, vấn đề dữ liệu/hình ảnh 
+BGH phụ trách, HTQT & HN, TL/PC/CN/TT khi cần ≤ 24-48 giờ 
+Đỏ Khủng hoảng tâm lý/nguy cơ tự hại, truyền thông tiêu cực nghiêm 
+trọng, lộ dữ liệu cá nhân, khiếu nại cấp cao, sự cố an toàn 
+BGH/HĐQT, nhóm phản ứng nhanh, 
+TL/PC/TT/CN/AT 
+Ngay lập tức 
+ 
+
+===== PAGE 8 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+Nguyên tắc: nếu có yếu tố an toàn học sinh, ưu tiên bảo vệ học sinh trước mục tiêu chương trình. Mọi escalation mức Cam/Đỏ phải 
+có nhật ký xử lý, phân công owner và RCA/CAPA sau sự kiện. 
+18. ĐÀO TẠO 
+Đối tượng Nội dung đào tạo/briefing 
+Cán bộ HTQT & HN Thiết kế chương trình, khung chuẩn đầu ra, RASCI, biểu mẫu, KPI/SLA, dashboard, bảo mật, CAPA. 
+GVCN THPT Truyền thông chương trình, thu dữ liệu nhu cầu, nhận diện học sinh cần follow-up/chuyển tuyến, hỗ trợ 
+action evidence. 
+GVBM/Tổ chuyên môn Đọc dữ liệu năng lực học thuật, gợi ý nhóm ngành, phối hợp hoạt động dự án/học thuật. 
+Mentor/đối tác/cựu HS/CMHS chuyên 
+gia 
+Mục tiêu chương trình, phạm vi chia sẻ, chuẩn ứng xử với học sinh, bảo mật, không quảng bá dịch vụ ngoài 
+phạm vi. 
+Phòng TT Truyền thông đúng phạm vi, consent, xác minh dữ liệu, bảo vệ hình ảnh học sinh và thương hiệu trường. 
+BGH/CBQL Đọc dashboard, xử lý escalation, phê duyệt nguồn lực và ra quyết định cải tiến theo dữ liệu. 
+ 
+Chuẩn hoàn thành Minh chứng 
+Hiểu mục tiêu và phạm vi SOP.HT-03 Ký xác nhận/biên bản briefing 
+Sử dụng được BM.SOP.HT-03.01/.02/.03 Bài tập tình huống hoặc hồ sơ mẫu 
+Nắm nguyên tắc bảo mật dữ liệu học sinh Cam kết bảo mật hoặc checklist briefing 
+Biết tình huống cần chuyển TL/PC/TT/CN/BGH Kịch bản xử lý tình huống 
+Biết đo KPI/SLA và cập nhật dashboard Báo cáo mẫu hoặc dashboard thử nghiệm 
+ 
+19. AUDIT/CAPA 
+Nội dung audit Chu kỳ 
+Tỷ lệ chương trình có kế hoạch/phê duyệt và checklist kiểm soát Theo học kỳ 
+Chất lượng dữ liệu đầu vào và chuẩn đầu ra chương trình Theo chương trình/học kỳ 
+Tỷ lệ mentor/đối tác được phê duyệt và briefing Theo chương trình 
+Việc tuân thủ consent, bảo mật và truyền thông hình ảnh/hồ sơ học sinh Theo học kỳ hoặc khi có sự cố 
+Tỷ lệ thu phản hồi, action evidence và danh sách follow-up Theo chương trình/học kỳ 
+Tỷ lệ hoàn thành báo cáo trong SLA Theo chương trình 
+Chất lượng dashboard và báo cáo xu hướng hướng nghiệp THPT Theo học kỳ/năm học 
+Hiệu lực CAPA sau phản hồi tiêu cực/sự cố Theo từng CAPA 
+ 
+Điều kiện kích hoạt CAPA 
+Nhóm sai lệch Ví dụ kích hoạt CAPA 
+Nội dung chương trình Chủ đề không phù hợp; thông tin ngành/trường sai; hoạt động không đạt chuẩn đầu ra. 
+Dữ liệu & bảo mật Chia sẻ dữ liệu sai phân quyền; dùng hình ảnh/câu chuyện thiếu consent; dashboard lỗi. 
+Mentor/đối tác Mentor vượt phạm vi, quảng bá dịch vụ, thu thập dữ liệu riêng hoặc gây phản hồi tiêu cực. 
+Vận hành Trễ kế hoạch, thiếu phê duyệt, thiếu điểm danh, thiếu minh chứng, không báo cáo sau chương trình. 
+Học sinh/CMHS Phản hồi không hài lòng nghiêm trọng; xung đột định hướng; học sinh cần chuyển tuyến nhưng chậm xử lý. 
+Truyền thông Thông tin sai lệch, phóng đại, gây hiểu nhầm hoặc ảnh hưởng thương hiệu trường. 
+ 
+Bước CAPA Nội dung 
+1 Ghi nhận sai lệch/vấn đề và phân loại mức độ ảnh hưởng. 
+2 Xác định nguyên nhân gốc rễ bằng 5 Why/Ishikawa. 
+3 Đề xuất hành động khắc phục trước mắt. 
+4 Đề xuất hành động phòng ngừa tái diễn. 
+5 Giao owner, deadline, minh chứng hoàn thành. 
+6 Kiểm tra hiệu lực sau CAPA và cập nhật SOP/biểu mẫu/đào tạo khi cần. 
+ 
+20. PHỤ LỤC 
+20.1. Checklist triển khai chương trình hướng nghiệp THPT 
+Câu hỏi kiểm tra Có/Không Ghi chú 
+Đã xác định rõ mục tiêu, đối tượng, chuẩn đầu ra và tiêu chí thành công chưa?   
+Đã có dữ liệu nhu cầu/baseline hoặc căn cứ chiến lược để thiết kế chương trình chưa?   
+Đã xác định khối/lớp/nhóm học sinh áp dụng chưa?   
+Đã hoàn thiện kế hoạch chương trình và được phê duyệt chưa?   
+Đã phân công RASCI, Program Owner và Data Owner chưa?   
+Đã rà soát mentor/đối tác và briefing trước chương trình chưa?   
+Đã chuẩn bị consent nếu có dữ liệu/hình ảnh/câu chuyện cá nhân chưa?   
+Đã truyền thông đúng thời hạn và đúng đối tượng chưa?   
+
+===== PAGE 9 =====
+META-OS NSHM-XQ | SOP.HT-03 | Hợp tác Quốc tế & Hướng nghiệp 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Chương trình hướng nghiệp THPT: Nội bộ hạn chế 
+Câu hỏi kiểm tra Có/Không Ghi chú 
+Đã chuẩn bị điểm danh, tài liệu, minh chứng, khảo sát phản hồi chưa?   
+Đã có phương án xử lý học sinh cần follow-up/chuyển SOP chưa?   
+Đã cập nhật dashboard và báo cáo kết quả sau chương trình chưa?   
+Có sai lệch/rủi ro cần CAPA không?   
+ 
+20.2. Câu hỏi audit nhanh 
+STT Câu hỏi audit 
+1 Chương trình có kế hoạch/phê duyệt trước triển khai không? 
+2 Chuẩn đầu ra chương trình có rõ và phù hợp khối lớp không? 
+3 Hoạt động có dựa trên dữ liệu nhu cầu học sinh/CMHS/GVCN không? 
+4 Mentor/đối tác có được duyệt và briefing không? 
+5 Có thu consent khi dùng dữ liệu/hình ảnh/câu chuyện cá nhân không? 
+6 Có danh sách tham gia, tài liệu, phản hồi, minh chứng không? 
+7 Có phân loại học sinh cần tư vấn cá nhân/portfolio/đại học/du học/tâm lý không? 
+8 KPI/SLA có được cập nhật dashboard đúng kỳ không? 
+9 Phản hồi tiêu cực có được xử lý và đóng vòng không? 
+10 CAPA có owner, deadline và kiểm tra hiệu lực không? 
+ 
+20.3. Tình huống ngoại lệ 
+Tình huống Cách xử lý 
+Học sinh không muốn CMHS biết một số chia sẻ 
+định hướng 
+Ghi nhận mong muốn; đánh giá mức độ rủi ro; nếu không có nguy cơ an toàn, tôn trọng phạm vi 
+chia sẻ phù hợp; nếu có yếu tố an toàn, chuyển TL/BGH. 
+CMHS yêu cầu chương trình định hướng theo một 
+ngành duy nhất 
+Dùng dữ liệu khách quan, trình bày nhiều phương án; không áp đặt; có thể tổ chức trao đổi HS-
+CMHS-GVCN. 
+Mentor muốn liên hệ riêng với học sinh Không cho phép nếu chưa được phê duyệt; yêu cầu trao đổi qua kênh chính thức và có phạm vi rõ. 
+Đối tác đề xuất dịch vụ thương mại trong chương 
+trình 
+Dừng nội dung chưa duyệt; chuyển BGH/PC xem xét; không giới thiệu cho học sinh/CMHS khi chưa 
+được phê duyệt. 
+Học sinh có dấu hiệu stress/khủng hoảng khi 
+tham gia chương trình 
+Dừng hoạt động với học sinh đó, bảo đảm an toàn, báo GVCN/BGH và chuyển Phòng TL theo mức 
+độ. 
+Thông tin ngành/nghề/đại học bị phản ánh sai Rà soát nguồn, đính chính nếu cần, cập nhật tài liệu và CAPA. 
+ 
+20.4. Maturity Level cho SOP.HT-03 
+Level Mô tả 
+Level 1 - Có làm Có tổ chức hoạt động hướng nghiệp nhưng rời rạc, phụ thuộc cá nhân, ít dữ liệu và ít minh chứng. 
+Level 2 - Có chuẩn Có kế hoạch, biểu mẫu, owner, danh sách tham gia, phản hồi và báo cáo sau hoạt động. 
+Level 3 - Có kiểm soát Có RASCI, KPI/SLA, dashboard, phân quyền dữ liệu, kiểm soát mentor/đối tác, audit định kỳ. 
+Level 4 - Có dữ liệu Có phân tích xu hướng ngành/nghề, action evidence, follow-up học sinh, CAPA theo dữ liệu và cải tiến theo học kỳ. 
+Level 5 - Tối ưu Có hệ sinh thái hướng nghiệp cá nhân hóa, mentor network, AI/kho dữ liệu ngành nghề, liên thông portfolio/đại 
+học/du học và đo tác động dài hạn. 
+ 
+KẾT LUẬN VẬN HÀNH 
+SOP.HT-03 - Quy trình xây dựng và triển khai chương trình hướng nghiệp cho học sinh THPT là quy trình lõi trong bộ HT, giúp 
+Trường Ngôi Sao Hoàng Mai chuyển hoạt động hướng nghiệp từ các sự kiện đơn lẻ thành một hệ thống phát triển học sinh 
+có mục tiêu, có dữ liệu, có nguồn lực, có minh chứng, có dashboard và có cải tiến liên tục. 
+Câu định vị: Chương trình hướng nghiệp THPT tại Ngôi Sao Hoàng Mai giúp học sinh hiểu mình, hiểu thế giới học tập 
+và nghề nghiệp, kết nối đúng nguồn lực, tạo minh chứng phát triển và từng bước xây dựng lộ trình tương lai phù 
+hợp. 

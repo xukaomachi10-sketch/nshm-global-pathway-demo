@@ -1,0 +1,826 @@
+
+
+===== PAGE 1 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 1 
+CÔNG TY CỔ PHẦN GIÁO DỤC ĐÔNG ĐÔ 
+TRƯỜNG NGÔI SAO HOÀNG MAI 
+SOP.HT-04 
+QUY TRÌNH TRIỂN KHAI VÀ QUẢN LÝ PORTFOLIO 
+CỦA HỌC SINH KHỐI 10-12 
+Bộ quy trình HT - Hợp tác Quốc tế, Hướng nghiệp & Đối tác 
+Meta-OS NSHM-XQ | Phiên bản v2.3 | Năm học 2026-2027 
+Vai trò Họ và tên Chức danh Chữ ký & Ngày ký 
+Phê duyệt  Chủ tịch HĐQT Ngày ____/____/2026 
+Phê duyệt Phạm Bích Ngà Tổng Giám đốc Ngày ____/____/2026 
+Xem xét Nguyễn Thị Vân Trang BGH phụ trách THPT/Hướng 
+nghiệp/Hợp tác quốc tế Ngày ____/____/2026 
+Chịu trách nhiệm Nguyễn Trung Kiên Trưởng/Phụ trách Phòng Hợp 
+tác Quốc tế & Hướng nghiệp Ngày ____/____/2026 
+ 
+Trường thông tin Nội dung 
+Ngày ban hành ____/____/2026 
+Ngày hiệu lực ____/____/2026 
+Mã tài liệu SOP.HT-04.NSHM 
+Phiên bản v2.3 - Bản hoàn chỉnh theo Meta-OS NSHM-XQ và thực tế triển 
+khai Portfolio học sinh 10-12 
+Mức bảo mật 
+Nội bộ hạn chế - Dữ liệu Portfolio, hồ sơ hướng nghiệp, minh 
+chứng, CV/Resume, reflection, hồ sơ ứng tuyển và dashboard 
+được phân quyền theo mục đích sử dụng 
+ 
+CHÚ Ý: Tài liệu lưu hành nội bộ. Không sao chép, chia sẻ dữ liệu học sinh/CMHS, hồ sơ ứng tuyển, reflection cá nhân, hình ảnh, 
+bảng điểm, minh chứng hoặc kết quả tư vấn ra ngoài kênh chính thức. Portfolio là hồ sơ phát triển cá nhân; không dùng để dán 
+nhãn học sinh, xếp hạng công khai hoặc tạo áp lực thành tích. 
+ 
+
+===== PAGE 2 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 2 
+SOP.HT-04 - QUY TRÌNH TRIỂN KHAI VÀ QUẢN LÝ PORTFOLIO CỦA HỌC SINH KHỐI 10-12 
+SOP.HT-04 chuẩn hóa việc khởi tạo, cập nhật, xác thực, lưu trữ, khai thác và cải tiến Portfolio học sinh khối 10-12 tại 
+Trường Ngôi Sao Hoàng Mai. Quy trình này là lớp dữ liệu nền trong hệ sinh thái Hợp tác Quốc tế - Hướng nghiệp - Tư vấn 
+đại học, liên thông với SOP.HT-03 về tư vấn hướng nghiệp và SOP.HT-05 về tư vấn đại học. 
+Nguyên tắc lõi: Khởi tạo sớm - Cập nhật đều - Minh chứng thật - Xác thực rõ - Bảo mật chặt - Khai thác đúng - Tư vấn cá 
+nhân hóa - Cải tiến bằng dữ liệu. 
+Điểm cập nhật thực tế v2.3: Portfolio được tổ chức theo 04 nhóm hồ sơ vận hành thực tế của nhà trường: Hồ sơ hướng 
+nghiệp, Hồ sơ dự án, Hồ sơ hoạt động ngoại khóa và Hồ sơ thành tích học tập; trong đó yêu cầu theo khối 10-11-12 được 
+cụ thể hóa rõ để GVCN, học sinh, CMHS và Phòng HT triển khai thống nhất. 
+1. KIỂM SOÁT TÀI LIỆU 
+Trường kiểm soát Nội dung 
+Mã SOP SOP.HT-04 
+Tên SOP Quy trình triển khai và quản lý Portfolio của học sinh khối 10-12 
+Bộ quy trình HT - Hợp tác Quốc tế, Hướng nghiệp & Đối tác 
+Chủ trì / Responsible (R) Phòng Hợp tác Quốc tế & Hướng nghiệp; chuyên viên phụ trách 
+Portfolio; GVCN theo lớp được phân công 
+Accountable (A) 
+BGH phụ trách THPT/Hướng nghiệp/Hợp tác quốc tế; Phòng HT chịu 
+trách nhiệm chất lượng chuyên môn, tiến độ và khai thác dữ liệu 
+Portfolio 
+Portfolio Owner Học sinh là chủ thể sở hữu nội dung Portfolio cá nhân; Phòng HT là 
+đơn vị quản trị chuẩn và khai thác tư vấn 
+Data Owner / Data Steward Phòng HT là Data Owner nghiệp vụ; Phòng CN là Data Steward kỹ 
+thuật; Phòng PC/CL được phân quyền để kiểm soát tuân thủ và audit 
+Phối hợp chính GVCN, GVBM, Phòng CL, Phòng CN, Phòng PC, Phòng TT, Phòng GD, 
+Phòng TN, CMHS 
+Phối hợp khi cần Mentor/chuyên gia ngoài trường, đối tác chương trình quốc tế, đơn 
+vị tổ chức cuộc thi, CLB, dự án 
+Chu kỳ rà soát 
+Tối thiểu 01 lần/năm học; rà soát sau mùa tư vấn đại học, sau 
+chương trình quốc tế lớn, sau thay đổi chính sách xét tuyển hoặc sau 
+sự cố dữ liệu 
+Phân loại mật 
+Dữ liệu Portfolio cá nhân, reflection, bảng điểm, chứng chỉ, 
+CV/Resume, hồ sơ ứng tuyển, minh chứng và dashboard chưa ẩn 
+danh là dữ liệu nội bộ hạn chế/nhạy cảm 
+Trạng thái áp dụng Áp dụng bắt buộc sau khi hoàn thành pilot, đào tạo vai trò, phân 
+quyền dữ liệu và phê duyệt template/bộ biểu mẫu 
+ 
+1.1. Bảng tái cấu trúc mã SOP bộ HT sau rà soát 
+Mã SOP sau rà soát Tên SOP sau rà soát Ghi chú 
+SOP.HT-01 Quản lý hợp tác và đối tác chiến lược Gộp chiến lược, MOU, cam kết đối tác cấp 
+chiến lược 
+SOP.HT-02 Tổ chức chương trình trải nghiệm và giao lưu 
+quốc tế 
+Tập trung triển khai chương trình quốc 
+tế/đối tác 
+
+===== PAGE 3 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 3 
+Mã SOP sau rà soát Tên SOP sau rà soát Ghi chú 
+SOP.HT-03 Tư vấn hướng nghiệp Cung cấp dữ liệu định hướng nghề/ngành 
+đầu vào cho Portfolio 
+SOP.HT-04 Triển khai và quản lý Portfolio học sinh Quy trình mới/tái mã hóa theo nhu cầu vận 
+hành THPT 
+SOP.HT-05 Tư vấn đại học Nhận handoff từ Portfolio để xây dựng chiến 
+lược ứng tuyển 
+ 
+2. MỤC ĐÍCH 
+• Thiết lập chuẩn vận hành thống nhất để học sinh khối 10-12 có Portfolio được khởi tạo sớm, cập nhật định kỳ, có 
+minh chứng, được xác thực và được bảo mật đúng chuẩn. 
+• Chuyển hoạt động lưu hồ sơ học sinh từ trạng thái rời rạc sang hệ thống dữ liệu phát triển cá nhân phục vụ hướng 
+nghiệp, dự án, hoạt động ngoại khóa, thành tích học tập, học bổng và tư vấn đại học. 
+• Bảo đảm Portfolio trở thành đầu vào có chất lượng cho SOP.HT-03 - Tư vấn hướng nghiệp và SOP.HT-05 - Tư vấn đại 
+học. 
+• Giúp học sinh biết mình, hiểu ngành, biết xây dựng hồ sơ, phản tư về quá trình phát triển và chuẩn bị sớm cho lựa 
+chọn sau THPT. 
+• Tạo dashboard quản trị để BGH/Phòng HT/GVCN theo dõi tiến độ, chất lượng hồ sơ, mức độ sẵn sàng và các rủi ro 
+cần hỗ trợ. 
+3. PHẠM VI 
+Phạm vi Quy định 
+Đối tượng áp dụng Học sinh khối 10, 11, 12; GVCN/GVBM; CMHS; Phòng HT và các đơn 
+vị phối hợp trong hệ sinh thái hồ sơ học sinh THPT. 
+Loại Portfolio 
+Portfolio hướng nghiệp, Portfolio dự án, Portfolio hoạt động ngoại 
+khóa, Portfolio thành tích học tập; các sản phẩm CV/Resume, Profile 
+Summary và hồ sơ handoff được tạo từ dữ liệu này. 
+Mục đích sử dụng 
+Tư vấn hướng nghiệp, tư vấn đại học, học bổng, chương trình quốc 
+tế, trại hè, giao lưu, đội tuyển, dự án, truyền thông thành tích đã 
+duyệt. 
+Không thuộc phạm vi 
+Tham vấn tâm lý chuyên sâu, can thiệp khủng hoảng, xử lý kỷ luật, 
+xác minh pháp lý độc lập, truyền thông thành tích chưa phê duyệt, 
+nộp hồ sơ đại học chính thức ngoài SOP.HT-05. 
+ 
+3.1. Ma trận Portfolio thực tế theo khối 10-11-12 
+Nhóm hồ sơ Lớp 10 Lớp 11 Lớp 12 Tần suất cập nhật 
+Hồ sơ hướng nghiệp 
+Bảng tầm nhìn (Vision 
+Board); Báo cáo thiên hướng 
+nghề nghiệp theo Holland. 
+Bản mô tả mục tiêu nghề 
+nghiệp và mục tiêu đại học; 
+Đăng kí tổ hợp thi tốt nghiệp 
+THPTQG. 
+Tư vấn 1-1 chọn ngành, chọn 
+trường và chọn phương thức 
+tuyển sinh. 
+Tối thiểu 01 lần/học kỳ; bắt 
+buộc trước các mốc tư vấn 
+lớn. 
+Hồ sơ dự án 
+Báo cáo dự án; sản phẩm 
+trong quá trình thực hiện 
+như poster, bản mô tả ban 
+Cập nhật dự án có chiều sâu, 
+sản phẩm hoàn thiện, vai trò 
+cá nhân, kết quả/impact, 
+minh chứng trình bày. 
+Chọn lọc dự án phù hợp 
+ngành/trường; chuẩn hóa 
+mô tả dự án cho CV, essay, 
+phỏng vấn hoặc học bổng. 
+Sau mỗi dự án/chủ điểm; rà 
+soát cuối học kỳ. 
+
+===== PAGE 4 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 4 
+Nhóm hồ sơ Lớp 10 Lớp 11 Lớp 12 Tần suất cập nhật 
+đầu; hình ảnh quá trình; 
+slides trình bày. 
+Hồ sơ hoạt động ngoại khóa 
+Chứng nhận hoạt động ngoại 
+khóa, CLB/các hoạt động 
+trong trường, sản phẩm của 
+CLB. 
+Minh chứng vai trò, trách 
+nhiệm, sản phẩm, đóng góp, 
+năng lực lãnh đạo/hợp tác. 
+Chọn hoạt động trọng tâm, 
+chuẩn hóa vai trò, kết quả và 
+minh chứng sử dụng cho hồ 
+sơ ứng tuyển. 
+Sau hoạt động/CLB; tối thiểu 
+cuối học kỳ. 
+Hồ sơ thành tích học tập 
+Bảng điểm, phiếu đánh giá 
+của giáo viên, chứng nhận 
+giải thưởng. 
+Bảng điểm, chứng chỉ, giải 
+thưởng, nhận xét năng lực, 
+minh chứng học thuật/dự án 
+môn học. 
+Bảng điểm, chứng chỉ, giải 
+thưởng, thư/nhận xét học 
+thuật, minh chứng sẵn sàng 
+handoff sang HT-05. 
+Sau kỳ đánh giá/chứng 
+chỉ/giải thưởng. 
+ 
+3.2. Phân tầng mức sẵn sàng Portfolio 
+Trạng thái Mô tả Điều kiện chuyển trạng thái 
+Draft Học sinh đã có thư mục/hồ sơ nền nhưng dữ 
+liệu còn thiếu hoặc chưa được rà soát. 
+Hoàn thành thông tin nền và tối thiểu 01 
+nhóm hồ sơ bắt buộc. 
+Reviewed GVCN/Phòng HT đã rà soát cấu trúc, tiến độ, 
+lỗi định dạng và dữ liệu thiếu. 
+Có checklist rà soát và danh sách việc cần bổ 
+sung. 
+Verified 
+Các thành tích, chứng chỉ, dự án hoặc hoạt 
+động trọng yếu đã có minh chứng mức A/B 
+hoặc được xác nhận. 
+Hoàn thành xác thực minh chứng trọng yếu. 
+Handoff-ready 
+Portfolio đủ điều kiện chuyển sang SOP.HT-
+05 hoặc dùng cho chương trình/học 
+bổng/truyền thông đã duyệt. 
+Đạt checklist handoff và được Phòng HT xác 
+nhận. 
+ 
+4. CĂN CỨ 
+Căn cứ Áp dụng vào SOP.HT-04 
+Meta-OS NSHM-XQ Cấu trúc 20 mục, lưu đồ 10 bước MỤC-HIỆN-BÊN-CẦU-THIẾT-HỒ-
+THỬ-HUẤN-THỰC-ĐO, RASCI, KPI/SLA, hồ sơ và CAPA. 
+Triết lý và văn hóa NSHM 
+Đức - Trí - Thể - Nhân - Hòa; Chân - Chính - Chăm - Chuyên - Chất; 
+yêu cầu trung thực, chính trực, chăm sóc, chuyên nghiệp và chất 
+lượng trong hồ sơ học sinh. 
+Định hướng HT Portfolio là dữ liệu nền cho hướng nghiệp, tư vấn đại học, học bổng, 
+chương trình quốc tế, giao lưu và phát triển hồ sơ học sinh. 
+Quy định nội bộ 
+Quy định hồ sơ học sinh, bảo mật dữ liệu, sử dụng hình ảnh/thành 
+tích, truyền thông, tư vấn hướng nghiệp, tư vấn đại học, quản lý hệ 
+thống số. 
+Quy định bên ngoài Yêu cầu hồ sơ của trường đại học, học bổng, chương trình trao đổi, 
+đối tác quốc tế, trại hè, cuộc thi, tổ chức khảo thí/chứng chỉ nếu có. 
+ISO tham chiếu ISO 21001, ISO 9001, ISO 10015, ISO 31000, ISO 27001/27701. 
+ 
+
+===== PAGE 5 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 5 
+5. THUẬT NGỮ 
+Thuật ngữ Định nghĩa vận hành 
+Portfolio học sinh Hồ sơ phát triển cá nhân phản ánh năng lực, hành trình học tập, hoạt 
+động, dự án, thành tích, định hướng và minh chứng của học sinh. 
+E-Portfolio Portfolio số, được lưu trữ, cập nhật, phân quyền và khai thác trên nền 
+tảng số của nhà trường. 
+Hồ sơ hướng nghiệp Nhóm hồ sơ gồm Vision Board, báo cáo Holland, mục tiêu nghề 
+nghiệp/đại học, đăng ký tổ hợp thi, biên bản tư vấn 1-1. 
+Hồ sơ dự án Nhóm hồ sơ gồm báo cáo dự án, poster, bản mô tả, sản phẩm, hình ảnh 
+quá trình, slides trình bày và minh chứng vai trò. 
+Hồ sơ hoạt động ngoại khóa Nhóm hồ sơ gồm chứng nhận CLB/hoạt động, sản phẩm của CLB, minh 
+chứng vai trò, đóng góp và kết quả. 
+Hồ sơ thành tích học tập Nhóm hồ sơ gồm bảng điểm, phiếu đánh giá giáo viên, chứng nhận giải 
+thưởng, chứng chỉ và minh chứng học thuật. 
+Evidence/Minh chứng Tài liệu, giấy chứng nhận, ảnh, link, video, sản phẩm, thư xác nhận hoặc 
+dữ liệu chứng minh nội dung ghi trong Portfolio. 
+Evidence Level Mức độ tin cậy của minh chứng: A, B, C, D. 
+Portfolio Owner Học sinh - chủ thể sở hữu nội dung Portfolio cá nhân. 
+Portfolio Readiness Status Trạng thái sẵn sàng của hồ sơ: Draft, Reviewed, Verified, Handoff-ready. 
+AI-assisted Writing Việc sử dụng AI để hỗ trợ cấu trúc, rà lỗi, cải thiện diễn đạt nhưng không 
+được tạo nội dung sai sự thật hoặc viết thay trải nghiệm cá nhân. 
+Handoff Gate Điểm kiểm soát trước khi chuyển Portfolio sang SOP.HT-05 - Tư vấn đại 
+học. 
+CAPA Hành động khắc phục và phòng ngừa khi có sai lệch, lỗi dữ liệu, trễ tiến 
+độ hoặc sự cố bảo mật. 
+ 
+6. ĐẦU VÀO 
+Nhóm đầu vào Nội dung 
+Dữ liệu học sinh Họ tên, lớp, mã HS, tài khoản nội bộ, GVCN, định hướng ban đầu, 
+thông tin liên hệ theo phân quyền. 
+Dữ liệu hướng nghiệp Vision Board, báo cáo Holland, mục tiêu nghề nghiệp/đại học, đăng 
+ký tổ hợp thi, biên bản tư vấn 1-1. 
+Dữ liệu dự án Báo cáo dự án, poster/bản mô tả, sản phẩm, ảnh quá trình, slides 
+trình bày, vai trò và kết quả. 
+Dữ liệu hoạt động ngoại khóa Chứng nhận CLB/hoạt động, sản phẩm của CLB, vai trò, đóng góp, 
+phản hồi hoặc xác nhận người phụ trách. 
+Dữ liệu thành tích học tập Bảng điểm, phiếu đánh giá giáo viên, chứng chỉ, giải thưởng, giấy 
+chứng nhận, nhận xét học thuật. 
+Dữ liệu từ GVCN/GVBM Nhận xét, xác nhận vai trò, xác nhận quá trình tham gia, nhận xét 
+phẩm chất/năng lực nếu được phân công. 
+Dữ liệu từ CMHS Định hướng gia đình, nguyện vọng, kế hoạch du học/đại học, xác 
+nhận thông tin khi cần. 
+
+===== PAGE 6 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 6 
+Nhóm đầu vào Nội dung 
+Nguồn lực Template Portfolio, biểu mẫu, thư mục lưu trữ, dashboard, nhân sự 
+hướng dẫn, lịch cập nhật, mentor/chuyên gia nếu có. 
+Ràng buộc Thời hạn theo khối, bảo mật dữ liệu, đồng thuận sử dụng hình 
+ảnh/thành tích, quy định truyền thông, yêu cầu ứng tuyển. 
+ 
+7. ĐẦU RA 
+Nhóm đầu ra Minh chứng 
+Portfolio cá nhân Hồ sơ Portfolio được tạo cho từng học sinh khối 10-12 theo cấu trúc 
+chuẩn 04 nhóm hồ sơ thực tế. 
+Thư mục minh chứng Minh chứng được lưu theo cấu trúc và quy tắc đặt tên thống nhất. 
+CV/Resume học sinh CV bản nền, bản cập nhật, bản dùng cho ứng tuyển nếu có. 
+Profile Summary Bản tóm tắt học thuật - hoạt động - định hướng phục vụ tư vấn. 
+Portfolio Readiness Status Draft / Reviewed / Verified / Handoff-ready. 
+Dashboard tiến độ Tỷ lệ tạo hồ sơ, tỷ lệ hoàn thành, tỷ lệ cập nhật, tỷ lệ hồ sơ đạt 
+chuẩn, rủi ro cần hỗ trợ. 
+Danh sách rủi ro hồ sơ Học sinh thiếu dữ liệu, thiếu minh chứng, trễ hạn, sai định dạng, cần 
+tư vấn thêm. 
+Biên bản tư vấn sử dụng Portfolio Ghi nhận cách Portfolio được dùng trong hướng nghiệp/đại 
+học/chương trình quốc tế. 
+CAPA Phiếu sai lệch, phân tích nguyên nhân, hành động khắc phục/phòng 
+ngừa và kiểm tra hiệu lực. 
+ 
+8. BÊN LIÊN QUAN 
+Bên liên quan Vai trò 
+BGH Phê duyệt định hướng, nguồn lực, timeline, xử lý escalation và quyết 
+định khi có rủi ro dữ liệu/truyền thông/ứng tuyển. 
+Phòng HT Thiết kế, triển khai, hướng dẫn, rà soát, khai thác tư vấn, báo cáo 
+dashboard và CAPA. 
+GVCN Theo dõi tiến độ lớp, nhắc học sinh, xác nhận một số thông tin nền, 
+phối hợp truyền thông với CMHS. 
+GVBM Xác nhận năng lực học thuật, dự án, sản phẩm, thành tích môn học 
+hoặc thư nhận xét khi được phân công. 
+Học sinh Chủ thể xây dựng, cập nhật, phản tư và xác nhận tính trung thực của 
+Portfolio. 
+CMHS Phối hợp định hướng, cung cấp thông tin, xác nhận và hỗ trợ học 
+sinh trong phạm vi phù hợp. 
+CL/CN/PC/TT Hỗ trợ audit, dashboard, phân quyền, bảo mật, pháp lý, truyền 
+thông thành tích đã duyệt. 
+
+===== PAGE 7 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 7 
+Bên liên quan Vai trò 
+GD/TN Cung cấp dữ liệu học thuật, dự án, đội tuyển, thành tích HSG, thể 
+thao, năng khiếu. 
+Mentor/đối tác Góp ý hoặc khai thác Portfolio trong phạm vi đã được phê duyệt và 
+có kiểm soát dữ liệu. 
+ 
+9. RASCI 
+Hoạt động R A S C I 
+1. Phê duyệt khung 
+Portfolio Phòng HT BGH phụ trách CN/CL GVCN, GVBM, PC, 
+GD/TN HS, CMHS 
+2. Ban hành timeline 
+triển khai Phòng HT BGH phụ trách GVCN CL/CN HS, CMHS, GVBM 
+3. Tạo hồ sơ và phân 
+quyền HT/CN Phòng HT GVCN PC/CL HS, CMHS 
+4. Hướng dẫn học sinh 
+cập nhật HT/GVCN Phòng HT GVBM CMHS, CL BGH 
+5. Cập nhật Portfolio Học sinh Phòng HT GVCN, CMHS GVBM, mentor khi cần BGH 
+6. Xác thực minh chứng HT/GVCN/GVBM BGH/Phòng HT CL, GD/TN PC nếu dữ liệu nhạy 
+cảm HS, CMHS 
+7. Handoff sang 
+SOP.HT-05 Phòng HT BGH phụ trách GVCN, HS CL, PC, GVBM CMHS 
+8. Sử dụng cho truyền 
+thông TT BGH HT PC, CL, GVCN, HS/CMHS Đơn vị liên quan 
+9. Dashboard, audit, 
+CAPA HT/CL/CN BGH/Phòng HT GVCN, PC GD/TN, TT HS/CMHS theo bản 
+tổng hợp 
+ 
+10. QUY TRÌNH 
+10.1. Lưu đồ 10 bước Meta-OS 
+Bước Nội dung thực hiện Đầu ra 
+B1 - MỤC 
+Xác định mục tiêu Portfolio theo khối, đối 
+tượng, tiêu chí thành công và phạm vi triển 
+khai. 
+Kế hoạch Portfolio theo khối/lớp 
+B2 - HIỆN Rà soát dữ liệu hiện có: hướng nghiệp, dự án, 
+hoạt động ngoại khóa, thành tích học tập. Gap List/hiện trạng hồ sơ 
+B3 - BÊN 
+Xác định bên liên quan, người cập nhật, người 
+xác thực, người phê duyệt và người được thông 
+tin. 
+RASCI chương trình 
+B4 - CẦU 
+Chuyển hóa nhu cầu thành chuẩn Portfolio, 
+chuẩn minh chứng, chuẩn bảo mật và mốc cập 
+nhật. 
+Portfolio Standard 
+B5 - THIẾT Thiết kế template, thư mục, form, dashboard, 
+checklist và quy tắc đặt tên file. Template/Form Pack/Dashboard 
+
+===== PAGE 8 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 8 
+Bước Nội dung thực hiện Đầu ra 
+B6 - HỒ Khởi tạo hồ sơ, phân quyền, chuẩn bị biểu mẫu, 
+hướng dẫn và kênh nộp minh chứng. Portfolio Folder/Form Pack 
+B7 - THỬ Pilot hoặc rà soát chéo với lớp/nhóm đại diện 
+trước khi triển khai rộng. Pilot Report/Issue Log 
+B8 - HUẤN Hướng dẫn học sinh, GVCN, GVBM, Phòng HT, 
+CL, CN, PC về vai trò và thao tác. Training Record 
+B9 - THỰC Học sinh cập nhật; GVCN/HT rà soát; GVBM xác 
+thực; HT khai thác tư vấn. 
+Portfolio theo trạng thái 
+Draft/Reviewed/Verified 
+B10 - ĐO Đo KPI/SLA, phân tích dashboard, audit, CAPA 
+và cập nhật phiên bản. Báo cáo kết quả/CAPA/Release Notes 
+ 
+10.2. Chu kỳ triển khai theo năm học 
+Thời điểm Việc cần làm Đầu ra 
+Đầu năm học 
+Khởi tạo/cập nhật danh sách học sinh, thư 
+mục Portfolio, phân quyền, timeline và 
+hướng dẫn. 
+Danh sách Portfolio, thư mục, timeline 
+Học kỳ I 
+Khối 10 hoàn thành Vision Board/Holland; 
+khối 11 hoàn thành mục tiêu nghề 
+nghiệp/đại học; khối 12 tư vấn 1-1 đợt 1. 
+Dashboard học kỳ I 
+Học kỳ II 
+Cập nhật dự án, hoạt động ngoại khóa, thành 
+tích học tập; rà soát CV/Resume và minh 
+chứng trọng yếu. 
+Portfolio Reviewed/Verified 
+Trước mùa ứng tuyển 
+Khối 12 handoff sang SOP.HT-05, rà soát 
+evidence level, bảo mật và tư vấn 
+ngành/trường/phương thức. 
+Handoff-ready List 
+Cuối năm học Audit mẫu, tổng kết lỗi, CAPA, cập nhật 
+chuẩn cho năm học sau. Báo cáo năm/CAPA 
+ 
+10.3. Quy trình chi tiết 
+Bước Thực hiện Yêu cầu kiểm soát 
+1 Phòng HT ban hành kế hoạch Portfolio và mốc 
+triển khai theo khối. 
+Có phê duyệt BGH; có RASCI và biểu mẫu đi 
+kèm. 
+2 GVCN/HT kiểm kê hồ sơ hiện có của học sinh. Không yêu cầu học sinh nộp trùng dữ liệu đã có 
+trong hệ thống; ưu tiên dữ liệu thật. 
+3 CN/HT tạo thư mục và phân quyền theo 
+lớp/khối/học sinh. 
+Không mở quyền công khai; dữ liệu nhạy cảm 
+phân quyền riêng. 
+4 HT/GVCN hướng dẫn học sinh cập nhật 04 
+nhóm hồ sơ thực tế. 
+Học sinh hiểu yêu cầu từng khối và chuẩn minh 
+chứng. 
+5 Học sinh cập nhật bản nháp và tải minh chứng. Học sinh xác nhận tính trung thực; AI không 
+được viết thay trải nghiệm. 
+6 GVCN/HT rà soát vòng 1. Dùng BM.SOP.HT-04.02; phản hồi rõ việc cần 
+bổ sung. 
+
+===== PAGE 9 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 9 
+Bước Thực hiện Yêu cầu kiểm soát 
+7 GVBM/GVCN/HT xác thực minh chứng trọng 
+yếu. 
+Áp dụng Evidence Level A/B/C/D; không dùng 
+minh chứng D cho hồ sơ chính thức. 
+8 HT khai thác Portfolio để tư vấn hướng 
+nghiệp/đại học. 
+Chỉ dùng dữ liệu đã được phân quyền và có 
+trạng thái phù hợp. 
+9 Cập nhật định kỳ sau dự án, hoạt động, kỳ đánh 
+giá, chứng chỉ hoặc giải thưởng. 
+Có nhật ký cập nhật/chia sẻ với dữ liệu nhạy 
+cảm. 
+10 HT/CL báo cáo dashboard, audit và CAPA. CAPA có owner, deadline, bằng chứng và kiểm 
+tra hiệu lực. 
+ 
+11. ĐIỂM KIỂM SOÁT 
+Điểm kiểm soát Yêu cầu 
+Phê duyệt trước triển khai Template, timeline, biểu mẫu và dashboard phải được Phòng HT 
+trình BGH phê duyệt. 
+Kiểm soát 04 nhóm hồ sơ Portfolio tối thiểu có Hồ sơ hướng nghiệp, Hồ sơ dự án, Hồ sơ hoạt 
+động ngoại khóa và Hồ sơ thành tích học tập. 
+Kiểm soát minh chứng Thành tích, chứng chỉ, vai trò, dự án trọng yếu phải có minh chứng 
+và xác thực theo Evidence Level. 
+Kiểm soát tính trung thực Không phóng đại vai trò, ghi sai thành tích, ghi hoạt động chưa tham 
+gia hoặc dùng minh chứng không thuộc về học sinh. 
+Kiểm soát AI AI chỉ được dùng để gợi ý cấu trúc/rà lỗi; không viết thay reflection, 
+CV hoặc tạo nội dung sai sự thật. 
+Kiểm soát dữ liệu nhạy cảm Không đưa thông tin sức khỏe, tài chính, hoàn cảnh riêng, tâm lý nếu 
+không phục vụ mục tiêu tư vấn và chưa phân quyền đúng. 
+Kiểm soát truyền thông TT chỉ dùng thông tin đã được HT/BGH/PC xác nhận và có đồng 
+thuận phù hợp. 
+Kiểm soát handoff Portfolio chỉ chuyển sang SOP.HT-05 khi đạt Handoff-ready. 
+Kiểm soát deadline Khối 12 có deadline riêng trước mùa tư vấn/nộp hồ sơ. 
+Kiểm soát CAPA Lỗi lặp lại hoặc rủi ro dữ liệu phải có RCA/CAPA. 
+ 
+11.1. Rubric đánh giá chất lượng Portfolio 
+Tiêu chí Mức 1 - Chưa đạt Mức 2 - Đạt nền Mức 3 - Tốt Mức 4 - Xuất sắc 
+Tính đầy đủ Thiếu nhiều mục Đủ mục cơ bản Đủ và cập nhật Đầy đủ, có chiều sâu 
+Tính xác thực Thiếu minh chứng Có minh chứng chính Minh chứng rõ, đúng vai trò Minh chứng mạnh, có xác nhận 
+Định hướng Rời rạc Có định hướng chung Gắn với ngành/trường Có chiến lược phát triển rõ 
+CV/Resume Chưa có hoặc sơ sài Đúng mẫu cơ bản Rõ năng lực, thành tích Nổi bật, phù hợp mục tiêu 
+Reflection Chung chung Có trải nghiệm thật Có phân tích, bài học Sâu sắc, cá nhân hóa 
+Bảo mật/tuân thủ Có lỗi dữ liệu Không lỗi nghiêm trọng Đúng phân quyền Sẵn sàng audit 
+ 
+
+===== PAGE 10 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 10 
+12. RỦI RO VÀ KIỂM SOÁT 
+Rủi ro Biện pháp kiểm soát 
+Portfolio làm hình thức, học sinh nộp cho đủ Gắn Portfolio với tư vấn hướng nghiệp, dự án, hoạt động, thành tích học 
+tập và handoff HT-05. 
+Học sinh không cập nhật đúng hạn Dashboard theo lớp; GVCN nhắc; Phòng HT escalation theo mốc. 
+Thiếu minh chứng hoặc minh chứng yếu Checklist bắt buộc; không dùng chính thức nếu chưa đạt Evidence Level 
+A/B với nội dung trọng yếu. 
+Thông tin phóng đại/sai sự thật Verification bởi GVCN/GVBM/HT/CL; yêu cầu chỉnh sửa; CAPA nếu lặp 
+lại. 
+Học sinh dùng AI viết thay reflection/CV Kiểm tra khả năng học sinh trình bày lại nội dung; yêu cầu sửa nếu thiếu 
+tính cá nhân hoặc sai sự thật. 
+Lộ dữ liệu cá nhân CN phân quyền; PC kiểm soát; nhật ký chia sẻ; escalation Cam/Đỏ. 
+Dữ liệu thất lạc Lưu trên hệ thống chuẩn, backup, đặt tên file thống nhất. 
+Không đồng bộ với hồ sơ đại học Handoff bắt buộc sang SOP.HT-05 với checklist riêng. 
+TT sử dụng sai thông tin Chỉ dùng dữ liệu đã xác thực và có đồng thuận/phê duyệt. 
+Mentor/đối tác truy cập vượt phạm vi Phân quyền giới hạn, NDA/MOU nếu cần, PC rà soát. 
+CMHS/học sinh chưa hiểu giá trị Portfolio Truyền thông định hướng, workshop, ví dụ mẫu và lộ trình theo khối. 
+ 
+13. KPI/SLA 
+13.1. KPI theo giai đoạn triển khai 
+Giai đoạn KPI/SLA 
+Pilot 01-02 lớp/khối; >=80% HS hoàn thành bản nháp; >=70% hồ sơ có 
+minh chứng nền; 100% lỗi hệ thống được ghi nhận. 
+Mở rộng 100% HS có thư mục; >=90% hoàn thành đúng hạn; >=85% có minh 
+chứng đạt chuẩn. 
+Ổn định 100% HS có Portfolio; >=95% hoàn thành đúng hạn; >=90% minh 
+chứng đạt chuẩn; CAPA đúng hạn >=90%. 
+ 
+13.2. KPI/SLA vận hành chính thức 
+Mã Chỉ số Ngưỡng Tần suất đo 
+KPI.HT04-01 Tỷ lệ học sinh khối 10-12 được tạo 
+Portfolio 100% Đầu năm/học kỳ 
+KPI.HT04-02 Tỷ lệ học sinh hoàn thành Portfolio nền 
+đúng hạn >=95% Theo mốc 
+KPI.HT04-03 Tỷ lệ Portfolio có minh chứng tối thiểu 
+đạt chuẩn >=90% Học kỳ 
+KPI.HT04-04 Tỷ lệ Portfolio được cập nhật ít nhất 01 
+lần/học kỳ >=95% Học kỳ 
+KPI.HT04-05 Tỷ lệ hồ sơ khối 12 đạt Handoff-ready 
+trước mùa tư vấn/nộp hồ sơ >=95% Theo mùa 
+
+===== PAGE 11 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 11 
+Mã Chỉ số Ngưỡng Tần suất đo 
+KPI.HT04-06 Tỷ lệ sai lệch dữ liệu nghiêm trọng 0 trường hợp Liên tục 
+KPI.HT04-07 Tỷ lệ CAPA hoàn thành đúng hạn >=90% Tháng/học kỳ 
+SLA.HT04-01 Thời hạn phản hồi Portfolio vòng 1 <=10 ngày làm việc sau hạn nộp Theo đợt 
+SLA.HT04-02 Thời hạn xử lý yêu cầu chỉnh sửa dữ 
+liệu quan trọng <=05 ngày làm việc Theo yêu cầu 
+SLA.HT04-03 Thời hạn báo cáo dashboard sau mốc 
+cập nhật <=10 ngày làm việc Theo mốc 
+ 
+14. BIỂU MẪU 
+Mã Tên biểu mẫu Loại Mục đích 
+BM.SOP.HT-04.01 Phiếu khởi tạo và cập nhật Portfolio học 
+sinh Bắt buộc 
+Thu thập dữ liệu nền, định hướng, dự 
+án, hoạt động, thành tích, minh chứng 
+và kế hoạch cập nhật. 
+BM.SOP.HT-04.02 Checklist kiểm soát chất lượng Portfolio Bắt buộc 
+Rà soát cấu trúc, minh chứng, tính 
+trung thực, bảo mật, định dạng và mức 
+sẵn sàng sử dụng. 
+BM.SOP.HT-04.03 Báo cáo tiến độ, kết quả và CAPA 
+Portfolio Bắt buộc 
+Tổng hợp tiến độ, lỗi phổ biến, rủi ro, 
+học sinh cần hỗ trợ và hành động cải 
+tiến. 
+BM.SOP.HT-04.04 Phiếu xác thực minh chứng Portfolio Bắt buộc khi xác thực Phân loại Evidence Level A/B/C/D và 
+xác nhận thông tin trọng yếu. 
+BM.SOP.HT-04.05 Mẫu CV/Resume học sinh THPT Khi cần/bắt buộc với khối 11-12 Chuẩn hóa sản phẩm CV/Resume phục 
+vụ tư vấn và ứng tuyển. 
+BM.SOP.HT-04.06 Mẫu Reflection/Bài phản tư Portfolio Khi cần Hỗ trợ học sinh viết phản tư chân thực, 
+có cấu trúc và không AI viết thay. 
+BM.SOP.HT-04.07 Checklist handoff sang SOP.HT-05 - Tư 
+vấn đại học Bắt buộc trước handoff Đảm bảo hồ sơ đủ điều kiện chuyển 
+sang tư vấn đại học. 
+BM.SOP.HT-04.08 Phiếu đồng thuận sử dụng thông 
+tin/hình ảnh/thành tích 
+Bắt buộc khi truyền thông/chia sẻ ngoài 
+phạm vi nội bộ 
+Kiểm soát quyền sử dụng dữ liệu, hình 
+ảnh và thành tích. 
+BM.SOP.HT-04.09 Nhật ký chỉnh sửa và chia sẻ dữ liệu 
+Portfolio Bắt buộc với dữ liệu nhạy cảm Theo dõi ai chỉnh sửa/chia sẻ dữ liệu, 
+thời điểm, mục đích và phạm vi. 
+BM.SOP.HT-04.10 Dashboard theo dõi Portfolio theo 
+lớp/khối Bắt buộc khi Go-Live Theo dõi tiến độ, chất lượng và rủi ro 
+theo lớp/khối. 
+ 
+15. HỒ SƠ LƯU TRỮ 
+Loại hồ sơ Nội dung Thời gian lưu Phân loại 
+Portfolio cá nhân Hồ sơ 04 nhóm: hướng nghiệp, dự 
+án, ngoại khóa, thành tích học tập Tối thiểu 03 năm sau tốt nghiệp Nội bộ hạn chế 
+Minh chứng Chứng chỉ, giấy chứng nhận, ảnh, 
+link, sản phẩm, slides, phiếu đánh giá Tối thiểu 03 năm sau tốt nghiệp Nội bộ hạn chế/nhạy cảm 
+CV/Resume và Profile Summary Các phiên bản CV/Resume, bản tóm 
+tắt hồ sơ 03 năm sau tốt nghiệp Nội bộ hạn chế 
+Reflection Bài phản tư cá nhân 03 năm sau tốt nghiệp hoặc theo quy 
+định Nhạy cảm theo nội dung 
+
+===== PAGE 12 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 12 
+Loại hồ sơ Nội dung Thời gian lưu Phân loại 
+Checklist rà soát/xác thực BM.SOP.HT-04.02, 04.04, 04.07 03-05 năm Nội bộ hạn chế 
+Báo cáo dashboard/CAPA BM.SOP.HT-04.03, Issue Log, CAPA 
+Log 03-05 năm Nội bộ hạn chế 
+Phiếu đồng thuận Đồng thuận sử dụng thông tin/hình 
+ảnh/thành tích Theo quy định nội bộ Nội bộ hạn chế 
+Nhật ký phân quyền/chia sẻ Ai được truy cập, thời điểm, mục 
+đích, phạm vi chia sẻ Tối thiểu 03 năm với nhật ký Dữ liệu hạn chế 
+ 
+15.1. Quy tắc đặt tên file 
+Cú pháp chuẩn: [Khối]_[Lớp]_[MãHS]_[HọTên]_[LoạiMinhChứng]_[Năm]. Ví dụ: 
+K11_11S01_HS1234_NguyenVanA_Certificate_SAT_2026. 
+16. BẢO MẬT 
+Mức bảo mật Loại thông tin Người có thể truy cập 
+D1 - Công khai có kiểm soát Thành tích đã công bố, ảnh sự kiện được duyệt TT/HT/BGH theo phê duyệt 
+D2 - Nội bộ Portfolio học thuật, hoạt động, CV nội bộ, sản 
+phẩm dự án HS, HT, GVCN, BGH theo quyền 
+D3 - Nhạy cảm Định hướng cá nhân, học bổng, tài chính, hoàn 
+cảnh riêng, reflection riêng tư HT/BGH/PC theo nhu cầu nhiệm vụ 
+D4 - Bảo mật cao Sức khỏe, tâm lý, dữ liệu cá nhân đặc biệt, hồ 
+sơ pháp lý, sự cố dữ liệu 
+Chỉ người được phân quyền đặc biệt; chuyển 
+SOP phù hợp nếu cần 
+ 
+Nguyên tắc sử dụng dữ liệu: chỉ thu thập dữ liệu phục vụ phát triển học sinh và tư vấn; không chia sẻ Portfolio qua kênh không 
+kiểm soát; không công khai hồ sơ cá nhân để so sánh/xếp hạng; không sử dụng hình ảnh/thành tích cho truyền thông nếu chưa 
+có phê duyệt và đồng thuận phù hợp. 
+17. ESCALATION 
+Mức Tình huống Cách xử lý 
+Xanh Sai định dạng nhẹ, thiếu trường thông tin, chưa 
+cập nhật đúng mẫu; không có rủi ro dữ liệu. 
+GVCN/HT nhắc và hỗ trợ chỉnh sửa; cập nhật 
+checklist. 
+Vàng Trễ hạn cập nhật, thiếu nhiều minh chứng, học 
+sinh/CMHS chưa phối hợp, phản hồi lặp lại. 
+Phòng HT báo GVCN/BGH khối; lập danh sách 
+hỗ trợ; đặt deadline bổ sung. 
+Cam 
+Thông tin sai lệch nghiêm trọng, dùng thành 
+tích chưa xác thực, mentor truy cập vượt phạm 
+vi, chia sẻ sai người nhận. 
+BGH phụ trách, HT, CL, PC, CN phối hợp; tạm 
+dừng sử dụng Portfolio; lập Issue Log. 
+Đỏ 
+Rò rỉ dữ liệu cá nhân, giả mạo minh chứng, sử 
+dụng sai hồ sơ gây ảnh hưởng pháp lý/danh 
+tiếng/ứng tuyển. 
+Kích hoạt BGH/HĐQT; PC, CN, CL, HT xử lý khẩn; 
+lập báo cáo sự cố và CAPA bắt buộc. 
+ 
+
+===== PAGE 13 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 13 
+18. ĐÀO TẠO 
+Đối tượng Nội dung đào tạo Chuẩn hoàn thành 
+Học sinh khối 10 Portfolio là gì; Vision Board; Holland; cách lưu 
+minh chứng; cách cập nhật hồ sơ nền. 
+Hoàn thành hồ sơ hướng nghiệp nền và thư mục 
+minh chứng. 
+Học sinh khối 11 Mục tiêu nghề nghiệp/đại học; đăng ký tổ hợp; 
+phát triển hồ sơ dự án/hoạt động; CV bản 1. 
+Có bản mô tả mục tiêu, CV bản 1 và kế hoạch phát 
+triển hồ sơ. 
+Học sinh khối 12 Tư vấn 1-1; chuẩn hóa CV, minh chứng, Profile 
+Summary, ngành/trường/phương thức. 
+Portfolio đạt Reviewed/Verified và sẵn sàng 
+handoff khi cần. 
+GVCN Theo dõi tiến độ, nhắc học sinh, kiểm tra 04 nhóm 
+hồ sơ, xác nhận thông tin nền. Nắm RASCI và dashboard lớp. 
+GVBM/GD/TN Xác nhận năng lực, dự án, sản phẩm, thành tích 
+học thuật/thể thao/năng khiếu. 
+Biết cách xác thực minh chứng theo Evidence 
+Level. 
+Phòng HT Vận hành template, tư vấn, phản hồi, dashboard, 
+handoff, CAPA. Vận hành được toàn bộ chu trình và biểu mẫu. 
+CN/PC/CL/TT Phân quyền, bảo mật, audit, truyền thông, đồng 
+thuận, xử lý sai lệch. Thực hiện đúng vai trò hỗ trợ và kiểm soát. 
+ 
+Người tham gia được xác nhận hoàn thành đào tạo khi tham dự tối thiểu 90% thời lượng, đạt tối thiểu 70% bài kiểm tra/hướng 
+dẫn thực hành và thực hiện đúng 01 nhiệm vụ mẫu theo vai trò. 
+19. AUDIT/CAPA 
+Hoạt động Tần suất Owner Minh chứng 
+Audit hồ sơ Portfolio Mỗi học kỳ HT + CL Checklist, dashboard, mẫu hồ sơ 
+theo khối. 
+Audit minh chứng Trước handoff hoặc khi có rủi ro HT + GVCN/GVBM + CL Phiếu xác thực minh chứng, 
+Evidence Level. 
+Audit dữ liệu/phân quyền Hằng học kỳ hoặc khi thay đổi hệ 
+thống CN + PC + HT Nhật ký phân quyền, nhật ký chia 
+sẻ, kiểm tra quyền truy cập. 
+Audit truyền thông Trước khi công bố thành tích TT + HT + PC/BGH Phiếu đồng thuận, dữ liệu đã xác 
+thực. 
+CAPA Khi có sai lệch trung bình trở lên Owner được phân công RCA, hành động khắc phục, phòng 
+ngừa, deadline, kiểm tra hiệu lực. 
+ 
+19.1. Chọn mẫu audit 
+Nhóm mẫu Tỷ lệ đề xuất 
+Portfolio khối 10 10% 
+Portfolio khối 11 15% 
+Portfolio khối 12 20% 
+Hồ sơ dùng cho học bổng/du học/tư vấn đại học 100% trước khi sử dụng chính thức 
+Hồ sơ có rủi ro dữ liệu/minh chứng 100% 
+ 
+
+===== PAGE 14 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 14 
+19.2. Phân loại CAPA 
+Loại CAPA Điều kiện kích hoạt 
+CAPA tiến độ Tỷ lệ hoàn thành dưới KPI hoặc trễ hạn lặp lại. 
+CAPA chất lượng hồ sơ Nhiều hồ sơ thiếu minh chứng, sai định dạng hoặc chưa đạt rubric. 
+CAPA minh chứng Sai lệch, phóng đại, giả mạo hoặc minh chứng không thuộc về học 
+sinh. 
+CAPA dữ liệu Lộ dữ liệu, phân quyền sai, chia sẻ sai kênh, không có nhật ký chia 
+sẻ. 
+CAPA handoff Portfolio chuyển sang tư vấn đại học khi chưa đủ điều kiện. 
+CAPA truyền thông Sử dụng hình ảnh/thành tích chưa có phê duyệt hoặc đồng thuận. 
+ 
+20. PHỤ LỤC 
+Mã phụ lục Tên phụ lục 
+PL.HT04-01 Cấu trúc Portfolio chuẩn 
+PL.HT04-02 Chuẩn Portfolio theo khối 10-11-12 
+PL.HT04-03 Evidence Verification Protocol 
+PL.HT04-04 Hướng dẫn handoff Portfolio sang SOP.HT-05 
+PL.HT04-05 Maturity Level cho Portfolio học sinh 
+PL.HT04-06 Ma trận Portfolio thực tế: hồ sơ hướng nghiệp - dự án - ngoại khóa - 
+thành tích học tập 
+PL.HT04-07 Câu hỏi audit nhanh SOP.HT-04 
+PL.HT04-08 Hướng dẫn sử dụng AI đúng chuẩn trong Portfolio 
+PL.HT04-09 Hướng dẫn truyền thông Portfolio và thành tích học sinh tới CMHS 
+PL.HT04-10 Mẫu cấu trúc thư mục và quy tắc đặt tên file Portfolio 
+ 
+20.1. Chuẩn Portfolio theo khối 
+Khối Chuẩn tối thiểu Chuẩn tốt Chuẩn xuất sắc 
+10 
+Vision Board; báo cáo Holland; thư 
+mục minh chứng nền; tối thiểu 01 
+reflection. 
+Có hồ sơ hoạt động, môn mạnh, mục 
+tiêu 2 năm. 
+Có dự án/CLB/hoạt động chiến lược 
+đầu tiên và minh chứng rõ vai trò. 
+11 
+Bản mô tả mục tiêu nghề nghiệp/đại 
+học; đăng ký tổ hợp; CV bản 1; hồ sơ 
+hoạt động có chiều sâu. 
+Có dự án/sản phẩm, chứng chỉ/kế 
+hoạch chứng chỉ, reflection theo 
+ngành. 
+Profile phù hợp nhóm ngành/trường 
+mục tiêu, minh chứng mạnh. 
+12 
+Tư vấn 1-1 ngành/trường/phương 
+thức; CV hoàn thiện; minh chứng đầy 
+đủ. 
+Profile Summary và bộ minh chứng 
+sẵn sàng. 
+Sẵn sàng nộp học bổng/đại học/quốc 
+tế, có chiến lược hồ sơ rõ. 
+ 
+
+===== PAGE 15 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 15 
+20.2. Evidence Verification Protocol 
+Mức minh chứng Loại minh chứng Mức tin cậy Cách xử lý 
+A 
+Chứng chỉ chính thức, giấy chứng 
+nhận, bảng điểm, thư mời, quyết 
+định 
+Rất cao Dùng được cho hồ sơ chính thức. 
+B Xác nhận từ GVBM/GVCN/đơn vị 
+tổ chức trong trường Cao Dùng được sau xác nhận. 
+C Ảnh, link, sản phẩm, bài đăng, 
+email Trung bình Cần đối chiếu thêm. 
+D Học sinh tự khai, chưa có bằng 
+chứng Thấp Không dùng cho hồ sơ chính thức. 
+ 
+20.3. Checklist handoff sang SOP.HT-05 
+• CV/Resume đã hoàn thiện và thống nhất phiên bản sử dụng. 
+• Thành tích trọng yếu đạt Evidence Level A/B. 
+• Danh mục minh chứng đã sắp xếp đúng cấu trúc. 
+• Định hướng ngành/trường/phương thức tuyển sinh đã được cập nhật. 
+• Reflection/bài luận nền không có dấu hiệu sao chép hoặc AI viết thay. 
+• Dữ liệu nhạy cảm đã được loại bỏ hoặc phân quyền đúng. 
+• Phòng HT xác nhận trạng thái Handoff-ready. 
+20.4. Maturity Level cho Portfolio 
+Level Mô tả 
+Level 1 - Rời rạc Học sinh có dữ liệu rải rác, chưa có cấu trúc Portfolio. 
+Level 2 - Có hồ sơ Có Portfolio nhưng thiếu minh chứng, cập nhật chưa đều. 
+Level 3 - Chuẩn hóa Portfolio đủ cấu trúc, có minh chứng, cập nhật theo học kỳ. 
+Level 4 - Dữ liệu hóa Portfolio được dùng hiệu quả cho tư vấn, có dashboard, có audit. 
+Level 5 - Cá nhân hóa sâu Portfolio kết nối với chiến lược đại học/học bổng, mentor, chương 
+trình quốc tế và kế hoạch phát triển dài hạn. 
+ 
+TÀI LIỆU THAM CHIẾU CHÍNH 
+• Meta-OS NSHM-XQ v2026 - Bộ quy trình toàn diện Trường Ngôi Sao Hoàng Mai. 
+• NSHM-XQ Framework: MỤC - HIỆN - BÊN - CẦU - THIẾT - HỒ - THỬ - HUẤN - THỰC - ĐO. 
+• Cẩm nang văn hóa Ngôi Sao Hoàng Mai: Đức - Trí - Thể - Nhân - Hòa; Chân - Chính - Chăm - Chuyên - Chất. 
+• SOP.TL-04 - Template trình bày SOP theo Meta-OS NSHM-XQ. 
+• Các quy định nội bộ của Trường Ngôi Sao Hoàng Mai về hồ sơ học sinh, bảo mật dữ liệu, truyền thông và tư vấn đại 
+học. 
+KẾT LUẬN VẬN HÀNH 
+SOP.HT-04 là quy trình lõi để quản trị Portfolio học sinh khối 10-12 trong hệ sinh thái Hợp tác Quốc tế, Hướng nghiệp và 
+Tư vấn đại học của Trường Ngôi Sao Hoàng Mai. Quy trình này đưa công việc thực tế của nhà trường - gồm hồ sơ hướng 
+
+===== PAGE 16 =====
+META-OS NSHM-XQ · SOP.HT-04 · Trường Ngôi Sao Hoàng Mai 
+SOP.HT-04 | Meta-OS NSHM-XQ | Tài liệu lưu hành nội bộ 
+Trang 16 
+nghiệp, hồ sơ dự án, hồ sơ hoạt động ngoại khóa và hồ sơ thành tích học tập - vào một hệ thống chuẩn hóa, có minh 
+chứng, có phân quyền, có dashboard, có audit và có CAPA. 
+Khi vận hành đúng, Portfolio không chỉ là bộ hồ sơ lưu trữ mà trở thành bản đồ tăng trưởng cá nhân của học sinh 
+THPT, giúp học sinh chuẩn bị sớm, chọn hướng đi chính xác hơn và có hồ sơ trung thực, sâu sắc, nổi bật cho các cơ hội 
+học thuật trong nước và quốc tế. 

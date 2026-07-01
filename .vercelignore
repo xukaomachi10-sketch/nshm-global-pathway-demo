@@ -1,0 +1,9 @@
+# Non-runtime source documents and generated QA artifacts
+outputs/
+tmp/
+work/
+
+# Local caches and editor files
+.next/
+node_modules/
+.DS_Store

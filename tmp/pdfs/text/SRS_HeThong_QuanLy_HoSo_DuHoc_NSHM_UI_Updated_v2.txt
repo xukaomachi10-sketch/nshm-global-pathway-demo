@@ -1,0 +1,889 @@
+
+
+===== PAGE 1 =====
+ 
+SOFTWARE REQUIREMENTS SPECIFICATION (SRS) 
+HỆ THỐNG QUẢN LÝ HỒ SƠ DU HỌC 
+Phòng Hợp tác Quốc tế – Trường Ngôi Sao Hoàng Mai 
+Phiên bản: v2.0 – Cập nhật theo bộ giao diện UI mới nhất 
+Tài liệu bàn giao cho đội Developer 
+ 
+ 
+Thông tin Nội dung 
+Đơn vị sở hữu nghiệp vụ Phòng Hợp tác Quốc tế & Tư vấn hướng nghiệp 
+Đơn vị sử dụng chính Chuyên viên tư vấn, Trưởng phòng HTQT, BGH, Học sinh, CMHS, Admin CMS 
+Mục đích tài liệu Mô tả yêu cầu nghiệp vụ, giao diện và dữ liệu để đội Developer phát triển hệ thống 
+Phạm vi Quản lý tư vấn du học, hồ sơ học sinh, hồ sơ ứng tuyển, tài liệu, website công khai và 
+CMS nội dung 
+Ngày cập nhật 30/06/2026 
+ 
+
+
+===== PAGE 2 =====
+MỤC LỤC 
+1. Tổng quan tài liệu 
+2. Mục tiêu hệ thống và phạm vi 
+3. Danh mục module và màn hình 
+4. Vai trò người dùng & phân quyền 
+5. Quy tắc dữ liệu, chống trùng và nguyên tắc hiển thị 
+6. Đặc tả chi tiết từng màn hình UI 
+   UI-01 – Màn hình làm việc hằng ngày của chuyên viên 
+   UI-02 – Đăng ký chờ tư vấn 
+   UI-03 – Student 360 Overview 
+   UI-04 – Quản lý chứng chỉ, giải thưởng, CLB, hoạt động ngoại khóa & minh chứng 
+   UI-05 – University Application Pipeline 
+   UI-07 – Documents, Essays & Checklist 
+   PW-01 – Public Website 
+   PW-02 – CMS / Admin đăng bài 
+7. Data Dictionary rút gọn 
+8. Workflow & tích hợp dữ liệu 
+9. Non-functional Requirements 
+10. Bảo mật, logging, backup, audit trail 
+11. Acceptance Criteria & UAT checklist 
+12. Roadmap phát triển 
+ 
+
+===== PAGE 3 =====
+1. TỔNG QUAN TÀI LIỆU 
+Tài liệu này là bản SRS cập nhật theo bộ giao diện UI mới đã được chốt để làm đầu vào phát triển cho đội Developer. Tài liệu 
+kết hợp góc nhìn nghiệp vụ (BRD) và kỹ thuật (SRS) theo hướng đủ rõ để đội phát triển thiết kế database, API, workflow, 
+frontend và UAT. 
+2. MỤC TIÊU HỆ THỐNG VÀ PHẠM VI 
+• Quản lý tập trung toàn bộ hành trình tư vấn du học: đăng ký tư vấn → xác nhận làm hồ sơ → xây hồ sơ → ứng tuyển → nhận 
+kết quả → nhập học. 
+• Quản lý 1 hồ sơ học sinh duy nhất theo Mã học sinh, hạn chế dữ liệu trùng. 
+• Quản lý toàn bộ tài liệu, chứng chỉ, hoạt động, bài luận, thư giới thiệu, biểu mẫu nộp trường và tiến độ checklist. 
+• Quản lý danh sách trường/ngành ứng tuyển, deadline, kết quả, học bổng, phỏng vấn. 
+• Cung cấp website công khai cho học sinh/CMHS và CMS để Admin cập nhật nội dung. 
+• Quy mô tối thiểu: 1.000 hồ sơ/năm học; mở rộng lên 3.000–5.000 hồ sơ trong tương lai. 
+3. DANH MỤC MODULE VÀ MÀN HÌNH 
+Mã màn hình Tên màn hình Mục đích chính 
+UI-01 Màn hình làm việc hằng ngày của chuyên viên Worklist / Dashboard vận hành 
+UI-02 Đăng ký chờ tư vấn Tiếp nhận đăng ký, chống trùng, phân 
+công, đặt lịch 
+UI-03 Student 360 Overview Hồ sơ tổng quan học sinh 
+UI-04 Quản lý chứng chỉ, giải thưởng, CLB, hoạt động ngoại khóa & 
+minh chứng Evidence Vault + Auto Folder 
+UI-05 University Application Pipeline Danh sách trường/ngành ứng tuyển 
+UI-07 Documents, Essays & Checklist Quản lý tài liệu hồ sơ, bài luận, phiên bản, 
+trạng thái duyệt 
+PW-01 Public Website Website công khai của Phòng HTQT 
+PW-02 CMS / Admin đăng bài Quản trị nội dung website công khai 
+4. VAI TRÒ NGƯỜI DÙNG & PHÂN QUYỀN 
+Vai trò Quyền chính 
+Admin hệ thống Cấu hình, phân quyền, tra soát log, import/export, không mặc định sửa nội dung nghiệp vụ 
+Trưởng phòng HTQT Xem toàn bộ hồ sơ, phân công chuyên viên, xem dashboard và báo cáo 
+Chuyên viên tư vấn Xử lý hồ sơ được giao, cập nhật trạng thái, lịch tư vấn, tài liệu, ứng tuyển 
+BGH Xem báo cáo và dashboard tổng hợp, theo dõi kết quả 
+Học sinh Cập nhật hồ sơ cá nhân, upload tài liệu khi được phân quyền 
+CMHS Theo dõi trạng thái, bổ sung tài liệu, xác nhận lịch tư vấn nếu mở quyền 
+Admin CMS Tạo, duyệt, xuất bản nội dung website công khai 
+5. QUY TẮC DỮ LIỆU, CHỐNG TRÙNG VÀ NGUYÊN TẮC HIỂN THỊ 
+• Mã học sinh là khóa nghiệp vụ chính để nhận diện duy nhất 1 học sinh trong toàn hệ thống. 
+• Một học sinh có thể đăng ký nhiều lần nhưng chỉ tồn tại 1 hồ sơ gốc; các lần đăng ký được lưu ở bảng lịch sử tiếp nhận. 
+• Thông tin cá nhân học sinh được hiển thị tập trung tại header / profile summary; các bảng bên dưới không lặp lại các cột thông 
+tin đã có nếu không thực sự cần cho thao tác. 
+• Mỗi loại tài liệu / minh chứng được gán đúng nhóm dữ liệu và thư mục tự động trên Google Drive / kho lưu trữ. 
+• Deadline, cảnh báo và mức rủi ro phải nhất quán giữa UI-01, UI-03, UI-05 và UI-07. 
+• Tất cả thay đổi trạng thái, upload tài liệu, kết quả duyệt, phân công chuyên viên và đặt lịch phải ghi vào audit log. 
+
+===== PAGE 4 =====
+6.1. UI-01 – Màn hình làm việc hằng ngày của chuyên viên 
+ 
+Hình tham chiếu: UI-01 – Màn hình làm việc hằng ngày của chuyên viên 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích Cho phép chuyên viên nhìn ngay các hồ sơ cần xử lý trong ngày theo dạng bảng, có bộ lọc, ưu 
+tiên, deadline, tài liệu mới và rủi ro. 
+Người dùng chính Chuyên viên tư vấn, Trưởng phòng HTQT (xem theo phạm vi), BGH (chế độ xem tổng hợp nếu mở 
+quyền). 
+Luồng thao tác chính Mở màn hình → chọn bộ lọc → xem bảng hồ sơ cần xử lý → thao tác hàng loạt / vào chi tiết hồ 
+sơ / tạo lịch tư vấn → xem các bảng phụ về deadline, tài liệu mới và hồ sơ rủi ro. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+A1 Header + điều 
+hướng 
+Hiển thị tên màn hình, breadcrumb, 
+ô tìm kiếm toàn hệ thống, ngày hiện 
+tại và thông tin người dùng. 
+Tên màn hình, breadcrumb, 
+current user, global search 
+Tìm kiếm nhanh, 
+mở thông báo, đổi 
+profile 
+A2 Bộ lọc 
+Lọc theo từ khóa, năm học, khối, 
+trạng thái hồ sơ, quốc gia, chuyên 
+viên, mức rủi ro, deadline và tài liệu 
+mới. 
+Keyword, SchoolYear, 
+Grade, Status, Country, 
+Counselor, RiskLevel, 
+DeadlineFlag, 
+NewDocumentFlag 
+Lọc / xóa lọc / lưu 
+bộ lọc 
+A3 Bảng hồ sơ cần xử lý 
+hôm nay 
+Danh sách trọng tâm trong ngày, sắp 
+xếp theo quá hạn → deadline gần → 
+có tài liệu mới → rủi ro cao. 
+Priority, StudentID, 
+StudentName, Class, 
+TargetCountry/University, 
+ApplicationStatus, 
+NextAction, 
+NearestDeadline, NewFiles, 
+MissingItems, RiskLevel, 
+Counselor 
+Mở hồ sơ, chọn 
+nhiều dòng, xuất 
+Excel, tạo lịch tư 
+vấn 
+A4 Thanh thao tác bảng Chứa hành động hàng loạt, xuất 
+Excel, refresh, tạo lịch tư vấn. Selected rows 
+Bulk update / 
+export / refresh / 
+create counseling 
+session 
+
+
+===== PAGE 5 =====
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+A5 Bảng phụ Deadline 7 
+ngày tới 
+Danh sách công việc sắp đến hạn để 
+theo dõi nhanh. 
+DeadlineDate, 
+StudentName, Task, Status 
+Mở danh sách đầy 
+đủ 
+A6 Bảng phụ Tài liệu 
+mới tải lên hôm nay 
+Danh sách upload mới để chuyên 
+viên kiểm tra và duyệt. 
+StudentName, 
+DocumentType, 
+UploadTime, ReviewStatus 
+Mở chi tiết tài liệu 
+A7 Bảng phụ Hồ sơ rủi 
+ro cao / quá hạn 
+Danh sách hồ sơ cần ưu tiên xử lý 
+ngay. 
+StudentName, RiskReason, 
+Owner Xem chi tiết hồ sơ 
+6.x.3. Cột dữ liệu / cấu trúc bảng chính 
+Tên cột Ý nghĩa nghiệp vụ Nguồn dữ liệu / ghi chú 
+Ưu tiên Màu / biểu tượng thể hiện mức xử lý Tính từ rule quá hạn, deadline gần, tài liệu mới, rủi 
+ro 
+Mã HS Định danh học sinh Khóa nghiệp vụ chính 
+Quốc gia / Trường mục tiêu Ngữ cảnh hồ sơ hiện tại Lấy từ StudentProfile + application ưu tiên cao 
+nhất 
+Hạng mục cần xử lý tiếp 
+theo Đầu việc kế tiếp Lấy từ checklist / next action 
+Deadline gần nhất Mốc hạn gần nhất của hồ sơ Đổi màu khi <7 ngày hoặc quá hạn 
+Tài liệu mới Số file mới tải lên chưa xử lý Lấy từ upload log chưa đọc 
+Thiếu hồ sơ Số mục còn thiếu Lấy từ checklist open items 
+Mức độ rủi ro Cao / Trung bình / Thấp Tính từ rule engine hoặc do chuyên viên gán 
+6.x.4. Business rules, validation & notification 
+• Bảng chính chỉ hiển thị hồ sơ thuộc phạm vi phân công của chuyên viên, trừ người có quyền xem rộng hơn. 
+• Nếu một hồ sơ vừa quá hạn vừa có tài liệu mới, mức ưu tiên vẫn lấy trạng thái quá hạn là cao nhất. 
+• Nút “Tạo lịch tư vấn” chỉ bật khi chọn ít nhất 1 hồ sơ hoặc mở từ từng dòng. 
+• Số lượng “Thiếu hồ sơ” được tính từ checklist active của học sinh, không đếm các mục đã đóng. 
+Validation: Khoảng ngày deadline phải hợp lệ; nếu ngày bắt đầu lớn hơn ngày kết thúc thì chặn lọc và hiển thị thông báo. 
+Notification: Khi có tài liệu mới hoặc hồ sơ chuyển sang quá hạn, hệ thống hiển thị badge/alert trên màn hình và gửi thông báo 
+nội bộ nếu cấu hình. 
+6.x.5. Acceptance criteria 
+• Người dùng có thể lọc hồ sơ theo tối thiểu 8 tiêu chí và thấy số lượng kết quả đúng. 
+• Bảng chính cho phép mở nhanh Student 360 từ từng dòng. 
+• Bảng phụ hiển thị đúng dữ liệu và cập nhật khi đổi bộ lọc hoặc refresh. 
+• Xuất Excel giữ nguyên bộ lọc hiện hành. 
+ 
+
+===== PAGE 6 =====
+6.2. UI-02 – Đăng ký chờ tư vấn 
+ 
+Hình tham chiếu: UI-02 – Đăng ký chờ tư vấn 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích Tiếp nhận các lượt đăng ký tư vấn du học, phát hiện trùng hồ sơ theo Mã HS, phân công chuyên 
+viên và đặt lịch hẹn tư vấn. 
+Người dùng chính Admin / Trưởng phòng HTQT, chuyên viên được cấp quyền tiếp nhận đăng ký. 
+Luồng thao tác chính Nhận đăng ký mới → hệ thống đối chiếu Mã HS → hiển thị cảnh báo trùng nếu có → admin phân 
+công chuyên viên → đặt lịch hẹn → chuyển hồ sơ sang giai đoạn tư vấn. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+B1 Header + thông tin 
+truy cập 
+Hiển thị tên màn hình, breadcrumb 
+và thông tin người dùng. 
+Title, breadcrumb, global 
+search Điều hướng 
+B2 Bộ lọc danh sách 
+đăng ký 
+Lọc theo từ khóa, năm học, khối, 
+trạng thái đăng ký, cảnh báo trùng, 
+chuyên viên phụ trách, ca tư vấn, 
+ngày đăng ký. 
+Keyword, SchoolYear, 
+Grade, RegistrationStatus, 
+DuplicateFlag, Counselor, 
+Slot, RegisterDateRange 
+Lọc / xóa lọc / lưu 
+bộ lọc 
+B3 Bảng danh sách 
+đăng ký chờ tư vấn 
+Danh sách đăng ký đang chờ xử lý 
+dạng bảng, ưu tiên cảnh báo trùng > 
+chưa phân công > chưa đặt lịch > 
+đăng ký mới. 
+RegistrationID, StudentID, 
+StudentName, Class, 
+ParentContact, 
+InterestCountry, 
+InterestMajor, 
+RegistrationStatus, 
+DuplicateStatus, 
+AssignedCounselor, Slot, 
+Schedule, Location, 
+CreatedAt 
+Mở chi tiết, phân 
+công, đặt lịch, xem 
+log 
+B4 Thanh thao tác 
+Cho phép thao tác hàng loạt, phân 
+công chuyên viên, đặt lịch hẹn, xuất 
+Excel, refresh. 
+Selected rows Bulk assign / 
+schedule / export 
+B5 Bảng phụ Đăng ký 
+cần phân công ngay 
+Danh sách đăng ký mới chưa có 
+owner. 
+StudentID, StudentName, 
+RegisterTime, MainInterest, Phân công nhanh 
+
+
+===== PAGE 7 =====
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+Priority 
+B6 Bảng phụ Cảnh báo 
+trùng hồ sơ 
+Danh sách đăng ký có trùng Mã HS / 
+có hồ sơ cũ / đăng ký lặp. 
+StudentID, StudentName, 
+WarningType, 
+RelatedRecord, 
+SuggestedAction 
+Kiểm tra và hợp 
+nhất / liên kết 
+B7 
+Bảng phụ Lịch hẹn 
+tư vấn hôm nay / 
+ngày mai 
+Danh sách lịch tư vấn đã đặt. Time, StudentName, 
+Counselor, Location, Status 
+Xem / xác nhận / 
+sửa lịch 
+6.x.3. Cột dữ liệu / cấu trúc bảng chính 
+Tên cột Ý nghĩa nghiệp vụ Nguồn dữ liệu / ghi chú 
+Mã đăng ký ID của lượt đăng ký Khóa của bảng CounselingRegistrations 
+Mã HS Khóa đối chiếu chống trùng Bắt buộc nếu hệ thống học sinh nội bộ đã có mã 
+Trạng thái đăng ký Mới đăng ký / Chờ phân công / Đã phân 
+công / Đã đặt lịch / Đã tư vấn Workflow trạng thái 
+Cảnh báo trùng hồ sơ Mức độ trùng lặp Tính từ rule matching 
+Ca tư vấn dự kiến Khung giờ tư vấn Có thể chọn từ master schedule 
+Lịch hẹn Ngày giờ cụ thể Sinh sau khi schedule 
+Địa điểm tư vấn Online / phòng tư vấn / phòng HTQT Bắt buộc khi đặt lịch 
+6.x.4. Business rules, validation & notification 
+• Hệ thống phải đối chiếu Mã HS ngay khi tiếp nhận đăng ký; nếu chưa có Mã HS hợp lệ thì chuyển sang trạng thái cần xác 
+minh. 
+• Một học sinh đăng ký nhiều lần không tạo nhiều hồ sơ học sinh; các lần đăng ký được liên kết vào cùng StudentID. 
+• Cảnh báo trùng có ít nhất 3 mức: Trùng Mã HS, Có hồ sơ cũ, Đăng ký lặp. 
+• Khi đặt lịch hẹn, bắt buộc nhập thời gian, địa điểm và chuyên viên tư vấn. 
+Validation: Không cho phép đặt lịch trùng ca cho cùng một chuyên viên tại cùng thời điểm nếu không có quyền override. 
+Notification: Khi phân công hoặc đặt lịch thành công, hệ thống gửi thông báo cho chuyên viên và có thể gửi email xác nhận cho 
+học sinh/CMHS nếu cấu hình. 
+6.x.5. Acceptance criteria 
+• Admin có thể phân công chuyên viên cho một hoặc nhiều đăng ký. 
+• Cảnh báo trùng hiển thị rõ ở bảng chính và bảng phụ. 
+• Lịch hẹn vừa tạo xuất hiện ngay ở bảng phụ lịch hẹn. 
+ 
+
+===== PAGE 8 =====
+6.3. UI-03 – Student 360 Overview 
+ 
+Hình tham chiếu: UI-03 – Student 360 Overview 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích 
+Màn hình trung tâm để chuyên viên nhìn toàn cảnh hồ sơ học sinh trên một trang: thông tin cá 
+nhân, học thuật, chứng chỉ, định hướng du học, tài liệu Drive, lịch sử tư vấn, checklist và cảnh 
+báo. 
+Người dùng chính Chuyên viên tư vấn, Trưởng phòng HTQT, BGH (xem giới hạn), học sinh/CMHS nếu làm portal với 
+phiên bản rút gọn. 
+Luồng thao tác chính 
+Mở từ danh sách hồ sơ hoặc worklist → xem header profile → dùng các tab nghiệp vụ → rà soát 
+thông tin, tài liệu, điểm số, cảnh báo và timeline → chuyển sang các màn hình chuyên sâu nếu 
+cần. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+C1 Header hồ sơ học 
+sinh 
+Hiển thị ảnh, tên, Mã HS, lớp, niên 
+khóa, liên hệ, phụ huynh, chuyên 
+viên phụ trách và badge trạng thái 
+hồ sơ. 
+Student core profile, 
+AssignedCounselor, status 
+badges 
+Cập nhật nhanh, 
+mở contact action 
+C2 Thanh tiến độ hồ sơ 
+Cho thấy trạng thái toàn hành trình: 
+đăng ký → tư vấn → xây hồ sơ → 
+nộp hồ sơ → kết quả. 
+Milestone status, percent 
+complete 
+Xem / cập nhật 
+milestone 
+C3 KPI tóm tắt 
+Tóm tắt số trường mục tiêu, hồ sơ 
+đang làm, deadline sắp tới, tài liệu 
+mới, mức độ rủi ro. 
+Summary counters Điều hướng tới màn 
+hình liên quan 
+C4 Tab điều hướng 
+trong hồ sơ 
+Tổng quan, Học thuật & Chứng chỉ, 
+Định hướng du học, Hồ sơ / Google 
+Drive, Lịch sử tư vấn, Timeline & 
+Checklist. 
+Tab navigation Chuyển tab 
+C5 Khối Thông tin cá 
+nhân & định hướng 
+Quốc gia mục tiêu, ngành, trường 
+mục tiêu, kỳ nhập học, mục tiêu học 
+bổng, ngân sách. 
+StudentProfile + target 
+schools summary Sửa profile 
+C6 Khối Điểm học tập Bảng điểm giữa kỳ, cuối kỳ và GPA AcademicRecords Mở chi tiết học 
+
+
+===== PAGE 9 =====
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+lớp 10–12 theo năm học. thuật 
+C7 Khối Chứng chỉ 
+chuẩn hóa 
+Danh sách IELTS, SAT, HSK, AP, TOEFL 
+và file minh chứng. TestScores Mở file / chỉnh sửa 
+/ thêm mới 
+C8 Khối Cảnh báo & 
+việc cần xử lý Danh sách việc cần làm của hồ sơ. Alerts, due items Mở task / đánh dấu 
+xử lý 
+C9 Khối Tài liệu hồ sơ / 
+Google Drive 
+Danh sách thư mục hồ sơ, số file, 
+trạng thái đầy đủ và liên kết mở 
+Drive. 
+Auto folders, sync status Mở Drive 
+C10 Khối Lịch sử tư vấn 
+gần nhất Hiển thị các buổi tư vấn gần nhất. CounselingSessions Mở lịch sử 
+C11 Khối Timeline & 
+checklist hồ sơ 
+Hiển thị tiến độ tài liệu / checklist 
+theo hạng mục. Checklist items Cập nhật trạng thái 
+6.x.3. Cột dữ liệu / cấu trúc bảng chính 
+Tên cột Ý nghĩa nghiệp vụ Nguồn dữ liệu / ghi chú 
+Mã HS Định danh duy nhất hồ sơ Nguồn từ Students 
+Trường mục tiêu Danh sách trường ưu tiên cao nhất Nguồn từ UniversityApplications / target shortlist 
+Điểm TB / GPA Thành tích học tập theo năm Nguồn từ AcademicRecords 
+Chứng chỉ chuẩn hóa Điểm chuẩn hóa và file minh chứng Nguồn từ TestScores 
+Tài liệu hồ sơ Nhóm folder và trạng thái đủ/thiếu Nguồn từ DocumentFolders / sync service 
+Timeline & Checklist Đầu việc hồ sơ theo trạng thái Nguồn từ ChecklistItems 
+6.x.4. Business rules, validation & notification 
+• Thông tin cơ bản học sinh chỉ hiển thị tập trung ở header; các bảng phụ không lặp lại cột họ tên/lớp nếu không cần cho 
+thao tác. 
+• Bảng điểm phải hỗ trợ cả điểm giữa kỳ và cuối kỳ cho lớp 10, 11, 12; GPA tính theo thang quy đổi nhà trường hoặc cấu 
+hình hệ thống. 
+• Danh sách chứng chỉ phải cho phép nhiều bản ghi cùng loại (ví dụ thi IELTS nhiều lần) nhưng mặc định hiển thị kết quả tốt 
+nhất hoặc mới nhất theo rule cấu hình. 
+• Khối Google Drive chỉ hiển thị trạng thái và link thư mục; việc quản lý chi tiết file nằm ở UI-04/UI-07. 
+Validation: Không hiển thị trường dữ liệu trống vô nghĩa; với dữ liệu chưa có thì hiển thị trạng thái “Chưa cập nhật” thay vì để 
+trắng. 
+Notification: Nếu hồ sơ có deadline dưới 7 ngày hoặc thiếu tài liệu bắt buộc, hiển thị badge cảnh báo trong header và khối 
+cảnh báo. 
+6.x.5. Acceptance criteria 
+• Màn hình hiển thị được toàn bộ thông tin tổng quan của một học sinh trên 1 trang. 
+• Chuyên viên có thể từ màn hình này điều hướng tới UI-04, UI-05 và UI-07. 
+• Badge cảnh báo, KPI và checklist hiển thị nhất quán với dữ liệu ở các module chuyên sâu. 
+ 
+
+===== PAGE 10 =====
+6.4. UI-04 – Quản lý chứng chỉ, giải thưởng, CLB, hoạt động ngoại 
+khóa & minh chứng 
+ 
+Hình tham chiếu: UI-04 – Quản lý chứng chỉ, giải thưởng, CLB, hoạt động ngoại khóa & minh chứng 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích Quản lý toàn bộ minh chứng thành tích, hoạt động, chứng chỉ của học sinh và tự động phân loại 
+vào folder đúng trên Google Drive / kho lưu trữ. 
+Người dùng chính Chuyên viên tư vấn, học sinh (nếu được upload), Trưởng phòng HTQT. 
+Luồng thao tác chính Chọn học sinh → lọc theo loại hồ sơ / nhóm hoạt động / trạng thái duyệt → xem danh sách minh 
+chứng → duyệt / yêu cầu bổ sung / mở thư mục Drive → theo dõi log upload và mapping folder. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+D1 Header hồ sơ học 
+sinh 
+Hiển thị học sinh đang thao tác và 
+chuyên viên phụ trách. Student summary Đổi hồ sơ / mở 
+Student 360 
+D2 KPI minh chứng 
+Tổng minh chứng, chờ duyệt, thiếu 
+minh chứng, số nhóm folder tự 
+động. 
+Evidence counters Điều hướng nhanh 
+D3 Bộ lọc minh chứng 
+Lọc theo từ khóa, loại hồ sơ, nhóm 
+hoạt động, trạng thái duyệt, mức độ 
+ưu tiên, nguồn tải lên, ngày cập nhật. 
+Evidence filter fields Lọc / xóa / lưu bộ 
+lọc 
+D4 Bảng danh sách 
+minh chứng 
+Bảng chính liệt kê từng item minh 
+chứng với nhóm hồ sơ, vai trò, cấp 
+độ, trạng thái, folder tự động và file 
+đính kèm. 
+EvidenceItems Xem / sửa / mở file 
+/ mở folder / duyệt 
+D5 Thanh thao tác bảng Thao tác hàng loạt, gán nhóm tự 
+động, mở Google Drive, refresh. Selected rows Bulk assign / sync 
+D6 Panel quy tắc gán 
+folder tự động 
+Hiển thị mapping giữa nhóm minh 
+chứng và tên thư mục đích. Category-folder mapping Xem toàn bộ quy 
+tắc 
+D7 Bảng phụ Cảnh báo 
+thiếu minh chứng 
+Những hạng mục còn thiếu 
+file/ảnh/giấy xác nhận. Missing evidence alerts Xem / xử lý 
+
+
+===== PAGE 11 =====
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+D8 
+Bảng phụ Cấu trúc 
+folder tự động / 
+Google Drive 
+Tổng quan các thư mục hồ sơ và 
+trạng thái đồng bộ. 
+Folder structure, file count, 
+sync status Mở Drive 
+D9 Bảng phụ Nhật ký 
+upload & duyệt 
+Lịch sử upload, phân loại, duyệt và 
+người duyệt. UploadLog, ReviewLog Xem toàn bộ log 
+6.x.3. Cột dữ liệu / cấu trúc bảng chính 
+Tên cột Ý nghĩa nghiệp vụ Nguồn dữ liệu / ghi chú 
+Mã mục ID từng minh chứng Khóa của bảng EvidenceItems 
+Nhóm hồ sơ Nhóm dữ liệu gốc Chứng chỉ ngoại ngữ / học thuật / giải thưởng / 
+CLB / trại hè / tình nguyện ... 
+Tên chứng chỉ / hoạt động Tên item nghiệp vụ Ví dụ IELTS Academic, Chủ nhiệm CLB Debate 
+Vai trò / thành tích Giá trị nổi bật của item Score / President / Founder / Participant ... 
+Folder tự động Tên thư mục lưu file Nguồn từ rule engine 
+File đính kèm Link file hoặc số file Có thể là 1 file hoặc bundle file 
+Trạng thái duyệt Đã duyệt / Chờ duyệt / Cần bổ sung / Chờ 
+xử lý Nguồn từ review workflow 
+6.x.4. Business rules, validation & notification 
+• Mỗi item minh chứng phải thuộc đúng 1 nhóm hồ sơ chính; hệ thống có thể hỗ trợ gán thêm tag phụ. 
+• Folder tự động được gán theo rule mapping (ví dụ chứng chỉ ngoại ngữ → 02_TestScores). 
+• Trạng thái minh chứng và trạng thái duyệt là 2 khái niệm khác nhau: “đủ/thiếu” phản ánh completeness, “đã duyệt/chờ 
+duyệt” phản ánh review workflow. 
+• Không lặp lại các cột học sinh nếu danh sách đang thao tác trong ngữ cảnh 1 học sinh duy nhất. 
+Validation: File tải lên phải có định dạng nằm trong allow-list; nếu file không hợp lệ thì từ chối và ghi log lỗi. 
+Notification: Khi chuyên viên yêu cầu bổ sung minh chứng, người phụ trách nhận thông báo và item chuyển trạng thái tương 
+ứng. 
+6.x.5. Acceptance criteria 
+• Khi tải file hoặc gán nhóm tự động, folder đích được xác định đúng. 
+• Danh sách thiếu minh chứng phản ánh đúng các item chưa đủ tài liệu. 
+• Nhật ký upload và duyệt ghi đúng người thực hiện, thời gian và trạng thái. 
+ 
+
+===== PAGE 12 =====
+6.5. UI-05 – University Application Pipeline 
+ 
+Hình tham chiếu: UI-05 – University Application Pipeline 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích Quản lý danh sách trường/ngành ứng tuyển, deadline, phỏng vấn, kết quả và học bổng theo dạng 
+pipeline. 
+Người dùng chính Chuyên viên tư vấn, Trưởng phòng HTQT, BGH (xem tổng hợp). 
+Luồng thao tác chính 
+Mở hồ sơ học sinh → xem KPI pipeline → lọc theo quốc gia / trạng thái / kết quả / học bổng / 
+deadline → cập nhật từng nguyện vọng/trường → theo dõi cảnh báo bên phải và các bảng phụ 
+phía dưới. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+E1 Header học sinh 
+Hiển thị học sinh, cố vấn phụ trách 
+và thống kê nhanh tổng trường mục 
+tiêu, đã nộp, offers, học bổng. 
+Student summary + 
+application counters Điều hướng hồ sơ 
+E2 KPI pipeline 
+Tổng trường mục tiêu, đã nộp hồ sơ, 
+sắp đến deadline, có kết quả, có học 
+bổng, phỏng vấn. 
+Application KPIs Điều hướng nhanh 
+E3 Bộ lọc pipeline 
+Tìm kiếm trường/ngành và lọc theo 
+năm học, quốc gia, nhóm trường, 
+trạng thái hồ sơ, kết quả, học bổng, 
+deadline. 
+Pipeline filters Lọc / xóa / lưu / 
+xuất Excel 
+E4 
+Bảng danh sách 
+trường/ngành ứng 
+tuyển 
+Bảng chính quản lý từng nguyện 
+vọng/trường. UniversityApplications 
+Thêm nguyện vọng 
+/ sửa / cập nhật 
+trạng thái 
+E5 Panel gợi ý xử lý / 
+cảnh báo 
+Danh sách cảnh báo cần hành động 
+như deadline gần, thiếu essay, chờ 
+phỏng vấn. 
+Alerts based on application 
+rules Mở hồ sơ liên quan 
+E6 Bảng phụ Deadline 
+14 ngày tới Liệt kê các trường sắp đến hạn. Upcoming deadlines Xem tất cả 
+E7 Bảng phụ Kết quả & 
+học bổng mới cập 
+Danh sách thay đổi mới nhất về offer 
+/ scholarship. Results update log Xem tất cả 
+
+
+===== PAGE 13 =====
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+nhật 
+E8 Bảng phụ Lịch phỏng 
+vấn / follow-up 
+Theo dõi lịch phỏng vấn liên quan tới 
+từng trường. Interview schedule Xem / xác nhận 
+6.x.3. Cột dữ liệu / cấu trúc bảng chính 
+Tên cột Ý nghĩa nghiệp vụ Nguồn dữ liệu / ghi chú 
+Mã hồ sơ ID của bản ghi ứng tuyển Khóa của UniversityApplications 
+Trường đại học Tên trường Master data hoặc nhập tay theo chuẩn 
+Ngành / Chương trình Chương trình ứng tuyển Ví dụ Business Analytics, Computer Science 
+Mức ưu tiên Reach / Target / Safety Phục vụ chiến lược apply 
+Yêu cầu IELTS/SAT Mốc đầu vào mục tiêu Không phải điểm thật của học sinh 
+Trạng thái hồ sơ Đang chuẩn bị / Sẵn sàng nộp / Đã nộp / 
+Phỏng vấn / Chờ phản hồi / Có kết quả ... Workflow theo trường 
+Kết quả Offer / Reject / Waitlist / Chưa có Kết quả đầu ra 
+Học bổng Phần trăm hoặc giá trị Có thể hiển thị 30%, 50% hoặc tiền 
+6.x.4. Business rules, validation & notification 
+• Mỗi bản ghi ứng tuyển đại diện cho 1 trường + 1 chương trình / ngành + 1 kỳ nhập học. 
+• Các mức ưu tiên Reach / Target / Safety không được trùng với trạng thái hồ sơ; đây là phân loại chiến lược nộp đơn. 
+• Một hồ sơ có thể có kết quả nhưng chưa có học bổng; cột học bổng phải độc lập với cột kết quả. 
+• Nếu hồ sơ có nhiều deadline, cột deadline gần nhất hiển thị deadline gần nhất đang active. 
+Validation: Không cho lưu bản ghi nếu thiếu các trường tối thiểu: trường đại học, quốc gia, ngành/chương trình, kỳ nhập học, 
+trạng thái hồ sơ. 
+Notification: Khi còn dưới ngưỡng cấu hình (ví dụ 7 ngày), deadline phải xuất hiện ở cảnh báo và bảng phụ deadline. 
+6.x.5. Acceptance criteria 
+• Thêm, sửa, lọc và xuất danh sách trường thành công. 
+• Cảnh báo deadline, thiếu tài liệu và lịch phỏng vấn hiển thị đúng theo dữ liệu. 
+• Kết quả và học bổng mới cập nhật phản ánh đúng ở bảng phụ và tổng hợp KPI. 
+ 
+
+===== PAGE 14 =====
+6.6. UI-07 – Documents, Essays & Checklist 
+ 
+Hình tham chiếu: UI-07 – Documents, Essays & Checklist 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích Quản lý toàn bộ tài liệu hồ sơ, bài luận, phiên bản, checklist và trạng thái duyệt. 
+Người dùng chính Chuyên viên tư vấn, học sinh/CMHS (phạm vi upload), giáo viên/PH liên quan tới thư giới thiệu và 
+tài liệu tài chính nếu có portal. 
+Luồng thao tác chính 
+Vào màn hình tài liệu → lọc tài liệu theo loại / trường áp dụng / người phụ trách / deadline → 
+xem bảng chính → mở file / review → theo dõi checklist nộp hồ sơ và các bảng phụ về version, 
+thiếu tài liệu, log duyệt. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+F1 Header học sinh Thông tin học sinh đang làm hồ sơ. Student summary Điều hướng hồ sơ 
+F2 KPI tài liệu Tổng tài liệu, số essays, chờ duyệt, 
+thiếu tài liệu, % checklist hoàn thành. 
+Document and checklist 
+counters Điều hướng nhanh 
+F3 Bộ lọc tài liệu 
+Lọc theo từ khóa, loại tài liệu, trường 
+áp dụng, trạng thái duyệt, người phụ 
+trách, deadline, nguồn lưu trữ. 
+Document filters 
+Lọc / xóa / lưu / mở 
+Drive / xuất Excel / 
+tải tài liệu 
+F4 Bảng danh sách tài 
+liệu & bài luận 
+Bảng chính quản lý document item 
+và essay item. DocumentItems 
+Xem / sửa / 
+comment / mở file / 
+open Drive 
+F5 Panel Checklist nộp 
+hồ sơ 
+Checklist theo nhóm tài liệu: 
+Academic Documents, Essays, 
+Recommendation Letters, Financial 
+Documents, Application Forms, 
+Others. 
+Checklist summary Mở checklist chi tiết 
+F6 Panel Cảnh báo / gợi 
+ý xử lý 
+Cảnh báo còn thiếu essay, transcript, 
+financial statement, thư giới thiệu. Document alerts Mở item liên quan 
+F7 Bảng phụ Lịch sử 
+phiên bản bài luận 
+Theo dõi các bản v1, v2, v3... và ghi 
+chú chỉnh sửa. EssayVersions Xem tất cả version 
+F8 Bảng phụ Tài liệu 
+thiếu / sắp đến hạn 
+Danh sách item còn thiếu hoặc sắp 
+hết hạn. 
+Missing/overdue document 
+items Xem toàn bộ 
+
+
+===== PAGE 15 =====
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+F9 Bảng phụ Nhật ký 
+duyệt & phản hồi 
+Log review của chuyên viên đối với 
+tài liệu. Review logs Xem lịch sử đầy đủ 
+6.x.3. Cột dữ liệu / cấu trúc bảng chính 
+Tên cột Ý nghĩa nghiệp vụ Nguồn dữ liệu / ghi chú 
+Mã tài liệu ID của tài liệu / essay Khóa bảng DocumentItems 
+Loại tài liệu 
+Personal Essay / Supplemental Essay / CV / 
+Recommendation Letter / Passport / 
+Transcript ... 
+Master data document type 
+Hạng mục Nhóm hồ sơ tài liệu Essays / Học bạ / Tài chính / Đơn đăng ký ... 
+Trường áp dụng Ngữ cảnh sử dụng của tài liệu General hoặc tên trường 
+Phiên bản mới nhất Version hiện hành v1, v2, v3, final 
+Người phụ trách Ai chịu trách nhiệm hoàn thành item Học sinh / PH / GV / Nhà trường / chuyên viên 
+Trạng thái làm việc Đang viết / Cần sửa / Hoàn thành / Thiếu / 
+Chưa bắt đầu ... Progress status 
+Trạng thái duyệt Chờ duyệt / Đã duyệt / Cần chỉnh sửa / 
+Chưa duyệt Review status 
+6.x.4. Business rules, validation & notification 
+• Một document item có thể liên quan đến một hoặc nhiều trường; trong bảng chính chỉ hiển thị trường áp dụng chính hoặc 
+danh sách rút gọn. 
+• Essay được quản lý như một loại document item có thêm version history. 
+• Không lặp lại các cột dư thừa: nếu bảng đang ở ngữ cảnh 1 học sinh thì bỏ cột Học sinh. 
+• Checklist hoàn thành được tính theo số mục completed / tổng mục active, hiển thị cả % và số lượng theo nhóm. 
+Validation: Khi tải file mới cho một tài liệu đã có sẵn, hệ thống phải hỏi tạo phiên bản mới hay thay thế file hiện tại nếu người 
+dùng có quyền. 
+Notification: Khi chuyên viên phản hồi “Cần chỉnh sửa”, người phụ trách item nhận được thông báo và trạng thái cập nhật 
+ngay. 
+6.x.5. Acceptance criteria 
+• Version history của essay phải theo dõi được ít nhất 1→n phiên bản. 
+• Checklist completion hiển thị đúng theo trạng thái item. 
+• Các cảnh báo tài liệu thiếu và log duyệt phản ánh đúng tình trạng bảng chính. 
+ 
+
+===== PAGE 16 =====
+6.7. PW-01 – Public Website 
+ 
+Hình tham chiếu: PW-01 – Public Website 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích 
+Trang web công khai của Phòng HTQT để truyền thông với học sinh và CMHS: tin tức, học bổng, 
+tuyển sinh đại học, cựu học sinh, học sinh NSHM, hành trình/chuyến đi và CTA đăng ký tư vấn du 
+học. 
+Người dùng chính Học sinh, CMHS, khách truy cập công khai, BGH/nhà trường như kênh truyền thông. 
+Luồng thao tác chính Người dùng truy cập website → xem banner, tin mới, học bổng, tuyển sinh, câu chuyện học 
+sinh/cựu học sinh, chuyến đi → bấm CTA để đi đến form đăng ký tư vấn du học. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+P1 Header website Logo, menu điều hướng, tìm kiếm, 
+nút đăng ký tư vấn. Site menu, CTA Điều hướng / tìm 
+kiếm / đăng ký 
+P2 Hero/Banner Khối nổi bật giới thiệu phòng HTQT 
+và CTA chính. 
+Hero title, subtext, hero 
+image, CTAUrl Đi tới form tư vấn 
+P3 Khối tin tức / bài nổi 
+bật Bài viết mới, hội thảo, sự kiện. Posts by category Mở bài viết 
+P4 Khối học bổng Danh sách học bổng nổi bật. Scholarship posts Mở chi tiết 
+P5 Khối tuyển sinh đại 
+học 
+Thông tin tuyển sinh / trường đối tác 
+/ hội thảo đại học. Admissions posts Mở chi tiết 
+P6 Khối cựu học sinh & 
+học sinh NSHM 
+Câu chuyện thành công của alumni 
+và current students. Story posts Mở chi tiết 
+P7 Khối hành trình / 
+chuyến đi 
+Hình ảnh và bài viết về các chuyến đi 
+trong nước và quốc tế. Trip posts Mở bài 
+P8 Footer Thông tin liên hệ, liên kết quan 
+trọng, mạng xã hội. Contact info, quick links Điều hướng 
+6.x.4. Business rules, validation & notification 
+• Trong các bài tin / bài học bổng / bài tuyển sinh có thể hiển thị nút CTA “Đăng ký tư vấn du học” nếu Admin cấu hình. 
+• Nội dung website lấy từ CMS và chỉ hiển thị bài đã xuất bản. 
+
+
+===== PAGE 17 =====
+Validation: Nếu bài viết không có ảnh đại diện thì dùng ảnh fallback mặc định theo category. 
+Notification: Không áp dụng thông báo nội bộ cho người dùng công khai; có thể có popup đăng ký hoặc form submission 
+success. 
+6.x.5. Acceptance criteria 
+• Website hiển thị đúng các chuyên mục nội dung đã yêu cầu. 
+• CTA đăng ký tư vấn hoạt động và dẫn đúng form. 
+• Responsive tốt trên desktop và mobile là yêu cầu khuyến nghị cho giai đoạn build UI thực tế. 
+ 
+
+===== PAGE 18 =====
+6.8. PW-02 – CMS / Admin đăng bài 
+ 
+Hình tham chiếu: PW-02 – CMS / Admin đăng bài 
+6.x.1. Mục đích & phạm vi sử dụng 
+Hạng mục Mô tả 
+Mục đích Cho phép Admin quản lý nội dung website công khai: tạo bài mới, soạn thảo, upload media, cấu 
+hình CTA, lưu nháp, xem trước và xuất bản. 
+Người dùng chính Admin CMS, Trưởng phòng HTQT (nếu được duyệt/xuất bản), Admin hệ thống. 
+Luồng thao tác chính Admin vào CMS → tạo bài viết mới → nhập tiêu đề, chuyên mục, tóm tắt, nội dung, ảnh đại diện, 
+media → cấu hình CTA → lưu nháp / xem trước / xuất bản. 
+6.x.2. Chú thích các khu vực trên màn hình 
+Mã vùng Tên khu vực Mô tả chức năng Dữ liệu/Trường chính Hành động 
+Q1 Sidebar CMS 
+Điều hướng các module nội dung: 
+Dashboard, Bài viết, Học bổng, Tuyển 
+sinh, Cựu học sinh, Học sinh NSHM, 
+Hành trình-Chuyến đi, Media, Danh 
+mục, Form tư vấn, Cài đặt. 
+CMS navigation Điều hướng 
+Q2 Header CMS Tìm kiếm, xem trang public, user 
+profile. Search, public preview link Tìm bài / mở public 
+site 
+Q3 Form bài viết Tiêu đề, chuyên mục, thẻ tag, tóm 
+tắt ngắn, nội dung rich text. PublicPosts core fields Soạn thảo 
+Q4 Media uploader Ảnh đại diện và thư viện ảnh cho bài 
+viết. CoverImage, GalleryImages Upload / chọn 
+media 
+Q5 Cấu hình CTA Đường link đăng ký tư vấn du học và 
+các nút CTA hiển thị trong bài. CTA config list Thêm / sửa / xóa 
+CTA 
+Q6 Thông tin xuất bản Tác giả, ngày đăng, trạng thái hiển 
+thị, bài nổi bật, lịch xuất bản. 
+Author, PublishAt, Visibility, 
+IsFeatured, Schedule Cập nhật metadata 
+Q7 Công cụ xuất bản Lưu nháp, xem trước, xuất bản ngay. Draft / preview / publish 
+actions Xuất bản 
+Q8 Panel kiểm soát quy 
+trình 
+Trạng thái quy trình và checklist 
+trước khi xuất bản. 
+Workflow steps, pre-publish 
+checklist Rà soát 
+
+
+===== PAGE 19 =====
+6.x.4. Business rules, validation & notification 
+• Bài viết phải thuộc ít nhất 1 chuyên mục để xuất bản. 
+• CTA là cấu hình tùy chọn; nếu để trống hệ thống không hiển thị nút trong bài. 
+• Bài viết chỉ hiển thị ra website công khai khi trạng thái là Published và PublishAt <= thời điểm hiện tại. 
+Validation: Nếu thiếu tiêu đề, chuyên mục hoặc nội dung tối thiểu, hệ thống không cho xuất bản. 
+Notification: Có thể cấu hình thông báo nội bộ khi bài chờ duyệt / đã xuất bản nếu workflow phê duyệt được bật. 
+6.x.5. Acceptance criteria 
+• Admin tạo được bài viết mới, lưu nháp, xem trước và xuất bản. 
+• Bài viết xuất bản xuất hiện đúng ở website công khai theo chuyên mục. 
+• CTA trong bài dẫn đúng về form hoặc trang đích được cấu hình. 
+ 
+
+===== PAGE 20 =====
+7. DATA DICTIONARY RÚT GỌN 
+Entity Trường dữ liệu chính Mục đích 
+Students StudentID, FullName, Grade, Class, AcademicYear, 
+StudentEmail, ParentPhone, AssignedCounselor, CurrentStatus Hồ sơ gốc của học sinh 
+CounselingRegistrations RegistrationID, StudentID, InterestCountry, InterestMajor, 
+ReadinessLevel, CreatedAt Lịch sử đăng ký tư vấn 
+CounselingSessions SessionID, StudentID, CounselorID, ScheduleAt, Location, 
+Mode, Summary, Conclusion, NextAction Lịch hẹn & biên bản tư vấn 
+StudentProfiles StudentID, PrimaryCountry, BackupCountry, TargetIntake, 
+ScholarshipGoal, BudgetRange Định hướng du học tổng quát 
+AcademicRecords StudentID, SchoolYear, GradeLevel, SemesterType, 
+AverageScore, GPA4, SubjectScores Điểm học kỳ / giữa kỳ 
+TestScores StudentID, TestType, ScoreTotal, Subscores, TestDate, 
+EvidenceFile IELTS, SAT, HSK, TOEFL, AP... 
+EvidenceItems EvidenceID, StudentID, Category, Title, Role, Level, Status, 
+FolderPath, FileLinks 
+Giải thưởng, CLB, hoạt động, minh 
+chứng 
+UniversityApplications ApplicationID, StudentID, UniversityName, Country, Program, 
+Intake, Priority, Deadline, Status, Result, Scholarship 
+Danh sách trường/ngành ứng 
+tuyển 
+DocumentItems DocumentID, StudentID, DocumentType, Category, 
+TargetSchool, Version, Owner, ReviewStatus, FileLink Tài liệu hồ sơ / essay / form 
+EssayVersions EssayID, DocumentID, VersionNo, UpdatedAt, Editor, Note Lịch sử phiên bản bài luận 
+PublicPosts PostID, Category, Title, Summary, Content, CoverImage, 
+CTAUrl, PublishStatus, PublishAt Nội dung website công khai 
+AuditLogs LogID, EntityName, RecordID, ActionType, ActionBy, ActionAt, 
+OldValue, NewValue Nhật ký thay đổi hệ thống 
+8. WORKFLOW & TÍCH HỢP DỮ LIỆU 
+• Nguồn vào 1: Học sinh/CMHS gửi form đăng ký tư vấn → tạo Registration → đối chiếu StudentID → tạo hoặc liên kết hồ sơ 
+gốc. 
+• Nguồn vào 2: Chuyên viên nhập tay / import danh sách hồ sơ từ Excel hoặc SIS. 
+• Nguồn vào 3: Học sinh hoặc chuyên viên upload tài liệu → hệ thống phân loại → gán thư mục auto → chờ duyệt nếu cần. 
+• Nguồn vào 4: Admin CMS xuất bản bài viết website công khai; bài viết có thể gắn CTA đi tới form đăng ký tư vấn. 
+• Tích hợp khuyến nghị: Microsoft 365 / Entra ID để đăng nhập; SharePoint/OneDrive/Google Drive cho lưu trữ file; Power BI 
+hoặc dashboard nội bộ cho báo cáo; Email/Teams để gửi thông báo. 
+9. NON-FUNCTIONAL REQUIREMENTS 
+Hạng mục Yêu cầu 
+Hiệu năng Trang bảng chính tải dưới 5 giây với 1.000 hồ sơ; tìm kiếm dưới 2 giây trong điều kiện mạng nội bộ 
+ổn định. 
+Khả năng mở rộng Thiết kế dữ liệu cho phép mở rộng 3.000–5.000 hồ sơ; thêm trường dữ liệu và danh mục mà không 
+phải sửa cấu trúc lõi quá nhiều. 
+Bảo mật RBAC theo vai trò và theo bản ghi; dữ liệu truyền tải qua HTTPS; phân quyền file; nhật ký truy cập 
+và chỉnh sửa. 
+Tính sẵn sàng Uptime mục tiêu >= 99% trong giờ làm việc. 
+Backup Backup tối thiểu hằng ngày; giữ tối thiểu 30 bản gần nhất hoặc theo chính sách CNTT của trường. 
+Audit trail Ghi log: đăng nhập, upload, download, sửa/xóa trạng thái, phân công, đặt lịch, duyệt tài liệu, xuất 
+bản bài viết. 
+Khả năng dùng UI theo hướng bảng, dễ lọc, dễ thao tác hàng loạt; hỗ trợ người dùng nghiệp vụ không chuyên 
+CNTT. 
+10. BẢO MẬT, LOGGING, BACKUP, AUDIT TRAIL 
+• Không cho phép xem hồ sơ học sinh ngoài phạm vi phân công, trừ Trưởng phòng HTQT, BGH hoặc Admin có quyền được cấp. 
+
+===== PAGE 21 =====
+• Thư giới thiệu và tài liệu nhạy cảm có thể gắn cờ confidential; người không đủ quyền chỉ thấy trạng thái, không thấy nội dung. 
+• Tải file lên phải kiểm soát định dạng, dung lượng, tên file, quét file độc hại nếu nền tảng cho phép. 
+• Mọi thao tác xóa logic / đóng hồ sơ / hợp nhất hồ sơ trùng phải ghi log đầy đủ trước và sau thay đổi. 
+• Có cơ chế khôi phục bản trước đối với bài viết CMS và phiên bản bài luận. 
+11. ACCEPTANCE CRITERIA & UAT CHECKLIST 
+• Đăng ký tư vấn mới không tạo trùng hồ sơ khi trùng Mã HS. 
+• Admin phân công chuyên viên và đặt lịch tư vấn thành công, lịch hiển thị đúng trên UI-02 và Student 360. 
+• UI-01 hiển thị đúng hồ sơ ưu tiên, deadline, tài liệu mới và rủi ro. 
+• UI-03 hiển thị đầy đủ thông tin cá nhân, định hướng du học, điểm số, chứng chỉ, timeline, tài liệu Drive. 
+• UI-04 tự gán folder đúng theo nhóm minh chứng và hiển thị log upload/duyệt. 
+• UI-05 quản lý được danh sách trường, deadline, kết quả và học bổng; cảnh báo đúng hồ sơ đến hạn. 
+• UI-07 quản lý phiên bản essay và trạng thái duyệt tài liệu; checklist hoàn thành tính đúng. 
+• Website công khai hiển thị tin tức, học bổng, tuyển sinh, cựu học sinh; CTA đăng ký tư vấn hoạt động. 
+• CMS cho phép tạo bài, lưu nháp, xem trước, xuất bản và cấu hình CTA. 
+12. ROADMAP PHÁT TRIỂN 
+Giai đoạn Phạm vi 
+Phase 1 – Core CRM UI-01, UI-02, UI-03; chống trùng, phân công, lịch tư vấn, hồ sơ 360, dashboard công việc. 
+Phase 2 – Evidence & 
+Application UI-04, UI-05, UI-07; kho minh chứng, pipeline ứng tuyển, quản lý tài liệu/essay/checklist. 
+Phase 3 – Public Website & 
+CMS PW-01, PW-02; website công khai, bài viết, CTA, form đăng ký tư vấn. 
+Phase 4 – BI & Integration Báo cáo nâng cao, Power BI, đồng bộ SIS/Email/Calendar/Drive. 
+ 

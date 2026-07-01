@@ -1,0 +1,621 @@
+
+
+===== PAGE 1 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+CÔNG TY CỔ PHẦN GIÁO DỤC ĐÔNG ĐÔ 
+TRƯỜNG NGÔI SAO HOÀNG MAI 
+ 
+SOP.HT-05 
+QUY TRÌNH TƯ VẤN ĐẠI HỌC 
+VÀ LỘ TRÌNH ỨNG TUYỂN 
+Bộ quy trình HT - Hợp tác Quốc tế & Đối tác 
+Meta-OS NSHM-XQ | Phiên bản v1.1 | Năm học 2026-2027 
+Vai trò Họ và tên Chức danh Chữ ký & Ngày ký 
+Phê duyệt Phạm Bích Ngà Chủ tịch HĐQT Ngày ____/____/2026 
+Phê duyệt Nguyễn Thị Vân Trang Giám đốc Điều hành Ngày ____/____/2026 
+Xem xét Lê Thị Thúy Phó Tổng Giám đốc Ngày ____/____/2026 
+Chịu trách nhiệm Nguyễn Trung Kiên Trưởng phòng Hợp tác Quốc tế & Hướng 
+nghiệp/ICCO Ngày ____/____/2026 
+ 
+Trường thông tin Nội dung 
+Ngày ban hành ____/____/2026 
+Ngày hiệu lực ____/____/2026 
+Mã tài liệu SOP.HT-05.NSHM 
+Phiên bản v1.1 - Bản sửa đổi, bổ sung theo Meta-OS NSHM-XQ 
+Mức bảo mật Nội bộ hạn chế - Dữ liệu học sinh, học bạ, chứng chỉ, bài luận, thư giới thiệu, thông tin gia đình và hồ sơ ứng 
+tuyển được phân quyền theo mục đích sử dụng 
+ 
+CHÚ Ý: Tài liệu lưu hành nội bộ. Không sao chép, chia sẻ dữ liệu học sinh/CMHS, hồ sơ ứng tuyển, thư giới thiệu, thông tin tài chính gia 
+đình hoặc kết quả tuyển sinh ra ngoài kênh chính thức. Quy trình tư vấn đại học không đồng nghĩa với cam kết trúng tuyển, không thay 
+thế dịch vụ nộp hồ sơ, visa, chứng minh tài chính, dịch thuật công chứng hoặc các dịch vụ ngoài phạm vi được BGH phê duyệt. 
+ 
+
+===== PAGE 2 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+MỤC LỤC 
+Tài liệu gồm: Tuyên bố vận hành; 20 mục chuẩn Meta-OS; Tài liệu tham chiếu chính; Kết luận vận hành. 
+Khi phát hành chính thức trên Microsoft Word, có thể cập nhật mục lục tự động bằng References > Update Table. 
+SOP.HT-05 - Quy trình Tư vấn Đại học và Lộ trình Ứng tuyển 
+SOP.HT-05 chuẩn hóa việc tiếp nhận nhu cầu, phân tích hồ sơ, tư vấn lựa chọn ngành/trường/chương trình/học bổng, xây 
+dựng University List, lập lộ trình ứng tuyển, theo dõi hồ sơ, hỗ trợ thư giới thiệu/xác nhận và tổng kết kết quả tuyển sinh 
+đại học tại Trường Ngôi Sao Hoàng Mai. 
+Quy trình này là lớp tư vấn - định hướng - kết nối đại học trong hệ sinh thái HT, liên thông với SOP.HT-01 Quản lý hợp tác 
+và đối tác chiến lược, SOP.HT-03 Tư vấn hướng nghiệp, SOP.HT-04 Triển khai và quản lý Portfolio, các quy trình tư vấn du 
+học, truyền thông kết quả học sinh, chất lượng khảo thí và bảo mật dữ liệu. 
+Nguyên tắc lõi: Tư vấn có căn cứ - Chọn trường có chiến lược - Quản trị deadline chặt chẽ - Hồ sơ minh bạch - Dữ liệu bảo 
+mật - Kết quả đo được - Cải tiến sau mỗi mùa tuyển sinh. 
+1. Kiểm soát tài liệu 
+Trường kiểm soát Nội dung 
+Mã SOP SOP.HT-05 
+Tên SOP Quy trình Tư vấn Đại học và Lộ trình Ứng tuyển 
+Bộ quy trình HT - Hợp tác Quốc tế & Đối tác 
+Chủ trì / Responsible (R) Phòng Hợp tác Quốc tế & Hướng nghiệp/ICCO; nhân sự tư vấn đại học được phân công 
+Accountable (A) BGH phụ trách THPT/HTQT/Hướng nghiệp theo phân quyền; Trưởng phòng ICCO chịu trách nhiệm chuyên 
+môn, tiến độ, hồ sơ và chất lượng tư vấn thường quy 
+Program Owner Nhân sự ICCO phụ trách từng nhóm: đại học Việt Nam, đại học quốc tế/du học, học bổng/đối tác, LOR/xác 
+nhận 
+Data Owner / Data Steward Trưởng phòng ICCO là Data Owner; nhân sự ICCO/CL/CN được phân quyền là Data Steward phụ trách lưu 
+trữ, phân quyền, dashboard, log chia sẻ dữ liệu 
+Phối hợp chính BGH, GVCN, GVBM/cố vấn học thuật, Phòng CL/Khảo thí, Phòng GD/Học thuật, Phòng PC, Phòng CN, Phòng 
+TT, Văn thư, CMHS 
+Phối hợp khi cần Đối tác đại học, đối tác tư vấn được phê duyệt, chuyên gia hướng nghiệp, cựu học sinh/CMHS mentor 
+Chu kỳ rà soát Tối thiểu 01 lần/năm học; rà soát sau mùa tuyển sinh đại học, sau thay đổi chính sách tuyển sinh hoặc sau 
+sự cố/khiếu nại 
+Phân loại mật Hồ sơ học sinh, học bạ, chứng chỉ, bài luận, thư giới thiệu, thông tin gia đình và dữ liệu ứng tuyển là dữ liệu 
+hạn chế/nhạy cảm 
+Trạng thái áp dụng Áp dụng bắt buộc cho mọi ca tư vấn đại học chính thức do nhà trường/ICCO quản lý 
+ 
+1.1. Danh mục SOP bộ HT sau rà soát 
+Mã SOP Tên SOP sau rà soát, phân loại 
+SOP.HT-01 Quản lý hợp tác và đối tác chiến lược 
+SOP.HT-02 Tổ chức chương trình trải nghiệm và giao lưu quốc tế 
+SOP.HT-03 Tư vấn hướng nghiệp 
+SOP.HT-04 Quy trình triển khai và quản lý Portfolio 
+SOP.HT-05 Quy trình Tư vấn Đại học và Lộ trình Ứng tuyển 
+ 
+
+===== PAGE 3 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+2. Mục đích 
+Thiết lập chuẩn vận hành thống nhất để hoạt động tư vấn đại học được thực hiện đúng nhu cầu, đúng năng lực, đúng dữ 
+liệu, đúng lộ trình, đúng phạm vi hỗ trợ và đúng chuẩn bảo mật. 
+Mục tiêu Diễn giải vận hành 
+Tư vấn đúng nhu cầu Ghi nhận mong muốn của học sinh và CMHS về ngành, trường, quốc gia, chương trình, học bổng, tài chính 
+và môi trường học tập. 
+Phân tích đúng năng lực Sử dụng học bạ, GPA, điểm chuẩn hóa, chứng chỉ, hoạt động, portfolio, giải thưởng, nhận xét chuyên 
+môn. 
+Xây dựng lộ trình phù hợp Thiết lập kế hoạch hành động theo giai đoạn: học thuật, chứng chỉ, hoạt động, bài luận, thư giới thiệu, 
+deadline. 
+Chọn trường có căn cứ Xây dựng University List theo Reach - Target - Safety, có nguồn dữ liệu và phương án dự phòng. 
+Minh bạch phạm vi hỗ trợ Làm rõ nhà trường tư vấn định hướng, không cam kết trúng tuyển và không làm thay hồ sơ ngoài phạm 
+vi. 
+Quản trị deadline Theo dõi mốc quan trọng, cảnh báo trễ hạn, điều phối LOR/xác nhận đúng thời gian. 
+Bảo mật dữ liệu Kiểm soát quyền truy cập, lưu trữ, chia sẻ dữ liệu học sinh và hồ sơ ứng tuyển. 
+Đo lường và cải tiến Theo dõi KPI, hài lòng, kết quả trúng tuyển, khiếu nại, CAPA và bài học sau mỗi mùa tuyển sinh. 
+ 
+3. Phạm vi 
+Phạm vi Quy định 
+Đối tượng áp dụng Học sinh THPT Trường Ngôi Sao Hoàng Mai, ưu tiên kh ối 10, 11, 12 có nhu cầu tư vấn định hướng đại học 
+quốc tế, du học, chuẩn bị hồ sơ ứng tuyển, học bổng hoặc lựa chọn chương trình sau THPT. 
+Loại hoạt động Tư vấn chọn ngành, chọn trường, chọn chương trình, h ọc bổng, hồ sơ ứng tuyển, LOR/xác nh ận, so sánh 
+offer, truyền thông kết quả nếu có đồng thuận. 
+Không thuộc phạm vi Cam kết trúng tuyển, tư vấn đại học công lập trong nước, nộp hồ sơ thay, xử lý visa, chứng minh tài chính, 
+định cư, dịch thuật công chứng, quyết định thay gia đình, chia sẻ dữ liệu khi chưa có phê duyệt/đồng thuận. 
+ 
+3.1. Ba nhánh tư vấn chính 
+Nhánh Nội dung tư vấn Đầu ra chính 
+A. Đại học Việt Nam Tư vấn ngành, trường, tổ hợp xét tuyển, học bạ, ĐGNL, tuyển 
+sinh tài năng, phỏng vấn, học bổng trong nước. 
+Danh sách trường/ngành, phương thức xét tuyển, 
+timeline đăng ký, kế hoạch điểm số. 
+B. Đại học quốc tế/du 
+học/chương trình quốc tế 
+Tư vấn quốc gia, loại hình trường, GPA, IELTS/SAT/AP/ACT/A-
+Level/IB, portfolio, bài luận, LOR, deadline. 
+University List, checklist hồ sơ, kế hoạch chứng chỉ, 
+LOR, portfolio. 
+C. Học bổng/đối tác đại học Tư vấn học bổng từ trường/đối tác, chương trình hợp tác, 
+điều kiện xét học bổng, hồ sơ minh chứng, phỏng vấn. 
+Danh sách học bổng, tiêu chí phù hợp, hồ sơ minh 
+chứng, kế hoạch phỏng vấn. 
+ 
+3.2. Tuyên bố ranh giới chuyên môn 
+Nhà trường thực hiện tư vấn định hướng đại học, hỗ trợ học sinh xây dựng lộ trình và chuẩn bị hồ sơ trong phạm vi chuyên 
+môn giáo dục. Nhà trường không cam kết kết quả trúng tuyển, không đại diện nộp hồ sơ thay học sinh/CMHS, không xử lý 
+visa, chứng minh tài chính, định cư, dịch thuật công chứng hoặc các dịch vụ ngoài phạm vi được BGH phê duyệt. 
+4. Căn cứ 
+Căn cứ Áp dụng vào SOP.HT-05 
+Meta-OS NSHM-XQ Cấu trúc 20 mục, lưu đồ 10 bước MỤC-HIỆN-BÊN-CẦU-THIẾT-HỒ-THỬ-HUẤN-THỰC-ĐO, RASCI, KPI/SLA, hồ sơ và 
+CAPA. 
+
+===== PAGE 4 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+Căn cứ Áp dụng vào SOP.HT-05 
+Triết lý và văn hóa NSHM Đức - Trí - Thể - Nhân - Hòa; Chân - Chính - Chăm - Chuyên - Chất; tinh thần HT: Kết nối tinh hoa - Cộng hưởng 
+giá trị - Vươn tầm quốc tế. 
+SOP liên quan 
+SOP.HT-01 Quản lý hợp tác và đối tác chiến lược;  
+SOP.HT-03 Tư vấn hướng nghiệp;  
+SOP.HT-04 Triển khai và quản lý Portfolio; quy trình tư vấn du học; quy trình truyền thông kết quả học sinh. 
+Chuẩn ISO tham chiếu ISO 21001, ISO 9001, ISO 10015, ISO 31000, ISO 27001, ISO 10002. 
+Nguyên tắc dữ liệu Bảo mật, phân quyền, tối thiểu hóa dữ liệu, lưu vết, sử dụng đúng mục đích, đồng thuận khi chia sẻ dữ 
+liệu/truyền thông. 
+Nguyên tắc tư vấn Khách quan, có căn cứ, không cam kết vượt phạm vi, tôn trọng lựa chọn của học sinh và CMHS, không tạo xung 
+đột lợi ích với đối tác. 
+5. Thuật ngữ 
+Thuật ngữ Định nghĩa vận hành 
+ICCO/Phòng HTQT&HN Phòng Hợp tác Quốc tế & Hướng nghiệp. 
+Tư vấn đại học Hoạt động định hướng lựa chọn ngành, trường, chương trình, học bổng và lộ trình ứng tuyển đại học. 
+University List/College List Danh sách trường/chương trình mục tiêu của học sinh, có phân nhóm và căn cứ lựa chọn. 
+Reach Nhóm trường có mức độ cạnh tranh cao hơn hồ sơ hiện tại của học sinh. 
+Target Nhóm trường phù hợp tương đối với năng lực, mục tiêu và điều kiện của học sinh. 
+Safety Nhóm trường có xác suất trúng tuyển cao hơn, dùng làm phương án an toàn. 
+Portfolio Hồ sơ năng lực học sinh: học thuật, hoạt động, giải thưởng, dự án, sản phẩm, minh chứng. 
+LOR Letter of Recommendation - Thư giới thiệu. 
+Consent Đồng thuận sử dụng/chia sẻ dữ liệu hoặc truyền thông kết quả. 
+Data Owner/Data Steward Vai trò chịu trách nhiệm quản trị dữ liệu và vận hành lưu trữ/phân quyền/dashboard. 
+KPI/SLA Chỉ số hiệu quả/Thời hạn xử lý dịch vụ. 
+CAPA Corrective and Preventive Action - hành động khắc phục và phòng ngừa. 
+6. Đầu vào 
+6.1. Bộ dữ liệu tối thiểu - Minimum Data Set 
+Nhóm dữ liệu Thành phần tối thiểu 
+Thông tin học sinh Họ tên, lớp, năm tốt nghiệp, GVCN, hệ học. 
+Mục tiêu ban đầu Ngành quan tâm, quốc gia/trường/chương trình quan tâm, định hướng nghề. 
+Dữ liệu học thuật GPA/học bạ, môn mạnh/yếu, tổ hợp xét tuyển, kết quả khảo thí nội bộ nếu có. 
+Chứng chỉ IELTS/TOEFL/SAT/ACT/AP/A-Level/IB/HSK hoặc chứng chỉ liên quan nếu có. 
+Hoạt động CLB, dự án, hoạt động cộng đồng, nghiên cứu, giải thưởng, leadership. 
+Portfolio CV/activity list, sản phẩm, minh chứng, bài luận nháp nếu có. 
+Ràng buộc gia đình Ngân sách dự kiến, vùng địa lý, quốc gia, yêu cầu an toàn, mong muốn CMHS nếu gia đình tự nguyện cung cấp. 
+Timeline Deadline quan trọng, mốc thi chứng chỉ, mốc nộp hồ sơ, mốc xét học bổng. 
+Mức độ sẵn sàng Điểm mạnh, điểm thiếu, mức ưu tiên, rủi ro cần xử lý. 
+ 
+
+===== PAGE 5 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+6.2. Đầu vào đầy đủ 
+Nhóm đầu vào Nội dung cần thu thập 
+Thông tin học sinh Họ tên, lớp, hệ học, GVCN, năm tốt nghiệp, định hướng ban đầu. 
+Nhu cầu tư vấn Ngành học, trường học, quốc gia, chương trình, học bổng, chi phí, môi trường học tập. 
+Dữ liệu học thuật Học bạ, GPA, điểm trung bình, môn mạnh/yếu, tổ hợp xét tuyển, kết quả khảo thí. 
+Chứng chỉ IELTS, TOEFL, SAT, ACT, AP, A-Level, IB, HSK, chứng chỉ chuyên môn khác. 
+Hoạt động và thành tích CLB, dự án, nghiên cứu, giải thưởng, hoạt động cộng đồng, leadership, thể thao, nghệ thuật. 
+Dữ liệu hướng nghiệp Kết quả khảo sát sở thích/nghề nghiệp, biên bản tư vấn hướng nghiệp, định hướng nghề. 
+Nguồn tuyển sinh Website chính thức, tài liệu trường đại học, đối tác đã duyệt, hội thảo, cổng tuyển sinh. 
+Nguồn lực vận hành Lịch tư vấn, cố vấn phụ trách, biểu mẫu, dashboard, thư mục lưu hồ sơ. 
+ 
+7. Đầu ra 
+Nhóm đầu ra Sản phẩm/hồ sơ 
+Hồ sơ tiếp nhận Phiếu tiếp nhận nhu cầu tư vấn đại học. 
+Hồ sơ phân tích Phiếu dữ liệu học sinh và phân tích mức độ phù hợp. 
+Biên bản tư vấn Nội dung tư vấn, căn cứ, khuyến nghị, phạm vi hỗ trợ. 
+University List Danh sách trường theo nhóm Reach - Target - Safety, có chấm điểm phù hợp và nguồn tham chiếu. 
+Kế hoạch hành động Timeline chuẩn bị điểm số, chứng chỉ, hoạt động, bài luận, LOR, portfolio. 
+Checklist hồ sơ Danh mục tài liệu, deadline, tình trạng hoàn thành. 
+Log tiến độ Nhật ký theo dõi các mốc chuẩn bị và cảnh báo trễ hạn. 
+LOR/xác nhận Phiếu yêu cầu, gói thông tin, bản thư/xác nhận, lưu vết phát hành. 
+Phiếu tư vấn sau kết quả So sánh offer, học bổng, điều kiện nhập học, phương án lựa chọn. 
+Phiếu đồng thuận Đồng thuận sử dụng dữ liệu/truyền thông kết quả nếu có. 
+Báo cáo tổng kết Kết quả tư vấn, mức độ hài lòng, KPI, CAPA nếu có. 
+Dashboard Trạng thái học sinh, nhóm trường, deadline, kết quả, consent, CAPA, cảnh báo. 
+ 
+8. Bên liên quan 
+Bên liên quan Vai trò 
+Học sinh Chủ thể chính; cung cấp thông tin trung thực; tham gia tư vấn; thực hiện kế hoạch hành động. 
+CMHS Đồng hành, xác nhận nhu cầu, phối hợp ra quyết định, cung cấp thông tin ràng buộc nếu cần. 
+ICCO/Phòng HTQT&HN Chủ trì quy trình tư vấn, điều phối, lưu hồ sơ, theo dõi tiến độ, báo cáo. 
+BGH Phê duyệt định hướng, xử lý trường hợp vượt cấp, ký xác nhận/thư khi thuộc thẩm quyền. 
+GVCN Cung cấp bối cảnh học sinh, phối hợp nhắc tiến độ, kết nối CMHS. 
+GVBM/Cố vấn học thuật Cung cấp nhận xét chuyên môn, hỗ trợ LOR, minh chứng học thuật. 
+CL/Khảo thí Cung cấp dữ liệu điểm, kết quả khảo thí, đánh giá năng lực. 
+PC/CN/TT/Văn thư Rà soát pháp lý/bảo mật; hỗ trợ hệ thống; truyền thông kết quả; ký, đóng dấu, lưu vết văn bản. 
+Đối tác/đại học Cung cấp thông tin, hội thảo, mentoring hoặc hỗ trợ trong phạm vi được phê duyệt. 
+ 
+
+===== PAGE 6 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+9. RASCI 
+Hoạt động R A S C I 
+1. Tiếp nhận nhu cầu tư vấn ICCO ICCO GVCN, CMHS, HS BGH khi cần GVCN, HS/CMHS 
+2. Mở hồ sơ tư vấn ICCO ICCO CN PC nếu dữ liệu nhạy 
+cảm BGH, GVCN 
+3. Thu thập dữ liệu học sinh HS/CMHS/ICCO ICCO GVCN, GVBM, CL GD/PC khi cần BGH 
+4. Phân tích hồ sơ ICCO ICCO CL, GVCN, GVBM BGH/GD HS/CMHS 
+5. Tổ chức buổi tư vấn ICCO, HS, CMHS ICCO GVCN BGH khi cần GVCN/GVBM 
+6. Xây University List ICCO, HS ICCO CL, GVCN, GVBM BGH/GD CMHS 
+7. Điều phối LOR/xác nhận ICCO, GVBM/GVCN, 
+Văn thư 
+BGH theo thẩm 
+quyền HS, CL PC khi cần CMHS 
+8. Theo dõi tiến độ hồ sơ HS, ICCO ICCO GVCN, CN BGH khi cần CMHS 
+9. Truyền thông kết quả TT BGH/TT theo phân 
+quyền ICCO, HS/CMHS PC khi cần 
+GVCN, cộng 
+đồng theo phạm 
+vi duyệt 
+10. Audit/CAPA ICCO, CL ICCO/BGH CN, PC, GVCN BGH Các bên liên 
+quan 
+ 
+9.1. Quy tắc Accountable 
+Tình huống Accountable 
+Ca tư vấn thường quy ICCO 
+Ký xác nhận, phát hành thư mang danh nghĩa nhà trường BGH/Hiệu trưởng theo phân quyền 
+Khiếu nại chính thức, rủi ro pháp lý, dữ liệu, truyền thông BGH 
+Truyền thông kết quả trúng tuyển/học bổng BGH/TT theo phân quyền; PC rà soát nếu cần 
+Ca có đối tác bên ngoài tham gia ICCO/BGH theo phê duyệt chương trình 
+ 
+10. Quy trình 
+10.1. Lưu đồ 10 bước Meta-OS 
+Bước Nội dung thực hiện Đầu ra 
+B1 - MỤC Tiếp nhận nhu cầu tư vấn, xác định mục tiêu, phạm vi, nhánh tư vấn, tiêu chí thành công. 
+BM.SOP.HT-05.01 
+BM.SOP.HT-05.01_Phiếu tiếp nhận nhu 
+cầu tư vấn đại học 
+B2 - HIỆN Mở hồ sơ, thu thập và phân tích dữ liệu học sinh, bối cảnh, điểm mạnh, điểm thiếu, deadline. 
+BM.SOP.HT-05.02; Báo cáo phân tích hồ 
+sơ 
+BM.SOP.HT-05.02_Phiếu thu thập dữ liệu 
+học sinh và hồ sơ năng lực 
+B3 - BÊN Xác định các bên liên quan, người phê duyệt, người hỗ trợ, người cần được thông tin. RASCI ca tư vấn 
+B4 - CẦU Chuyển hóa nhu cầu thành yêu cầu tư vấn: ngành, trường, phương thức xét tuyển, học bổng, hồ sơ, LOR. Bộ yêu cầu tư vấn 
+B5 - THIẾT Thiết kế University List, kế hoạch hành động, timeline và phương án dự phòng. 
+BM.SOP.HT-05.03/04 
+BM.SOP.HT-05.03_Biên bản tư vấn đại 
+học và kế hoạch hành động 
+BM.SOP.HT-05.04_Bảng xây dựng 
+University List College List 
+B6 - HỒ Chuẩn bị biểu mẫu, checklist hồ sơ, consent, thư mục lưu trữ và dashboard theo dõi. Form Pack/Checklist 
+B7 - THỬ Rà soát chéo University List, LOR, hồ sơ/nguồn thông tin trước khi chốt với học sinh/CMHS. Issue Log/phiếu rà soát 
+B8 - HUẤN Hướng dẫn học sinh/CMHS/GVCN/GVBM về vai trò, deadline, LOR, bảo mật và cách cập nhật tiến độ. Training/Guidance Record 
+
+===== PAGE 7 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+Bước Nội dung thực hiện Đầu ra 
+B9 - THỰC Theo dõi hồ sơ, hỗ trợ trong phạm vi, tư vấn sau kết quả, xử lý phát sinh theo escalation. Log tiến độ; phiếu so sánh offer 
+B10 - ĐO Đo KPI/SLA, khảo sát hài lòng, tổng kết kết quả, review mùa tuyển sinh và CAPA. 
+BM.SOP.HT-05.08/09/13 
+BM.SOP.HT-05.08_Phiếu khảo sát hài 
+lòng sau tư vấn 
+BM.SOP.HT-05.09_Báo cáo tổng kết tư 
+vấn đại học CAPA 
+BM.SOP.HT-05.13_Báo cáo Review sau 
+mùa tuyển sinh 
+10.2. Quy trình chi tiết 
+Bước Thực hiện Phụ trách SLA Đầu ra 
+1 Tiếp nhận nhu cầu từ HS/CMHS/GVCN/BGH. ICCO <=02 ngày làm việc Phiếu tiếp nhận nhu cầu 
+2 Phân loại nhánh tư vấn và mức ưu tiên. ICCO <=02 ngày Nhóm nhu cầu và mức ưu 
+tiên 
+3 Mở hồ sơ tư vấn, tạo mã hồ sơ, phân quyền lưu trữ. ICCO + CN <=01 ngày sau phân loại Mã hồ sơ tư vấn 
+4 Thu thập Minimum Data Set và dữ liệu bổ sung. HS, CMHS, ICCO, GVCN, CL 03-05 ngày Phiếu dữ liệu 
+5 Phân tích năng lực và mức độ phù hợp. ICCO, GVCN, GVBM/cố vấn, CL 03 ngày Phiếu phân tích hồ sơ 
+6 Tổ chức tư vấn lần 1: ngành, trường, phương thức xét tuyển, 
+phạm vi hỗ trợ. ICCO, HS, CMHS <=07 ngày sau khi đủ dữ 
+liệu Biên bản tư vấn 
+7 Xây University List sơ bộ theo Reach - Target - Safety. ICCO + HS 05 ngày sau tư vấn lần 1 University List sơ bộ 
+8 Lập kế hoạch hành động cá nhân. ICCO, HS, CMHS 03 ngày sau University List Timeline ứng tuyển 
+9 Rà soát Portfolio/LOR/hồ sơ minh chứng. ICCO, GVCN, GVBM, HS Theo timeline Checklist portfolio/LOR 
+10 Tư vấn lần 2, chốt danh sách trường và phương án dự phòng. ICCO, HS, CMHS Trước deadline tối thiểu 20 
+ngày nếu đủ điều kiện University List chốt 
+11 Theo dõi tiến độ hồ sơ, nhắc deadline và cập nhật 
+dashboard. HS chủ trì; ICCO theo dõi Tối thiểu 02 tuần/lần trong 
+mùa hồ sơ Log tiến độ 
+12 Hỗ trợ LOR/xác nhận học sinh trong phạm vi nhà trường. ICCO, BGH, GVCN, GVBM, Văn thư Nhận yêu cầu tối thiểu 10-
+15 ngày trước hạn LOR/xác nhận 
+13 Tư vấn sau kết quả: so sánh offer, học bổng, điều kiện nhập 
+học. ICCO, HS, CMHS <=05 ngày sau khi HS báo 
+kết quả Phiếu so sánh offer 
+14 Ghi nhận kết quả, xác minh minh chứng, xin consent truyền 
+thông nếu cần. ICCO, TT, HS/CMHS <=07 ngày sau khi có minh 
+chứng Consent và hồ sơ kết quả 
+15 Đóng hồ sơ, khảo sát hài lòng, cập nhật dashboard, tổng hợp 
+CAPA nếu có. ICCO <=07 ngày sau hoàn tất Báo cáo tổng kết/CAPA 
+ 
+10.3. Nhánh phụ A - Hỗ trợ LOR/xác nhận học sinh 
+Bước Nội dung Đầu ra 
+A1 Tiếp nhận yêu cầu LOR/xác nhận. Phiếu yêu cầu LOR 
+A2 Kiểm tra deadline, đơn vị nhận, hình thức nộp, yêu cầu nội dung. Checklist LOR 
+A3 Thu thập thông tin học sinh, CV, portfolio, thành tích, mục tiêu ứng tuyển. Gói thông tin LOR 
+A4 Phân công người viết/người xác nhận. Phân công RASCI 
+A5 Soạn thảo/rà soát nội dung, bảo đảm đúng sự thật, không phóng đại. Bản nháp 
+A6 Ký/phát hành đúng thẩm quyền. Bản LOR/xác nhận 
+A7 Lưu vết phát hành và cập nhật log. Log LOR 
+Người viết thư chịu trách nhiệm tính xác thực của nội dung. ICCO rà soát định dạng, dữ liệu và tính nhất quán; BGH/Hiệu 
+trưởng ký theo thẩm quyền khi thư/xác nhận sử dụng danh nghĩa nhà trường. 
+
+===== PAGE 8 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+10.4. Nhánh phụ B - Truyền thông kết quả trúng tuyển/học bổng 
+Bước Nội dung Đầu ra 
+B1 Học sinh/CMHS gửi minh chứng kết quả. Offer letter/học bổng 
+B2 ICCO xác minh tính hợp lệ của minh chứng. Phiếu xác minh 
+B3 Xin đồng thuận sử dụng dữ liệu/hình ảnh/thông tin. Phiếu đồng thuận 
+B4 TT soạn nội dung truyền thông. Bản nháp 
+B5 ICCO/BGH/PC rà soát nội dung nếu cần. Bản duyệt 
+B6 Đăng tải/lưu trữ kết quả. Link/bản lưu 
+ 
+10.5. Nhánh phụ C - Khiếu nại/sai lệch 
+Bước Nội dung Đầu ra 
+C1 Tiếp nhận phản ánh/khiếu nại. Phiếu ghi nhận 
+C2 Phân loại mức Xanh/Vàng/Cam/Đỏ. Log escalation 
+C3 Kiểm tra hồ sơ, nguồn dữ liệu, biên bản tư vấn. Báo cáo kiểm tra 
+C4 Phản hồi ban đầu trong SLA. Biên bản phản hồi 
+C5 Kích hoạt CAPA nếu có sai lệch. CAPA 
+C6 Kiểm tra hiệu lực sau CAPA. Báo cáo đóng CAPA 
+ 
+11. Điểm kiểm soát 
+Điểm kiểm soát Yêu cầu Minh chứng 
+Phạm vi tư vấn Nêu rõ nhà trường tư vấn định hướng, không cam kết trúng tuyển, không làm thay hồ sơ 
+ngoài phạm vi. Biên bản tư vấn 
+Nguồn thông tin Thông tin trường/ngành/deadline/học bổng phải có nguồn tham chiếu rõ và ngày cập nhật. Link/tài liệu nguồn 
+Dữ liệu học sinh Dữ liệu sử dụng phải được cung cấp hợp lệ hoặc có phân quyền nội bộ. Phiếu dữ liệu 
+University List Có phân nhóm Reach - Target - Safety, chấm điểm phù hợp, rủi ro và phương án dự phòng. BM.SOP.HT-05.04 
+Deadline Có checklist và log tiến độ cho các mốc quan trọng. BM.SOP.HT-05.05/06 
+LOR/xác nhận Có phiếu yêu cầu, phân công người viết, rà soát, ký đúng thẩm quyền, lưu vết. BM.SOP.HT-05.07 
+Bảo mật Chỉ chia sẻ dữ liệu theo nguyên tắc cần biết, đúng mục đích, đúng kênh. Log phân quyền/chia sẻ 
+Đồng thuận dữ liệu Có consent khi chia sẻ hồ sơ cho đối tác hoặc truyền thông kết quả. BM.SOP.HT-05.10 
+Xung đột lợi ích Không ép chọn đối tác/trường; công khai phạm vi hợp tác; PC/BGH rà soát khi cần. Biên bản/phiếu rà soát 
+Đóng hồ sơ Hồ sơ đủ phiếu nhu cầu, biên bản, kế hoạch, log tiến độ, khảo sát. Checklist đóng hồ sơ 
+ 
+12. Rủi ro và kiểm soát 
+Rủi ro Biện pháp kiểm soát 
+Thông tin tuyển sinh lỗi thời Dùng nguồn chính thức, ghi ngày cập nhật, rà soát trước mùa tuyển sinh. 
+Kỳ vọng HS/CMHS không phù hợp năng lực hồ sơ Phân tích dữ liệu khách quan; dùng Reach - Target - Safety; ghi rõ rủi ro. 
+Trễ deadline hồ sơ Dashboard deadline; nhắc hạn; escalation khi dưới 14 ngày. 
+Hồ sơ thiếu minh chứng Checklist tài liệu; không xác nhận thông tin chưa có minh chứng. 
+LOR sai thông tin hoặc vượt phạm vi xác nhận Rà soát nội bộ; người viết chịu trách nhiệm nội dung; ký đúng thẩm quyền. 
+
+===== PAGE 9 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+Rủi ro Biện pháp kiểm soát 
+Lộ dữ liệu học sinh Phân quyền, lưu trữ chính thức, không dùng kênh cá nhân, log truy cập. 
+Xung đột giữa học sinh và CMHS Tư vấn 3 bên, ghi nhận quan điểm, escalation BGH nếu cần. 
+Đối tác bên ngoài tư vấn sai lệch Chỉ giới thiệu đối tác được phê duyệt, thu phản hồi, đánh giá lại đối tác. 
+Xung đột lợi ích với đối tác tư vấn/đại học Công khai phạm vi hợp tác, không ép lựa chọn, BGH/PC rà soát. 
+Truyền thông kết quả sai/chưa xin phép Xác minh minh chứng, xin đồng thuận, PC/TT rà soát nếu cần. 
+Khiếu nại chất lượng tư vấn Lưu biên bản, phản hồi đúng SLA, kích hoạt CAPA. 
+ 
+13. KPI/SLA 
+13.1. KPI tuân thủ 
+Mã Chỉ số Ngưỡng Tần suất đo 
+KPI.HT05-01 Tỷ lệ ca tư vấn có phiếu tiếp nhận nhu cầu 100% Theo ca 
+KPI.HT05-02 Tỷ lệ ca tư vấn có biên bản tư vấn 100% Theo ca 
+KPI.HT05-03 Tỷ lệ hồ sơ tư vấn có kế hoạch hành động >=95% Theo tháng/học kỳ 
+KPI.HT05-04 Tỷ lệ LOR có phiếu yêu cầu và rà soát trước phát hành 100% Theo yêu cầu 
+KPI.HT05-05 Tỷ lệ dữ liệu lưu đúng nơi, đúng phân quyền 100% Theo audit 
+KPI.HT05-06 Số sự cố lộ lọt dữ liệu 0 Theo sự vụ 
+ 
+13.2. KPI chất lượng tư vấn và kết quả 
+Mã Chỉ số Ngưỡng Tần suất đo 
+KPI.HT05-07 Tỷ lệ HS/CMHS hài lòng sau tư vấn >=85% Sau ca/chu kỳ 
+KPI.HT05-08 Tỷ lệ học sinh khối mục tiêu có University List cập nhật >=90% Học kỳ/mùa tuyển sinh 
+KPI.HT05-09 Tỷ lệ học sinh có tối thiểu 01 phương án Safety phù hợp >=95% Theo University List 
+KPI.HT05-10 Tỷ lệ University List có đủ nguồn tham chiếu và ngày cập nhật >=95% Theo audit 
+KPI.HT05-11 Tỷ lệ LOR/xác nhận phát hành đúng hạn >=95% Theo mùa tuyển sinh 
+KPI.HT05-12 Tỷ lệ kết quả trúng tuyển/học bổng được ghi nhận có minh chứng >=95% Theo mùa tuyển sinh 
+ 
+13.3. SLA xử lý 
+Mã Công việc SLA 
+SLA.HT05-01 Phản hồi tiếp nhận nhu cầu tư vấn <=02 ngày làm việc 
+SLA.HT05-02 Phân loại nhu cầu và mở hồ sơ <=03 ngày làm việc 
+SLA.HT05-03 Tổ chức tư vấn sau khi đủ dữ liệu <=07 ngày làm việc 
+SLA.HT05-04 Gửi biên bản/kế hoạch hành động sau tư vấn <=03 ngày làm việc 
+SLA.HT05-05 Cập nhật tiến độ mùa hồ sơ Tối thiểu 02 tuần/lần 
+SLA.HT05-06 Tiếp nhận yêu cầu LOR/xác nhận Tối thiểu 10-15 ngày trước deadline 
+SLA.HT05-07 Phản hồi khiếu nại ban đầu <=02 ngày làm việc 
+SLA.HT05-08 Review sau mùa tuyển sinh <=30 ngày sau mùa tuyển sinh chính 
+ 
+
+===== PAGE 10 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+14. Biểu mẫu 
+Mã Tên biểu mẫu Loại Mục đích 
+BM.SOP.HT-05.01 Phiếu tiếp nhận nhu cầu tư vấn đại học Bắt buộc Mở ca tư vấn, xác định nhu cầu, nhánh tư vấn và 
+phạm vi hỗ trợ. 
+BM.SOP.HT-05.02 Phiếu thu thập dữ liệu học sinh & hồ sơ năng lực Bắt buộc Chuẩn hóa Minimum Data Set và hồ sơ năng lực. 
+BM.SOP.HT-05.03 Biên bản tư vấn đại học & kế hoạch hành động Bắt buộc Ghi nhận kết quả tư vấn, khuyến nghị, timeline và việc 
+cần làm. 
+BM.SOP.HT-05.04 Bảng xây dựng University List/College List Bắt buộc khi có chọn 
+trường 
+Phân nhóm, chấm điểm phù hợp, nguồn tham chiếu 
+và rủi ro. 
+BM.SOP.HT-05.05 Checklist hồ sơ ứng tuyển đại học Khi có hồ sơ ứng tuyển Theo dõi tài liệu, chứng chỉ, bài luận, LOR và deadline. 
+BM.SOP.HT-05.06 Nhật ký tiến độ hồ sơ đại học Khi có hồ sơ ứng tuyển Theo dõi mốc thực hiện và cảnh báo trễ hạn. 
+BM.SOP.HT-05.07 Phiếu yêu cầu thư giới thiệu/xác nhận học sinh Khi phát sinh Điều phối LOR, xác nhận học sinh, minh chứng. 
+BM.SOP.HT-05.08 Phiếu khảo sát hài lòng sau tư vấn Khi cần Đo chất lượng trải nghiệm tư vấn. 
+BM.SOP.HT-05.09 Báo cáo tổng kết tư vấn đại học/CAPA Bắt buộc theo chu kỳ Tổng hợp kết quả, KPI, sai lệch, cải tiến. 
+BM.SOP.HT-05.10 Phiếu đồng thuận sử dụng dữ liệu và truyền thông 
+kết quả Khi phát sinh Consent chia sẻ dữ liệu và truyền thông thành tích. 
+BM.SOP.HT-05.11 Phiếu so sánh offer/học bổng/điều kiện nhập học Khi có offer Hỗ trợ học sinh/CMHS ra quyết định. 
+BM.SOP.HT-05.12 Rubric đánh giá mức độ sẵn sàng hồ sơ đại học Khi cần Đánh giá học thuật, chứng chỉ, hoạt động, portfolio, 
+định hướng. 
+BM.SOP.HT-05.13 Báo cáo Review sau mùa tuyển sinh Bắt buộc sau mùa tuyển 
+sinh 
+Tổng kết kết quả, bài học, dữ liệu trường/ngành, 
+CAPA mùa sau. 
+ 
+15. Hồ sơ lưu trữ 
+Loại hồ sơ Nội dung Thời gian lưu Phân loại 
+Phiếu tiếp nhận nhu cầu BM.SOP.HT-05.01 Tối thiểu 03 năm Nội bộ hạn chế 
+Phiếu dữ liệu học sinh BM.SOP.HT-05.02 và minh chứng liên quan Tối thiểu 03 năm Dữ liệu nhạy cảm 
+Biên bản tư vấn/kế hoạch hành 
+động BM.SOP.HT-05.03 Tối thiểu 03 năm Nội bộ hạn chế 
+University List/Checklist/Log tiến độ BM.SOP.HT-05.04/05/06 Tối thiểu 03 năm Nội bộ hạn chế 
+LOR/xác nhận BM.SOP.HT-05.07, bản thư/xác nhận và log phát hành Theo quy định văn thư; 
+tối thiểu 03 năm Mật 
+Phiếu đồng thuận BM.SOP.HT-05.10 Tối thiểu 03 năm Mật 
+Minh chứng kết quả tuyển sinh/học 
+bổng Offer letter, học bổng, xác nhận nhập học Tối thiểu 03 năm Nội bộ hạn chế/mật 
+Khảo sát hài lòng, báo cáo/CAPA BM.SOP.HT-05.08/09/13 03-05 năm Nội bộ hạn chế 
+Nhật ký phân quyền/chia sẻ dữ liệu Data Sharing Log, access log nếu có Tối thiểu 03 năm Dữ liệu hạn chế 
+ 
+15.1. Quy tắc đặt mã hồ sơ 
+Cấu trúc đề xuất: HT05_[Năm tốt nghiệp]_[Lớp]_[HọTênHS]_[Loại tư vấn]. Ví dụ: 
+HT05_2026_12T1_NguyenVanA_UniversityList. 
+16. Bảo mật 
+Mức bảo mật Loại thông tin Người có thể truy cập 
+Mức 1 - Công khai nội bộ Lịch workshop, chủ đề tư vấn chung, thông điệp tuyển sinh không 
+chứa dữ liệu cá nhân. 
+ICCO, BGH, GVCN/GVBM, HS/CMHS theo phạm 
+vi. 
+
+===== PAGE 11 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+Mức bảo mật Loại thông tin Người có thể truy cập 
+Mức 2 - Nội bộ hạn chế Biên bản tư vấn, University List, kế hoạch hành động, checklist hồ sơ. ICCO, học sinh, CMHS, GVCN/GVBM khi cần, 
+BGH. 
+Mức 3 - Dữ liệu nhạy cảm Học bạ, điểm, chứng chỉ, bài luận, LOR, thông tin gia đình/tài chính. ICCO, BGH, người được phân công và phân 
+quyền. 
+Mức 4 - Bảo mật cao Khiếu nại, xung đột gia đình, dữ liệu sức khỏe/tâm lý nếu có, sự cố dữ 
+liệu. BGH, ICCO, PC, CN, TL khi được chỉ định. 
+ 
+Nguyên tắc sử dụng dữ liệu: chỉ truy cập theo vai trò; chỉ chia sẻ tối thiểu cần thiết; dùng đúng mục đích; lưu tại kênh chính 
+thức; có log chia sẻ dữ liệu; không gửi học bạ, chứng chỉ, điểm số, bài luận, LOR hoặc thông tin tài chính qua kênh cá nhân 
+nếu chưa được phê duyệt. 
+Nếu phát hiện vi phạm dữ liệu, kích hoạt Escalation Đỏ và phối hợp PC/CN/BGH xử lý ngay trong ngày. Không truyền thông 
+kết quả trúng tuyển/học bổng nếu chưa có minh chứng và đồng thuận phù hợp. 
+17. Escalation 
+Mức Tình huống Cách xử lý 
+Xanh Tư vấn thường quy, đủ dữ liệu, không có rủi ro deadline. ICCO xử lý theo SLA, cập nhật hồ sơ. 
+Vàng Thiếu dữ liệu, học sinh chậm tiến độ, cần GVCN/GVBM hỗ trợ, deadline dưới 30 
+ngày. ICCO phối hợp GVCN/GVBM; nhắc hạn trong 02 ngày. 
+Cam Deadline dưới 14 ngày; nguy cơ trễ LOR; mâu thuẫn HS-CMHS; thông tin hồ sơ có 
+rủi ro; khiếu nại bước đầu. 
+Trưởng ICCO báo BGH THPT/GVCN, xử lý trong 24-48 
+giờ. 
+Đỏ Lộ dữ liệu; sử dụng thư/chữ ký sai mục đích; thông tin sai gây hậu quả nghiêm 
+trọng; khiếu nại chính thức; rủi ro pháp lý/thương hiệu. 
+BGH/HĐQT + PC + ICCO + CN/TT kích hoạt ngay trong 
+ngày. 
+ 
+18. Đào tạo 
+Đối tượng Nội dung đào tạo Tần suất 
+Nhân sự ICCO Quy trình HT-05, phân tích hồ sơ, University List, LOR, bảo mật, dashboard, CAPA. Hằng năm; trước mùa tuyển 
+sinh. 
+GVCN khối 10-12 Nhận diện nhu cầu tư vấn, phối hợp dữ liệu, nhắc tiến độ, trao đổi CMHS, 
+escalation. 
+Đầu năm và trước mùa hồ 
+sơ. 
+GVBM/Cố vấn học thuật Cách cung cấp nhận xét, minh chứng, viết LOR đúng sự thật, bảo mật thông tin. Theo đợt LOR. 
+BGH/Quản lý cấp học Quản trị rủi ro, phê duyệt, đọc dashboard, xử lý khiếu nại/truyền thông. Hằng năm/học kỳ. 
+CL/CN/TT/PC/Văn thư Dashboard, phân quyền, lưu trữ, truyền thông kết quả, pháp lý/bảo mật, ký phát 
+hành. 
+Theo vai trò và khi thay đổi 
+hệ thống. 
+ 
+18.1. Chuẩn hoàn thành đào tạo 
+• Tham dự tối thiểu 90% thời lượng. 
+• Đạt tối thiểu 70% bài kiểm tra cuối buổi. 
+• Thực hành hoàn thiện 01 bộ hồ sơ tư vấn mẫu gồm phiếu tiếp nhận, phiếu dữ liệu, University List, biên bản tư vấn và 
+kế hoạch hành động. 
+19. Audit/CAPA 
+Hoạt động Tần suất Owner Minh chứng 
+Audit hồ sơ tư vấn Hằng tháng trong mùa cao 
+điểm ICCO + CL Kiểm tra phiếu nhu cầu, biên bản, checklist, log tiến độ, consent. 
+
+===== PAGE 12 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+Hoạt động Tần suất Owner Minh chứng 
+Audit dữ liệu và bảo mật Mỗi học kỳ hoặc theo sự 
+vụ CN + PC + ICCO Kiểm tra phân quyền, nơi lưu, log chia sẻ, dữ liệu nhạy cảm. 
+Audit chất lượng tư vấn Mỗi học kỳ/mùa tuyển 
+sinh ICCO + BGH + CL Đánh giá University List, kế hoạch hành động, hài lòng HS/CMHS, 
+KPI/SLA. 
+Audit theo sự vụ Khi có khiếu nại/sai lệch BGH/CL/PC/ICCO Kiểm tra nguyên nhân, trách nhiệm, biện pháp xử lý. 
+Post-Admission Review Trong 30 ngày sau mùa 
+tuyển sinh chính ICCO + BGH + CL Tổng kết kết quả, học bổng, bài học, dữ liệu trường/ngành, CAPA 
+mùa sau. 
+ 
+19.1. Phân loại CAPA 
+Loại CAPA Điều kiện kích hoạt 
+CAPA thông tin Tư vấn sai thông tin, thiếu nguồn tham chiếu, thông tin tuyển sinh lỗi thời. 
+CAPA tiến độ Trễ deadline, trễ LOR/xác nhận, cập nhật dashboard không đúng hạn. 
+CAPA dữ liệu Lưu sai nơi, phân quyền sai, chia sẻ dữ liệu khi chưa có consent, không có log. 
+CAPA LOR/xác nhận Thư/xác nhận sai thông tin, vượt thẩm quyền, thiếu minh chứng. 
+CAPA truyền thông Truyền thông kết quả chưa có minh chứng/đồng thuận hoặc diễn đạt gây hiểu nhầm. 
+CAPA khiếu nại HS/CMHS phản ánh chất lượng tư vấn hoặc kỳ vọng không được làm rõ. 
+ 
+20. Phụ lục 
+Mã phụ lục Tên phụ lục 
+PL.HT05-01 Checklist audit nhanh SOP.HT-05 
+PL.HT05-02 Tiêu chuẩn University List/College List 
+PL.HT05-03 Rubric đánh giá mức độ sẵn sàng hồ sơ đại học 
+PL.HT05-04 Mẫu Dashboard theo dõi tư vấn đại học 
+PL.HT05-05 Kịch bản tư vấn điển hình theo 3 nhánh: Việt Nam - quốc tế/du học - học bổng/đối tác 
+PL.HT05-06 Hướng dẫn LOR/xác nhận học sinh 
+PL.HT05-07 Hướng dẫn đồng thuận sử dụng dữ liệu và truyền thông kết quả 
+PL.HT05-08 Câu hỏi audit nhanh SOP.HT-05 
+PL.HT05-09 Mẫu báo cáo Post-Admission Review 
+PL.HT05-10 Bảng maturity level SOP.HT-05 
+ 
+20.1. Tiêu chuẩn University List tối thiểu 
+Trường thông tin Yêu cầu 
+Tên trường/chương trình Có 
+Quốc gia/thành phố Có 
+Ngành/chuyên ngành Có 
+Nhóm Reach/Target/Safety Có 
+Điều kiện đầu vào Có 
+GPA/chứng chỉ cần đạt Có 
+Deadline Có 
+
+===== PAGE 13 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+Trường thông tin Yêu cầu 
+Học phí/học bổng Có nếu có nguồn 
+Mức phù hợp học thuật Chấm 1-5 
+Mức phù hợp tài chính Chấm 1-5 
+Mức phù hợp định hướng nghề Chấm 1-5 
+Rủi ro Có 
+Nguồn tham chiếu Có 
+Ngày cập nhật Có 
+Người cập nhật Có 
+ 
+20.2. Mẫu Dashboard tối thiểu 
+Nhóm dữ liệu Trường theo dõi 
+Thông tin học sinh Họ tên, lớp, GVCN, năm tốt nghiệp. 
+Trạng thái tư vấn Chưa tư vấn, tư vấn lần 1, có University List, đang chuẩn bị hồ sơ, đã có kết quả. 
+Nhánh tư vấn Việt Nam, quốc tế/du học, học bổng/đối tác. 
+Hồ sơ năng lực GPA, IELTS/SAT, portfolio, hoạt động, LOR. 
+Deadline Deadline gần nhất, trạng thái cảnh báo. 
+University List Số Reach, Target, Safety. 
+Consent Đã/chưa có đồng thuận dữ liệu, truyền thông. 
+Kết quả Offer, học bổng, trường nhập học. 
+CAPA Có/không, trạng thái xử lý. 
+ 
+20.3. Maturity level SOP.HT-05 
+Level Đặc điểm 
+Level 1 - Ad-hoc Tư vấn theo kinh nghiệm cá nhân, hồ sơ rời rạc, ít dữ liệu. 
+Level 2 - Defined Có biểu mẫu cơ bản, có biên bản tư vấn, có checklist. 
+Level 3 - Standardized Có RASCI, University List, KPI/SLA, dashboard tiến độ. 
+Level 4 - Managed Có audit định kỳ, CAPA sau mùa tuyển sinh, dữ liệu kết quả nhiều năm. 
+Level 5 - Optimized Có benchmark trường/ngành, cảnh báo sớm, cá nhân hóa lộ trình bằng dashboard/AI. 
+ 
+Tài liệu tham chiếu chính 
+• Meta-OS NSHM-XQ v2026 - Bộ quy trình toàn diện Trường Ngôi Sao Hoàng Mai. 
+• NSHM-XQ Framework 2025 - Chu trình MỤC-HIỆN-BÊN-CẦU-THIẾT-HỒ-THỬ-HUẤN-THỰC-ĐO. 
+• SOP.TL-04 - Quản lý chương trình Wellbeing và Giáo dục cảm xúc - xã hội (SEL) - Template trình bày và cấu trúc SOP 
+chuẩn. 
+• Quy trình tư vấn du học học sinh - ICCO. 
+• Quy định nội bộ về bảo mật dữ liệu, truyền thông kết quả học sinh, thư giới thiệu và xác nhận học sinh. 
+• ISO 21001, ISO 9001, ISO 10015, ISO 31000, ISO 27001, ISO 10002. 
+
+===== PAGE 14 =====
+META-OS NSHM-XQ | SOP.HT-05 | Hợp tác Quốc tế & Đối tác 
+Trường Ngôi Sao Hoàng Mai | Tài liệu nội bộ | Dữ liệu học sinh và hồ sơ ứng tuyển: Bảo mật cao 
+Kết luận vận hành 
+SOP.HT-05 là quy trình lõi để quản trị hoạt động tư vấn đại học và lộ trình ứng tuyển của Trường Ngôi Sao Hoàng Mai. Mọi 
+ca tư vấn đại học cần được tiếp nhận chính thức, phân tích dựa trên dữ liệu, tư vấn có căn cứ, xây dựng University List có 
+chiến lược, quản trị deadline chặt chẽ, bảo mật hồ sơ học sinh, đo lường kết quả và cải tiến sau mỗi mùa tuyển sinh. 
+Chuẩn vận hành cuối cùng: Tư vấn có căn cứ - Chọn trường có chiến lược - Quản trị deadline chặt chẽ - Hồ sơ 
+minh bạch - Dữ liệu bảo mật - Kết quả đo được - Cải tiến sau mỗi mùa tuyển sinh. 
