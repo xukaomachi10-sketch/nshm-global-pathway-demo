@@ -181,13 +181,13 @@ export default function Registrations() {
                 <p className="text-sm font-semibold text-slate-500">
                   {String(l)}
                 </p>
-                <p className="mt-2 text-3xl font-black text-[#10233f]">
+                <p className="mt-2 text-3xl font-black text-[#23328C]">
                   {String(v)}
                 </p>
                 <p className="mt-1 text-xs text-slate-400">{String(h)}</p>
               </div>
               <div
-                className={`rounded-xl p-3 text-white ${c === "red" ? "bg-[#941b2b]" : c === "gold" ? "bg-[#d6aa49]" : c === "green" ? "bg-emerald-600" : "bg-[#10233f]"}`}
+                className={`rounded-xl p-3 text-white ${c === "red" ? "bg-[#D21235]" : c === "gold" ? "bg-[#FFAD00]" : c === "green" ? "bg-[#2DA037]" : "bg-[#23328C]"}`}
               >
                 <I className="h-5 w-5" />
               </div>
@@ -233,7 +233,7 @@ export default function Registrations() {
       <Card className="overflow-hidden">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4">
           <div>
-            <h2 className="font-black text-[#10233f]">Danh sách đăng ký</h2>
+            <h2 className="font-black text-[#23328C]">Danh sách đăng ký</h2>
             <p className="text-xs text-slate-400">
               {rows.length} lượt đăng ký · ưu tiên cảnh báo trùng trước
             </p>
@@ -269,12 +269,12 @@ export default function Registrations() {
                     key={r.id}
                     className={
                       r.duplicate !== "Không trùng"
-                        ? "bg-red-50/30 hover:bg-red-50/50"
+                        ? "bg-[#FAC7D0]/20 hover:bg-[#FAC7D0]/30"
                         : "hover:bg-slate-50"
                     }
                   >
                     <td className="px-5 py-4">
-                      <p className="font-bold text-[#10233f]">{r.name}</p>
+                      <p className="font-bold text-[#23328C]">{r.name}</p>
                       <p className="text-xs text-slate-400">
                         {r.id} · {r.studentId} · {r.className}
                       </p>
@@ -319,7 +319,7 @@ export default function Registrations() {
                                 `Đã liên kết ${r.studentId} với hồ sơ gốc`,
                               )
                             }
-                            className="rounded-lg border border-red-200 p-2 text-red-700 hover:bg-red-50"
+                            className="rounded-lg border border-[#D21235]/25 p-2 text-[#D21235] hover:bg-[#FAC7D0]/35"
                           >
                             <Link2 className="h-4 w-4" />
                           </button>
@@ -342,7 +342,7 @@ export default function Registrations() {
       <div className="grid gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2 p-5">
           <div className="flex items-center justify-between">
-            <h3 className="font-black text-[#10233f]">
+            <h3 className="font-black text-[#23328C]">
               Lịch tư vấn hôm nay & ngày mai
             </h3>
             <Badge tone="blue">6 lịch</Badge>
@@ -356,7 +356,7 @@ export default function Registrations() {
                   key={r.id}
                   className="flex items-center gap-3 rounded-xl border border-slate-100 p-3"
                 >
-                  <div className="rounded-xl bg-[#10233f] px-3 py-2 text-center text-white">
+                  <div className="rounded-xl bg-[#23328C] px-3 py-2 text-center text-white">
                     <p className="text-xs font-black">
                       {["09:00", "10:30", "14:00", "15:30"][i]}
                     </p>
@@ -374,10 +374,10 @@ export default function Registrations() {
               ))}
           </div>
         </Card>
-        <Card className="border-amber-200 bg-amber-50 p-5">
-          <Clock className="h-5 w-5 text-amber-700" />
-          <h3 className="mt-3 font-black text-amber-950">SLA tiếp nhận</h3>
-          <p className="mt-1 text-sm leading-6 text-amber-800">
+        <Card className="border-[#FFAD00]/35 bg-[#FFEBD6] p-5">
+          <Clock className="h-5 w-5 text-[#23328C]" />
+          <h3 className="mt-3 font-black text-[#23328C]">SLA tiếp nhận</h3>
+          <p className="mt-1 text-sm leading-6 text-[#23328C]">
             100% đăng ký cần được phản hồi trong 2 ngày làm việc. Hiện có{" "}
             <strong>2 đăng ký</strong> còn dưới 8 giờ trước hạn.
           </p>
@@ -398,25 +398,25 @@ export default function Registrations() {
         <div className="space-y-4">
           <label className="block">
             <span className="text-sm font-bold text-slate-700">
-              Mã học sinh <span className="text-red-600">*</span>
+              Mã học sinh <span className="text-[#D21235]">*</span>
             </span>
             <input
               autoFocus
               value={studentId}
               onChange={(e) => setStudentId(e.target.value)}
               placeholder="Ví dụ: NSHM260101"
-              className="mt-2 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm uppercase focus:border-[#941b2b]"
+              className="mt-2 h-11 w-full rounded-xl border border-slate-200 px-3 text-sm uppercase focus:border-[#D21235]"
             />
           </label>
           {studentId && existing && (
-            <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+            <div className="rounded-xl border border-[#D21235]/25 bg-[#FAC7D0]/35 p-4">
               <div className="flex gap-3">
-                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-700" />
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#D21235]" />
                 <div>
-                  <p className="text-sm font-black text-red-900">
+                  <p className="text-sm font-black text-[#D21235]">
                     Phát hiện trùng Mã HS
                   </p>
-                  <p className="mt-1 text-sm text-red-700">
+                  <p className="mt-1 text-sm text-[#D21235]">
                     {existing.name} · {existing.className} đã có hồ sơ ở trạng
                     thái “{existing.stage}”. Đăng ký mới sẽ được liên kết, không
                     tạo hồ sơ học sinh thứ hai.
@@ -510,7 +510,7 @@ export default function Registrations() {
               <option>Online · Microsoft Teams</option>
             </select>
           </label>
-          <div className="rounded-xl bg-blue-50 p-3 text-xs text-blue-800">
+          <div className="rounded-xl bg-[#ADDDFF]/35 p-3 text-xs text-[#23328C]">
             Hệ thống đã kiểm tra: chuyên viên không có lịch trùng trong khung
             giờ này.
           </div>

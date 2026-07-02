@@ -27,16 +27,16 @@ export default async function Article({
   return (
     <PublicLayout>
       <main>
-        <section className="bg-[#10233f] text-white">
+        <section className="bg-[#23328C] text-white">
           <div className="mx-auto max-w-[1120px] px-5 py-14 lg:px-8">
             <Link
               href="/"
-              className="inline-flex items-center gap-1 text-sm font-bold text-slate-300 hover:text-[#d6aa49]"
+              className="inline-flex items-center gap-1 text-sm font-bold text-slate-300 hover:text-[#FFAD00]"
             >
               <ArrowLeft className="h-4 w-4" /> Về trang chủ
             </Link>
             <div className="mt-8 flex flex-wrap gap-2">
-              <span className="rounded-full bg-[#d6aa49] px-3 py-1 text-xs font-black text-[#10233f]">
+              <span className="rounded-full bg-[#FFAD00] px-3 py-1 text-xs font-black text-[#23328C]">
                 {post.category}
               </span>
               <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-slate-200">
@@ -63,7 +63,7 @@ export default async function Article({
           </div>
         </section>
         <div className="mx-auto max-w-[1120px] px-5 lg:px-8">
-          <div className="relative -mt-1 h-[360px] overflow-hidden rounded-b-3xl bg-[#941b2b] sm:h-[480px]">
+          <div className="relative -mt-1 h-[360px] overflow-hidden rounded-b-3xl bg-[#D21235] sm:h-[480px]">
             <Image
               src="/campus-hero.svg"
               alt={post.title}
@@ -73,12 +73,12 @@ export default async function Article({
           </div>
           <div className="grid gap-10 py-14 lg:grid-cols-[1fr_240px]">
             <article className="max-w-3xl text-[17px] leading-8 text-slate-700">
-              <p className="text-xl font-semibold leading-9 text-[#10233f]">
+              <p className="text-xl font-semibold leading-9 text-[#23328C]">
                 Mỗi hành trình đại học bắt đầu từ những lựa chọn có căn cứ.
                 Thông tin dưới đây được đội ngũ NSHM tổng hợp để học sinh và gia
                 đình có một điểm khởi đầu rõ ràng.
               </p>
-              <h2 className="font-display mt-10 text-3xl font-bold text-[#10233f]">
+              <h2 className="font-display mt-10 text-3xl font-bold text-[#23328C]">
                 Điều học sinh cần biết
               </h2>
               <p className="mt-4">
@@ -92,15 +92,15 @@ export default async function Article({
                 nghiệm có ý nghĩa, lưu minh chứng đầy đủ và phản tư trung thực
                 về vai trò, kết quả cũng như bài học của mình.
               </p>
-              <div className="my-9 rounded-2xl border-l-4 border-[#d6aa49] bg-[#f7f5f0] p-6">
-                <Quote className="h-7 w-7 text-[#941b2b]" />
-                <p className="font-display mt-3 text-2xl font-bold leading-9 text-[#10233f]">
+              <div className="my-9 rounded-2xl border-l-4 border-[#FFAD00] bg-[#FFEBD6] p-6">
+                <Quote className="h-7 w-7 text-[#D21235]" />
+                <p className="font-display mt-3 text-2xl font-bold leading-9 text-[#23328C]">
                   Một danh sách trường tốt không phải danh sách có nhiều tên nổi
                   tiếng nhất, mà là danh sách có đủ lựa chọn phù hợp và phương
                   án an toàn.
                 </p>
               </div>
-              <h2 className="font-display mt-10 text-3xl font-bold text-[#10233f]">
+              <h2 className="font-display mt-10 text-3xl font-bold text-[#23328C]">
                 Checklist chuẩn bị
               </h2>
               <ul className="mt-5 space-y-3">
@@ -112,13 +112,13 @@ export default async function Article({
                   "Lên timeline Essay, LOR, tài chính và các deadline nội bộ trước hạn trường.",
                 ].map((x) => (
                   <li key={x} className="flex gap-3">
-                    <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-[#941b2b]" />
+                    <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-[#D21235]" />
                     <span>{x}</span>
                   </li>
                 ))}
               </ul>
-              <div className="mt-10 rounded-3xl bg-[#10233f] p-7 text-white sm:p-9">
-                <Sparkles className="h-7 w-7 text-[#d6aa49]" />
+              <div className="mt-10 rounded-3xl bg-[#23328C] p-7 text-white sm:p-9">
+                <Sparkles className="h-7 w-7 text-[#FFAD00]" />
                 <h3 className="font-display mt-4 text-3xl font-bold">
                   Bạn muốn biết lộ trình nào phù hợp với mình?
                 </h3>
@@ -128,7 +128,7 @@ export default async function Article({
                 </p>
                 <Link
                   href="/dang-ky-tu-van"
-                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#d6aa49] px-5 py-3 text-sm font-black text-[#10233f]"
+                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#FFAD00] px-5 py-3 text-sm font-black text-[#23328C]"
                 >
                   Đăng ký tư vấn du học <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -144,15 +144,15 @@ export default async function Article({
                     {[Share2, BriefcaseBusiness, Link2].map((Icon, i) => (
                       <button
                         key={i}
-                        className="rounded-xl bg-slate-100 p-3 text-slate-500 hover:bg-[#941b2b] hover:text-white"
+                        className="rounded-xl bg-slate-100 p-3 text-slate-500 hover:bg-[#D21235] hover:text-white"
                       >
                         <Icon className="h-4 w-4" />
                       </button>
                     ))}
                   </div>
                 </div>
-                <div className="rounded-2xl bg-[#f7f5f0] p-5">
-                  <p className="text-sm font-black text-[#10233f]">
+                <div className="rounded-2xl bg-[#FFEBD6] p-5">
+                  <p className="text-sm font-black text-[#23328C]">
                     Nguồn thông tin
                   </p>
                   <p className="mt-2 text-xs leading-5 text-slate-500">
@@ -165,7 +165,7 @@ export default async function Article({
           </div>
           {related.length > 0 && (
             <section className="border-t border-slate-200 py-14">
-              <h2 className="font-display text-3xl font-bold text-[#10233f]">
+              <h2 className="font-display text-3xl font-bold text-[#23328C]">
                 Có thể bạn quan tâm
               </h2>
               <div className="mt-7 grid gap-5 md:grid-cols-3">
@@ -173,12 +173,12 @@ export default async function Article({
                   <Link
                     key={p.slug}
                     href={`/bai-viet/${p.slug}`}
-                    className="rounded-2xl border border-slate-200 p-5 hover:border-[#d6aa49] hover:shadow-lg"
+                    className="rounded-2xl border border-slate-200 p-5 hover:border-[#FFAD00] hover:shadow-lg"
                   >
-                    <span className="text-[10px] font-black uppercase tracking-wider text-[#941b2b]">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#D21235]">
                       {p.category}
                     </span>
-                    <h3 className="font-display mt-2 text-xl font-bold leading-7 text-[#10233f]">
+                    <h3 className="font-display mt-2 text-xl font-bold leading-7 text-[#23328C]">
                       {p.title}
                     </h3>
                     <p className="mt-3 text-xs text-slate-400">

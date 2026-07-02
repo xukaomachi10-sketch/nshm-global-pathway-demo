@@ -21,6 +21,7 @@ import {
   UsersRound,
   X,
 } from "lucide-react";
+import { Navbar, Sidebar } from "@/components/brand";
 
 const items = [
   { href: "/portal", label: "Bàn làm việc", icon: LayoutDashboard },
@@ -73,8 +74,11 @@ export default function PortalShell({ children }: { children: ReactNode }) {
             <div className="text-sm font-black tracking-wide text-white">
               NSHM GLOBAL
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-[.17em] text-[#d6aa49]">
+            <div className="text-[10px] font-semibold uppercase tracking-[.17em] text-[#FFAD00]">
               Pathways Office
+            </div>
+            <div className="mt-0.5 text-[8px] font-semibold uppercase tracking-[.14em] text-white/45">
+              Brilliance Within
             </div>
           </div>
         )}
@@ -94,7 +98,7 @@ export default function PortalShell({ children }: { children: ReactNode }) {
               href={href}
               onClick={() => setMobileOpen(false)}
               title={collapsed ? label : undefined}
-              className={`flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-bold transition ${active ? "bg-[#941b2b] text-white shadow-lg shadow-black/20" : "text-slate-300 hover:bg-white/7 hover:text-white"}`}
+              className={`flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-bold transition ${active ? "bg-[#D21235] text-white shadow-lg shadow-black/20" : "text-slate-300 hover:bg-white/7 hover:text-white"}`}
             >
               <Icon className="h-5 w-5 shrink-0" />
               {!collapsed && (
@@ -102,7 +106,7 @@ export default function PortalShell({ children }: { children: ReactNode }) {
                   <span className="min-w-0 flex-1 truncate">{label}</span>
                   {badge && (
                     <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] ${active ? "bg-white/15" : "bg-[#d6aa49] text-[#10233f]"}`}
+                      className={`rounded-full px-2 py-0.5 text-[10px] ${active ? "bg-white/15" : "bg-[#FFAD00] text-[#23328C]"}`}
                     >
                       {badge}
                     </span>
@@ -132,7 +136,7 @@ export default function PortalShell({ children }: { children: ReactNode }) {
         <div
           className={`flex items-center gap-3 rounded-xl bg-white/5 p-3 ${collapsed ? "justify-center" : ""}`}
         >
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#d6aa49] text-xs font-black text-[#10233f]">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFAD00] text-xs font-black text-[#23328C]">
             HL
           </div>
           {!collapsed && (
@@ -151,9 +155,9 @@ export default function PortalShell({ children }: { children: ReactNode }) {
   );
 
   return (
-    <div className="min-h-screen bg-[#f6f7f9]">
-      <aside
-        className={`fixed inset-y-0 left-0 z-40 hidden bg-[#10233f] transition-all duration-300 lg:flex lg:flex-col ${collapsed ? "w-20" : "w-64"}`}
+    <div className="min-h-screen bg-[#FBFAF7]">
+      <Sidebar
+        className={`fixed inset-y-0 left-0 z-40 hidden bg-[#23328C] transition-all duration-300 lg:flex lg:flex-col ${collapsed ? "w-20" : "w-64"}`}
       >
         {nav}
         <button
@@ -166,18 +170,18 @@ export default function PortalShell({ children }: { children: ReactNode }) {
             <ChevronLeft className="h-4 w-4" />
           )}
         </button>
-      </aside>
+      </Sidebar>
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-50 bg-[#10233f]/50 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-50 bg-[#23328C]/50 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
         >
-          <aside
+          <Sidebar
             onClick={(e) => e.stopPropagation()}
-            className="flex h-full w-72 flex-col bg-[#10233f]"
+            className="flex h-full w-72 flex-col bg-[#23328C]"
           >
             {nav}
-          </aside>
+          </Sidebar>
           <button
             className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white"
             onClick={() => setMobileOpen(false)}
@@ -189,7 +193,7 @@ export default function PortalShell({ children }: { children: ReactNode }) {
       <div
         className={`transition-all duration-300 ${collapsed ? "lg:pl-20" : "lg:pl-64"}`}
       >
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-slate-200 bg-white/95 px-4 backdrop-blur lg:px-7">
+        <Navbar className="sticky top-0 z-30 flex h-16 items-center gap-3 px-4 lg:px-7">
           <button
             className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 lg:hidden"
             onClick={() => setMobileOpen(true)}
@@ -201,7 +205,7 @@ export default function PortalShell({ children }: { children: ReactNode }) {
             <input
               aria-label="Tìm kiếm toàn hệ thống"
               placeholder="Tìm học sinh, trường đại học, tài liệu..."
-              className="h-10 w-full rounded-xl bg-slate-100 pl-10 pr-4 text-sm focus:bg-white focus:ring-2 focus:ring-[#941b2b]/20"
+              className="h-10 w-full rounded-xl bg-slate-100 pl-10 pr-4 text-sm focus:bg-white focus:ring-2 focus:ring-[#D21235]/20"
             />
           </div>
           <div className="ml-auto flex items-center gap-2">
@@ -213,13 +217,13 @@ export default function PortalShell({ children }: { children: ReactNode }) {
             </button>
             <button className="relative rounded-xl p-2.5 text-slate-500 hover:bg-slate-100">
               <Bell className="h-5 w-5" />
-              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#941b2b] ring-2 ring-white" />
+              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#D21235] ring-2 ring-white" />
             </button>
-            <div className="ml-1 flex h-9 w-9 items-center justify-center rounded-full bg-[#10233f] text-xs font-black text-white">
+            <div className="ml-1 flex h-9 w-9 items-center justify-center rounded-full bg-[#23328C] text-xs font-black text-white">
               HL
             </div>
           </div>
-        </header>
+        </Navbar>
         <main className="mx-auto max-w-[1600px] p-4 lg:p-7">{children}</main>
       </div>
     </div>

@@ -10,6 +10,16 @@ High-fidelity UI prototype for the International Counseling Office at Trường 
 - Lucide icons
 - In-memory mock data: 36 students and 18 public posts
 
+## NSHM brand system
+
+The interface follows `NSHM - BRAND GUIDELINE (02042026)`:
+
+- Primary: NSHM Crimson `#D21235` and NSHM Antique/Vanilla `#FFEBD6`
+- Secondary: Egyptian Blue `#23328C`, Emerald `#2DA037`, Orange `#FFAD00`
+- Typography: Lexend for functional UI and Literata for editorial/display headings
+- Official Khuê Văn Các-inspired mark, core-value patterns, and `Brilliance Within` positioning
+- No gradients; branded surfaces use solid color, contrast, pattern, and clear content hierarchy
+
 ## Run locally
 
 Requirements: Node.js 20.9+ and npm 10+.
@@ -61,6 +71,7 @@ All public, counselor, student, and CMS demo routes are part of the same Next.js
 | Screen | Route |
 | --- | --- |
 | Public website | `/` |
+| Demo hub | `/demo` |
 | Public article | `/bai-viet/[slug]` |
 | Consultation CTA/form | `/dang-ky-tu-van` |
 | Counselor Workbench | `/portal` |
@@ -93,6 +104,7 @@ app/
   portal/                        Six counselor-facing screens
   cms/page.tsx                   CMS editor
 components/
+  brand.tsx                      Brand layout, hero, pattern, table primitives
   PortalShell.tsx                Internal sidebar/header shell
   PublicSite.tsx                 Public header/footer
   ui.tsx                         Shared cards, badges, filters, modal, toast

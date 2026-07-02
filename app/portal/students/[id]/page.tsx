@@ -57,14 +57,14 @@ export default function Student360() {
       <div>
         <Link
           href="/portal"
-          className="inline-flex items-center gap-1 text-xs font-bold text-slate-500 hover:text-[#941b2b]"
+          className="inline-flex items-center gap-1 text-xs font-bold text-slate-500 hover:text-[#D21235]"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Quay lại bàn làm việc
         </Link>
       </div>
       <Card className="overflow-hidden">
-        <div className="relative bg-[#10233f] px-5 py-6 text-white soft-grid lg:px-7">
-          <div className="absolute right-0 top-0 h-full w-72 bg-gradient-to-l from-[#941b2b]/70 to-transparent" />
+        <div className="relative bg-[#23328C] px-5 py-6 text-white soft-grid lg:px-7">
+          <div className="soft-grid absolute right-0 top-0 h-full w-72 bg-[#D21235]/75" />
           <div className="relative flex flex-col gap-5 md:flex-row md:items-center">
             <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-2 border-white/20 bg-white/10 text-2xl font-black">
               MA
@@ -115,7 +115,7 @@ export default function Student360() {
             <Link
               key={t.label}
               href={t.href}
-              className={`whitespace-nowrap border-b-2 px-4 py-4 text-sm font-bold ${i === 0 ? "border-[#941b2b] text-[#941b2b]" : "border-transparent text-slate-500 hover:text-[#10233f]"}`}
+              className={`whitespace-nowrap border-b-2 px-4 py-4 text-sm font-bold ${i === 0 ? "border-[#D21235] text-[#D21235]" : "border-transparent text-slate-500 hover:text-[#23328C]"}`}
             >
               {t.label}
             </Link>
@@ -124,23 +124,23 @@ export default function Student360() {
       </Card>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
         {[
-          ["GPA tích lũy", "9.2 / 10", "Top 8% khối", TrendingUp, "#10233f"],
+          ["GPA tích lũy", "9.2 / 10", "Top 8% khối", TrendingUp, "#23328C"],
           [
             "IELTS tốt nhất",
             "7.5",
             "Hết hạn 05/2028",
             BookOpenCheck,
-            "#941b2b",
+            "#D21235",
           ],
-          ["SAT tốt nhất", "1450", "Math 760", Target, "#d6aa49"],
+          ["SAT tốt nhất", "1450", "Math 760", Target, "#FFAD00"],
           [
             "Portfolio",
             "Verified",
             "12 minh chứng A/B",
             ShieldCheck,
-            "#059669",
+            "#2DA037",
           ],
-          ["Tiến độ hồ sơ", "76%", "18/24 mục", CheckCircle2, "#2563eb"],
+          ["Tiến độ hồ sơ", "76%", "18/24 mục", CheckCircle2, "#23328C"],
         ].map(([l, v, h, I, c], i) => (
           <Card key={String(l)} className="p-4">
             <div className="flex items-center gap-3">
@@ -154,7 +154,7 @@ export default function Student360() {
                 <p className="text-xs font-semibold text-slate-500">
                   {String(l)}
                 </p>
-                <p className="mt-0.5 text-xl font-black text-[#10233f]">
+                <p className="mt-0.5 text-xl font-black text-[#23328C]">
                   {String(v)}
                 </p>
               </div>
@@ -175,7 +175,7 @@ export default function Student360() {
           <Card className="p-5 lg:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-black text-[#10233f]">
+                <h2 className="font-black text-[#23328C]">
                   Hồ sơ định hướng du học
                 </h2>
                 <p className="mt-1 text-xs text-slate-400">
@@ -212,14 +212,14 @@ export default function Student360() {
                 helper="Có nhu cầu học bổng merit"
               />
             </div>
-            <div className="mt-5 rounded-xl border border-blue-100 bg-blue-50/60 p-4">
+            <div className="mt-5 rounded-xl border border-[#23328C]/20 bg-[#ADDDFF]/35 p-4">
               <div className="flex gap-3">
-                <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
+                <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-[#23328C]" />
                 <div>
-                  <p className="text-sm font-black text-blue-950">
+                  <p className="text-sm font-black text-[#23328C]">
                     Nhận định của chuyên viên
                   </p>
-                  <p className="mt-1 text-sm leading-6 text-blue-800">
+                  <p className="mt-1 text-sm leading-6 text-[#23328C]">
                     Hồ sơ học thuật tốt, có câu chuyện xuyên suốt về công nghệ
                     vì cộng đồng. Cần làm rõ impact định lượng của dự án Green
                     Steps và hoàn thiện phương án Safety trước 15/07.
@@ -231,7 +231,7 @@ export default function Student360() {
           <Card id="academic" className="overflow-hidden">
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
               <div>
-                <h2 className="font-black text-[#10233f]">
+                <h2 className="font-black text-[#23328C]">
                   Học thuật & điểm số
                 </h2>
                 <p className="text-xs text-slate-400">
@@ -282,10 +282,10 @@ export default function Student360() {
           </Card>
           <Card className="p-5">
             <div className="flex items-center justify-between">
-              <h2 className="font-black text-[#10233f]">Dấu ấn nổi bật</h2>
+              <h2 className="font-black text-[#23328C]">Dấu ấn nổi bật</h2>
               <Link
                 href="/portal/evidence"
-                className="text-xs font-bold text-[#941b2b]"
+                className="text-xs font-bold text-[#D21235]"
               >
                 Mở Evidence Vault
               </Link>
@@ -300,7 +300,7 @@ export default function Student360() {
                   key={String(a)}
                   className="rounded-xl border border-slate-100 bg-slate-50 p-4"
                 >
-                  <I className="h-5 w-5 text-[#941b2b]" />
+                  <I className="h-5 w-5 text-[#D21235]" />
                   <p className="mt-3 text-sm font-black">{String(a)}</p>
                   <p className="mt-1 text-xs text-slate-400">{String(b)}</p>
                 </div>
@@ -311,7 +311,7 @@ export default function Student360() {
         <div className="space-y-6">
           <Card className="p-5">
             <div className="flex items-center justify-between">
-              <h2 className="font-black text-[#10233f]">Việc cần làm tiếp</h2>
+              <h2 className="font-black text-[#23328C]">Việc cần làm tiếp</h2>
               <Badge tone="red">3 ưu tiên</Badge>
             </div>
             <div className="mt-4 space-y-4">
@@ -324,12 +324,12 @@ export default function Student360() {
                 <div key={a} className="flex gap-3">
                   <button
                     onClick={() => showToast(`Đã đánh dấu hoàn thành: ${a}`)}
-                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-slate-300 hover:border-emerald-500 hover:bg-emerald-50"
+                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-slate-300 hover:border-[#2DA037]/35 hover:bg-[#C7F1BF]/45"
                   />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold">{a}</p>
                     <p
-                      className={`text-xs ${i === 0 ? "text-red-600" : "text-slate-400"}`}
+                      className={`text-xs ${i === 0 ? "text-[#D21235]" : "text-slate-400"}`}
                     >
                       {b}
                     </p>
@@ -341,10 +341,10 @@ export default function Student360() {
           </Card>
           <Card className="p-5">
             <div className="flex items-center justify-between">
-              <h2 className="font-black text-[#10233f]">University List</h2>
+              <h2 className="font-black text-[#23328C]">University List</h2>
               <Link
                 href="/portal/applications"
-                className="text-xs font-bold text-[#941b2b]"
+                className="text-xs font-bold text-[#D21235]"
               >
                 Chi tiết
               </Link>
@@ -356,7 +356,7 @@ export default function Student360() {
                 ["Safety", 2, "green"],
               ].map(([a, b, c]) => (
                 <div key={String(a)} className="text-center">
-                  <p className="text-2xl font-black text-[#10233f]">
+                  <p className="text-2xl font-black text-[#23328C]">
                     {String(b)}
                   </p>
                   <Badge tone={c as "purple" | "blue" | "green"}>
@@ -372,7 +372,7 @@ export default function Student360() {
                 "UW-Madison",
               ].map((x, i) => (
                 <div key={x} className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#10233f] text-xs font-black text-white">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#23328C] text-xs font-black text-white">
                     {x
                       .split(" ")
                       .map((y) => y[0])
@@ -392,7 +392,7 @@ export default function Student360() {
           </Card>
           <Card id="sessions" className="p-5">
             <div className="flex items-center justify-between">
-              <h2 className="font-black text-[#10233f]">Lịch sử tư vấn</h2>
+              <h2 className="font-black text-[#23328C]">Lịch sử tư vấn</h2>
               <Button
                 variant="ghost"
                 onClick={() => showToast("Đã mở biên bản tư vấn đầy đủ")}
@@ -433,16 +433,16 @@ export default function Student360() {
               ))}
             </div>
           </Card>
-          <Card className="border-[#d6aa49]/40 bg-[#fffaf0] p-5">
+          <Card className="border-[#FFAD00]/40 bg-[#FFEBD6] p-5">
             <div className="flex items-center gap-3">
-              <div className="rounded-xl bg-[#d6aa49] p-2 text-[#10233f]">
+              <div className="rounded-xl bg-[#FFAD00] p-2 text-[#23328C]">
                 <Clock3 className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-xs font-black uppercase tracking-wider text-amber-700">
+                <p className="text-xs font-black uppercase tracking-wider text-[#23328C]">
                   Lịch tiếp theo
                 </p>
-                <p className="font-black text-[#10233f]">14:30 · 03/07/2026</p>
+                <p className="font-black text-[#23328C]">14:30 · 03/07/2026</p>
               </div>
             </div>
             <p className="mt-3 text-sm text-slate-600">
@@ -468,12 +468,12 @@ function Info({
 }) {
   return (
     <div className="flex gap-3">
-      <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-[#941b2b]">
+      <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-[#D21235]">
         {icon}
       </div>
       <div>
         <p className="text-xs font-semibold text-slate-400">{label}</p>
-        <p className="mt-0.5 text-sm font-black text-[#10233f]">{value}</p>
+        <p className="mt-0.5 text-sm font-black text-[#23328C]">{value}</p>
         <p className="mt-1 text-xs text-slate-400">{helper}</p>
       </div>
     </div>

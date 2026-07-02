@@ -11,7 +11,7 @@ export function Card({
   return (
     <div
       {...props}
-      className={`rounded-2xl border border-slate-200/80 bg-white card-shadow ${className}`}
+      className={`rounded-2xl border border-[#23328C]/10 bg-white card-shadow ${className}`}
     >
       {children}
     </div>
@@ -34,11 +34,11 @@ export function Button({
   disabled?: boolean;
 }) {
   const styles = {
-    primary: "bg-[#941b2b] text-white hover:bg-[#781523] shadow-sm",
+    primary: "bg-[#D21235] text-white hover:bg-[#23328C] shadow-sm",
     secondary:
-      "border border-slate-300 bg-white text-[#10233f] hover:bg-slate-50",
+      "border border-slate-300 bg-white text-[#23328C] hover:bg-slate-50",
     ghost: "text-slate-600 hover:bg-slate-100",
-    gold: "bg-[#d6aa49] text-[#10233f] hover:bg-[#c79a38]",
+    gold: "bg-[#FFAD00] text-[#23328C] hover:bg-[#FFEBD6]",
   };
   return (
     <button
@@ -60,13 +60,13 @@ export function Badge({
   tone?: "red" | "green" | "amber" | "blue" | "slate" | "purple" | "gold";
 }) {
   const colors = {
-    red: "bg-red-50 text-red-700 ring-red-600/15",
-    green: "bg-emerald-50 text-emerald-700 ring-emerald-600/15",
-    amber: "bg-amber-50 text-amber-800 ring-amber-600/20",
-    blue: "bg-blue-50 text-blue-700 ring-blue-600/15",
+    red: "bg-[#FAC7D0] text-[#D21235] ring-[#D21235]/25",
+    green: "bg-[#C7F1BF] text-[#23328C] ring-[#2DA037]/30",
+    amber: "bg-[#FFEBD6] text-[#23328C] ring-[#FFAD00]/35",
+    blue: "bg-[#ADDDFF] text-[#23328C] ring-[#23328C]/25",
     slate: "bg-slate-100 text-slate-700 ring-slate-500/10",
-    purple: "bg-purple-50 text-purple-700 ring-purple-600/15",
-    gold: "bg-amber-100 text-amber-900 ring-amber-700/15",
+    purple: "bg-[#FAC7D0] text-[#23328C] ring-[#D21235]/25",
+    gold: "bg-[#FFAD00]/25 text-[#23328C] ring-[#FFAD00]/40",
   };
   return (
     <span
@@ -88,9 +88,13 @@ export function StatusBadge({ value }: { value: string }) {
   return <Badge tone={tone}>{value}</Badge>;
 }
 
+export function StatusChip({ value }: { value: string }) {
+  return <StatusBadge value={value} />;
+}
+
 export function Progress({
   value,
-  color = "#941b2b",
+  color = "#D21235",
   small = false,
 }: {
   value: number;
@@ -123,17 +127,17 @@ export function StatCard({
   accent?: "navy" | "red" | "gold" | "green";
 }) {
   const tones = {
-    navy: "bg-[#10233f]",
-    red: "bg-[#941b2b]",
-    gold: "bg-[#d6aa49]",
-    green: "bg-emerald-600",
+    navy: "bg-[#23328C]",
+    red: "bg-[#D21235]",
+    gold: "bg-[#FFAD00]",
+    green: "bg-[#2DA037]",
   };
   return (
     <Card className="p-5">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-semibold text-slate-500">{label}</p>
-          <p className="mt-2 text-3xl font-black tracking-tight text-[#10233f]">
+          <p className="mt-2 text-3xl font-black tracking-tight text-[#23328C]">
             {value}
           </p>
           <p className="mt-1 text-xs text-slate-500">{helper}</p>
@@ -160,10 +164,10 @@ export function PageHeader({
   return (
     <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
       <div>
-        <p className="text-xs font-black uppercase tracking-[.18em] text-[#941b2b]">
+        <p className="text-xs font-black uppercase tracking-[.18em] text-[#D21235]">
           {eyebrow}
         </p>
-        <h1 className="mt-1 text-2xl font-black tracking-tight text-[#10233f] lg:text-3xl">
+        <h1 className="mt-1 text-2xl font-black tracking-tight text-[#23328C] lg:text-3xl">
           {title}
         </h1>
         <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
@@ -197,7 +201,7 @@ export function FilterBar({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={placeholder}
-            className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm focus:border-[#941b2b] focus:bg-white"
+            className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm focus:border-[#D21235] focus:bg-white"
           />
         </label>
         {children}
@@ -276,7 +280,7 @@ export function Modal({
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#10233f]/55 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#23328C]/55 p-4 backdrop-blur-sm"
       onMouseDown={onClose}
     >
       <div
@@ -284,7 +288,7 @@ export function Modal({
         className={`max-h-[90vh] w-full overflow-auto rounded-2xl bg-white shadow-2xl animate-rise ${width}`}
       >
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-100 bg-white px-6 py-4">
-          <h2 className="text-lg font-black text-[#10233f]">{title}</h2>
+          <h2 className="text-lg font-black text-[#23328C]">{title}</h2>
           <button
             aria-label="Đóng"
             onClick={onClose}
@@ -307,8 +311,8 @@ export function Toast({
   onClose: () => void;
 }) {
   return (
-    <div className="fixed bottom-5 right-5 z-[60] flex max-w-sm items-center gap-3 rounded-2xl bg-[#10233f] px-4 py-3 text-sm font-semibold text-white shadow-2xl animate-rise">
-      <span className="rounded-full bg-emerald-500 p-1">
+    <div className="fixed bottom-5 right-5 z-[60] flex max-w-sm items-center gap-3 rounded-2xl bg-[#23328C] px-4 py-3 text-sm font-semibold text-white shadow-2xl animate-rise">
+      <span className="rounded-full bg-[#2DA037] p-1">
         <Check className="h-3.5 w-3.5" />
       </span>
       <span>{message}</span>

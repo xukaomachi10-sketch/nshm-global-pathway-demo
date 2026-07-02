@@ -31,17 +31,17 @@ export default function RegistrationForm() {
   };
   return (
     <PublicLayout>
-      <main className="bg-[#f7f5f0] py-12 lg:py-16">
+      <main className="bg-[#FFEBD6] py-12 lg:py-16">
         <div className="mx-auto max-w-6xl px-5 lg:px-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-sm font-bold text-slate-500 hover:text-[#941b2b]"
+            className="inline-flex items-center gap-1 text-sm font-bold text-slate-500 hover:text-[#D21235]"
           >
             <ArrowLeft className="h-4 w-4" /> Về trang chủ
           </Link>
           <div className="mt-7 grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-            <div className="rounded-3xl bg-[#10233f] p-7 text-white soft-grid lg:p-9">
-              <p className="text-xs font-black uppercase tracking-[.2em] text-[#d6aa49]">
+            <div className="rounded-3xl bg-[#23328C] p-7 text-white soft-grid lg:p-9">
+              <p className="text-xs font-black uppercase tracking-[.2em] text-[#FFAD00]">
                 International Counseling Office
               </p>
               <h1 className="font-display mt-4 text-4xl font-bold leading-tight">
@@ -70,7 +70,7 @@ export default function RegistrationForm() {
                   ],
                 ] as const).map(([I, t, d]) => (
                   <div key={String(t)} className="flex gap-3">
-                    <div className="rounded-xl bg-white/10 p-2.5 text-[#d6aa49]">
+                    <div className="rounded-xl bg-white/10 p-2.5 text-[#FFAD00]">
                       <I className="h-5 w-5" />
                     </div>
                     <div>
@@ -81,7 +81,7 @@ export default function RegistrationForm() {
                 ))}
               </div>
               <div className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-5">
-                <LockKeyhole className="h-5 w-5 text-[#d6aa49]" />
+                <LockKeyhole className="h-5 w-5 text-[#FFAD00]" />
                 <p className="mt-2 text-xs leading-5 text-slate-400">
                   Dữ liệu dùng duy nhất cho hoạt động tư vấn và quản lý hồ sơ
                   theo phạm vi bạn đồng thuận.
@@ -91,15 +91,15 @@ export default function RegistrationForm() {
             <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl lg:p-8">
               {done ? (
                 <div className="flex min-h-[520px] flex-col items-center justify-center text-center">
-                  <div className="rounded-full bg-emerald-50 p-5 text-emerald-600">
+                  <div className="rounded-full bg-[#C7F1BF]/45 p-5 text-[#2DA037]">
                     <CheckCircle2 className="h-12 w-12" />
                   </div>
-                  <h2 className="font-display mt-6 text-3xl font-bold text-[#10233f]">
+                  <h2 className="font-display mt-6 text-3xl font-bold text-[#23328C]">
                     Đăng ký đã được ghi nhận
                   </h2>
                   <p className="mt-3 max-w-md leading-7 text-slate-500">
                     Mã đăng ký{" "}
-                    <strong className="text-[#941b2b]">REG-2607-013</strong>.
+                    <strong className="text-[#D21235]">REG-2607-013</strong>.
                     Phòng HTQT sẽ liên hệ với bạn trong 2 ngày làm việc.
                   </p>
                   <div className="mt-6 rounded-xl bg-slate-50 px-5 py-4 text-sm text-slate-600">
@@ -109,7 +109,7 @@ export default function RegistrationForm() {
                   </div>
                   <Link
                     href="/"
-                    className="mt-8 rounded-xl bg-[#941b2b] px-6 py-3 text-sm font-black text-white"
+                    className="mt-8 rounded-xl bg-[#D21235] px-6 py-3 text-sm font-black text-white"
                   >
                     Quay về trang chủ
                   </Link>
@@ -118,10 +118,10 @@ export default function RegistrationForm() {
                 <>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-black uppercase tracking-wider text-[#941b2b]">
+                      <p className="text-xs font-black uppercase tracking-wider text-[#D21235]">
                         Bước {step}/3
                       </p>
-                      <h2 className="font-display mt-1 text-2xl font-bold text-[#10233f]">
+                      <h2 className="font-display mt-1 text-2xl font-bold text-[#23328C]">
                         {step === 1
                           ? "Thông tin học sinh"
                           : step === 2
@@ -149,14 +149,14 @@ export default function RegistrationForm() {
                           />
                         </Field>
                         {existing && (
-                          <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                          <div className="rounded-xl border border-[#FFAD00]/35 bg-[#FFEBD6] p-4">
                             <div className="flex gap-3">
-                              <AlertCircle className="h-5 w-5 shrink-0 text-amber-700" />
+                              <AlertCircle className="h-5 w-5 shrink-0 text-[#23328C]" />
                               <div>
-                                <p className="text-sm font-black text-amber-950">
+                                <p className="text-sm font-black text-[#23328C]">
                                   Đã tìm thấy hồ sơ học sinh
                                 </p>
-                                <p className="mt-1 text-xs leading-5 text-amber-800">
+                                <p className="mt-1 text-xs leading-5 text-[#23328C]">
                                   {existing.name} · {existing.className}. Đăng
                                   ký này sẽ được liên kết với hồ sơ hiện có để
                                   tránh trùng dữ liệu.
@@ -242,7 +242,7 @@ export default function RegistrationForm() {
                             ].map((x, i) => (
                               <label
                                 key={x}
-                                className="flex items-center gap-2 rounded-xl border border-slate-200 p-3 text-sm font-semibold hover:border-[#941b2b]"
+                                className="flex items-center gap-2 rounded-xl border border-slate-200 p-3 text-sm font-semibold hover:border-[#D21235]"
                               >
                                 <input
                                   type="checkbox"
@@ -264,7 +264,7 @@ export default function RegistrationForm() {
                     {step === 3 && (
                       <div className="space-y-5">
                         <div className="rounded-2xl bg-slate-50 p-5">
-                          <h3 className="font-black text-[#10233f]">
+                          <h3 className="font-black text-[#23328C]">
                             Thông tin đăng ký
                           </h3>
                           <dl className="mt-4 grid gap-4 text-sm sm:grid-cols-2">
@@ -361,7 +361,7 @@ export default function RegistrationForm() {
           font-size: 0.875rem;
         }
         .input:focus {
-          border-color: #941b2b;
+          border-color: #D21235;
           box-shadow: 0 0 0 3px rgba(148, 27, 43, 0.08);
           outline: none;
         }
@@ -382,7 +382,7 @@ function Field({
     <label className="block">
       <span className="text-sm font-black text-slate-700">
         {label}
-        {required && <span className="text-red-600"> *</span>}
+        {required && <span className="text-[#D21235]"> *</span>}
       </span>
       {children}
     </label>

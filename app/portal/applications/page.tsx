@@ -88,12 +88,12 @@ export default function Applications() {
               <p className="text-sm font-semibold text-slate-500">
                 Tổng nguyện vọng
               </p>
-              <p className="mt-2 text-3xl font-black text-[#10233f]">9</p>
+              <p className="mt-2 text-3xl font-black text-[#23328C]">9</p>
               <p className="mt-1 text-xs text-slate-400">
                 3 Reach · 4 Target · 2 Safety
               </p>
             </div>
-            <div className="rounded-xl bg-[#10233f] p-3 text-white">
+            <div className="rounded-xl bg-[#23328C] p-3 text-white">
               <GraduationCap className="h-5 w-5" />
             </div>
           </div>
@@ -104,10 +104,10 @@ export default function Applications() {
               <p className="text-sm font-semibold text-slate-500">
                 Sắp đến hạn
               </p>
-              <p className="mt-2 text-3xl font-black text-[#10233f]">3</p>
-              <p className="mt-1 text-xs text-red-600">Trong 30 ngày tới</p>
+              <p className="mt-2 text-3xl font-black text-[#23328C]">3</p>
+              <p className="mt-1 text-xs text-[#D21235]">Trong 30 ngày tới</p>
             </div>
-            <div className="rounded-xl bg-[#941b2b] p-3 text-white">
+            <div className="rounded-xl bg-[#D21235] p-3 text-white">
               <CalendarClock className="h-5 w-5" />
             </div>
           </div>
@@ -116,10 +116,10 @@ export default function Applications() {
           <div className="flex items-start justify-between">
             <div>
               <p className="text-sm font-semibold text-slate-500">Đã nộp</p>
-              <p className="mt-2 text-3xl font-black text-[#10233f]">1</p>
+              <p className="mt-2 text-3xl font-black text-[#23328C]">1</p>
               <p className="mt-1 text-xs text-slate-400">11% University List</p>
             </div>
-            <div className="rounded-xl bg-emerald-600 p-3 text-white">
+            <div className="rounded-xl bg-[#2DA037] p-3 text-white">
               <CheckCircle2 className="h-5 w-5" />
             </div>
           </div>
@@ -130,12 +130,12 @@ export default function Applications() {
               <p className="text-sm font-semibold text-slate-500">
                 Học bổng dự kiến
               </p>
-              <p className="mt-2 text-3xl font-black text-[#10233f]">$48K</p>
+              <p className="mt-2 text-3xl font-black text-[#23328C]">$48K</p>
               <p className="mt-1 text-xs text-slate-400">
                 Tổng giá trị mỗi năm
               </p>
             </div>
-            <div className="rounded-xl bg-[#d6aa49] p-3 text-white">
+            <div className="rounded-xl bg-[#FFAD00] p-3 text-white">
               <CircleDollarSign className="h-5 w-5" />
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function Applications() {
           <div className="p-5 lg:p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-black text-[#10233f]">
+                <h2 className="font-black text-[#23328C]">
                   Cân bằng chiến lược
                 </h2>
                 <p className="mt-1 text-xs text-slate-400">
@@ -156,31 +156,31 @@ export default function Applications() {
               <Badge tone="green">Đạt chuẩn</Badge>
             </div>
             <div className="mt-5 flex h-4 overflow-hidden rounded-full">
-              <div className="w-[33%] bg-purple-500" />
-              <div className="w-[45%] bg-blue-500" />
-              <div className="w-[22%] bg-emerald-500" />
+              <div className="w-[33%] bg-[#FAC7D0]" />
+              <div className="w-[45%] bg-[#23328C]" />
+              <div className="w-[22%] bg-[#2DA037]" />
             </div>
             <div className="mt-3 flex flex-wrap gap-5 text-xs font-bold">
               <span className="flex items-center gap-2">
-                <i className="h-2.5 w-2.5 rounded-full bg-purple-500" /> Reach 3
+                <i className="h-2.5 w-2.5 rounded-full bg-[#FAC7D0]" /> Reach 3
               </span>
               <span className="flex items-center gap-2">
-                <i className="h-2.5 w-2.5 rounded-full bg-blue-500" /> Target 4
+                <i className="h-2.5 w-2.5 rounded-full bg-[#23328C]" /> Target 4
               </span>
               <span className="flex items-center gap-2">
-                <i className="h-2.5 w-2.5 rounded-full bg-emerald-500" /> Safety
+                <i className="h-2.5 w-2.5 rounded-full bg-[#2DA037]" /> Safety
                 2
               </span>
             </div>
           </div>
-          <div className="border-t border-slate-100 bg-amber-50 p-5 lg:border-l lg:border-t-0">
+          <div className="border-t border-slate-100 bg-[#FFEBD6] p-5 lg:border-l lg:border-t-0">
             <div className="flex gap-3">
-              <AlertTriangle className="h-5 w-5 shrink-0 text-amber-700" />
+              <AlertTriangle className="h-5 w-5 shrink-0 text-[#23328C]" />
               <div>
-                <p className="text-sm font-black text-amber-950">
+                <p className="text-sm font-black text-[#23328C]">
                   1 rủi ro cần theo dõi
                 </p>
-                <p className="mt-1 text-xs leading-5 text-amber-800">
+                <p className="mt-1 text-xs leading-5 text-[#23328C]">
                   Boston University: Supplemental Essay mới đạt 45%, còn 24 ngày
                   trước mốc review nội bộ.
                 </p>
@@ -188,7 +188,7 @@ export default function Applications() {
                   onClick={() =>
                     showToast("Đã giao việc sửa essay cho học sinh")
                   }
-                  className="mt-2 text-xs font-black text-amber-900 underline"
+                  className="mt-2 text-xs font-black text-[#23328C] underline"
                 >
                   Giao việc ngay
                 </button>
@@ -218,13 +218,13 @@ export default function Applications() {
         <div className="flex rounded-xl border border-slate-200 bg-white p-1">
           <button
             onClick={() => setView("board")}
-            className={`rounded-lg p-2 ${view === "board" ? "bg-[#10233f] text-white" : "text-slate-400"}`}
+            className={`rounded-lg p-2 ${view === "board" ? "bg-[#23328C] text-white" : "text-slate-400"}`}
           >
             <Columns3 className="h-4 w-4" />
           </button>
           <button
             onClick={() => setView("list")}
-            className={`rounded-lg p-2 ${view === "list" ? "bg-[#10233f] text-white" : "text-slate-400"}`}
+            className={`rounded-lg p-2 ${view === "list" ? "bg-[#23328C] text-white" : "text-slate-400"}`}
           >
             <List className="h-4 w-4" />
           </button>
@@ -239,9 +239,9 @@ export default function Applications() {
                 <div className="mb-3 flex items-center justify-between px-1">
                   <div className="flex items-center gap-2">
                     <span
-                      className={`h-2.5 w-2.5 rounded-full ${si === 0 ? "bg-slate-400" : si === 1 ? "bg-amber-500" : si === 2 ? "bg-blue-500" : "bg-emerald-500"}`}
+                      className={`h-2.5 w-2.5 rounded-full ${si === 0 ? "bg-slate-400" : si === 1 ? "bg-[#FFAD00]" : si === 2 ? "bg-[#23328C]" : "bg-[#2DA037]"}`}
                     />
-                    <h3 className="text-sm font-black text-[#10233f]">
+                    <h3 className="text-sm font-black text-[#23328C]">
                       {stage}
                     </h3>
                   </div>
@@ -252,10 +252,10 @@ export default function Applications() {
                     <button
                       key={app.university}
                       onClick={() => setSelected(app)}
-                      className="w-full rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[#941b2b] hover:shadow-md"
+                      className="w-full rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[#D21235] hover:shadow-md"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#10233f] text-xs font-black text-white">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#23328C] text-xs font-black text-white">
                           {app.university
                             .split(" ")
                             .map((x) => x[0])
@@ -264,7 +264,7 @@ export default function Applications() {
                         </div>
                         <StatusBadge value={app.type} />
                       </div>
-                      <h4 className="mt-3 text-sm font-black leading-5 text-[#10233f]">
+                      <h4 className="mt-3 text-sm font-black leading-5 text-[#23328C]">
                         {app.university}
                       </h4>
                       <p className="mt-1 text-xs text-slate-400">
@@ -280,10 +280,10 @@ export default function Applications() {
                           small
                           color={
                             app.type === "Reach"
-                              ? "#a855f7"
+                              ? "#FAC7D0"
                               : app.type === "Target"
-                                ? "#3b82f6"
-                                : "#10b981"
+                                ? "#23328C"
+                                : "#2DA037"
                           }
                         />
                       </div>
@@ -293,7 +293,7 @@ export default function Applications() {
                           {app.deadline}
                         </span>
                         {app.scholarship !== "Không" && (
-                          <Trophy className="h-4 w-4 text-[#d6aa49]" />
+                          <Trophy className="h-4 w-4 text-[#FFAD00]" />
                         )}
                       </div>
                     </button>
@@ -302,7 +302,7 @@ export default function Applications() {
                     onClick={() =>
                       showToast(`Đã mở biểu mẫu thêm trường ở cột ${stage}`)
                     }
-                    className="flex w-full items-center justify-center gap-1 rounded-xl border border-dashed border-slate-300 py-3 text-xs font-bold text-slate-400 hover:border-[#941b2b] hover:text-[#941b2b]"
+                    className="flex w-full items-center justify-center gap-1 rounded-xl border border-dashed border-slate-300 py-3 text-xs font-bold text-slate-400 hover:border-[#D21235] hover:text-[#D21235]"
                   >
                     <Plus className="h-3.5 w-3.5" /> Thêm nguyện vọng
                   </button>
@@ -330,7 +330,7 @@ export default function Applications() {
                 {rows.map((app) => (
                   <tr key={app.university} className="hover:bg-slate-50">
                     <td className="px-5 py-4">
-                      <p className="font-black text-[#10233f]">
+                      <p className="font-black text-[#23328C]">
                         {app.university}
                       </p>
                       <p className="text-xs text-slate-400">{app.country}</p>
@@ -384,7 +384,7 @@ export default function Applications() {
             ].map((x) => (
               <div key={x[0]} className="rounded-xl bg-slate-50 p-4">
                 <p className="text-xs text-slate-400">{x[0]}</p>
-                <p className="mt-1 text-xl font-black text-[#10233f]">{x[1]}</p>
+                <p className="mt-1 text-xl font-black text-[#23328C]">{x[1]}</p>
               </div>
             ))}
           </div>

@@ -5,17 +5,16 @@ import {
   Award,
   BookOpen,
   CalendarDays,
-  CheckCircle2,
   ChevronRight,
   Compass,
   Globe2,
   GraduationCap,
   Quote,
-  Sparkles,
   UsersRound,
 } from "lucide-react";
 import { posts } from "@/lib/data";
 import { PublicLayout } from "@/components/PublicSite";
+import { HeroSection, SectionHeading } from "@/components/brand";
 
 export default function PublicHome() {
   const published = posts.filter((p) => p.published);
@@ -23,83 +22,26 @@ export default function PublicHome() {
   return (
     <PublicLayout>
       <main>
-        <section className="relative min-h-[650px] overflow-hidden bg-[#10233f] text-white">
-          <Image
-            src="/campus-hero.svg"
-            alt="Khuôn viên Trường Ngôi Sao Hoàng Mai"
-            fill
-            priority
-            className="object-cover opacity-90"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0b1b31] via-[#10233f]/80 to-transparent" />
-          <div className="relative mx-auto flex min-h-[650px] max-w-[1380px] items-center px-5 py-20 lg:px-8">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#d6aa49]/50 bg-[#d6aa49]/10 px-4 py-2 text-xs font-black uppercase tracking-[.14em] text-[#f1cc76]">
-                <Sparkles className="h-4 w-4" /> Từ Ngôi Sao Hoàng Mai đến thế
-                giới
-              </div>
-              <h1 className="font-display mt-6 text-5xl font-bold leading-[1.08] sm:text-6xl lg:text-7xl">
-                Hiểu mình sâu hơn.
-                <br />
-                <span className="text-[#e6bd62]">Đi xa vững vàng.</span>
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
-                Phòng Hợp tác Quốc tế đồng hành cùng mỗi học sinh từ khám phá
-                bản thân, xây dựng portfolio đến chinh phục đại học phù hợp trên
-                toàn cầu.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/dang-ky-tu-van"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#d6aa49] px-6 py-3.5 text-sm font-black text-[#10233f] shadow-xl hover:bg-[#e6bd62]"
-                >
-                  Đăng ký tư vấn du học <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="#gioi-thieu"
-                  className="rounded-xl border border-white/30 bg-white/5 px-6 py-3.5 text-sm font-black backdrop-blur hover:bg-white/10"
-                >
-                  Khám phá lộ trình
-                </Link>
-              </div>
-              <div className="mt-10 flex flex-wrap gap-7 text-sm">
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#d6aa49]" /> Tư vấn 1:1
-                </span>
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#d6aa49]" /> Lộ trình
-                  cá nhân hóa
-                </span>
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#d6aa49]" /> Hồ sơ chân
-                  thực
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-[#0b1b31]/85 backdrop-blur">
-            <div className="mx-auto grid max-w-[1380px] grid-cols-2 divide-x divide-white/10 px-5 md:grid-cols-4 lg:px-8">
-              {[
-                ["120+", "Hồ sơ được đồng hành"],
-                ["18", "Quốc gia & vùng lãnh thổ"],
-                ["93%", "Có phương án phù hợp"],
-                ["45+", "Đại học kết nối"],
-              ].map((x) => (
-                <div key={x[1]} className="px-4 py-5 text-center">
-                  <p className="text-2xl font-black text-[#e6bd62]">{x[0]}</p>
-                  <p className="mt-1 text-xs text-slate-400">{x[1]}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section id="gioi-thieu" className="bg-[#f7f5f0] py-20">
+        <HeroSection
+          eyebrow="Brilliance Within · Tỏa sáng từ nội tại"
+          title="Hiểu mình sâu hơn."
+          highlight="Đi xa vững vàng."
+          description="Phòng Hợp tác Quốc tế đồng hành cùng mỗi học sinh từ khám phá bản thân, xây dựng portfolio đến chinh phục đại học phù hợp trên toàn cầu."
+          assurances={["Tư vấn 1:1", "Lộ trình cá nhân hóa", "Hồ sơ chân thực"]}
+          stats={[
+            ["120+", "Hồ sơ được đồng hành"],
+            ["18", "Quốc gia & vùng lãnh thổ"],
+            ["93%", "Có phương án phù hợp"],
+            ["45+", "Đại học kết nối"],
+          ]}
+        />
+        <section id="gioi-thieu" className="bg-[#FFEBD6] py-20">
           <div className="mx-auto max-w-[1380px] px-5 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <p className="text-xs font-black uppercase tracking-[.2em] text-[#941b2b]">
+              <p className="text-xs font-black uppercase tracking-[.2em] text-[#D21235]">
                 Một hành trình có phương pháp
               </p>
-              <h2 className="font-display mt-3 text-4xl font-bold text-[#10233f]">
+              <h2 className="font-display mt-3 text-4xl font-bold text-[#23328C]">
                 Từ tiềm năng đến hồ sơ có tiếng nói riêng
               </h2>
               <p className="mt-4 leading-7 text-slate-600">
@@ -139,14 +81,14 @@ export default function PublicHome() {
                   className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="rounded-xl bg-red-50 p-3 text-[#941b2b]">
+                    <div className="rounded-xl bg-[#FAC7D0]/35 p-3 text-[#D21235]">
                       <I className="h-6 w-6" />
                     </div>
-                    <span className="font-display text-3xl font-bold text-slate-200 group-hover:text-[#d6aa49]">
+                    <span className="font-display text-3xl font-bold text-slate-200 group-hover:text-[#FFAD00]">
                       {n}
                     </span>
                   </div>
-                  <h3 className="mt-5 text-lg font-black text-[#10233f]">
+                  <h3 className="mt-5 text-lg font-black text-[#23328C]">
                     {t}
                   </h3>
                   <p className="mt-2 text-sm leading-6 text-slate-500">{d}</p>
@@ -157,15 +99,15 @@ export default function PublicHome() {
         </section>
         <section id="tin-tuc" className="py-20">
           <div className="mx-auto max-w-[1380px] px-5 lg:px-8">
-            <SectionTitle
+            <SectionHeading
               eyebrow="Đang diễn ra tại NSHM"
               title="Tin mới & sự kiện nổi bật"
-              href={hero.slug}
+              href={`/bai-viet/${hero.slug}`}
             />
             <div className="mt-10 grid gap-6 lg:grid-cols-[1.25fr_1fr]">
               <Link
                 href={`/bai-viet/${hero.slug}`}
-                className="group relative min-h-[430px] overflow-hidden rounded-3xl bg-[#10233f] text-white"
+                className="group relative min-h-[430px] overflow-hidden rounded-3xl bg-[#23328C] text-white"
               >
                 <Image
                   src="/campus-hero.svg"
@@ -173,9 +115,9 @@ export default function PublicHome() {
                   fill
                   className="object-cover opacity-60 transition duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b31] via-[#10233f]/30 to-transparent" />
+                <div className="absolute inset-0 bg-[#23328C]/45" />
                 <div className="absolute inset-x-0 bottom-0 p-7 lg:p-9">
-                  <span className="rounded-full bg-[#d6aa49] px-3 py-1 text-xs font-black text-[#10233f]">
+                  <span className="rounded-full bg-[#FFAD00] px-3 py-1 text-xs font-black text-[#23328C]">
                     {hero.category}
                   </span>
                   <h3 className="font-display mt-4 max-w-2xl text-3xl font-bold leading-tight">
@@ -184,7 +126,7 @@ export default function PublicHome() {
                   <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-200">
                     {hero.excerpt}
                   </p>
-                  <p className="mt-4 text-xs font-bold text-[#e6bd62]">
+                  <p className="mt-4 text-xs font-bold text-[#FFAD00]">
                     {hero.date} · {hero.readTime}
                   </p>
                 </div>
@@ -197,11 +139,11 @@ export default function PublicHome() {
             </div>
           </div>
         </section>
-        <section id="hoc-bong" className="bg-[#10233f] py-20 text-white">
+        <section id="hoc-bong" className="bg-[#23328C] py-20 text-white">
           <div className="mx-auto max-w-[1380px] px-5 lg:px-8">
             <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
               <div>
-                <p className="text-xs font-black uppercase tracking-[.2em] text-[#d6aa49]">
+                <p className="text-xs font-black uppercase tracking-[.2em] text-[#FFAD00]">
                   Cơ hội tài chính
                 </p>
                 <h2 className="font-display mt-3 text-4xl font-bold">
@@ -214,7 +156,7 @@ export default function PublicHome() {
               </div>
               <Link
                 href="/dang-ky-tu-van"
-                className="inline-flex items-center gap-2 text-sm font-black text-[#d6aa49]"
+                className="inline-flex items-center gap-2 text-sm font-black text-[#FFAD00]"
               >
                 Tìm học bổng phù hợp <ArrowRight className="h-4 w-4" />
               </Link>
@@ -227,10 +169,10 @@ export default function PublicHome() {
                   <Link
                     key={p.slug}
                     href={`/bai-viet/${p.slug}`}
-                    className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-[#d6aa49]/50 hover:bg-white/10"
+                    className="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-[#FFAD00]/50 hover:bg-white/10"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="rounded-xl bg-[#d6aa49] p-3 text-[#10233f]">
+                      <div className="rounded-xl bg-[#FFAD00] p-3 text-[#23328C]">
                         <Award className="h-5 w-5" />
                       </div>
                       <span className="text-xs font-bold text-slate-400">
@@ -243,7 +185,7 @@ export default function PublicHome() {
                     <p className="mt-3 text-sm leading-6 text-slate-300">
                       {p.excerpt}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-1 text-xs font-black text-[#d6aa49]">
+                    <span className="mt-5 inline-flex items-center gap-1 text-xs font-black text-[#FFAD00]">
                       Xem điều kiện <ChevronRight className="h-3 w-3" />
                     </span>
                   </Link>
@@ -253,10 +195,10 @@ export default function PublicHome() {
         </section>
         <section id="tuyen-sinh" className="py-20">
           <div className="mx-auto max-w-[1380px] px-5 lg:px-8">
-            <SectionTitle
+            <SectionHeading
               eyebrow="Cập nhật chính xác"
               title="Thông tin tuyển sinh đại học"
-              href={published.find((p) => p.category === "Tuyển sinh")!.slug}
+              href={`/bai-viet/${published.find((p) => p.category === "Tuyển sinh")!.slug}`}
             />
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {published
@@ -267,9 +209,9 @@ export default function PublicHome() {
             </div>
           </div>
         </section>
-        <section id="cau-chuyen" className="overflow-hidden bg-[#f7f5f0] py-20">
+        <section id="cau-chuyen" className="overflow-hidden bg-[#FFEBD6] py-20">
           <div className="mx-auto grid max-w-[1380px] gap-10 px-5 lg:grid-cols-2 lg:items-center lg:px-8">
-            <div className="relative min-h-[480px] overflow-hidden rounded-3xl bg-[#941b2b]">
+            <div className="relative min-h-[480px] overflow-hidden rounded-3xl bg-[#D21235]">
               <Image
                 src="/campus-hero.svg"
                 alt="Câu chuyện học sinh"
@@ -278,22 +220,22 @@ export default function PublicHome() {
               />
               <div className="absolute inset-0 flex items-end p-8">
                 <div className="max-w-md rounded-2xl bg-white/95 p-6 shadow-xl">
-                  <Quote className="h-8 w-8 text-[#d6aa49]" />
-                  <p className="font-display mt-3 text-xl font-bold leading-8 text-[#10233f]">
+                  <Quote className="h-8 w-8 text-[#FFAD00]" />
+                  <p className="font-display mt-3 text-xl font-bold leading-8 text-[#23328C]">
                     “Em không còn cố trở thành ứng viên hoàn hảo. Em học cách kể
                     thật rõ điều mình quan tâm và đã kiên trì làm.”
                   </p>
-                  <p className="mt-4 text-sm font-black text-[#941b2b]">
+                  <p className="mt-4 text-sm font-black text-[#D21235]">
                     Nguyễn Minh Khang · Boston, Class of 2030
                   </p>
                 </div>
               </div>
             </div>
             <div>
-              <p className="text-xs font-black uppercase tracking-[.2em] text-[#941b2b]">
+              <p className="text-xs font-black uppercase tracking-[.2em] text-[#D21235]">
                 Câu chuyện NSHM
               </p>
-              <h2 className="font-display mt-3 text-4xl font-bold text-[#10233f]">
+              <h2 className="font-display mt-3 text-4xl font-bold text-[#23328C]">
                 Mỗi bộ hồ sơ là một hành trình trưởng thành
               </h2>
               <p className="mt-5 leading-7 text-slate-600">
@@ -310,18 +252,18 @@ export default function PublicHome() {
                       href={`/bai-viet/${p.slug}`}
                       className="flex items-center gap-4 border-b border-slate-200 pb-4 group"
                     >
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#10233f] text-xs font-black text-white">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#23328C] text-xs font-black text-white">
                         NS
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="font-black text-[#10233f] group-hover:text-[#941b2b]">
+                        <p className="font-black text-[#23328C] group-hover:text-[#D21235]">
                           {p.title}
                         </p>
                         <p className="mt-1 text-xs text-slate-400">
                           {p.readTime}
                         </p>
                       </div>
-                      <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#941b2b]" />
+                      <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#D21235]" />
                     </Link>
                   ))}
               </div>
@@ -330,10 +272,10 @@ export default function PublicHome() {
         </section>
         <section id="chuyen-di" className="py-20">
           <div className="mx-auto max-w-[1380px] px-5 lg:px-8">
-            <SectionTitle
+            <SectionHeading
               eyebrow="Học qua trải nghiệm"
               title="Những hành trình mở rộng thế giới"
-              href={published.find((p) => p.category === "Chuyến đi")!.slug}
+              href={`/bai-viet/${published.find((p) => p.category === "Chuyến đi")!.slug}`}
             />
             <div className="mt-10 grid gap-5 md:grid-cols-3">
               {published
@@ -354,12 +296,12 @@ export default function PublicHome() {
                         fill
                         className="object-cover opacity-45 transition duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-[#10233f]">
+                      <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-[#23328C]">
                         {p.date}
                       </div>
                     </div>
                     <div className="p-5">
-                      <h3 className="font-display text-xl font-bold leading-7 text-[#10233f] group-hover:text-[#941b2b]">
+                      <h3 className="font-display text-xl font-bold leading-7 text-[#23328C] group-hover:text-[#D21235]">
                         {p.title}
                       </h3>
                       <p className="mt-2 text-sm leading-6 text-slate-500">
@@ -371,22 +313,22 @@ export default function PublicHome() {
             </div>
           </div>
         </section>
-        <section className="bg-[#941b2b] py-16 text-white">
+        <section className="bg-[#D21235] py-16 text-white">
           <div className="mx-auto flex max-w-[1100px] flex-col items-center px-5 text-center">
-            <UsersRound className="h-9 w-9 text-[#d6aa49]" />
-            <p className="mt-4 text-xs font-black uppercase tracking-[.2em] text-[#f1cc76]">
+            <UsersRound className="h-9 w-9 text-[#FFAD00]" />
+            <p className="mt-4 text-xs font-black uppercase tracking-[.2em] text-[#FFEBD6]">
               Bắt đầu bằng một cuộc trò chuyện
             </p>
             <h2 className="font-display mt-3 text-4xl font-bold">
               Bạn đã sẵn sàng cho hành trình của riêng mình?
             </h2>
-            <p className="mt-4 max-w-2xl leading-7 text-red-100">
+            <p className="mt-4 max-w-2xl leading-7 text-white/80">
               Đăng ký để chuyên viên của NSHM lắng nghe mục tiêu, rà soát dữ
               liệu ban đầu và cùng bạn xác định bước tiếp theo.
             </p>
             <Link
               href="/dang-ky-tu-van"
-              className="mt-7 inline-flex items-center gap-2 rounded-xl bg-[#d6aa49] px-7 py-3.5 text-sm font-black text-[#10233f]"
+              className="mt-7 inline-flex items-center gap-2 rounded-xl bg-[#FFAD00] px-7 py-3.5 text-sm font-black text-[#23328C]"
             >
               Đăng ký tư vấn du học <ArrowRight className="h-4 w-4" />
             </Link>
@@ -397,34 +339,6 @@ export default function PublicHome() {
   );
 }
 
-function SectionTitle({
-  eyebrow,
-  title,
-  href,
-}: {
-  eyebrow: string;
-  title: string;
-  href: string;
-}) {
-  return (
-    <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-      <div>
-        <p className="text-xs font-black uppercase tracking-[.2em] text-[#941b2b]">
-          {eyebrow}
-        </p>
-        <h2 className="font-display mt-3 text-4xl font-bold text-[#10233f]">
-          {title}
-        </h2>
-      </div>
-      <Link
-        href={`/bai-viet/${href}`}
-        className="inline-flex items-center gap-2 text-sm font-black text-[#941b2b]"
-      >
-        Xem tất cả <ArrowRight className="h-4 w-4" />
-      </Link>
-    </div>
-  );
-}
 function PostRow({
   post,
   index,
@@ -435,7 +349,7 @@ function PostRow({
   return (
     <Link
       href={`/bai-viet/${post.slug}`}
-      className="group flex gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#d6aa49] hover:shadow-lg"
+      className="group flex gap-4 rounded-2xl border border-slate-200 p-4 hover:border-[#FFAD00] hover:shadow-lg"
     >
       <div
         className="flex h-24 w-28 shrink-0 items-center justify-center rounded-xl text-white"
@@ -450,10 +364,10 @@ function PostRow({
         )}
       </div>
       <div className="min-w-0">
-        <span className="text-[10px] font-black uppercase tracking-wider text-[#941b2b]">
+        <span className="text-[10px] font-black uppercase tracking-wider text-[#D21235]">
           {post.category}
         </span>
-        <h3 className="mt-1 line-clamp-2 font-display text-lg font-bold leading-6 text-[#10233f] group-hover:text-[#941b2b]">
+        <h3 className="mt-1 line-clamp-2 font-display text-lg font-bold leading-6 text-[#23328C] group-hover:text-[#D21235]">
           {post.title}
         </h3>
         <p className="mt-2 text-xs text-slate-400">
@@ -485,12 +399,12 @@ function ArticleCard({
           fill
           className="object-cover opacity-35 transition duration-500 group-hover:scale-105"
         />
-        <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#941b2b]">
+        <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#D21235]">
           {p.category}
         </div>
       </div>
       <div className="p-5">
-        <h3 className="font-display text-xl font-bold leading-7 text-[#10233f] group-hover:text-[#941b2b]">
+        <h3 className="font-display text-xl font-bold leading-7 text-[#23328C] group-hover:text-[#D21235]">
           {p.title}
         </h3>
         <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-500">

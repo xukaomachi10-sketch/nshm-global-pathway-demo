@@ -131,7 +131,7 @@ export default function Dashboard() {
       <Card className="overflow-hidden">
         <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
           <div>
-            <h2 className="font-black text-[#10233f]">
+            <h2 className="font-black text-[#23328C]">
               Hồ sơ cần xử lý hôm nay
             </h2>
             <p className="mt-0.5 text-xs text-slate-500">
@@ -162,7 +162,7 @@ export default function Dashboard() {
                   <tr key={s.id} className="group hover:bg-slate-50/80">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#10233f] text-xs font-black text-white">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#23328C] text-xs font-black text-white">
                           {s.name
                             .split(" ")
                             .slice(-2)
@@ -172,7 +172,7 @@ export default function Dashboard() {
                         <div>
                           <Link
                             href={`/portal/students/${s.id}`}
-                            className="font-bold text-[#10233f] hover:text-[#941b2b]"
+                            className="font-bold text-[#23328C] hover:text-[#D21235]"
                           >
                             {s.name}
                           </Link>
@@ -215,7 +215,7 @@ export default function Dashboard() {
                     <td className="px-4 py-4">
                       <p className="font-bold text-slate-700">{s.deadline}</p>
                       <p
-                        className={`text-xs ${i < 3 ? "text-red-600" : "text-slate-400"}`}
+                        className={`text-xs ${i < 3 ? "text-[#D21235]" : "text-slate-400"}`}
                       >
                         {i < 3
                           ? `${i + 2} ngày còn lại`
@@ -229,7 +229,7 @@ export default function Dashboard() {
                       <Link
                         href={`/portal/students/${s.id}`}
                         aria-label={`Mở hồ sơ ${s.name}`}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-[#941b2b] hover:text-white"
+                        className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-[#D21235] hover:text-white"
                       >
                         <ArrowRight className="h-4 w-4" />
                       </Link>
@@ -246,10 +246,10 @@ export default function Dashboard() {
       <div className="grid gap-4 xl:grid-cols-3">
         <Card className="p-5">
           <div className="flex items-center justify-between">
-            <h3 className="font-black text-[#10233f]">Deadline 7 ngày tới</h3>
+            <h3 className="font-black text-[#23328C]">Deadline 7 ngày tới</h3>
             <Link
               href="/portal/applications"
-              className="text-xs font-bold text-[#941b2b]"
+              className="text-xs font-bold text-[#D21235]"
             >
               Xem tất cả
             </Link>
@@ -258,7 +258,7 @@ export default function Dashboard() {
             {students.slice(0, 4).map((s, i) => (
               <div key={s.id} className="flex items-center gap-3">
                 <div
-                  className={`flex h-10 w-10 flex-col items-center justify-center rounded-xl text-xs font-black ${i < 2 ? "bg-red-50 text-red-700" : "bg-amber-50 text-amber-700"}`}
+                  className={`flex h-10 w-10 flex-col items-center justify-center rounded-xl text-xs font-black ${i < 2 ? "bg-[#FAC7D0]/35 text-[#D21235]" : "bg-[#FFEBD6] text-[#23328C]"}`}
                 >
                   <span>{4 + i}</span>
                   <span className="text-[8px]">THG 7</span>
@@ -283,10 +283,10 @@ export default function Dashboard() {
         </Card>
         <Card className="p-5">
           <div className="flex items-center justify-between">
-            <h3 className="font-black text-[#10233f]">Tài liệu mới hôm nay</h3>
+            <h3 className="font-black text-[#23328C]">Tài liệu mới hôm nay</h3>
             <Link
               href="/portal/documents"
-              className="text-xs font-bold text-[#941b2b]"
+              className="text-xs font-bold text-[#D21235]"
             >
               Mở hộp duyệt
             </Link>
@@ -302,7 +302,7 @@ export default function Dashboard() {
                 key={x}
                 className="flex items-center gap-3 rounded-xl bg-slate-50 p-3"
               >
-                <div className="rounded-lg bg-white p-2 text-[#941b2b]">
+                <div className="rounded-lg bg-white p-2 text-[#D21235]">
                   <FilePlus2 className="h-4 w-4" />
                 </div>
                 <div className="min-w-0 flex-1">
@@ -317,8 +317,8 @@ export default function Dashboard() {
           </div>
         </Card>
         <Card className="overflow-hidden">
-          <div className="bg-[#10233f] p-5 text-white">
-            <div className="flex items-center gap-2 text-[#d6aa49]">
+          <div className="bg-[#23328C] p-5 text-white">
+            <div className="flex items-center gap-2 text-[#FFAD00]">
               <AlertTriangle className="h-4 w-4" />
               <span className="text-xs font-black uppercase tracking-wider">
                 Cần chú ý
@@ -340,7 +340,7 @@ export default function Dashboard() {
                   key={s.id}
                   className="flex items-center gap-3 px-5 py-3 hover:bg-slate-50"
                 >
-                  <div className="h-2 w-2 rounded-full bg-red-500" />
+                  <div className="h-2 w-2 rounded-full bg-[#D21235]" />
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold">{s.name}</p>
                     <p className="truncate text-xs text-slate-400">

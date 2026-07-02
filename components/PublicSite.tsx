@@ -19,7 +19,16 @@ import { ReactNode, useState } from "react";
 export function PublicHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="relative z-30 border-b border-white/15 bg-[#10233f] text-white">
+    <header className="relative z-30 bg-[#D21235] text-white shadow-[0_8px_24px_rgba(35,50,140,.14)]">
+      <div className="bg-[#23328C]">
+        <div className="mx-auto flex h-7 max-w-[1380px] items-center justify-between px-4 text-[9px] font-semibold uppercase tracking-[.18em] text-white/80 lg:px-8">
+          <span className="sm:hidden">Đức · Trí · Thể · Nhân · Hòa</span>
+          <span className="hidden sm:inline">
+            Đạo đức · Trí tuệ · Thể chất · Nhân cách · Hòa hợp
+          </span>
+          <span className="hidden text-[#FFAD00] sm:inline">Brilliance Within</span>
+        </div>
+      </div>
       <div className="mx-auto flex h-20 max-w-[1380px] items-center px-4 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/nshm-mark.svg" alt="NSHM" width={46} height={46} />
@@ -27,7 +36,7 @@ export function PublicHeader() {
             <p className="text-sm font-black tracking-wide">
               NGÔI SAO HOÀNG MAI
             </p>
-            <p className="text-[10px] font-bold uppercase tracking-[.18em] text-[#d6aa49]">
+            <p className="text-[10px] font-semibold uppercase tracking-[.18em] text-[#FFEBD6]">
               International Counseling Office
             </p>
           </div>
@@ -40,11 +49,12 @@ export function PublicHeader() {
             ["Tuyển sinh", "/#tuyen-sinh"],
             ["Câu chuyện", "/#cau-chuyen"],
             ["Chuyến đi", "/#chuyen-di"],
+            ["Demo", "/demo"],
           ].map((x) => (
             <Link
               key={x[0]}
               href={x[1]}
-              className="text-sm font-bold text-slate-200 hover:text-[#d6aa49]"
+              className="text-sm font-semibold text-white/90 hover:text-[#FFEBD6]"
             >
               {x[0]}
             </Link>
@@ -57,7 +67,7 @@ export function PublicHeader() {
           </button>
           <Link
             href="/dang-ky-tu-van"
-            className="rounded-xl bg-[#d6aa49] px-4 py-2.5 text-sm font-black text-[#10233f] hover:bg-[#e6bd62]"
+            className="rounded-xl bg-[#FFEBD6] px-4 py-2.5 text-sm font-extrabold text-[#D21235] ring-1 ring-white/30 transition hover:bg-white"
           >
             Đăng ký tư vấn du học
           </Link>
@@ -77,6 +87,7 @@ export function PublicHeader() {
             ["Tuyển sinh", "/#tuyen-sinh"],
             ["Câu chuyện", "/#cau-chuyen"],
             ["Chuyến đi", "/#chuyen-di"],
+            ["Demo sản phẩm", "/demo"],
           ].map((x) => (
             <Link
               onClick={() => setOpen(false)}
@@ -90,7 +101,7 @@ export function PublicHeader() {
           <Link
             onClick={() => setOpen(false)}
             href="/dang-ky-tu-van"
-            className="mt-4 block rounded-xl bg-[#d6aa49] px-4 py-3 text-center text-sm font-black text-[#10233f]"
+            className="mt-4 block rounded-xl bg-[#FFEBD6] px-4 py-3 text-center text-sm font-extrabold text-[#D21235]"
           >
             Đăng ký tư vấn du học
           </Link>
@@ -102,7 +113,7 @@ export function PublicHeader() {
 
 export function PublicFooter() {
   return (
-    <footer className="bg-[#0b1b31] text-slate-300">
+    <footer className="bg-[#23328C] text-slate-300">
       <div className="mx-auto grid max-w-[1380px] gap-10 px-5 py-14 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <div className="flex items-center gap-3">
@@ -111,8 +122,8 @@ export function PublicFooter() {
               <p className="text-sm font-black text-white">
                 NSHM GLOBAL PATHWAYS
               </p>
-              <p className="text-[10px] font-bold uppercase tracking-wider text-[#d6aa49]">
-                Know yourself. Shape your future.
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[#FFAD00]">
+                Brilliance Within · Tỏa sáng từ nội tại
               </p>
             </div>
           </div>
@@ -136,20 +147,23 @@ export function PublicFooter() {
             <Link className="block hover:text-white" href="/portal">
               Cổng chuyên viên
             </Link>
+            <Link className="block hover:text-white" href="/demo">
+              Danh mục demo
+            </Link>
           </div>
         </div>
         <div>
           <p className="font-black text-white">Liên hệ</p>
           <div className="mt-4 space-y-3 text-sm">
             <p className="flex gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#d6aa49]" /> Khu
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#FFAD00]" /> Khu
               đô thị Kim Văn - Kim Lũ, Hoàng Mai, Hà Nội
             </p>
             <p className="flex gap-2">
-              <Phone className="h-4 w-4 text-[#d6aa49]" /> 024 3555 2244
+              <Phone className="h-4 w-4 text-[#FFAD00]" /> 024 3555 2244
             </p>
             <p className="flex gap-2">
-              <Mail className="h-4 w-4 text-[#d6aa49]" />{" "}
+              <Mail className="h-4 w-4 text-[#FFAD00]" />{" "}
               globalpathways@nshm.edu.vn
             </p>
           </div>
@@ -160,7 +174,7 @@ export function PublicFooter() {
             {[Share2, AtSign, Play].map((I, i) => (
               <button
                 key={i}
-                className="rounded-xl bg-white/7 p-3 hover:bg-[#941b2b]"
+                className="rounded-xl bg-white/7 p-3 hover:bg-[#D21235]"
               >
                 <I className="h-4 w-4" />
               </button>
@@ -168,7 +182,7 @@ export function PublicFooter() {
           </div>
           <Link
             href="/dang-ky-tu-van"
-            className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#d6aa49]"
+            className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#FFAD00]"
           >
             Bắt đầu hành trình <ArrowRight className="h-4 w-4" />
           </Link>

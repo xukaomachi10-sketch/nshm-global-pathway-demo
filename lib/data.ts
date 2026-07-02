@@ -210,7 +210,7 @@ const postSeed = [
   ],
 ] as const;
 
-const accents = ["#8f1d2c", "#b58a32", "#173b65", "#5e294d", "#23606a"];
+const accents = ["#D21235", "#FFAD00", "#23328C", "#2DA037", "#2DA037"];
 export const posts: Post[] = postSeed.map((item, i) => ({
   slug: `bai-viet-${i + 1}-${item[0]
     .toLowerCase()

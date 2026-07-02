@@ -1,13 +1,75 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Lexend";
+  src: url("/fonts/Lexend-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lexend";
+  src: url("/fonts/Lexend-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lexend";
+  src: url("/fonts/Lexend-ExtraBold.ttf") format("truetype");
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("/fonts/Literata-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("/fonts/Literata-SemiBold.ttf") format("truetype");
+  font-weight: 600 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Literata";
+  src: url("/fonts/Literata-Black.ttf") format("truetype");
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --red: #941b2b;
-  --red-dark: #6f1020;
-  --navy: #10233f;
-  --navy-soft: #1c365a;
-  --gold: #d6aa49;
-  --paper: #f6f7f9;
-  --ink: #172033;
+  --nshm-crimson: #d21235;
+  --nshm-pink: #fac7d0;
+  --nshm-egyptian-blue: #23328c;
+  --nshm-emerald: #2da037;
+  --nshm-orange: #ffad00;
+  --nshm-uranium-blue: #adddff;
+  --nshm-celadon: #c7f1bf;
+  --nshm-antique: #ffebd6;
+  --red: var(--nshm-crimson);
+  --navy: var(--nshm-egyptian-blue);
+  --gold: var(--nshm-orange);
+  --paper: #fbfaf7;
+  --ink: #191d33;
+}
+
+@theme inline {
+  --color-brand-crimson: var(--nshm-crimson);
+  --color-brand-pink: var(--nshm-pink);
+  --color-brand-blue: var(--nshm-egyptian-blue);
+  --color-brand-emerald: var(--nshm-emerald);
+  --color-brand-orange: var(--nshm-orange);
+  --color-brand-sky: var(--nshm-uranium-blue);
+  --color-brand-celadon: var(--nshm-celadon);
+  --color-brand-antique: var(--nshm-antique);
+  --font-sans: "Lexend", Arial, Helvetica, sans-serif;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -20,7 +82,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lexend", Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 button,
@@ -35,16 +97,23 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 .font-display {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Literata", Georgia, "Times New Roman", serif;
 }
 .card-shadow {
-  box-shadow: 0 12px 32px rgba(16, 35, 63, 0.07);
+  box-shadow: 0 14px 36px rgba(35, 50, 140, 0.08);
+}
+.brand-focus:focus-visible {
+  outline: 3px solid var(--nshm-orange);
+  outline-offset: 3px;
 }
 .soft-grid {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 30px 30px;
+  background-image: url("/nshm-pattern.svg");
+  background-position: center;
+  background-size: 460px auto;
+}
+::selection {
+  color: #fff;
+  background: var(--nshm-crimson);
 }
 .scrollbar-none::-webkit-scrollbar {
   display: none;

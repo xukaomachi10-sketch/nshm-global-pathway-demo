@@ -78,8 +78,8 @@ export default function Evidence() {
       />
       <Card className="overflow-hidden">
         <div className="grid lg:grid-cols-[1.25fr_1fr]">
-          <div className="bg-[#10233f] p-6 text-white soft-grid">
-            <div className="flex items-center gap-2 text-[#d6aa49]">
+          <div className="bg-[#23328C] p-6 text-white soft-grid">
+            <div className="flex items-center gap-2 text-[#FFAD00]">
               <ShieldCheck className="h-5 w-5" />
               <span className="text-xs font-black uppercase tracking-[.16em]">
                 Portfolio Readiness
@@ -95,7 +95,7 @@ export default function Evidence() {
               <span className="text-2xl font-black">82%</span>
             </div>
             <div className="mt-4">
-              <Progress value={82} color="#d6aa49" />
+              <Progress value={82} color="#FFAD00" />
             </div>
             <div className="mt-5 grid grid-cols-4 gap-2 text-center">
               {[
@@ -112,7 +112,7 @@ export default function Evidence() {
             </div>
           </div>
           <div className="p-6">
-            <h3 className="font-black text-[#10233f]">
+            <h3 className="font-black text-[#23328C]">
               Chuẩn minh chứng A/B/C/D
             </h3>
             <div className="mt-4 space-y-3">
@@ -176,13 +176,13 @@ export default function Evidence() {
         <div className="flex rounded-xl border border-slate-200 bg-white p-1">
           <button
             onClick={() => setGrid(true)}
-            className={`rounded-lg p-2 ${grid ? "bg-[#10233f] text-white" : "text-slate-400"}`}
+            className={`rounded-lg p-2 ${grid ? "bg-[#23328C] text-white" : "text-slate-400"}`}
           >
             <Grid2X2 className="h-4 w-4" />
           </button>
           <button
             onClick={() => setGrid(false)}
-            className={`rounded-lg p-2 ${!grid ? "bg-[#10233f] text-white" : "text-slate-400"}`}
+            className={`rounded-lg p-2 ${!grid ? "bg-[#23328C] text-white" : "text-slate-400"}`}
           >
             <List className="h-4 w-4" />
           </button>
@@ -200,7 +200,7 @@ export default function Evidence() {
           <button
             key={x}
             onClick={() => setKind(x === "Tất cả" ? "" : x)}
-            className={`rounded-full px-4 py-2 text-xs font-bold transition ${(x === "Tất cả" && !kind) || x === kind ? "bg-[#941b2b] text-white" : "border border-slate-200 bg-white text-slate-600 hover:border-[#941b2b]"}`}
+            className={`rounded-full px-4 py-2 text-xs font-bold transition ${(x === "Tất cả" && !kind) || x === kind ? "bg-[#D21235] text-white" : "border border-slate-200 bg-white text-slate-600 hover:border-[#D21235]"}`}
           >
             {x}
           </button>
@@ -211,12 +211,12 @@ export default function Evidence() {
           {rows.map((x, i) => (
             <Card key={x.title} className="group overflow-hidden">
               <div
-                className={`h-1.5 ${x.level === "A" ? "bg-emerald-500" : x.level === "B" ? "bg-blue-500" : x.level === "C" ? "bg-amber-500" : "bg-red-500"}`}
+                className={`h-1.5 ${x.level === "A" ? "bg-[#2DA037]" : x.level === "B" ? "bg-[#23328C]" : x.level === "C" ? "bg-[#FFAD00]" : "bg-[#D21235]"}`}
               />
               <div className="p-5">
                 <div className="flex items-start justify-between">
                   <div
-                    className={`rounded-xl p-3 ${i % 3 === 0 ? "bg-red-50 text-[#941b2b]" : i % 3 === 1 ? "bg-blue-50 text-blue-700" : "bg-amber-50 text-amber-700"}`}
+                    className={`rounded-xl p-3 ${i % 3 === 0 ? "bg-[#FAC7D0]/35 text-[#D21235]" : i % 3 === 1 ? "bg-[#ADDDFF]/35 text-[#23328C]" : "bg-[#FFEBD6] text-[#23328C]"}`}
                   >
                     {i < 2 ? (
                       <FileCheck2 className="h-5 w-5" />
@@ -246,7 +246,7 @@ export default function Evidence() {
                 <p className="mt-4 text-xs font-black uppercase tracking-wider text-slate-400">
                   {x.kind}
                 </p>
-                <h3 className="mt-1 text-base font-black text-[#10233f]">
+                <h3 className="mt-1 text-base font-black text-[#23328C]">
                   {x.title}
                 </h3>
                 <p className="mt-2 min-h-10 text-sm leading-5 text-slate-500">
@@ -261,7 +261,7 @@ export default function Evidence() {
                   </div>
                   <button
                     onClick={() => setSelected(x)}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition group-hover:border-[#941b2b] group-hover:bg-[#941b2b] group-hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition group-hover:border-[#D21235] group-hover:bg-[#D21235] group-hover:text-white"
                   >
                     <ExternalLink className="h-4 w-4" />
                   </button>
@@ -324,27 +324,27 @@ export default function Evidence() {
       <div className="grid gap-4 lg:grid-cols-2">
         <Card className="p-5">
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-amber-600" />
-            <h3 className="font-black text-[#10233f]">
+            <AlertTriangle className="h-5 w-5 text-[#23328C]" />
+            <h3 className="font-black text-[#23328C]">
               Cần xử lý trước handoff
             </h3>
           </div>
           <div className="mt-4 space-y-3">
-            <div className="flex items-center gap-3 rounded-xl bg-amber-50 p-3">
-              <SearchCheck className="h-5 w-5 text-amber-700" />
+            <div className="flex items-center gap-3 rounded-xl bg-[#FFEBD6] p-3">
+              <SearchCheck className="h-5 w-5 text-[#23328C]" />
               <div className="flex-1">
                 <p className="text-sm font-bold">MUN Singapore 2026</p>
-                <p className="text-xs text-amber-700">
+                <p className="text-xs text-[#23328C]">
                   Thiếu email xác nhận vai trò Outstanding Delegate
                 </p>
               </div>
               <StatusBadge value="Cần bổ sung" />
             </div>
-            <div className="flex items-center gap-3 rounded-xl bg-red-50 p-3">
-              <FileUp className="h-5 w-5 text-red-700" />
+            <div className="flex items-center gap-3 rounded-xl bg-[#FAC7D0]/35 p-3">
+              <FileUp className="h-5 w-5 text-[#D21235]" />
               <div className="flex-1">
                 <p className="text-sm font-bold">Hoạt động STEM for Kids</p>
-                <p className="text-xs text-red-700">
+                <p className="text-xs text-[#D21235]">
                   File ảnh mờ, cần tải bản gốc
                 </p>
               </div>
@@ -353,7 +353,7 @@ export default function Evidence() {
           </div>
         </Card>
         <Card className="p-5">
-          <h3 className="font-black text-[#10233f]">Phân bổ Portfolio</h3>
+          <h3 className="font-black text-[#23328C]">Phân bổ Portfolio</h3>
           <div className="mt-5 space-y-4">
             {[
               ["Hướng nghiệp", 90, 9],
@@ -380,8 +380,8 @@ export default function Evidence() {
         title="Tải minh chứng mới"
       >
         <div className="space-y-4">
-          <button className="flex w-full flex-col items-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-5 py-10 text-center hover:border-[#941b2b] hover:bg-red-50/30">
-            <UploadCloud className="h-9 w-9 text-[#941b2b]" />
+          <button className="flex w-full flex-col items-center rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 px-5 py-10 text-center hover:border-[#D21235] hover:bg-[#FAC7D0]/20">
+            <UploadCloud className="h-9 w-9 text-[#D21235]" />
             <p className="mt-3 text-sm font-black">
               Kéo thả file hoặc bấm để chọn
             </p>
