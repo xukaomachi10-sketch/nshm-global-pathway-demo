@@ -5,6 +5,8 @@ import type {
   CounselingSession,
   InternalTask,
   InternalUser,
+  StudentImportBatch,
+  StudentImportStaging,
   StudentRecord,
   TestScore,
 } from "@/types/database";
@@ -34,4 +36,18 @@ export interface InternalOperationsRepository {
     input: UpdateOf<"counseling_sessions">,
   ): Promise<CounselingSession>;
   createActivityLog(input: InsertOf<"activity_logs">): Promise<ActivityLog>;
+  createActivityLogs(input: InsertOf<"activity_logs">[]): Promise<ActivityLog[]>;
+  upsertStudents(
+    input: InsertOf<"students">[],
+  ): Promise<StudentRecord[]>;
+  createStudentImportBatch(
+    input: InsertOf<"student_import_batches">,
+  ): Promise<StudentImportBatch>;
+  updateStudentImportBatch(
+    id: string,
+    input: UpdateOf<"student_import_batches">,
+  ): Promise<StudentImportBatch>;
+  createStudentImportStaging(
+    input: InsertOf<"student_import_staging">[],
+  ): Promise<StudentImportStaging[]>;
 }

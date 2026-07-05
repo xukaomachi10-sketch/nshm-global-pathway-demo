@@ -128,13 +128,15 @@ export function StudentsWorkspace({
       <Card className="overflow-hidden">
         {rows.length ? (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[1050px] text-left text-sm">
+            <table className="w-full min-w-[1200px] text-left text-sm">
               <thead className="bg-slate-50 text-[11px] uppercase tracking-wider text-slate-500">
                 <tr>
                   <th className="px-5 py-3">Học sinh</th>
+                  <th className="px-4 py-3">Lớp / Khối</th>
                   <th className="px-4 py-3">Định hướng</th>
                   <th className="px-4 py-3">Hồ sơ</th>
                   <th className="px-4 py-3">Rủi ro</th>
+                  <th className="px-4 py-3">Trạng thái</th>
                   <th className="px-5 py-3">Hành động tiếp theo</th>
                 </tr>
               </thead>
@@ -146,7 +148,15 @@ export function StudentsWorkspace({
                       <td className="px-5 py-4">
                         <p className="font-black text-[#23328C]">{student.full_name}</p>
                         <p className="mt-1 text-xs text-slate-500">
-                          {student.student_code} · {student.class_name ?? "Chưa có lớp"}
+                          {student.student_code}
+                        </p>
+                      </td>
+                      <td className="px-4 py-4">
+                        <p className="font-semibold text-slate-700">
+                          {student.class_name ?? "Chưa có lớp"} · Khối {student.grade_level ?? "—"}
+                        </p>
+                        <p className="mt-1 text-xs text-slate-500">
+                          GVCN: {student.homeroom_teacher ?? "Chưa cập nhật"}
                         </p>
                       </td>
                       <td className="px-4 py-4">
@@ -162,6 +172,11 @@ export function StudentsWorkspace({
                         ) : <Badge>Chưa mở hồ sơ</Badge>}
                       </td>
                       <td className="px-4 py-4"><StatusBadge value={riskLabels[student.risk_level]} /></td>
+                      <td className="px-4 py-4">
+                        <Badge tone={student.is_active_student ? "green" : "slate"}>
+                          {student.is_active_student ? "Đang học" : "Không hoạt động"}
+                        </Badge>
+                      </td>
                       <td className="max-w-sm px-5 py-4 text-slate-600">
                         {counselingCase?.next_action ?? "Mở hồ sơ tư vấn và xác nhận nhu cầu."}
                       </td>

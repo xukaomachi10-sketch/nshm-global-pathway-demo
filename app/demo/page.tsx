@@ -7,6 +7,7 @@ import {
   CalendarClock,
   Database,
   FileStack,
+  FileUp,
   FolderLock,
   Globe2,
   LayoutDashboard,
@@ -78,6 +79,13 @@ const screens: Array<{
     description: "Danh sách hồ sơ tư vấn từ data layer an toàn.",
     category: "Portal",
     icon: UserRound,
+  },
+  {
+    href: "/portal/import-students",
+    title: "Import học sinh CSV",
+    description: "Xem trước, kiểm tra và upsert fake student master.",
+    category: "Portal",
+    icon: FileUp,
   },
   {
     href: "/portal/tasks",
@@ -254,7 +262,7 @@ export default async function DemoPage() {
         <section className="bg-[#FBFAF7] py-16">
           <div className="mx-auto max-w-[1180px] px-5 lg:px-8">
             <SectionHeading
-              eyebrow="12 màn hình chính"
+              eyebrow="13 màn hình chính"
               title="Chọn trải nghiệm bạn muốn xem"
               description="Mỗi thẻ mở đúng route hiện có; logic và luồng nghiệp vụ được giữ nguyên."
             />

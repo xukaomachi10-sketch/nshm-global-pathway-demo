@@ -8,7 +8,7 @@
 - `deleted_at is null` means active; deletion is soft unless a reviewed retention process states otherwise.
 - `activity_logs` is append-only and has no soft-delete field.
 - `jsonb` fields hold extensible attributes, not core relational keys or statuses.
-- Seed data is fake. Codes begin with `FAKE-`, emails use `example.invalid`, and profiles contain `is_fake=true`.
+- Seed data is fake. Codes begin with `FAKE-`, emails use `example.invalid`, and the explicit `students.is_fake` column is `true`.
 
 ## Enums
 
@@ -52,13 +52,21 @@ Student master record used by all internal operations workflows.
 | `id` | uuid | No | PK, generated | Student database ID |
 | `student_code` | text | No | Unique, indexed | School/pilot identifier |
 | `full_name` | text | No |  | Student name |
-| `class_name` | text | Yes |  | Current class |
-| `graduation_year` | smallint | Yes | 2020-2100 | Expected graduation year |
 | `date_of_birth` | date | Yes |  | Sensitive identity attribute |
+| `gender` | text | Yes | Checked values | `female`, `male`, `other`, or `unspecified` |
+| `class_name` | text | Yes |  | Current class |
+| `grade_level` | smallint | Yes | 1-12 | Current grade; required by CSV import validation |
+| `graduation_year` | smallint | Yes | 2020-2100 | Expected graduation year |
+| `homeroom_teacher` | text | Yes |  | Current homeroom teacher |
+| `academic_track` | text | Yes |  | School academic pathway/track |
 | `student_email` | text | Yes |  | Student contact email |
 | `parent_name` | text | Yes |  | Parent/guardian name |
 | `parent_email` | text | Yes |  | Parent/guardian email |
 | `parent_phone` | text | Yes |  | Parent/guardian phone |
+| `source_system` | text | Yes | Indexed with source ID | Origin system label |
+| `source_record_id` | text | Yes | Indexed with source system | Origin-system record identifier |
+| `is_active_student` | boolean | No | `true` | Current enrollment/activity marker; never used for hard deletion |
+| `is_fake` | boolean | No | `false`, indexed | Explicit pilot-data marker; fake-only RLS also requires a `FAKE-*` code |
 | `assigned_counselor_id` | uuid | Yes | FK -> `users.id`, indexed | Primary counselor |
 | `target_country` | text | Yes |  | Current destination preference |
 | `target_university` | text | Yes |  | Current university preference |
@@ -69,8 +77,62 @@ Student master record used by all internal operations workflows.
 | `created_at` | timestamptz | No | `now()` | Creation time |
 | `updated_at` | timestamptz | No | trigger | Last update time |
 | `deleted_at` | timestamptz | Yes |  | Soft-delete time |
+| `deleted_by` | uuid | Yes | FK -> `users.id` | Staff identity responsible for soft deletion |
+| `delete_reason` | text | Yes |  | Human-readable soft-delete rationale |
 
 Classification: `restricted`; date of birth and family contact data are `highly_restricted` by policy.
+
+The counseling-specific columns (`assigned_counselor_id`, destination preferences, risk, confidentiality, and `profile_data`) are retained for existing Internal Operations workflows. The CSV student-master importer reads and writes the named master columns above directly and does not remove operational values during upsert.
+
+## `student_import_batches`
+
+One auditable confirmation attempt for a CSV file. No source file bytes are stored.
+
+| Column | Type | Null | Key/default | Description |
+| --- | --- | --- | --- | --- |
+| `id` | uuid | No | PK, generated | Import batch ID |
+| `source_file_name` | text | No |  | Sanitized original filename |
+| `source_file_size_bytes` | bigint | Yes | Non-negative | Upload size; file content is not retained |
+| `batch_status` | text | No | Checked lifecycle | `uploaded`, `validated`, `importing`, `completed`, `completed_with_errors`, or `failed` |
+| `data_mode` | text | No | `mock` or `supabase` | Repository used for the confirmation |
+| `is_fake_only` | boolean | No | Must be `true` | Pilot safety marker enforced by RLS |
+| `total_rows` | integer | No | `0` | Non-empty CSV data rows |
+| `valid_rows` | integer | No | `0` | Rows passing server validation |
+| `error_rows` | integer | No | `0` | Rows rejected by validation |
+| `new_rows` | integer | No | `0` | Valid codes not found before import |
+| `updated_rows` | integer | No | `0` | Valid codes found before import |
+| `skipped_rows` | integer | No | `0` | Rows not imported |
+| `created_by` | uuid | Yes | FK -> `users.id` | Reserved for authenticated staff identity |
+| `confirmed_at` | timestamptz | Yes |  | User confirmation time |
+| `completed_at` | timestamptz | Yes |  | Terminal processing time |
+| `error_summary` | jsonb | Yes |  | Sanitized batch failure details; no row PII |
+| `created_at` | timestamptz | No | `now()` | Creation time |
+| `updated_at` | timestamptz | No | trigger | Last state change |
+| `deleted_at` | timestamptz | Yes |  | Soft-delete time |
+
+## `student_import_staging`
+
+Validated row snapshot for a batch. Invalid rows are persisted only as sanitized rejection metadata by the application.
+
+| Column | Type | Null | Key/default | Description |
+| --- | --- | --- | --- | --- |
+| `id` | uuid | No | PK, generated | Staging row ID |
+| `batch_id` | uuid | No | FK -> `student_import_batches.id` | Parent batch |
+| `row_number` | integer | No | >=2, unique per batch | Original CSV line number |
+| `student_code` | text | Yes | Indexed | Fake student code when safe to retain |
+| `raw_data` | jsonb | No | `{}` | Fake-row input snapshot; sanitized for invalid rows |
+| `normalized_data` | jsonb | No | `{}` | Normalized fake-row values plus `pilot_fake=true` |
+| `validation_status` | text | No | `valid` or `error` | Server validation outcome |
+| `validation_errors` | jsonb | No | `[]` | Row-level error messages |
+| `validation_warnings` | jsonb | No | `[]` | Non-blocking row warnings |
+| `import_action` | text | No | Checked | `new`, `update`, `skipped`, or `imported` |
+| `imported_student_id` | uuid | Yes | FK -> `students.id` | Optional resulting student reference |
+| `imported_at` | timestamptz | Yes |  | Optional row completion time |
+| `created_at` | timestamptz | No | `now()` | Creation time |
+| `updated_at` | timestamptz | No | trigger | Last update time |
+| `deleted_at` | timestamptz | Yes |  | Soft-delete time |
+
+Classification: pilot fake data only. Do not use these publishable-key policies for real student data.
 
 ## `counseling_cases`
 

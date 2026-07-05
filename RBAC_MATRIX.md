@@ -2,7 +2,7 @@
 
 ## Pilot enforcement status
 
-The v1 schema defines roles and confidentiality levels, but the pilot does not yet expose operational CRUD access. RLS permits the publishable/anon key to select only active fake students marked by both `FAKE-%` and `profile_data.is_fake=true`; every other table remains blocked.
+The v1 schema defines roles and confidentiality levels, but real-data CRUD is not enabled. The isolated dev pilot permits publishable-key operations only on student rows protected by both `FAKE-*` and `students.is_fake=true`; related task/import metadata also carries fake markers. Non-fake records and unrelated tables remain blocked.
 
 The matrix below is the target policy for the next phase. It must be implemented as reviewed RLS policies and server authorization checks before any real data is used.
 

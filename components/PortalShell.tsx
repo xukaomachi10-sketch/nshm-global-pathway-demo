@@ -12,6 +12,7 @@ import {
   ChevronRight,
   CircleHelp,
   FileStack,
+  FileUp,
   FolderLock,
   Globe2,
   LayoutDashboard,
@@ -37,6 +38,11 @@ const items = [
     href: "/portal/students",
     label: "Học sinh tư vấn",
     icon: UserRound,
+  },
+  {
+    href: "/portal/import-students",
+    label: "Import học sinh",
+    icon: FileUp,
   },
   {
     href: "/portal/tasks",

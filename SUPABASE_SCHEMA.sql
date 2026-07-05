@@ -73,13 +73,21 @@ create table if not exists public.students (
   id uuid primary key default gen_random_uuid(),
   student_code text not null unique check (length(trim(student_code)) >= 3),
   full_name text not null check (length(trim(full_name)) >= 2),
-  class_name text,
-  graduation_year smallint check (graduation_year between 2020 and 2100),
   date_of_birth date,
+  gender text check (gender is null or gender in ('female', 'male', 'other', 'unspecified')),
+  class_name text,
+  grade_level smallint check (grade_level between 1 and 12),
+  graduation_year smallint check (graduation_year between 2020 and 2100),
+  homeroom_teacher text,
+  academic_track text,
   student_email text,
   parent_name text,
   parent_email text,
   parent_phone text,
+  source_system text,
+  source_record_id text,
+  is_active_student boolean not null default true,
+  is_fake boolean not null default false,
   assigned_counselor_id uuid references public.users(id) on delete set null,
   target_country text,
   target_university text,
@@ -89,8 +97,66 @@ create table if not exists public.students (
   profile_data jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  deleted_at timestamptz
+  deleted_at timestamptz,
+  deleted_by uuid references public.users(id) on delete set null,
+  delete_reason text
 );
+
+-- Idempotent additions for pilot projects created from an earlier schema revision.
+alter table public.students add column if not exists date_of_birth date;
+alter table public.students add column if not exists class_name text;
+alter table public.students add column if not exists grade_level smallint;
+alter table public.students add column if not exists graduation_year smallint;
+alter table public.students add column if not exists gender text;
+alter table public.students add column if not exists homeroom_teacher text;
+alter table public.students add column if not exists academic_track text;
+alter table public.students add column if not exists student_email text;
+alter table public.students add column if not exists parent_name text;
+alter table public.students add column if not exists parent_phone text;
+alter table public.students add column if not exists parent_email text;
+alter table public.students add column if not exists source_system text;
+alter table public.students add column if not exists source_record_id text;
+alter table public.students add column if not exists is_active_student boolean not null default true;
+alter table public.students add column if not exists is_fake boolean not null default false;
+alter table public.students add column if not exists created_at timestamptz not null default now();
+alter table public.students add column if not exists updated_at timestamptz not null default now();
+alter table public.students add column if not exists deleted_at timestamptz;
+alter table public.students add column if not exists deleted_by uuid;
+alter table public.students add column if not exists delete_reason text;
+
+alter table public.students alter column is_active_student set default true;
+update public.students set is_active_student = true where is_active_student is null;
+alter table public.students alter column is_active_student set not null;
+
+alter table public.students alter column is_fake set default false;
+update public.students
+set is_fake = true
+where student_code like 'FAKE-%'
+  and is_fake is not true;
+update public.students set is_fake = false where is_fake is null;
+alter table public.students alter column is_fake set not null;
+
+do $$ begin
+  if not exists (
+    select 1 from pg_constraint
+    where conname = 'students_deleted_by_fkey'
+      and conrelid = 'public.students'::regclass
+  ) then
+    alter table public.students
+      add constraint students_deleted_by_fkey
+      foreign key (deleted_by) references public.users(id) on delete set null;
+  end if;
+end $$;
+
+do $$ begin
+  alter table public.students add constraint students_grade_level_import_check
+    check (grade_level is null or grade_level between 1 and 12);
+exception when duplicate_object then null; end $$;
+
+do $$ begin
+  alter table public.students add constraint students_gender_import_check
+    check (gender is null or gender in ('female', 'male', 'other', 'unspecified'));
+exception when duplicate_object then null; end $$;
 
 create table if not exists public.counseling_cases (
   id uuid primary key default gen_random_uuid(),
@@ -226,6 +292,49 @@ create table if not exists public.activity_logs (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.student_import_batches (
+  id uuid primary key default gen_random_uuid(),
+  source_file_name text not null check (length(trim(source_file_name)) >= 1),
+  source_file_size_bytes bigint check (source_file_size_bytes is null or source_file_size_bytes >= 0),
+  batch_status text not null default 'uploaded' check (
+    batch_status in ('uploaded', 'validated', 'importing', 'completed', 'completed_with_errors', 'failed')
+  ),
+  data_mode text not null check (data_mode in ('mock', 'supabase')),
+  is_fake_only boolean not null default true check (is_fake_only = true),
+  total_rows integer not null default 0 check (total_rows >= 0),
+  valid_rows integer not null default 0 check (valid_rows >= 0),
+  error_rows integer not null default 0 check (error_rows >= 0),
+  new_rows integer not null default 0 check (new_rows >= 0),
+  updated_rows integer not null default 0 check (updated_rows >= 0),
+  skipped_rows integer not null default 0 check (skipped_rows >= 0),
+  created_by uuid references public.users(id) on delete set null,
+  confirmed_at timestamptz,
+  completed_at timestamptz,
+  error_summary jsonb,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  deleted_at timestamptz
+);
+
+create table if not exists public.student_import_staging (
+  id uuid primary key default gen_random_uuid(),
+  batch_id uuid not null references public.student_import_batches(id) on delete restrict,
+  row_number integer not null check (row_number >= 2),
+  student_code text,
+  raw_data jsonb not null default '{}'::jsonb,
+  normalized_data jsonb not null default '{}'::jsonb,
+  validation_status text not null check (validation_status in ('valid', 'error')),
+  validation_errors jsonb not null default '[]'::jsonb,
+  validation_warnings jsonb not null default '[]'::jsonb,
+  import_action text not null check (import_action in ('new', 'update', 'skipped', 'imported')),
+  imported_student_id uuid references public.students(id) on delete set null,
+  imported_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  deleted_at timestamptz,
+  unique (batch_id, row_number)
+);
+
 -- Required and operational indexes.
 create index if not exists students_student_code_idx
   on public.students(student_code) where deleted_at is null;
@@ -233,6 +342,9 @@ create index if not exists students_assigned_counselor_idx
   on public.students(assigned_counselor_id) where deleted_at is null;
 create index if not exists students_risk_level_idx
   on public.students(risk_level) where deleted_at is null;
+create index if not exists students_fake_active_idx
+  on public.students(is_fake, is_active_student)
+  where deleted_at is null;
 create index if not exists counseling_cases_case_status_idx
   on public.counseling_cases(case_status) where deleted_at is null;
 create index if not exists counseling_cases_assigned_counselor_idx
@@ -257,6 +369,18 @@ create index if not exists activity_logs_case_created_idx
   on public.activity_logs(counseling_case_id, created_at desc);
 create index if not exists activity_logs_entity_idx
   on public.activity_logs(entity_type, entity_id, created_at desc);
+create index if not exists students_source_record_idx
+  on public.students(source_system, source_record_id)
+  where deleted_at is null and source_record_id is not null;
+create index if not exists student_import_batches_status_idx
+  on public.student_import_batches(batch_status, created_at desc)
+  where deleted_at is null;
+create index if not exists student_import_staging_batch_idx
+  on public.student_import_staging(batch_id, validation_status, row_number)
+  where deleted_at is null;
+create index if not exists student_import_staging_student_code_idx
+  on public.student_import_staging(student_code)
+  where deleted_at is null and student_code is not null;
 
 create or replace function public.set_updated_at()
 returns trigger
@@ -275,7 +399,8 @@ declare table_name text;
 begin
   foreach table_name in array array[
     'users', 'students', 'counseling_cases', 'counseling_sessions',
-    'internal_tasks', 'test_scores', 'consents'
+    'internal_tasks', 'test_scores', 'consents',
+    'student_import_batches', 'student_import_staging'
   ] loop
     execute format(
       'drop trigger if exists %I on public.%I',
@@ -314,6 +439,8 @@ alter table public.internal_tasks enable row level security;
 alter table public.test_scores enable row level security;
 alter table public.consents enable row level security;
 alter table public.activity_logs enable row level security;
+alter table public.student_import_batches enable row level security;
+alter table public.student_import_staging enable row level security;
 
 -- Pilot security posture: all tables are blocked by default.
 revoke all on table public.users from anon, authenticated;
@@ -324,10 +451,12 @@ revoke all on table public.internal_tasks from anon, authenticated;
 revoke all on table public.test_scores from anon, authenticated;
 revoke all on table public.consents from anon, authenticated;
 revoke all on table public.activity_logs from anon, authenticated;
+revoke all on table public.student_import_batches from anon, authenticated;
+revoke all on table public.student_import_staging from anon, authenticated;
 
 -- The database pilot may read only fake, active student rows with the publishable key.
 grant usage on schema public to anon, authenticated;
-grant select on table public.students to anon, authenticated;
+grant select, insert, update on table public.students to anon, authenticated;
 
 drop policy if exists pilot_read_fake_students on public.students;
 create policy pilot_read_fake_students
@@ -337,7 +466,72 @@ to anon, authenticated
 using (
   deleted_at is null
   and student_code like 'FAKE-%'
-  and coalesce(profile_data ->> 'is_fake', 'false') = 'true'
+  and is_fake is true
+);
+
+drop policy if exists pilot_insert_fake_students on public.students;
+create policy pilot_insert_fake_students
+on public.students
+for insert
+to anon, authenticated
+with check (
+  deleted_at is null
+  and student_code like 'FAKE-%'
+  and is_fake is true
+);
+
+drop policy if exists pilot_update_fake_students on public.students;
+create policy pilot_update_fake_students
+on public.students
+for update
+to anon, authenticated
+using (
+  deleted_at is null
+  and student_code like 'FAKE-%'
+  and is_fake is true
+)
+with check (
+  deleted_at is null
+  and student_code like 'FAKE-%'
+  and is_fake is true
+);
+
+grant select, insert, update on table public.student_import_batches to anon, authenticated;
+grant select, insert, update on table public.student_import_staging to anon, authenticated;
+
+drop policy if exists pilot_manage_fake_import_batches on public.student_import_batches;
+create policy pilot_manage_fake_import_batches
+on public.student_import_batches
+for all
+to anon, authenticated
+using (deleted_at is null and is_fake_only = true)
+with check (deleted_at is null and is_fake_only = true);
+
+drop policy if exists pilot_manage_fake_import_staging on public.student_import_staging;
+create policy pilot_manage_fake_import_staging
+on public.student_import_staging
+for all
+to anon, authenticated
+using (
+  deleted_at is null
+  and (student_code is null or student_code like 'FAKE-%')
+  and exists (
+    select 1 from public.student_import_batches b
+    where b.id = student_import_staging.batch_id
+      and b.deleted_at is null
+      and b.is_fake_only = true
+  )
+)
+with check (
+  deleted_at is null
+  and (student_code is null or student_code like 'FAKE-%')
+  and coalesce(normalized_data ->> 'pilot_fake', 'false') = 'true'
+  and exists (
+    select 1 from public.student_import_batches b
+    where b.id = student_import_staging.batch_id
+      and b.deleted_at is null
+      and b.is_fake_only = true
+  )
 );
 
 -- Internal Operations core pilot. These policies intentionally permit only records
@@ -360,7 +554,7 @@ using (
     where s.id = counseling_cases.student_id
       and s.deleted_at is null
       and s.student_code like 'FAKE-%'
-      and coalesce(s.profile_data ->> 'is_fake', 'false') = 'true'
+      and s.is_fake is true
   )
 );
 
@@ -376,7 +570,7 @@ using (
     where s.id = counseling_sessions.student_id
       and s.deleted_at is null
       and s.student_code like 'FAKE-%'
-      and coalesce(s.profile_data ->> 'is_fake', 'false') = 'true'
+      and s.is_fake is true
   )
 )
 with check (
@@ -386,7 +580,7 @@ with check (
     where s.id = counseling_sessions.student_id
       and s.deleted_at is null
       and s.student_code like 'FAKE-%'
-      and coalesce(s.profile_data ->> 'is_fake', 'false') = 'true'
+      and s.is_fake is true
   )
 );
 
@@ -403,7 +597,7 @@ using (
     where s.id = internal_tasks.student_id
       and s.deleted_at is null
       and s.student_code like 'FAKE-%'
-      and coalesce(s.profile_data ->> 'is_fake', 'false') = 'true'
+      and s.is_fake is true
   )
 )
 with check (
@@ -414,7 +608,7 @@ with check (
     where s.id = internal_tasks.student_id
       and s.deleted_at is null
       and s.student_code like 'FAKE-%'
-      and coalesce(s.profile_data ->> 'is_fake', 'false') = 'true'
+      and s.is_fake is true
   )
 );
 
@@ -431,7 +625,7 @@ with check (
     where s.id = activity_logs.student_id
       and s.deleted_at is null
       and s.student_code like 'FAKE-%'
-      and coalesce(s.profile_data ->> 'is_fake', 'false') = 'true'
+      and s.is_fake is true
   )
 );
 
@@ -448,7 +642,7 @@ using (
     where s.id = activity_logs.student_id
       and s.deleted_at is null
       and s.student_code like 'FAKE-%'
-      and coalesce(s.profile_data ->> 'is_fake', 'false') = 'true'
+      and s.is_fake is true
   )
 );
 
@@ -460,6 +654,8 @@ comment on table public.internal_tasks is 'Operational tasks tied to cases, stud
 comment on table public.test_scores is 'Academic and standardized test score history.';
 comment on table public.consents is 'Consent lifecycle and evidence references.';
 comment on table public.activity_logs is 'Append-only audit trail for internal operations.';
+comment on table public.student_import_batches is 'Fake-only CSV import confirmation batches; source file bytes are not stored.';
+comment on table public.student_import_staging is 'Validated fake-only CSV row staging with sanitized invalid-row payloads.';
 
 -- ---------------------------------------------------------------------------
 -- FAKE PILOT SEED DATA. Never replace these values with real student data.
@@ -474,28 +670,28 @@ insert into public.users (
 on conflict (id) do nothing;
 
 insert into public.students (
-  id, student_code, full_name, class_name, graduation_year,
+  id, student_code, full_name, class_name, grade_level, graduation_year,
   student_email, parent_name, parent_email, parent_phone,
   assigned_counselor_id, target_country, target_university, intended_major,
-  risk_level, confidentiality_level, profile_data
+  risk_level, confidentiality_level, profile_data, is_fake
 ) values
   (
-    '20000000-0000-4000-8000-000000000001', 'FAKE-NSHM-0001', 'Học Sinh Mẫu 01', '11P1', 2028,
+    '20000000-0000-4000-8000-000000000001', 'FAKE-NSHM-0001', 'Học Sinh Mẫu 01', '11P1', 11, 2028,
     'fake.student1@example.invalid', 'Phụ Huynh Mẫu 01', 'fake.parent1@example.invalid', '0000000001',
     '10000000-0000-4000-8000-000000000002', 'Canada', 'Pilot University A', 'Data Science',
-    'medium', 'restricted', '{"is_fake":true,"purpose":"database_pilot"}'::jsonb
+    'medium', 'restricted', '{"is_fake":true,"purpose":"database_pilot"}'::jsonb, true
   ),
   (
-    '20000000-0000-4000-8000-000000000002', 'FAKE-NSHM-0002', 'Học Sinh Mẫu 02', '12P1', 2027,
+    '20000000-0000-4000-8000-000000000002', 'FAKE-NSHM-0002', 'Học Sinh Mẫu 02', '12P1', 12, 2027,
     'fake.student2@example.invalid', 'Phụ Huynh Mẫu 02', 'fake.parent2@example.invalid', '0000000002',
     '10000000-0000-4000-8000-000000000002', 'United Kingdom', 'Pilot University B', 'Economics',
-    'high', 'restricted', '{"is_fake":true,"purpose":"database_pilot"}'::jsonb
+    'high', 'restricted', '{"is_fake":true,"purpose":"database_pilot"}'::jsonb, true
   ),
   (
-    '20000000-0000-4000-8000-000000000003', 'FAKE-NSHM-0003', 'Học Sinh Mẫu 03', '10P1', 2029,
+    '20000000-0000-4000-8000-000000000003', 'FAKE-NSHM-0003', 'Học Sinh Mẫu 03', '10P1', 10, 2029,
     'fake.student3@example.invalid', 'Phụ Huynh Mẫu 03', 'fake.parent3@example.invalid', '0000000003',
     null, 'Australia', 'Pilot University C', 'Design',
-    'low', 'restricted', '{"is_fake":true,"purpose":"database_pilot"}'::jsonb
+    'low', 'restricted', '{"is_fake":true,"purpose":"database_pilot"}'::jsonb, true
   )
 on conflict (id) do nothing;
 

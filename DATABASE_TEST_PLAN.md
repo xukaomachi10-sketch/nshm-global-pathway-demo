@@ -25,7 +25,7 @@ Validate the v1 schema, fake seed data, repository switching, security boundarie
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| DB-001 | Required tables | Query `information_schema.tables` for all eight names | Eight rows returned |
+| DB-001 | Required tables | Query `information_schema.tables` for all ten names | Ten rows returned |
 | DB-002 | Primary keys | Inspect constraints for each table | UUID PK exists on every table |
 | DB-003 | Foreign keys | Inspect `information_schema` or Supabase UI | All documented FKs exist |
 | DB-004 | Updated timestamps | Update one fake mutable row | `updated_at` increases automatically |
@@ -39,6 +39,9 @@ Validate the v1 schema, fake seed data, repository switching, security boundarie
 | DB-012 | Risk enum | Insert unsupported risk value | Insert rejected |
 | DB-013 | Confidentiality enum | Insert unsupported confidentiality value | Insert rejected |
 | DB-014 | Activity immutability | Update or delete a fake activity log | Operation rejected as append-only |
+| DB-015 | Import batch counts | Insert negative row counts | Insert rejected |
+| DB-016 | Import staging line | Insert `row_number < 2` | Insert rejected |
+| DB-017 | Import batch fake marker | Insert `is_fake_only=false` | Insert rejected |
 
 Useful inspection query:
 
@@ -51,7 +54,8 @@ from information_schema.table_constraints tc
 where tc.table_schema = 'public'
   and tc.table_name in (
     'users', 'students', 'counseling_cases', 'counseling_sessions',
-    'internal_tasks', 'test_scores', 'consents', 'activity_logs'
+    'internal_tasks', 'test_scores', 'consents', 'activity_logs',
+    'student_import_batches', 'student_import_staging'
   )
 order by tc.table_name, tc.constraint_type;
 ```
@@ -88,14 +92,14 @@ For query-plan validation, use `explain (analyze, buffers)` only against fake da
 | --- | --- | --- |
 | SEED-001 | Student codes | Every seed code starts `FAKE-` |
 | SEED-002 | Emails | Every seed email ends `example.invalid` |
-| SEED-003 | Profile marker | Seed student JSON contains `is_fake=true` |
+| SEED-003 | Explicit fake marker | Seed student column `is_fake` is `true` |
 | SEED-004 | Evidence references | References are fake labels, not accessible URLs/files |
 | SEED-005 | Rerun schema | Seed inserts do not duplicate deterministic IDs |
 
 Queries:
 
 ```sql
-select student_code, student_email, profile_data
+select student_code, student_email, is_fake
 from public.students
 where deleted_at is null;
 
@@ -103,7 +107,7 @@ select count(*) as unsafe_seed_students
 from public.students
 where student_code not like 'FAKE-%'
    or student_email not like '%@example.invalid'
-   or coalesce((profile_data->>'is_fake')::boolean, false) is not true;
+   or is_fake is not true;
 ```
 
 Expected `unsafe_seed_students`: `0`.
@@ -112,13 +116,15 @@ Expected `unsafe_seed_students`: `0`.
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all eight tables |
-| SEC-002 | Anon blocked | Query REST with anon key | Permission denied/no rows |
-| SEC-003 | Authenticated blocked | Query with ordinary authenticated token | Permission denied/no rows |
+| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all ten tables |
+| SEC-002 | Anon fake-only boundary | Query REST with anon key | Only policy-approved fake pilot rows/actions succeed |
+| SEC-003 | Non-fake blocked | Query/write non-fake rows with ordinary token | Permission denied/no rows |
 | SEC-004 | No admin credential | Search source and environment files | No admin/secret key is requested or stored |
 | SEC-005 | Vercel disconnected | Inspect `vercel.json` and Production env | No Supabase variables |
 | SEC-006 | Activity mutation blocked | Attempt update/delete | Database exception |
 | SEC-007 | No secret logging | Review `activity_logs.metadata` and app logs | No tokens, keys, or raw documents |
+| SEC-008 | Real code blocked | Import a non-`FAKE-*` student code | Row error in UI; no student upsert |
+| SEC-009 | Invalid-row minimization | Inspect staging after a rejected row | Only sanitized rejection metadata is stored |
 
 RLS inspection:
 
@@ -156,6 +162,10 @@ Verify these routes render in mock mode:
 - `/portal`
 - `/portal/registrations`
 - `/portal/students/NSHM260101`
+- `/portal/students`
+- `/portal/tasks`
+- `/portal/sessions`
+- `/portal/import-students`
 - `/portal/evidence`
 - `/portal/applications`
 - `/portal/documents`
@@ -164,6 +174,21 @@ Verify these routes render in mock mode:
 - A valid `/bai-viet/[slug]` route
 
 The main demo pages must not import `@/lib/data` or the Supabase adapter directly; they use `lib/data-access/demo-data.ts`.
+
+## CSV import workflow tests
+
+| ID | Test | Expected result |
+| --- | --- | --- |
+| IMP-001 | Download template | Header-only CSV containing all required and optional columns |
+| IMP-002 | Missing required value | Row shows field-specific error and is skipped |
+| IMP-003 | Duplicate code in file | Every duplicate occurrence shows an error |
+| IMP-004 | Existing fake code | Preview shows update; student count does not duplicate |
+| IMP-005 | New fake code | Preview shows new; one student is created |
+| IMP-006 | Mixed valid/error rows | Only valid rows import; batch completes with errors |
+| IMP-007 | Activity audit | One create/update activity entry exists per imported student |
+| IMP-008 | Mock mode | Workflow completes in mock memory and shows developer warning |
+| IMP-009 | Missing import policies | Supabase rejects confirmation with safe guidance; no key escalation |
+| IMP-010 | No hard delete | Importing inactive status updates the flag; existing row remains stored |
 
 ## Build and static checks
 
@@ -194,7 +219,7 @@ The pilot package is accepted when:
 
 1. All schema, constraint, seed-safety, and security tests pass.
 2. Mock is the default and all existing routes pass regression testing.
-3. Supabase mode requires the flag plus both server credentials.
+3. Supabase mode requires the explicit flag, project URL, and a publishable/anon key.
 4. Automatic fallback works for missing and failed Supabase configuration.
 5. No real student data or production Supabase credentials are present.
 6. `pnpm lint` and `pnpm build` pass.

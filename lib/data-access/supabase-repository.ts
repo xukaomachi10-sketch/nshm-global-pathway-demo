@@ -84,6 +84,37 @@ export class SupabaseInternalOperationsRepository
     return rows[0];
   }
 
+  private async insertMany<T extends TableName>(
+    table: T,
+    input: InsertOf<T>[],
+    onConflict?: string,
+  ): Promise<RowOf<T>[]> {
+    if (!input.length) return [];
+    const endpoint = new URL(`/rest/v1/${table}`, this.config.url);
+    if (onConflict) endpoint.searchParams.set("on_conflict", onConflict);
+    const response = await fetch(endpoint, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        apikey: this.config.apiKey,
+        Authorization: `Bearer ${this.config.apiKey}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Prefer: onConflict
+          ? "resolution=merge-duplicates,return=representation"
+          : "return=representation",
+      },
+      body: JSON.stringify(input),
+    });
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(
+        `Supabase ${table} bulk insert failed (${response.status}): ${detail}`,
+      );
+    }
+    return (await response.json()) as RowOf<T>[];
+  }
+
   listUsers(limit?: number) {
     return this.select("users", limit);
   }
@@ -140,5 +171,30 @@ export class SupabaseInternalOperationsRepository
 
   createActivityLog(input: InsertOf<"activity_logs">) {
     return this.mutate("activity_logs", "POST", input);
+  }
+
+  createActivityLogs(input: InsertOf<"activity_logs">[]) {
+    return this.insertMany("activity_logs", input);
+  }
+
+  upsertStudents(input: InsertOf<"students">[]) {
+    return this.insertMany("students", input, "student_code");
+  }
+
+  createStudentImportBatch(input: InsertOf<"student_import_batches">) {
+    return this.mutate("student_import_batches", "POST", input);
+  }
+
+  updateStudentImportBatch(
+    id: string,
+    input: UpdateOf<"student_import_batches">,
+  ) {
+    return this.mutate("student_import_batches", "PATCH", input, id);
+  }
+
+  createStudentImportStaging(
+    input: InsertOf<"student_import_staging">[],
+  ) {
+    return this.insertMany("student_import_staging", input);
   }
 }

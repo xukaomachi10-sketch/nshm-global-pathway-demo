@@ -55,6 +55,15 @@ export type ConsentType =
   | "media"
   | "parent_communication";
 export type ConsentStatus = "pending" | "granted" | "withdrawn" | "expired";
+export type StudentImportBatchStatus =
+  | "uploaded"
+  | "validated"
+  | "importing"
+  | "completed"
+  | "completed_with_errors"
+  | "failed";
+export type StudentImportValidationStatus = "valid" | "error";
+export type StudentImportAction = "new" | "update" | "skipped" | "imported";
 
 type TableDefinition<Row, Insert> = {
   Row: Row;
@@ -78,13 +87,27 @@ export type StudentRecord = {
   id: string;
   student_code: string;
   full_name: string;
-  class_name: string | null;
-  graduation_year: number | null;
   date_of_birth: string | null;
+  gender: string | null;
+  class_name: string | null;
+  grade_level: number | null;
+  graduation_year: number | null;
+  homeroom_teacher: string | null;
+  academic_track: string | null;
   student_email: string | null;
   parent_name: string | null;
-  parent_email: string | null;
   parent_phone: string | null;
+  parent_email: string | null;
+  source_system: string | null;
+  source_record_id: string | null;
+  is_active_student: boolean;
+  is_fake: boolean;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  deleted_by: string | null;
+  delete_reason: string | null;
+  // Existing counseling-operation fields retained non-destructively.
   assigned_counselor_id: string | null;
   target_country: string | null;
   target_university: string | null;
@@ -92,6 +115,43 @@ export type StudentRecord = {
   risk_level: RiskLevel;
   confidentiality_level: ConfidentialityLevel;
   profile_data: Json;
+};
+
+export type StudentImportBatch = {
+  id: string;
+  source_file_name: string;
+  source_file_size_bytes: number | null;
+  batch_status: StudentImportBatchStatus;
+  data_mode: "mock" | "supabase";
+  is_fake_only: boolean;
+  total_rows: number;
+  valid_rows: number;
+  error_rows: number;
+  new_rows: number;
+  updated_rows: number;
+  skipped_rows: number;
+  created_by: string | null;
+  confirmed_at: string | null;
+  completed_at: string | null;
+  error_summary: Json | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+};
+
+export type StudentImportStaging = {
+  id: string;
+  batch_id: string;
+  row_number: number;
+  student_code: string | null;
+  raw_data: Json;
+  normalized_data: Json;
+  validation_status: StudentImportValidationStatus;
+  validation_errors: Json;
+  validation_warnings: Json;
+  import_action: StudentImportAction;
+  imported_student_id: string | null;
+  imported_at: string | null;
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
@@ -223,6 +283,30 @@ export type Database = {
       students: TableDefinition<
         StudentRecord,
         Omit<StudentRecord, "id" | "created_at" | "updated_at" | "deleted_at"> & {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          deleted_at?: string | null;
+        }
+      >;
+      student_import_batches: TableDefinition<
+        StudentImportBatch,
+        Omit<
+          StudentImportBatch,
+          "id" | "created_at" | "updated_at" | "deleted_at"
+        > & {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          deleted_at?: string | null;
+        }
+      >;
+      student_import_staging: TableDefinition<
+        StudentImportStaging,
+        Omit<
+          StudentImportStaging,
+          "id" | "created_at" | "updated_at" | "deleted_at"
+        > & {
           id?: string;
           created_at?: string;
           updated_at?: string;

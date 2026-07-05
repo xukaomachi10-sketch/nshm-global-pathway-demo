@@ -6,6 +6,8 @@ import type {
   CounselingSession,
   InternalTask,
   InternalUser,
+  StudentImportBatch,
+  StudentImportStaging,
   StudentRecord,
   TestScore,
 } from "@/types/database";
@@ -39,12 +41,20 @@ const students: StudentRecord[] = demoStudents.map((student, index) => ({
   student_code: student.id,
   full_name: student.name,
   class_name: student.className,
+  grade_level: Number.parseInt(student.className, 10) || null,
   graduation_year: student.graduationYear,
   date_of_birth: null,
+  gender: null,
+  homeroom_teacher: null,
+  academic_track: null,
   student_email: `fake.${student.id.toLowerCase()}@example.invalid`,
   parent_name: null,
   parent_email: null,
   parent_phone: null,
+  source_system: "mock_fixture",
+  source_record_id: `FAKE-SOURCE-${student.id}`,
+  is_active_student: true,
+  is_fake: true,
   assigned_counselor_id:
     users.find((user) => user.full_name === student.counselor)?.id ?? null,
   target_country: student.country,
@@ -68,6 +78,8 @@ const students: StudentRecord[] = demoStudents.map((student, index) => ({
   created_at: now,
   updated_at: now,
   deleted_at: null,
+  deleted_by: null,
+  delete_reason: null,
 }));
 
 const counselingCases: CounselingCase[] = students
@@ -220,6 +232,9 @@ const activityLogs: ActivityLog[] = counselingCases
     created_at: `2026-07-02T${String(index).padStart(2, "0")}:00:00.000Z`,
   }));
 
+const studentImportBatches: StudentImportBatch[] = [];
+const studentImportStaging: StudentImportStaging[] = [];
+
 function createId(): string {
   return globalThis.crypto.randomUUID();
 }
@@ -367,5 +382,83 @@ export class MockInternalOperationsRepository
     };
     activityLogs.unshift(log);
     return Promise.resolve(log);
+  }
+
+  createActivityLogs(input: InsertOf<"activity_logs">[]) {
+    return Promise.all(input.map((item) => this.createActivityLog(item)));
+  }
+
+  upsertStudents(input: InsertOf<"students">[]) {
+    const result = input.map((candidate) => {
+      const index = students.findIndex(
+        (student) => student.student_code === candidate.student_code,
+      );
+      if (index >= 0) {
+        const updated = {
+          ...students[index],
+          ...candidate,
+          id: students[index].id,
+          deleted_at: students[index].deleted_at,
+          updated_at: new Date().toISOString(),
+        } satisfies StudentRecord;
+        students[index] = updated;
+        return updated;
+      }
+      const created = timestamps({
+        ...candidate,
+        id: candidate.id ?? createId(),
+        created_at: candidate.created_at,
+        updated_at: candidate.updated_at,
+        deleted_at: candidate.deleted_at ?? null,
+      }) satisfies StudentRecord;
+      students.unshift(created);
+      return created;
+    });
+    return Promise.resolve(result);
+  }
+
+  createStudentImportBatch(input: InsertOf<"student_import_batches">) {
+    const batch = timestamps({
+      ...input,
+      id: input.id ?? createId(),
+      created_at: input.created_at,
+      updated_at: input.updated_at,
+      deleted_at: input.deleted_at ?? null,
+    }) satisfies StudentImportBatch;
+    studentImportBatches.unshift(batch);
+    return Promise.resolve(batch);
+  }
+
+  updateStudentImportBatch(
+    id: string,
+    input: UpdateOf<"student_import_batches">,
+  ) {
+    const index = studentImportBatches.findIndex((batch) => batch.id === id);
+    if (index < 0) throw new Error("Mock import batch not found.");
+    const batch = {
+      ...studentImportBatches[index],
+      ...input,
+      id,
+      updated_at: new Date().toISOString(),
+    } satisfies StudentImportBatch;
+    studentImportBatches[index] = batch;
+    return Promise.resolve(batch);
+  }
+
+  createStudentImportStaging(
+    input: InsertOf<"student_import_staging">[],
+  ) {
+    const rows = input.map((candidate) => {
+      const row = timestamps({
+        ...candidate,
+        id: candidate.id ?? createId(),
+        created_at: candidate.created_at,
+        updated_at: candidate.updated_at,
+        deleted_at: candidate.deleted_at ?? null,
+      }) satisfies StudentImportStaging;
+      studentImportStaging.push(row);
+      return row;
+    });
+    return Promise.resolve(rows);
   }
 }

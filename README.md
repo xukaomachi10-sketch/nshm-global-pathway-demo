@@ -56,7 +56,7 @@ NEXT_PUBLIC_DATA_MODE=supabase
 
 Missing or invalid values always resolve to `mock`. Supabase mode requires `NEXT_PUBLIC_SUPABASE_URL` plus either `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`; if configuration is missing or the fake-student query fails, `/demo` falls back to the mock repository.
 
-The current public, portal, and CMS demo screens remain fixture-backed through `lib/data-access/demo-data.ts`, so enabling the isolated pilot cannot partially replace their data. Follow [DATABASE_SETUP.md](DATABASE_SETUP.md) to create and test the Supabase pilot locally. Do not add Supabase variables to Vercel Production yet.
+The public website and CMS remain fixture-backed through `lib/data-access/demo-data.ts`. Approved Internal Operations routes use the shared repository with mock fallback, including a fake-only CSV import pilot at `/portal/import-students`. Follow [DATABASE_SETUP.md](DATABASE_SETUP.md) to test locally. Do not add Supabase variables to Vercel Production yet.
 
 ## Deploy to Vercel
 
