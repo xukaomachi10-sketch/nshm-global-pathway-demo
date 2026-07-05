@@ -15,7 +15,7 @@ import {
   Send,
   UploadCloud,
 } from "lucide-react";
-import { documents } from "@/lib/data";
+import { documents } from "@/lib/data-access/demo-data";
 import {
   Badge,
   Button,

@@ -7,6 +7,7 @@ import { ReactNode, useState } from "react";
 import {
   Bell,
   BriefcaseBusiness,
+  CalendarClock,
   ChevronLeft,
   ChevronRight,
   CircleHelp,
@@ -17,6 +18,7 @@ import {
   Menu,
   Search,
   Settings2,
+  SquareCheckBig,
   UserRound,
   UsersRound,
   X,
@@ -32,9 +34,19 @@ const items = [
     badge: "8",
   },
   {
-    href: "/portal/students/NSHM260101",
-    label: "Student 360",
+    href: "/portal/students",
+    label: "Học sinh tư vấn",
     icon: UserRound,
+  },
+  {
+    href: "/portal/tasks",
+    label: "Công việc nội bộ",
+    icon: SquareCheckBig,
+  },
+  {
+    href: "/portal/sessions",
+    label: "Lịch tư vấn",
+    icon: CalendarClock,
   },
   {
     href: "/portal/evidence",

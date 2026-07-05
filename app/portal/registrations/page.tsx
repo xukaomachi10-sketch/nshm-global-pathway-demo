@@ -12,7 +12,7 @@ import {
   UserCheck,
   UsersRound,
 } from "lucide-react";
-import { students } from "@/lib/data";
+import { students } from "@/lib/data-access/demo-data";
 import {
   Badge,
   Button,

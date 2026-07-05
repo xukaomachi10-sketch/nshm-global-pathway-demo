@@ -11,7 +11,7 @@ import {
   Share2,
   Sparkles,
 } from "lucide-react";
-import { posts } from "@/lib/data";
+import { posts } from "@/lib/data-access/demo-data";
 import { PublicLayout } from "@/components/PublicSite";
 
 export default async function Article({

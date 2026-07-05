@@ -23,7 +23,7 @@ import {
   Sparkles,
   Undo2,
 } from "lucide-react";
-import { posts } from "@/lib/data";
+import { posts } from "@/lib/data-access/demo-data";
 import {
   Badge,
   Button,

@@ -15,7 +15,7 @@ import {
   Target,
   Trophy,
 } from "lucide-react";
-import { applications } from "@/lib/data";
+import { applications } from "@/lib/data-access/demo-data";
 import {
   Badge,
   Button,

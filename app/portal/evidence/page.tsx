@@ -17,7 +17,7 @@ import {
   Trophy,
   UploadCloud,
 } from "lucide-react";
-import { evidenceItems } from "@/lib/data";
+import { evidenceItems } from "@/lib/data-access/demo-data";
 import {
   Badge,
   Button,

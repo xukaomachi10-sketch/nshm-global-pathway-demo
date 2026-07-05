@@ -1,0 +1,144 @@
+import type { InternalOperationsRepository } from "./repository";
+import type {
+  InsertOf,
+  RowOf,
+  TableName,
+  UpdateOf,
+} from "@/types/database";
+
+type SupabaseConfig = {
+  url: string;
+  apiKey: string;
+};
+
+export class SupabaseInternalOperationsRepository
+  implements InternalOperationsRepository
+{
+  readonly mode = "supabase" as const;
+
+  constructor(private readonly config: SupabaseConfig) {}
+
+  private async select<T extends TableName>(
+    table: T,
+    limit = 50,
+    filters: Record<string, string> = {},
+  ): Promise<RowOf<T>[]> {
+    const endpoint = new URL(`/rest/v1/${table}`, this.config.url);
+    endpoint.searchParams.set("select", "*");
+    endpoint.searchParams.set("limit", String(Math.max(0, limit)));
+    endpoint.searchParams.set("order", "created_at.desc");
+    Object.entries(filters).forEach(([key, value]) => {
+      endpoint.searchParams.set(key, value);
+    });
+
+    const response = await fetch(endpoint, {
+      cache: "no-store",
+      headers: {
+        apikey: this.config.apiKey,
+        Authorization: `Bearer ${this.config.apiKey}`,
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(
+        `Supabase ${table} query failed (${response.status}): ${detail}`,
+      );
+    }
+
+    return (await response.json()) as RowOf<T>[];
+  }
+
+  private async mutate<T extends TableName>(
+    table: T,
+    method: "POST" | "PATCH",
+    input: InsertOf<T> | UpdateOf<T>,
+    id?: string,
+  ): Promise<RowOf<T>> {
+    const endpoint = new URL(`/rest/v1/${table}`, this.config.url);
+    if (id) endpoint.searchParams.set("id", `eq.${id}`);
+
+    const response = await fetch(endpoint, {
+      method,
+      cache: "no-store",
+      headers: {
+        apikey: this.config.apiKey,
+        Authorization: `Bearer ${this.config.apiKey}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify(input),
+    });
+
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(
+        `Supabase ${table} mutation failed (${response.status}): ${detail}`,
+      );
+    }
+
+    const rows = (await response.json()) as RowOf<T>[];
+    if (!rows[0]) throw new Error(`Supabase ${table} returned no record.`);
+    return rows[0];
+  }
+
+  listUsers(limit?: number) {
+    return this.select("users", limit);
+  }
+
+  listStudents(limit?: number) {
+    return this.select("students", limit, {
+      deleted_at: "is.null",
+      student_code: "like.FAKE-%",
+    });
+  }
+
+  listCounselingCases(limit?: number) {
+    return this.select("counseling_cases", limit, { deleted_at: "is.null" });
+  }
+
+  listCounselingSessions(limit?: number) {
+    return this.select("counseling_sessions", limit, { deleted_at: "is.null" });
+  }
+
+  listInternalTasks(limit?: number) {
+    return this.select("internal_tasks", limit, { deleted_at: "is.null" });
+  }
+
+  listTestScores(limit?: number) {
+    return this.select("test_scores", limit);
+  }
+
+  listConsents(limit?: number) {
+    return this.select("consents", limit);
+  }
+
+  listActivityLogs(limit?: number) {
+    return this.select("activity_logs", limit);
+  }
+
+  createInternalTask(input: InsertOf<"internal_tasks">) {
+    return this.mutate("internal_tasks", "POST", input);
+  }
+
+  updateInternalTask(id: string, input: UpdateOf<"internal_tasks">) {
+    return this.mutate("internal_tasks", "PATCH", input, id);
+  }
+
+  createCounselingSession(input: InsertOf<"counseling_sessions">) {
+    return this.mutate("counseling_sessions", "POST", input);
+  }
+
+  updateCounselingSession(
+    id: string,
+    input: UpdateOf<"counseling_sessions">,
+  ) {
+    return this.mutate("counseling_sessions", "PATCH", input, id);
+  }
+
+  createActivityLog(input: InsertOf<"activity_logs">) {
+    return this.mutate("activity_logs", "POST", input);
+  }
+}
