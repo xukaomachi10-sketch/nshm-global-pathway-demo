@@ -287,6 +287,49 @@ Consent status by purpose. Withdrawal creates a retained status history rather t
 | `updated_at` | timestamptz | No | trigger | Last update time |
 | `deleted_at` | timestamptz | Yes |  | Soft-delete time |
 
+## `student_intake_assessments`
+
+One active pre-counseling assessment per student, aligned to SOP.HT-03 (orientation and handoff), SOP.HT-04 (portfolio evidence/readiness), and SOP.HT-05 (university goals, deadlines, risk, and action plan). The module deliberately does not copy date of birth or student/parent contact details.
+
+| Group | Columns | Type / rule | Purpose |
+| --- | --- | --- | --- |
+| Identity | `id` | uuid PK, generated | Assessment ID |
+| Linkage | `student_id` | Required FK -> `students.id`; unique while active | Student owner |
+| Linkage | `counseling_case_id` | Nullable FK -> `counseling_cases.id` | Optional case context |
+| Intake | `request_source`, `counseling_branch`, `intake_status` | Checked operational text in UI/schema | Source, counseling branch, and intake stage |
+| Intake | `intake_date` | date, default current date | Formal intake date |
+| Intake | `assigned_counselor_id` | Nullable FK -> `staff_profiles.id`, indexed | Assigned counselor and RLS scope |
+| Intake | `priority_level` | `priority_level`, default `normal` | Operational priority |
+| Goals | `post_high_school_goal`, `target_majors_text`, `career_cluster`, `target_countries`, `target_universities_text`, `scholarship_interest`, `goal_note` | Nullable text | Stated goals and options under review |
+| Goals | `orientation_clarity_score` | Integer 1-5 | Clarity of direction |
+| Academic | `gpa_summary`, `strong_subjects`, `weak_subjects`, `academic_track`, `other_certificates`, `academic_gap_note` | Nullable text | Minimum academic profile needed for counseling |
+| Academic | `ielts_score` | Numeric 0-9 | Current IELTS summary, not evidence storage |
+| Academic | `sat_total`, `sat_math`, `sat_rw` | Checked integer ranges | Current SAT summary, not evidence storage |
+| Academic | `academic_readiness_score` | Integer 1-5 | Counselor readiness rubric |
+| Portfolio | `activities_summary`, `leadership_summary`, `projects_summary`, `awards_summary` | Nullable text | Structured profile summary |
+| Portfolio | `evidence_status`, `highest_evidence_level`, `portfolio_readiness_status`, `cv_status`, `activity_list_status`, `portfolio_evidence_status`, `portfolio_gap_note` | Nullable text; evidence A-D and readiness values checked | SOP.HT-04 evidence and handoff state |
+| Portfolio | `profile_strength_score` | Integer 1-5 | Overall portfolio strength rubric |
+| Constraints | `parent_involvement_level`, `geography_constraints`, `budget_range`, `safety_or_family_constraints`, `sensitive_note` | Nullable restricted text | Operational constraints only; no contact, health, or diagnostic data |
+| Timeline | `nearest_deadline`, `next_test_date`, `next_due_date` | Nullable date; due date indexed | Time-critical milestones |
+| Timeline | `application_season`, `deadline_action_note` | Nullable text | Application cycle and mitigation |
+| Timeline | `deadline_risk_level` | `risk_level`, default `low` | Deadline-specific escalation risk |
+| Summary | `overall_readiness_score` | Integer 1-5 | Overall readiness rubric |
+| Summary | `key_strengths`, `key_gaps`, `risk_summary`, `escalation_to`, `intake_conclusion` | Nullable text | Evidence-based conclusion and escalation |
+| Summary | `risk_level` | `risk_level`, default `low`, indexed | Overall assessment risk |
+| Summary | `escalation_required` | Boolean, default false | Escalation decision |
+| Next action | `next_action` | Nullable text | Agreed next action |
+| Next action | `next_owner_id` | Nullable FK -> `staff_profiles.id` | Responsible staff member |
+| Next action | `create_session_recommended`, `create_task_recommended` | Boolean, default false | Workflow recommendations; no automatic creation yet |
+| Status | `assessment_status` | `Draft`, `In Review`, `Reviewed`, or `Closed` | Assessment lifecycle |
+| Audit | `confidentiality_level` | Checked text, default `D2` | Internal restricted handling class |
+| Audit | `created_by`, `updated_by` | Nullable FK -> `staff_profiles.id` | Staff audit attribution |
+| Audit | `created_at`, `updated_at` | timestamptz; defaults/trigger | Lifecycle timestamps |
+| Audit | `deleted_at` | Nullable timestamptz | Soft-delete marker; application/RLS grants no hard delete |
+
+Database trigger `audit_student_intake_change` writes only an approved minimal before/after subset to `activity_logs` using `student_intake.created`, `student_intake.updated`, or `student_intake.reviewed`. It does not copy narrative or constraint fields into the audit payload.
+
+Classification: `D2` / restricted. If a situation requires health, psychological, legal, or other highly sensitive detail, record only a neutral escalation instruction and use the separately approved restricted process.
+
 ## `activity_logs`
 
 Append-only audit record. Database triggers reject updates and deletes.

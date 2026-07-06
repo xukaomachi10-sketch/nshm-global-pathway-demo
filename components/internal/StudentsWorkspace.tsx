@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
-import { AlertTriangle, FolderKanban, UsersRound } from "lucide-react";
+import { ArrowRight, AlertTriangle, FolderKanban, UsersRound } from "lucide-react";
 import { DataModeNotice } from "./DataModeNotice";
 import {
   Badge,
@@ -77,7 +78,7 @@ export function StudentsWorkspace({
         <StatCard
           label="Học sinh"
           value={initialStudents.length}
-          helper="Chỉ dữ liệu giả trong pilot"
+          helper="Theo phạm vi RLS của tài khoản"
           icon={<UsersRound className="h-5 w-5" />}
         />
         <StatCard
@@ -128,7 +129,7 @@ export function StudentsWorkspace({
       <Card className="overflow-hidden">
         {rows.length ? (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[1200px] text-left text-sm">
+            <table className="w-full min-w-[1320px] text-left text-sm">
               <thead className="bg-slate-50 text-[11px] uppercase tracking-wider text-slate-500">
                 <tr>
                   <th className="px-5 py-3">Học sinh</th>
@@ -138,6 +139,7 @@ export function StudentsWorkspace({
                   <th className="px-4 py-3">Rủi ro</th>
                   <th className="px-4 py-3">Trạng thái</th>
                   <th className="px-5 py-3">Hành động tiếp theo</th>
+                  <th className="px-5 py-3 text-right">Mở hồ sơ</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -146,7 +148,12 @@ export function StudentsWorkspace({
                   return (
                     <tr key={student.id} className="hover:bg-[#FBFAF7]">
                       <td className="px-5 py-4">
-                        <p className="font-black text-[#23328C]">{student.full_name}</p>
+                        <Link
+                          href={`/portal/students/${student.id}`}
+                          className="font-black text-[#23328C] hover:text-[#D21235] hover:underline"
+                        >
+                          {student.full_name}
+                        </Link>
                         <p className="mt-1 text-xs text-slate-500">
                           {student.student_code}
                         </p>
@@ -179,6 +186,15 @@ export function StudentsWorkspace({
                       </td>
                       <td className="max-w-sm px-5 py-4 text-slate-600">
                         {counselingCase?.next_action ?? "Mở hồ sơ tư vấn và xác nhận nhu cầu."}
+                      </td>
+                      <td className="px-5 py-4 text-right">
+                        <Link
+                          href={`/portal/students/${student.id}`}
+                          aria-label={`Mở hồ sơ ${student.full_name}`}
+                          className="inline-flex items-center gap-2 rounded-xl bg-[#23328C] px-3.5 py-2.5 text-xs font-black text-white transition hover:bg-[#D21235]"
+                        >
+                          Mở hồ sơ <ArrowRight className="h-3.5 w-3.5" />
+                        </Link>
                       </td>
                     </tr>
                   );

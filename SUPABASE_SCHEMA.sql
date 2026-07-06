@@ -1,6 +1,7 @@
 -- NSHM Internal Operations MVP - Supabase database pilot v1
 -- All seed records are explicitly fake and reserved for testing.
--- Safe default: RLS exposes only explicitly fake Internal Operations pilot records.
+-- Safe default: anonymous access is limited to explicit fake demo rows; real
+-- Internal Operations records require an authenticated active staff role.
 
 create extension if not exists pgcrypto;
 
@@ -373,6 +374,92 @@ create table if not exists public.student_import_staging (
   unique (batch_id, row_number)
 );
 
+-- Student Intake Assessment module (SOP.HT-03/04/05). This table deliberately
+-- excludes student/parent contact details and date of birth.
+create table if not exists public.student_intake_assessments (
+  id uuid primary key default gen_random_uuid(),
+  student_id uuid not null references public.students(id) on delete restrict,
+  counseling_case_id uuid references public.counseling_cases(id) on delete set null,
+  request_source text,
+  intake_date date not null default current_date,
+  assigned_counselor_id uuid references public.staff_profiles(id) on delete set null,
+  counseling_branch text,
+  priority_level public.priority_level not null default 'normal',
+  intake_status text not null default 'new' check (
+    intake_status in ('new', 'collecting_data', 'ready_for_counseling', 'on_hold')
+  ),
+  post_high_school_goal text,
+  target_majors_text text,
+  career_cluster text,
+  target_countries text,
+  target_universities_text text,
+  scholarship_interest text,
+  orientation_clarity_score integer check (orientation_clarity_score between 1 and 5),
+  goal_note text,
+  gpa_summary text,
+  strong_subjects text,
+  weak_subjects text,
+  academic_track text,
+  ielts_score numeric(3,1) check (ielts_score between 0 and 9),
+  sat_total integer check (sat_total between 400 and 1600),
+  sat_math integer check (sat_math between 200 and 800),
+  sat_rw integer check (sat_rw between 200 and 800),
+  other_certificates text,
+  academic_readiness_score integer check (academic_readiness_score between 1 and 5),
+  academic_gap_note text,
+  activities_summary text,
+  leadership_summary text,
+  projects_summary text,
+  awards_summary text,
+  evidence_status text,
+  highest_evidence_level text check (
+    highest_evidence_level is null or highest_evidence_level in ('A', 'B', 'C', 'D')
+  ),
+  profile_strength_score integer check (profile_strength_score between 1 and 5),
+  portfolio_readiness_status text check (
+    portfolio_readiness_status is null
+    or portfolio_readiness_status in ('Draft', 'Reviewed', 'Verified', 'Handoff-ready')
+  ),
+  cv_status text,
+  activity_list_status text,
+  portfolio_evidence_status text,
+  portfolio_gap_note text,
+  parent_involvement_level text,
+  geography_constraints text,
+  budget_range text,
+  safety_or_family_constraints text,
+  sensitive_note text,
+  nearest_deadline date,
+  next_test_date date,
+  application_season text,
+  deadline_risk_level public.risk_level not null default 'low',
+  deadline_action_note text,
+  overall_readiness_score integer check (overall_readiness_score between 1 and 5),
+  key_strengths text,
+  key_gaps text,
+  risk_summary text,
+  risk_level public.risk_level not null default 'low',
+  escalation_required boolean not null default false,
+  escalation_to text,
+  intake_conclusion text,
+  next_action text,
+  next_owner_id uuid references public.staff_profiles(id) on delete set null,
+  next_due_date date,
+  create_session_recommended boolean not null default false,
+  create_task_recommended boolean not null default false,
+  assessment_status text not null default 'Draft' check (
+    assessment_status in ('Draft', 'In Review', 'Reviewed', 'Closed')
+  ),
+  confidentiality_level text not null default 'D2' check (
+    confidentiality_level in ('D1', 'D2', 'D3', 'D4')
+  ),
+  created_by uuid references public.staff_profiles(id) on delete set null,
+  updated_by uuid references public.staff_profiles(id) on delete set null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  deleted_at timestamptz
+);
+
 -- Required and operational indexes.
 create index if not exists students_student_code_idx
   on public.students(student_code) where deleted_at is null;
@@ -423,6 +510,18 @@ create index if not exists student_import_staging_batch_idx
 create index if not exists student_import_staging_student_code_idx
   on public.student_import_staging(student_code)
   where deleted_at is null and student_code is not null;
+create unique index if not exists student_intake_one_active_per_student_idx
+  on public.student_intake_assessments(student_id)
+  where deleted_at is null;
+create index if not exists student_intake_assigned_counselor_idx
+  on public.student_intake_assessments(assigned_counselor_id, assessment_status)
+  where deleted_at is null;
+create index if not exists student_intake_next_due_date_idx
+  on public.student_intake_assessments(next_due_date)
+  where deleted_at is null and next_due_date is not null;
+create index if not exists student_intake_risk_level_idx
+  on public.student_intake_assessments(risk_level, deadline_risk_level)
+  where deleted_at is null;
 
 create or replace function public.set_updated_at()
 returns trigger
@@ -441,7 +540,7 @@ declare table_name text;
 begin
   foreach table_name in array array[
     'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
-    'internal_tasks', 'test_scores', 'consents',
+    'internal_tasks', 'test_scores', 'consents', 'student_intake_assessments',
     'student_import_batches', 'student_import_staging'
   ] loop
     execute format(
@@ -485,6 +584,7 @@ alter table public.consents enable row level security;
 alter table public.activity_logs enable row level security;
 alter table public.student_import_batches enable row level security;
 alter table public.student_import_staging enable row level security;
+alter table public.student_intake_assessments enable row level security;
 
 -- Pilot security posture: all tables are blocked by default.
 revoke all on table public.users from anon, authenticated;
@@ -499,6 +599,7 @@ revoke all on table public.consents from anon, authenticated;
 revoke all on table public.activity_logs from anon, authenticated;
 revoke all on table public.student_import_batches from anon, authenticated;
 revoke all on table public.student_import_staging from anon, authenticated;
+revoke all on table public.student_intake_assessments from anon, authenticated;
 
 -- The database pilot may read only fake, active student rows with the publishable key.
 grant usage on schema public to anon, authenticated;
@@ -802,7 +903,7 @@ create policy staff_read_profiles
 on public.staff_profiles for select to authenticated
 using (
   auth_user_id = auth.uid()
-  or public.current_staff_role() = 'ADMIN'
+  or public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
 );
 
 drop policy if exists admin_insert_staff_profiles on public.staff_profiles;
@@ -841,6 +942,12 @@ using (
   and (
     public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
     or assigned_counselor_id = public.current_internal_user_id()
+    or exists (
+      select 1 from public.student_intake_assessments sia
+      where sia.student_id = students.id
+        and sia.assigned_counselor_id = public.current_staff_profile_id()
+        and sia.deleted_at is null
+    )
   )
 );
 
@@ -974,7 +1081,122 @@ on public.activity_logs for select to authenticated
 using (
   public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
   or actor_id = public.current_internal_user_id()
+  or metadata ->> 'actor_staff_profile_id' = public.current_staff_profile_id()::text
 );
+
+-- Student Intake Assessment: authenticated staff only. Head/Admin may create,
+-- read and update all rows. Counselors can read/update only rows assigned to
+-- their staff profile. DELETE is intentionally never granted.
+revoke all on table public.student_intake_assessments from anon;
+revoke all on table public.student_intake_assessments from authenticated;
+grant select, insert, update on table public.student_intake_assessments to authenticated;
+
+drop policy if exists head_admin_read_all_intakes on public.student_intake_assessments;
+create policy head_admin_read_all_intakes
+on public.student_intake_assessments for select to authenticated
+using (
+  deleted_at is null
+  and public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
+);
+
+drop policy if exists counselor_read_assigned_intakes on public.student_intake_assessments;
+create policy counselor_read_assigned_intakes
+on public.student_intake_assessments for select to authenticated
+using (
+  deleted_at is null
+  and public.current_staff_role() = 'COUNSELOR'
+  and assigned_counselor_id = public.current_staff_profile_id()
+);
+
+drop policy if exists head_admin_create_intakes on public.student_intake_assessments;
+create policy head_admin_create_intakes
+on public.student_intake_assessments for insert to authenticated
+with check (
+  deleted_at is null
+  and public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
+  and created_by = public.current_staff_profile_id()
+  and updated_by = public.current_staff_profile_id()
+);
+
+drop policy if exists head_admin_update_intakes on public.student_intake_assessments;
+create policy head_admin_update_intakes
+on public.student_intake_assessments for update to authenticated
+using (
+  deleted_at is null
+  and public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
+)
+with check (
+  deleted_at is null
+  and public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
+  and updated_by = public.current_staff_profile_id()
+);
+
+drop policy if exists counselor_update_assigned_intakes on public.student_intake_assessments;
+create policy counselor_update_assigned_intakes
+on public.student_intake_assessments for update to authenticated
+using (
+  deleted_at is null
+  and public.current_staff_role() = 'COUNSELOR'
+  and assigned_counselor_id = public.current_staff_profile_id()
+)
+with check (
+  deleted_at is null
+  and public.current_staff_role() = 'COUNSELOR'
+  and assigned_counselor_id = public.current_staff_profile_id()
+  and updated_by = public.current_staff_profile_id()
+);
+
+create or replace function public.log_student_intake_change()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_action text;
+begin
+  if tg_op = 'INSERT' then
+    v_action := 'student_intake.created';
+  elsif new.assessment_status = 'Reviewed'
+    and old.assessment_status is distinct from new.assessment_status then
+    v_action := 'student_intake.reviewed';
+  else
+    v_action := 'student_intake.updated';
+  end if;
+
+  insert into public.activity_logs (
+    actor_id, student_id, counseling_case_id, entity_type, entity_id,
+    action, confidentiality_level, previous_data, new_data, metadata
+  ) values (
+    public.current_internal_user_id(), new.student_id, new.counseling_case_id,
+    'student_intake_assessment', new.id, v_action, 'restricted',
+    case when tg_op = 'UPDATE' then jsonb_build_object(
+      'assessment_status', old.assessment_status,
+      'risk_level', old.risk_level,
+      'assigned_counselor_id', old.assigned_counselor_id,
+      'next_due_date', old.next_due_date
+    ) else null end,
+    jsonb_build_object(
+      'assessment_status', new.assessment_status,
+      'risk_level', new.risk_level,
+      'assigned_counselor_id', new.assigned_counselor_id,
+      'next_due_date', new.next_due_date
+    ),
+    jsonb_build_object(
+      'actor_staff_profile_id', public.current_staff_profile_id(),
+      'actor_role', public.current_staff_role(),
+      'source', 'student_intake_assessment_trigger'
+    )
+  );
+  return new;
+end;
+$$;
+
+revoke all on function public.log_student_intake_change() from public, anon, authenticated;
+drop trigger if exists audit_student_intake_change on public.student_intake_assessments;
+create trigger audit_student_intake_change
+after insert or update on public.student_intake_assessments
+for each row execute function public.log_student_intake_change();
 
 create or replace function public.import_fake_students_transaction(
   p_source_file_name text,
@@ -1459,6 +1681,7 @@ comment on table public.consents is 'Consent lifecycle and evidence references.'
 comment on table public.activity_logs is 'Append-only audit trail for internal operations.';
 comment on table public.student_import_batches is 'Authenticated fake/real CSV import batches; source file bytes are not stored.';
 comment on table public.student_import_staging is 'Validated CSV row staging; successful transactions scrub row PII immediately.';
+comment on table public.student_intake_assessments is 'Restricted pre-counseling intake profile aligned to SOP.HT-03/04/05; no parent contact or date-of-birth fields.';
 
 -- ---------------------------------------------------------------------------
 -- FAKE PILOT SEED DATA. Never replace these values with real student data.

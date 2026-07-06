@@ -120,11 +120,23 @@ export class SupabaseInternalOperationsRepository
     return this.select("users", limit);
   }
 
+  listStaffProfiles(limit?: number) {
+    return this.select("staff_profiles", limit);
+  }
+
   listStudents(limit?: number) {
     return this.select("students", limit, {
       deleted_at: "is.null",
       ...(this.config.accessToken ? {} : { student_code: "like.FAKE-%" }),
     });
+  }
+
+  async getStudentById(id: string) {
+    const rows = await this.select("students", 1, {
+      id: `eq.${id}`,
+      deleted_at: "is.null",
+    });
+    return rows[0] ?? null;
   }
 
   listCounselingCases(limit?: number) {
@@ -151,6 +163,12 @@ export class SupabaseInternalOperationsRepository
     return this.select("activity_logs", limit);
   }
 
+  listStudentIntakeAssessments(limit?: number) {
+    return this.select("student_intake_assessments", limit, {
+      deleted_at: "is.null",
+    });
+  }
+
   createInternalTask(input: InsertOf<"internal_tasks">) {
     return this.mutate("internal_tasks", "POST", input);
   }
@@ -168,6 +186,19 @@ export class SupabaseInternalOperationsRepository
     input: UpdateOf<"counseling_sessions">,
   ) {
     return this.mutate("counseling_sessions", "PATCH", input, id);
+  }
+
+  createStudentIntakeAssessment(
+    input: InsertOf<"student_intake_assessments">,
+  ) {
+    return this.mutate("student_intake_assessments", "POST", input);
+  }
+
+  updateStudentIntakeAssessment(
+    id: string,
+    input: UpdateOf<"student_intake_assessments">,
+  ) {
+    return this.mutate("student_intake_assessments", "PATCH", input, id);
   }
 
   createActivityLog(input: InsertOf<"activity_logs">) {

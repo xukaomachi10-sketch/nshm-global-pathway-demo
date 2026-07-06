@@ -6,6 +6,8 @@ import type {
   CounselingSession,
   InternalTask,
   InternalUser,
+  StaffProfile,
+  StudentIntakeAssessment,
   StudentImportBatch,
   StudentImportStaging,
   StudentRecord,
@@ -35,6 +37,29 @@ const users: InternalUser[] = counselorNames.map((name, index) => ({
   updated_at: now,
   deleted_at: null,
 }));
+
+const staffProfiles: StaffProfile[] = [
+  {
+    id: "00000000-0000-4000-8000-000000000099",
+    auth_user_id: "00000000-0000-4000-8000-000000000099",
+    full_name: "Nhân sự Demo",
+    email: "fake.staff@example.invalid",
+    role: "ICCO_HEAD",
+    is_active: true,
+    created_at: now,
+    updated_at: now,
+  },
+  ...counselorNames.slice(0, 3).map((name, index) => ({
+    id: id(9, index),
+    auth_user_id: id(10, index),
+    full_name: name,
+    email: `fake.intake.counselor${index + 1}@example.invalid`,
+    role: "COUNSELOR" as const,
+    is_active: true,
+    created_at: now,
+    updated_at: now,
+  })),
+];
 
 const students: StudentRecord[] = demoStudents.map((student, index) => ({
   id: id(2, index),
@@ -234,6 +259,7 @@ const activityLogs: ActivityLog[] = counselingCases
 
 const studentImportBatches: StudentImportBatch[] = [];
 const studentImportStaging: StudentImportStaging[] = [];
+const studentIntakeAssessments: StudentIntakeAssessment[] = [];
 
 function createId(): string {
   return globalThis.crypto.randomUUID();
@@ -263,8 +289,18 @@ export class MockInternalOperationsRepository
     return take(users, limit);
   }
 
+  listStaffProfiles(limit?: number) {
+    return take(staffProfiles, limit);
+  }
+
   listStudents(limit?: number) {
     return take(students, limit);
+  }
+
+  getStudentById(studentId: string) {
+    return Promise.resolve(
+      students.find((student) => student.id === studentId) ?? null,
+    );
   }
 
   listCounselingCases(limit?: number) {
@@ -289,6 +325,10 @@ export class MockInternalOperationsRepository
 
   listActivityLogs(limit?: number) {
     return take(activityLogs, limit);
+  }
+
+  listStudentIntakeAssessments(limit?: number) {
+    return take(studentIntakeAssessments, limit);
   }
 
   createInternalTask(input: InsertOf<"internal_tasks">) {
@@ -363,6 +403,38 @@ export class MockInternalOperationsRepository
     } satisfies CounselingSession;
     counselingSessions[index] = session;
     return Promise.resolve(session);
+  }
+
+  createStudentIntakeAssessment(
+    input: InsertOf<"student_intake_assessments">,
+  ) {
+    const assessment = timestamps({
+      ...input,
+      id: input.id ?? createId(),
+      created_at: input.created_at,
+      updated_at: input.updated_at,
+      deleted_at: input.deleted_at ?? null,
+    }) satisfies StudentIntakeAssessment;
+    studentIntakeAssessments.unshift(assessment);
+    return Promise.resolve(assessment);
+  }
+
+  updateStudentIntakeAssessment(
+    id: string,
+    input: UpdateOf<"student_intake_assessments">,
+  ) {
+    const index = studentIntakeAssessments.findIndex(
+      (assessment) => assessment.id === id,
+    );
+    if (index < 0) throw new Error("Mock intake assessment not found.");
+    const assessment = {
+      ...studentIntakeAssessments[index],
+      ...input,
+      id,
+      updated_at: new Date().toISOString(),
+    } satisfies StudentIntakeAssessment;
+    studentIntakeAssessments[index] = assessment;
+    return Promise.resolve(assessment);
   }
 
   createActivityLog(input: InsertOf<"activity_logs">) {

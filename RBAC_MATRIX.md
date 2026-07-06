@@ -23,6 +23,7 @@ Security Phase 1 uses Supabase Auth plus active `staff_profiles`. Portal pages a
 | `counseling_cases` | C/R/U All | C/R/U All | C/R/U assigned |
 | `counseling_sessions` | C/R/U All | C/R/U All | C/R/U own |
 | `internal_tasks` | C/R/U All | C/R/U All | C/R/U own/assigned case |
+| `student_intake_assessments` | C/R/U All | C/R/U All | R/U assigned; no create |
 | `student_import_batches` | R; C/U via RPC | R; C/U via RPC | - |
 | `student_import_staging` | R; C/U via RPC | R; C/U via RPC | - |
 | `activity_logs` | C/R All | C/R All | C/R own context |
@@ -33,6 +34,16 @@ Security Phase 1 uses Supabase Auth plus active `staff_profiles`. Portal pages a
 - `current_internal_user_id()` maps the Auth identity to the existing `users` counselor assignment.
 - `is_active_staff()` rejects inactive or unmapped Auth users.
 - `can_import_students()` permits only `ICCO_HEAD` and `ADMIN`.
+- Intake policies compare `assigned_counselor_id` with `current_staff_profile_id()`; knowing a student or assessment UUID does not expand counselor access.
+
+## Student Intake Assessment boundary
+
+- Anonymous and publishable-key-only requests have no table grant or RLS policy.
+- `ICCO_HEAD` and `ADMIN` may create, read, and update all active intake assessments.
+- `COUNSELOR` may read/update only an assessment assigned to the counselor's active `staff_profiles.id`; counselors cannot create or reassign an assessment.
+- No role receives `DELETE`. `deleted_at` is retained for a future reviewed retention workflow, but current update policies require it to remain null.
+- Every insert/update is audited by a database trigger in the same transaction. Narrative fields, family constraints, and `sensitive_note` are excluded from audit JSON.
+- Student detail UI excludes date of birth and student/parent contact fields. `sensitive_note` is limited to a neutral operational instruction and must not contain health, psychological, legal, or contact data.
 
 The publishable key identifies the Supabase project but grants no staff access by itself. Authenticated user JWTs and RLS determine access. A counselor cannot expand scope merely by knowing a student or case ID.
 

@@ -2,22 +2,22 @@
 
 ## Objective
 
-Validate the v1 schema, fake seed data, repository switching, security boundaries, fallback behavior, and regression safety for the current mock-data demo.
+Validate the v1 schema, controlled Student Intake Assessment module, repository switching, security boundaries, fallback behavior, and regression safety for the current mock-data demo. The database-pilot Preview may contain the four already authorized real student master rows; this plan does not import or seed any additional real student.
 
 ## Environments
 
 | Environment | Data mode | Data allowed | Purpose |
 | --- | --- | --- | --- |
 | Local default | `mock` | Existing mock fixtures | Regression and build testing |
-| Local Supabase pilot | `supabase` | Fake seed data only | Connectivity and schema testing |
-| Vercel Preview | `mock` initially | Mock only | Optional later pilot gate |
+| Local Supabase pilot | `supabase` | Fake seed data and approved existing pilot records | Connectivity and schema testing |
+| Vercel Preview | `supabase` only on database-pilot | Four existing controlled student records; no new import | Authenticated intake testing |
 | Vercel Production | `mock` | Mock only | Current demo; no Supabase variables |
 
 ## Preconditions
 
 1. Use a dedicated pilot Supabase project.
 2. Apply `SUPABASE_SCHEMA.sql` to a clean project.
-3. Confirm no real student data is present.
+3. Confirm only the four previously approved real student master rows are present and real import is locked again.
 4. Create fake Auth users linked to active `staff_profiles` roles.
 5. Use only the publishable/anon key in `.env.local`.
 5. Record test evidence without copying sensitive credentials.
@@ -26,7 +26,7 @@ Validate the v1 schema, fake seed data, repository switching, security boundarie
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| DB-001 | Required tables | Query `information_schema.tables` for all twelve names | Twelve rows returned |
+| DB-001 | Required tables | Query `information_schema.tables` for all thirteen names | Thirteen rows returned |
 | DB-002 | Primary keys | Inspect constraints for each table | UUID PK exists on every table |
 | DB-003 | Foreign keys | Inspect `information_schema` or Supabase UI | All documented FKs exist |
 | DB-004 | Updated timestamps | Update one fake mutable row | `updated_at` increases automatically |
@@ -43,6 +43,10 @@ Validate the v1 schema, fake seed data, repository switching, security boundarie
 | DB-015 | Import batch counts | Insert negative row counts | Insert rejected |
 | DB-016 | Import staging line | Insert `row_number < 2` | Insert rejected |
 | DB-017 | Import batch fake marker | Insert `is_fake_only=false` | Insert rejected |
+| DB-018 | One active intake | Create a second active intake for the same student | Unique index rejects it |
+| DB-019 | Intake score range | Save a rubric score outside 1-5 | Insert/update rejected |
+| DB-020 | SAT/IELTS range | Save an out-of-range score | Insert/update rejected |
+| DB-021 | Intake audit | Create/update/review through UI | Matching append-only activity action is written in the same transaction |
 
 Useful inspection query:
 
@@ -56,7 +60,8 @@ where tc.table_schema = 'public'
   and tc.table_name in (
     'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
-    'student_import_batches', 'student_import_staging'
+    'student_import_batches', 'student_import_staging',
+    'student_intake_assessments'
   )
 order by tc.table_name, tc.constraint_type;
 ```
@@ -97,18 +102,29 @@ For query-plan validation, use `explain (analyze, buffers)` only against fake da
 | SEED-004 | Evidence references | References are fake labels, not accessible URLs/files |
 | SEED-005 | Rerun schema | Seed inserts do not duplicate deterministic IDs |
 
-Queries:
+The schema seed rows remain fake even when the pilot database also contains separately approved real rows. Check only deterministic seed IDs:
 
 ```sql
-select student_code, student_email, is_fake
+select id, student_code, student_email, is_fake
 from public.students
-where deleted_at is null;
+where id in (
+  '20000000-0000-4000-8000-000000000001',
+  '20000000-0000-4000-8000-000000000002',
+  '20000000-0000-4000-8000-000000000003'
+);
 
 select count(*) as unsafe_seed_students
 from public.students
-where student_code not like 'FAKE-%'
-   or student_email not like '%@example.invalid'
-   or is_fake is not true;
+where id in (
+  '20000000-0000-4000-8000-000000000001',
+  '20000000-0000-4000-8000-000000000002',
+  '20000000-0000-4000-8000-000000000003'
+)
+and (
+  student_code not like 'FAKE-%'
+  or student_email not like '%@example.invalid'
+  or is_fake is not true
+);
 ```
 
 Expected `unsafe_seed_students`: `0`.
@@ -117,9 +133,9 @@ Expected `unsafe_seed_students`: `0`.
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all twelve tables |
+| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all thirteen tables |
 | SEC-002 | Anonymous boundary | Query REST with anon key | Only narrow fake-student demo read succeeds; portal writes fail |
-| SEC-003 | Non-fake blocked | Query/write non-fake rows with ordinary token | Permission denied/no rows |
+| SEC-003 | Real rows role-scoped | Query real rows anonymously or as an unassigned counselor | Permission denied/no rows; Head/Admin remain authorized |
 | SEC-004 | No admin credential | Search source and environment files | No admin/secret key is requested or stored |
 | SEC-005 | Vercel disconnected | Inspect `vercel.json` and Production env | No Supabase variables |
 | SEC-006 | Activity mutation blocked | Attempt update/delete | Database exception |
@@ -137,6 +153,12 @@ Expected `unsafe_seed_students`: `0`.
 | SEC-018 | Single-gate bypass | Enable only environment or only database gate | Real import remains blocked |
 | SEC-019 | Counselor real RPC | Call real RPC as counselor | Permission denied |
 | SEC-020 | Anonymous real RPC | Call real RPC with publishable key only | Permission denied |
+| SEC-021 | Anonymous intake | Query/mutate intake with publishable key only | Permission denied/no rows |
+| SEC-022 | Head/Admin intake | Create/read/update an intake | Succeeds for any visible student |
+| SEC-023 | Counselor assigned intake | Read/update assigned intake | Succeeds; create and reassignment fail |
+| SEC-024 | Counselor unassigned intake | Guess another assessment/student UUID | No row/access denied |
+| SEC-025 | Intake hard delete | Attempt `DELETE` as any staff role | Permission denied |
+| SEC-026 | Intake data minimization | Inspect UI and audit JSON | No DOB, parent contact, health/diagnostic narrative |
 
 RLS inspection:
 
@@ -148,7 +170,8 @@ where pg_namespace.nspname = 'public'
   and relname in (
     'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
-    'student_import_batches', 'student_import_staging'
+    'student_import_batches', 'student_import_staging',
+    'student_intake_assessments'
   )
 order by relname;
 ```
@@ -176,6 +199,7 @@ Verify public routes render in mock mode. Portal routes must first redirect anon
 - `/portal`
 - `/portal/registrations`
 - `/portal/students/NSHM260101`
+- `/portal/students/[one-of-the-four-real-student-UUIDs]`
 - `/portal/students`
 - `/portal/tasks`
 - `/portal/sessions`
@@ -210,6 +234,25 @@ The main demo pages must not import `@/lib/data` or the Supabase adapter directl
 | IMP-015 | Real code collision | Real import targets fake student code | Entire transaction rolls back |
 | IMP-016 | First-five limit procedure | Submit reviewed five-row file with both gates enabled | Counts/audit match exactly; gates disabled afterward |
 
+## Student Intake Assessment tests
+
+Use the four existing real student rows only. Do not upload or insert more students.
+
+| ID | Test | Expected result |
+| --- | --- | --- |
+| INTAKE-001 | Open from student list | Student name links to `/portal/students/[studentId]`; identity header matches code/name/class/grade/graduation/GVCN |
+| INTAKE-002 | Tabs | Overview, Intake Assessment, Tasks, and Sessions render without exposing DOB or contact data |
+| INTAKE-003 | Create as Head | Create a Draft for a student without one | One row created and `student_intake.created` logged |
+| INTAKE-004 | Edit as Head/Admin | Change goals, readiness, risk, owner, and due date | Same row updates; `student_intake.updated` logged |
+| INTAKE-005 | Fixed conclusion | Open a new form | Five numbered conclusion prompts appear |
+| INTAKE-006 | Review | Save Draft, then choose “Đánh dấu đã rà soát” | Status becomes `Reviewed`; `student_intake.reviewed` logged |
+| INTAKE-007 | Assigned counselor | Assign intake to counselor, sign in as that counselor | Student/intake read and update succeed |
+| INTAKE-008 | Unassigned counselor | Sign in as another counselor | Student/intake does not become accessible by guessed URL |
+| INTAKE-009 | No counselor create | As counselor, attempt server action without assessment ID | Rejected before data mutation |
+| INTAKE-010 | Audit minimization | Inspect three activity actions | Only status/risk/assignment/due date and staff metadata are stored |
+| INTAKE-011 | Existing operations tabs | Open Tasks/Sessions for a student | Only records allowed by existing RLS are shown; empty state is safe |
+| INTAKE-012 | Real-import lock regression | Check UI flag and `system_settings` | Both real-import gates remain false after intake tests |
+
 ## Build and static checks
 
 Run:
@@ -241,7 +284,7 @@ The pilot package is accepted when:
 2. Mock is the default and all existing routes pass regression testing.
 3. Supabase mode requires the explicit flag, project URL, and a publishable/anon key.
 4. Automatic fallback works for missing and failed Supabase configuration.
-5. No real student data or production Supabase credentials are present.
+5. No real student data is committed/seeded, no additional real row is imported, and no production Supabase credential is present.
 6. `pnpm lint` and `pnpm build` pass.
 7. Production Vercel remains in mock mode.
 8. Anonymous portal requests redirect to `/login`; inactive/unmapped Auth users cannot open the portal.

@@ -5,6 +5,8 @@ import type {
   CounselingSession,
   InternalTask,
   InternalUser,
+  StaffProfile,
+  StudentIntakeAssessment,
   StudentImportBatch,
   StudentImportStaging,
   StudentRecord,
@@ -17,13 +19,18 @@ import type { DataMode } from "./config";
 export interface InternalOperationsRepository {
   readonly mode: DataMode;
   listUsers(limit?: number): Promise<InternalUser[]>;
+  listStaffProfiles(limit?: number): Promise<StaffProfile[]>;
   listStudents(limit?: number): Promise<StudentRecord[]>;
+  getStudentById(id: string): Promise<StudentRecord | null>;
   listCounselingCases(limit?: number): Promise<CounselingCase[]>;
   listCounselingSessions(limit?: number): Promise<CounselingSession[]>;
   listInternalTasks(limit?: number): Promise<InternalTask[]>;
   listTestScores(limit?: number): Promise<TestScore[]>;
   listConsents(limit?: number): Promise<ConsentRecord[]>;
   listActivityLogs(limit?: number): Promise<ActivityLog[]>;
+  listStudentIntakeAssessments(
+    limit?: number,
+  ): Promise<StudentIntakeAssessment[]>;
   createInternalTask(input: InsertOf<"internal_tasks">): Promise<InternalTask>;
   updateInternalTask(
     id: string,
@@ -36,6 +43,13 @@ export interface InternalOperationsRepository {
     id: string,
     input: UpdateOf<"counseling_sessions">,
   ): Promise<CounselingSession>;
+  createStudentIntakeAssessment(
+    input: InsertOf<"student_intake_assessments">,
+  ): Promise<StudentIntakeAssessment>;
+  updateStudentIntakeAssessment(
+    id: string,
+    input: UpdateOf<"student_intake_assessments">,
+  ): Promise<StudentIntakeAssessment>;
   createActivityLog(input: InsertOf<"activity_logs">): Promise<ActivityLog>;
   createActivityLogs(input: InsertOf<"activity_logs">[]): Promise<ActivityLog[]>;
   upsertStudents(

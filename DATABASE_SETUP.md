@@ -18,7 +18,7 @@ This package is for an isolated Supabase pilot. It must not be connected to the 
 
 ## Package contents
 
-- `SUPABASE_SCHEMA.sql`: twelve pilot tables, staff RBAC, separate transactional fake/real RPCs, retention controls, and fake seed data.
+- `SUPABASE_SCHEMA.sql`: thirteen pilot tables, staff RBAC, intake audit trigger, separate transactional fake/real RPCs, retention controls, and fake seed data.
 - `DATA_DICTIONARY.md`: field definitions and data classifications.
 - `RBAC_MATRIX.md`: target role and confidentiality access model.
 - `DATABASE_TEST_PLAN.md`: database, fallback, security, and regression tests.
@@ -55,6 +55,7 @@ The publishable key is constrained by RLS. Store local configuration in `.env.lo
    - `activity_logs`
    - `student_import_batches`
    - `student_import_staging`
+   - `student_intake_assessments`
 
 The SQL includes fake records identified by `FAKE-*`, `example.invalid`, and `is_fake=true`. It contains no real student data.
 
@@ -100,7 +101,8 @@ where table_schema = 'public'
   and table_name in (
     'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
-    'student_import_batches', 'student_import_staging'
+    'student_import_batches', 'student_import_staging',
+    'student_intake_assessments'
   )
 order by table_name;
 ```
@@ -252,6 +254,31 @@ Do not add these variables to Vercel Production:
 Set Supabase variables only for the `database-pilot` Preview environment. Enable Vercel deployment protection or an equivalent access gate before testing any sensitive workflow. Confirm Production has no Supabase variables and resolves to mock mode after every environment change.
 
 ## 11. Validation commands
+
+Before application validation, re-run the full `SUPABASE_SCHEMA.sql` in the **database-pilot** Supabase SQL Editor. It adds `student_intake_assessments`, indexes, RLS policies, and the audit trigger with additive/idempotent statements. It does not drop/reset students, import additional students, or enable real import.
+
+Verify the module:
+
+```sql
+select column_name, data_type, is_nullable
+from information_schema.columns
+where table_schema = 'public'
+  and table_name = 'student_intake_assessments'
+order by ordinal_position;
+
+select policyname, cmd, roles
+from pg_policies
+where schemaname = 'public'
+  and tablename = 'student_intake_assessments'
+order by policyname;
+
+select trigger_name, event_manipulation
+from information_schema.triggers
+where event_object_schema = 'public'
+  and event_object_table = 'student_intake_assessments';
+```
+
+Expected: five staff policies (Head/Admin read/create/update plus counselor assigned read/update), no anonymous policy, and `audit_student_intake_change` for insert/update. Do not insert test records in SQL Editor; test through the protected Preview UI so `created_by`/`updated_by` match the authenticated staff profile.
 
 ```bash
 pnpm lint

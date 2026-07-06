@@ -65,6 +65,7 @@ export type StudentImportBatchStatus =
   | "failed";
 export type StudentImportValidationStatus = "valid" | "error";
 export type StudentImportAction = "new" | "update" | "skipped" | "imported";
+export type IntakeAssessmentStatus = "Draft" | "In Review" | "Reviewed" | "Closed";
 
 type TableDefinition<Row, Insert> = {
   Row: Row;
@@ -93,6 +94,79 @@ export type StaffProfile = {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+};
+
+export type StudentIntakeAssessment = {
+  id: string;
+  student_id: string;
+  counseling_case_id: string | null;
+  request_source: string | null;
+  intake_date: string;
+  assigned_counselor_id: string | null;
+  counseling_branch: string | null;
+  priority_level: Priority;
+  intake_status: string;
+  post_high_school_goal: string | null;
+  target_majors_text: string | null;
+  career_cluster: string | null;
+  target_countries: string | null;
+  target_universities_text: string | null;
+  scholarship_interest: string | null;
+  orientation_clarity_score: number | null;
+  goal_note: string | null;
+  gpa_summary: string | null;
+  strong_subjects: string | null;
+  weak_subjects: string | null;
+  academic_track: string | null;
+  ielts_score: number | null;
+  sat_total: number | null;
+  sat_math: number | null;
+  sat_rw: number | null;
+  other_certificates: string | null;
+  academic_readiness_score: number | null;
+  academic_gap_note: string | null;
+  activities_summary: string | null;
+  leadership_summary: string | null;
+  projects_summary: string | null;
+  awards_summary: string | null;
+  evidence_status: string | null;
+  highest_evidence_level: string | null;
+  profile_strength_score: number | null;
+  portfolio_readiness_status: string | null;
+  cv_status: string | null;
+  activity_list_status: string | null;
+  portfolio_evidence_status: string | null;
+  portfolio_gap_note: string | null;
+  parent_involvement_level: string | null;
+  geography_constraints: string | null;
+  budget_range: string | null;
+  safety_or_family_constraints: string | null;
+  sensitive_note: string | null;
+  nearest_deadline: string | null;
+  next_test_date: string | null;
+  application_season: string | null;
+  deadline_risk_level: RiskLevel;
+  deadline_action_note: string | null;
+  overall_readiness_score: number | null;
+  key_strengths: string | null;
+  key_gaps: string | null;
+  risk_summary: string | null;
+  risk_level: RiskLevel;
+  escalation_required: boolean;
+  escalation_to: string | null;
+  intake_conclusion: string | null;
+  next_action: string | null;
+  next_owner_id: string | null;
+  next_due_date: string | null;
+  create_session_recommended: boolean;
+  create_task_recommended: boolean;
+  assessment_status: IntakeAssessmentStatus;
+  confidentiality_level: "D2";
+  created_by: string | null;
+  updated_by: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
 };
 
 export type StudentRecord = {
@@ -319,6 +393,18 @@ export type Database = {
       students: TableDefinition<
         StudentRecord,
         Omit<StudentRecord, "id" | "created_at" | "updated_at" | "deleted_at"> & {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          deleted_at?: string | null;
+        }
+      >;
+      student_intake_assessments: TableDefinition<
+        StudentIntakeAssessment,
+        Omit<
+          StudentIntakeAssessment,
+          "id" | "created_at" | "updated_at" | "deleted_at"
+        > & {
           id?: string;
           created_at?: string;
           updated_at?: string;
