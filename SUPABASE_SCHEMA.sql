@@ -890,6 +890,14 @@ grant execute on function public.is_active_staff() to authenticated;
 grant execute on function public.can_import_students() to authenticated;
 grant execute on function public.is_real_student_import_enabled() to authenticated;
 
+-- Draft creation can omit the assignee in the request; PostgreSQL resolves it
+-- from the authenticated active staff profile. The application also supplies
+-- the value explicitly so errors remain easy to diagnose.
+alter table public.student_intake_assessments
+  alter column intake_date set default current_date,
+  alter column assigned_counselor_id set default public.current_staff_profile_id(),
+  alter column assessment_status set default 'Draft';
+
 grant select, insert, update on table public.staff_profiles to authenticated;
 grant select on table public.system_settings to authenticated;
 
@@ -1114,6 +1122,7 @@ on public.student_intake_assessments for insert to authenticated
 with check (
   deleted_at is null
   and public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
+  and assigned_counselor_id is not null
   and created_by = public.current_staff_profile_id()
   and updated_by = public.current_staff_profile_id()
 );
@@ -1128,6 +1137,7 @@ using (
 with check (
   deleted_at is null
   and public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
+  and assigned_counselor_id is not null
   and updated_by = public.current_staff_profile_id()
 );
 
@@ -1154,14 +1164,28 @@ set search_path = public
 as $$
 declare
   v_action text;
+  v_previous_data jsonb;
 begin
   if tg_op = 'INSERT' then
     v_action := 'student_intake.created';
+    v_previous_data := null;
   elsif new.assessment_status = 'Reviewed'
     and old.assessment_status is distinct from new.assessment_status then
     v_action := 'student_intake.reviewed';
+    v_previous_data := jsonb_build_object(
+      'assessment_status', old.assessment_status,
+      'risk_level', old.risk_level,
+      'assigned_counselor_id', old.assigned_counselor_id,
+      'next_due_date', old.next_due_date
+    );
   else
     v_action := 'student_intake.updated';
+    v_previous_data := jsonb_build_object(
+      'assessment_status', old.assessment_status,
+      'risk_level', old.risk_level,
+      'assigned_counselor_id', old.assigned_counselor_id,
+      'next_due_date', old.next_due_date
+    );
   end if;
 
   insert into public.activity_logs (
@@ -1170,12 +1194,7 @@ begin
   ) values (
     public.current_internal_user_id(), new.student_id, new.counseling_case_id,
     'student_intake_assessment', new.id, v_action, 'restricted',
-    case when tg_op = 'UPDATE' then jsonb_build_object(
-      'assessment_status', old.assessment_status,
-      'risk_level', old.risk_level,
-      'assigned_counselor_id', old.assigned_counselor_id,
-      'next_due_date', old.next_due_date
-    ) else null end,
+    v_previous_data,
     jsonb_build_object(
       'assessment_status', new.assessment_status,
       'risk_level', new.risk_level,
@@ -1184,7 +1203,6 @@ begin
     ),
     jsonb_build_object(
       'actor_staff_profile_id', public.current_staff_profile_id(),
-      'actor_role', public.current_staff_role(),
       'source', 'student_intake_assessment_trigger'
     )
   );

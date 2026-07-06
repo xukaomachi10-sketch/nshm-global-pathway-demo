@@ -7,15 +7,52 @@ import type {
 } from "@/types/database";
 import type { InsertOf, UpdateOf } from "@/types/database";
 import { activityBase, readWithMockFallback } from "./shared";
-import type { StudentIntakeAssessmentFormValues } from "@/lib/intake-assessment";
+import {
+  intakeConclusionTemplate,
+  type StudentIntakeAssessmentFormValues,
+} from "@/lib/intake-assessment";
 
 export type SaveStudentIntakeAssessmentInput = {
   assessmentId?: string;
   studentId: string;
-  staff: Pick<StaffProfile, "id" | "role">;
+  staff: Pick<StaffProfile, "id">;
   values: StudentIntakeAssessmentFormValues;
   event: "save" | "review";
 };
+
+const reviewFieldLabels = {
+  counseling_branch: "Nhánh tư vấn",
+  priority_level: "Mức ưu tiên",
+  risk_level: "Mức rủi ro",
+  next_action: "Hành động tiếp theo",
+  intake_conclusion: "Kết luận intake",
+} as const;
+
+function validateReview(values: StudentIntakeAssessmentFormValues) {
+  const missing = Object.entries(reviewFieldLabels)
+    .filter(([key]) => {
+      const value = values[key as keyof typeof reviewFieldLabels];
+      if (key === "intake_conclusion") {
+        return !value || value.trim() === intakeConclusionTemplate.trim();
+      }
+      return typeof value === "string" ? !value.trim() : !value;
+    })
+    .map(([, label]) => label);
+
+  if (missing.length) {
+    throw new Error(
+      `Chưa thể đánh dấu Đã rà soát. Vui lòng bổ sung: ${missing.join(", ")}.`,
+    );
+  }
+}
+
+function draftPayloadValues(values: StudentIntakeAssessmentFormValues) {
+  return Object.fromEntries(
+    Object.entries(values).filter(
+      ([, value]) => value !== null && value !== undefined && value !== "",
+    ),
+  ) as Partial<StudentIntakeAssessmentFormValues>;
+}
 
 export async function getStudentIntakeWorkspace(studentId: string) {
   return readWithMockFallback("hồ sơ đánh giá đầu vào", async (repository) => {
@@ -47,6 +84,15 @@ export async function saveStudentIntakeAssessment(
 ) {
   if (!input.studentId) throw new Error("Không xác định được học sinh.");
   if (!input.values.intake_date) throw new Error("Ngày tiếp nhận là bắt buộc.");
+  if (
+    input.event === "review" ||
+    input.values.assessment_status === "Reviewed"
+  ) {
+    if (!input.assessmentId) {
+      throw new Error("Hãy tạo và lưu bản Draft trước khi đánh dấu đã rà soát.");
+    }
+    validateReview(input.values);
+  }
 
   const selected = createInternalOperationsRepository(
     await getRepositoryAccessToken(),
@@ -54,6 +100,8 @@ export async function saveStudentIntakeAssessment(
   const repository = selected.repository;
   const values = {
     ...input.values,
+    assigned_counselor_id:
+      input.values.assigned_counselor_id || input.staff.id,
     assessment_status:
       input.event === "review" ? "Reviewed" : input.values.assessment_status,
     updated_by: input.staff.id,
@@ -66,15 +114,18 @@ export async function saveStudentIntakeAssessment(
       values,
     );
   } else {
-    if (input.event === "review") {
-      throw new Error("Hãy lưu bản nháp trước khi đánh dấu đã rà soát.");
-    }
     const payload = {
-      ...input.values,
+      ...(repository instanceof MockInternalOperationsRepository
+        ? input.values
+        : draftPayloadValues(input.values)),
       student_id: input.studentId,
+      intake_date: input.values.intake_date,
+      assigned_counselor_id:
+        input.values.assigned_counselor_id || input.staff.id,
+      assessment_status: "Draft" as const,
       created_by: input.staff.id,
       updated_by: input.staff.id,
-    } satisfies InsertOf<"student_intake_assessments">;
+    } as InsertOf<"student_intake_assessments">;
     assessment = await repository.createStudentIntakeAssessment(payload);
   }
 
@@ -97,7 +148,6 @@ export async function saveStudentIntakeAssessment(
           risk_level: assessment.risk_level,
           assigned_counselor_id: assessment.assigned_counselor_id,
           actor_staff_profile_id: input.staff.id,
-          actor_role: input.staff.role,
         },
       }),
     );

@@ -5,6 +5,19 @@ import { requireStaffRole } from "@/lib/auth/session";
 import { saveStudentIntakeAssessment } from "@/lib/data/intake-assessments";
 import type { StudentIntakeAssessmentFormValues } from "@/lib/intake-assessment";
 
+function userFacingMutationError(technicalError: string) {
+  if (/row-level security|permission denied|42501/i.test(technicalError)) {
+    return "Supabase từ chối thao tác do quyền RLS. Hãy kiểm tra vai trò nhân sự và assessment được phân công.";
+  }
+  if (/duplicate key|student_intake_one_active/i.test(technicalError)) {
+    return "Học sinh đã có một Intake Assessment. Hãy tải lại trang để cập nhật bản hiện có.";
+  }
+  if (/foreign key|violates.*constraint/i.test(technicalError)) {
+    return "Dữ liệu liên kết chưa hợp lệ. Hãy kiểm tra chuyên viên phụ trách và hồ sơ tư vấn.";
+  }
+  return technicalError;
+}
+
 export async function saveStudentIntakeAssessmentAction(input: {
   assessmentId?: string;
   studentId: string;
@@ -28,12 +41,12 @@ export async function saveStudentIntakeAssessmentAction(input: {
     revalidatePath("/portal/students");
     return { ok: true as const, result };
   } catch (error) {
+    const technicalError =
+      error instanceof Error ? error.message : "Unknown server action error";
     return {
       ok: false as const,
-      error:
-        error instanceof Error
-          ? error.message
-          : "Không thể lưu đánh giá đầu vào.",
+      error: userFacingMutationError(technicalError),
+      technicalError,
     };
   }
 }

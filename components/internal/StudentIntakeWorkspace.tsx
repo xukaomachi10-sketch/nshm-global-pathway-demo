@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import {
   ArrowLeft,
@@ -78,8 +79,7 @@ function initialValues(
     request_source: assessment?.request_source ?? null,
     intake_date: assessment?.intake_date ?? new Date().toISOString().slice(0, 10),
     assigned_counselor_id:
-      assessment?.assigned_counselor_id ??
-      (currentStaff.role === "COUNSELOR" ? currentStaff.id : null),
+      assessment?.assigned_counselor_id ?? currentStaff.id,
     counseling_branch: assessment?.counseling_branch ?? null,
     priority_level: assessment?.priority_level ?? "normal",
     intake_status: assessment?.intake_status ?? "new",
@@ -166,6 +166,7 @@ export function StudentIntakeWorkspace({
   currentStaff: StaffProfile;
   status: DataAccessStatus;
 }) {
+  const router = useRouter();
   const [tab, setTab] = useState<Tab>(initialAssessment ? "intake" : "overview");
   const [assessment, setAssessment] = useState(initialAssessment);
   const [assessmentId, setAssessmentId] = useState(initialAssessment?.id);
@@ -174,6 +175,7 @@ export function StudentIntakeWorkspace({
   );
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [technicalError, setTechnicalError] = useState("");
   const [pending, startTransition] = useTransition();
 
   const canCreate = ["ICCO_HEAD", "ADMIN"].includes(currentStaff.role);
@@ -190,8 +192,10 @@ export function StudentIntakeWorkspace({
   ) => setValues((current) => ({ ...current, [key]: value ? Number(value) : null }));
 
   const submit = (event: "save" | "review") => {
+    const isCreating = !assessmentId;
     setMessage("");
     setError("");
+    setTechnicalError("");
     startTransition(async () => {
       const response = await saveStudentIntakeAssessmentAction({
         assessmentId,
@@ -201,19 +205,25 @@ export function StudentIntakeWorkspace({
       });
       if (!response.ok) {
         setError(response.error);
+        setTechnicalError(response.technicalError);
         return;
       }
       setAssessmentId(response.result.data.id);
       setAssessment(response.result.data);
       setValues((current) => ({
         ...current,
+        assigned_counselor_id:
+          response.result.data.assigned_counselor_id,
         assessment_status: response.result.data.assessment_status,
       }));
       setMessage(
         event === "review"
           ? "Đã rà soát đánh giá và ghi activity log."
-          : "Đã lưu đánh giá đầu vào và ghi activity log.",
+          : isCreating
+            ? "Đã tạo bản Draft assessment và ghi activity log."
+            : "Đã lưu cập nhật assessment và ghi activity log.",
       );
+      router.refresh();
     });
   };
 
@@ -313,6 +323,14 @@ export function StudentIntakeWorkspace({
           {(message || error) && (
             <div className={`rounded-xl p-4 text-sm font-bold ${error ? "bg-red-50 text-red-700" : "bg-emerald-50 text-emerald-700"}`}>
               {error || message}
+              {error && technicalError && status.requestedMode === "supabase" && (
+                <details className="mt-3 rounded-lg bg-white/70 p-3 text-left font-mono text-xs font-medium text-slate-700">
+                  <summary className="cursor-pointer font-sans font-black text-slate-600">
+                    Chi tiết kỹ thuật dành cho IT
+                  </summary>
+                  <p className="mt-2 break-words leading-5">{technicalError}</p>
+                </details>
+              )}
             </div>
           )}
           <div className="sticky bottom-4 flex flex-wrap justify-end gap-3 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-xl backdrop-blur">
