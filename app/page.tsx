@@ -12,7 +12,7 @@ import {
   Quote,
   UsersRound,
 } from "lucide-react";
-import { posts } from "@/lib/data";
+import { posts } from "@/lib/data-access/demo-data";
 import { PublicLayout } from "@/components/PublicSite";
 import { HeroSection, SectionHeading } from "@/components/brand";
 

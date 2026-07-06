@@ -11,7 +11,7 @@ import {
   Send,
   ShieldCheck,
 } from "lucide-react";
-import { students } from "@/lib/data";
+import { students } from "@/lib/data-access/demo-data";
 import { PublicLayout } from "@/components/PublicSite";
 import { Button, Progress } from "@/components/ui";
 import { FormEvent, useState } from "react";

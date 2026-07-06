@@ -44,6 +44,21 @@ npm run start
 
 The project retains its mock data in `lib/data.ts`; no database or external service is required.
 
+## Safe database pilot
+
+The application supports two requested data modes:
+
+```env
+NEXT_PUBLIC_DATA_MODE=mock
+# or
+NEXT_PUBLIC_DATA_MODE=supabase
+NEXT_PUBLIC_REAL_STUDENT_IMPORT_ENABLED=false
+```
+
+Missing or invalid values always resolve to `mock`. Supabase mode requires `NEXT_PUBLIC_SUPABASE_URL` plus either `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`; if configuration is missing or the fake-student query fails, `/demo` falls back to the mock repository.
+
+The public website and CMS remain fixture-backed through `lib/data-access/demo-data.ts`. Approved Internal Operations routes use the shared repository with mock fallback, including a fake-only CSV import pilot at `/portal/import-students`. Follow [DATABASE_SETUP.md](DATABASE_SETUP.md) to test locally. Do not add Supabase variables to Vercel Production yet.
+
 ## Deploy to Vercel
 
 ### Vercel Dashboard
@@ -99,6 +114,7 @@ All public, counselor, student, and CMS demo routes are part of the same Next.js
 ```text
 app/
   page.tsx                       Public website
+  demo/page.tsx                  Demo hub and data-mode pilot status
   bai-viet/[slug]/page.tsx       Article detail
   dang-ky-tu-van/page.tsx        Public consultation form
   portal/                        Six counselor-facing screens
@@ -108,10 +124,14 @@ components/
   PortalShell.tsx                Internal sidebar/header shell
   PublicSite.tsx                 Public header/footer
   ui.tsx                         Shared cards, badges, filters, modal, toast
-lib/data.ts                      Mock students, posts, evidence, applications, docs
+lib/data.ts                      Original mock fixtures
+lib/data-access/                 Repository contract and mock/Supabase adapters
+types/database.ts                Internal operations table types
+SUPABASE_SCHEMA.sql              Pilot schema, indexes, triggers, and RLS lock-down
+DATABASE_SETUP.md                Local Supabase setup and safety instructions
 public/                          Local brand and hero SVG assets
 ```
 
 ## Prototype scope
 
-Interactions are client-side demonstrations. Authentication, persistence, uploads, email, Google Drive, audit log storage, APIs, and role-based permissions are intentionally mocked for the MVP.
+Public/CMS interactions remain demonstrations. Internal portal routes now have Phase 1 staff authentication and RBAC; the database pilot still accepts fake student imports only and is not approved for real student data.

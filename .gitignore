@@ -15,6 +15,12 @@ dist/
 .env.local
 .env*.local
 
+# Local student-import source files must never be committed.
+*.csv
+*.csv.rtf
+*.xlsx
+*.xls
+
 # Logs
 *.log
 npm-debug.log*
