@@ -6,8 +6,28 @@ begin;
 
 alter table public.student_intake_assessments
   alter column intake_date set default current_date,
+  alter column intake_date set not null,
   alter column assigned_counselor_id set default public.current_staff_profile_id(),
+  alter column assigned_counselor_id set not null,
   alter column assessment_status set default 'Draft',
+  alter column assessment_status set not null,
+  alter column created_by set not null,
+  alter column updated_by set not null,
+  alter column priority_level drop default,
+  alter column priority_level drop not null,
+  alter column intake_status drop default,
+  alter column intake_status drop not null,
+  alter column deadline_risk_level drop default,
+  alter column deadline_risk_level drop not null,
+  alter column risk_level drop default,
+  alter column risk_level drop not null,
+  alter column escalation_required drop default,
+  alter column escalation_required drop not null,
+  alter column create_session_recommended drop default,
+  alter column create_session_recommended drop not null,
+  alter column create_task_recommended drop default,
+  alter column create_task_recommended drop not null,
+  alter column confidentiality_level drop not null,
   alter column counseling_case_id drop not null,
   alter column request_source drop not null,
   alter column counseling_branch drop not null,
@@ -60,8 +80,6 @@ alter table public.student_intake_assessments
   alter column next_action drop not null,
   alter column next_owner_id drop not null,
   alter column next_due_date drop not null,
-  alter column created_by drop not null,
-  alter column updated_by drop not null,
   alter column deleted_at drop not null;
 
 alter table public.student_intake_assessments enable row level security;

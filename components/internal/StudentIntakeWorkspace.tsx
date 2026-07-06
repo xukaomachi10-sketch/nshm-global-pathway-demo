@@ -81,8 +81,8 @@ function initialValues(
     assigned_counselor_id:
       assessment?.assigned_counselor_id ?? currentStaff.id,
     counseling_branch: assessment?.counseling_branch ?? null,
-    priority_level: assessment?.priority_level ?? "normal",
-    intake_status: assessment?.intake_status ?? "new",
+    priority_level: assessment?.priority_level ?? null,
+    intake_status: assessment?.intake_status ?? null,
     post_high_school_goal: assessment?.post_high_school_goal ?? null,
     target_majors_text: assessment?.target_majors_text ?? student.intended_major,
     career_cluster: assessment?.career_cluster ?? null,
@@ -111,7 +111,7 @@ function initialValues(
     highest_evidence_level: assessment?.highest_evidence_level ?? null,
     profile_strength_score: assessment?.profile_strength_score ?? null,
     portfolio_readiness_status:
-      assessment?.portfolio_readiness_status ?? "Draft",
+      assessment?.portfolio_readiness_status ?? null,
     cv_status: assessment?.cv_status ?? null,
     activity_list_status: assessment?.activity_list_status ?? null,
     portfolio_evidence_status: assessment?.portfolio_evidence_status ?? null,
@@ -125,14 +125,14 @@ function initialValues(
     nearest_deadline: assessment?.nearest_deadline ?? null,
     next_test_date: assessment?.next_test_date ?? null,
     application_season: assessment?.application_season ?? null,
-    deadline_risk_level: assessment?.deadline_risk_level ?? "low",
+    deadline_risk_level: assessment?.deadline_risk_level ?? null,
     deadline_action_note: assessment?.deadline_action_note ?? null,
     overall_readiness_score: assessment?.overall_readiness_score ?? null,
     key_strengths: assessment?.key_strengths ?? null,
     key_gaps: assessment?.key_gaps ?? null,
     risk_summary: assessment?.risk_summary ?? null,
-    risk_level: assessment?.risk_level ?? "low",
-    escalation_required: assessment?.escalation_required ?? false,
+    risk_level: assessment?.risk_level ?? null,
+    escalation_required: assessment?.escalation_required ?? null,
     escalation_to: assessment?.escalation_to ?? null,
     intake_conclusion:
       assessment?.intake_conclusion ?? intakeConclusionTemplate,
@@ -140,8 +140,8 @@ function initialValues(
     next_owner_id: assessment?.next_owner_id ?? null,
     next_due_date: assessment?.next_due_date ?? null,
     create_session_recommended:
-      assessment?.create_session_recommended ?? false,
-    create_task_recommended: assessment?.create_task_recommended ?? false,
+      assessment?.create_session_recommended ?? null,
+    create_task_recommended: assessment?.create_task_recommended ?? null,
     assessment_status: assessment?.assessment_status ?? "Draft",
     confidentiality_level: "D2",
   };
@@ -453,8 +453,8 @@ function IntakeForm({
         <SelectField label="Nguồn tiếp nhận" value={values.request_source ?? ""} onChange={(v) => setText("request_source", v)} options={requestSourceOptions} disabled={disabled} />
         <Field label="Ngày tiếp nhận" type="date" value={values.intake_date} onChange={(v) => setText("intake_date", v)} disabled={disabled} />
         <SelectField label="Nhánh tư vấn" value={values.counseling_branch ?? ""} onChange={(v) => setText("counseling_branch", v)} options={branchOptions} disabled={disabled} />
-        <SelectField label="Mức ưu tiên" value={values.priority_level} onChange={(v) => setValues((c) => ({ ...c, priority_level: v as typeof c.priority_level }))} options={[["low", "Thấp"], ["normal", "Bình thường"], ["high", "Cao"], ["urgent", "Khẩn cấp"]]} disabled={disabled} />
-        <SelectField label="Trạng thái tiếp nhận" value={values.intake_status} onChange={(v) => setText("intake_status", v)} options={[["new", "Mới tiếp nhận"], ["collecting_data", "Đang thu thập dữ liệu"], ["ready_for_counseling", "Sẵn sàng tư vấn"], ["on_hold", "Tạm dừng"]]} disabled={disabled} />
+        <SelectField label="Mức ưu tiên" value={values.priority_level ?? ""} onChange={(v) => setValues((c) => ({ ...c, priority_level: v ? v as NonNullable<typeof c.priority_level> : null }))} options={[["", "Chưa xác định"], ["low", "Thấp"], ["normal", "Bình thường"], ["high", "Cao"], ["urgent", "Khẩn cấp"]]} disabled={disabled} />
+        <SelectField label="Trạng thái tiếp nhận" value={values.intake_status ?? ""} onChange={(v) => setText("intake_status", v)} options={[["", "Chưa xác định"], ["new", "Mới tiếp nhận"], ["collecting_data", "Đang thu thập dữ liệu"], ["ready_for_counseling", "Sẵn sàng tư vấn"], ["on_hold", "Tạm dừng"]]} disabled={disabled} />
         <SelectField label="Chuyên viên phụ trách" value={values.assigned_counselor_id ?? ""} onChange={(v) => setText("assigned_counselor_id", v)} options={[["", "Chưa phân công"], ...staffProfiles.filter((s) => s.role !== "ADMIN").map((s) => [s.id, `${s.full_name} · ${s.role}`])]} disabled={disabled} />
         <SelectField label="Hồ sơ tư vấn liên kết" value={values.counseling_case_id ?? ""} onChange={(v) => setText("counseling_case_id", v)} options={[["", "Chưa liên kết"], ...cases.map((item) => [item.id, item.case_number])]} disabled={disabled} />
         <SelectField label="Trạng thái assessment" value={values.assessment_status} onChange={(v) => setValues((c) => ({ ...c, assessment_status: v as typeof c.assessment_status }))} options={[["Draft", "Draft"], ["In Review", "In Review"], ["Reviewed", "Reviewed"], ["Closed", "Closed"]]} disabled={disabled} />
@@ -492,7 +492,7 @@ function IntakeForm({
         <TextArea label="Giải thưởng" value={values.awards_summary ?? ""} onChange={(v) => setText("awards_summary", v)} disabled={disabled} />
         <SelectField label="Tình trạng minh chứng" value={values.evidence_status ?? ""} onChange={(v) => setText("evidence_status", v)} options={[["", "Chưa đánh giá"], ["missing", "Thiếu"], ["partial", "Một phần"], ["sufficient", "Đủ"], ["verified", "Đã xác thực"]]} disabled={disabled} />
         <SelectField label="Mức minh chứng cao nhất" value={values.highest_evidence_level ?? ""} onChange={(v) => setText("highest_evidence_level", v)} options={[["", "Chưa có"], ["D", "D"], ["C", "C"], ["B", "B"], ["A", "A"]]} disabled={disabled} />
-        <SelectField label="Portfolio readiness" value={values.portfolio_readiness_status ?? ""} onChange={(v) => setText("portfolio_readiness_status", v)} options={[["Draft", "Draft"], ["Reviewed", "Reviewed"], ["Verified", "Verified"], ["Handoff-ready", "Handoff-ready"]]} disabled={disabled} />
+        <SelectField label="Portfolio readiness" value={values.portfolio_readiness_status ?? ""} onChange={(v) => setText("portfolio_readiness_status", v)} options={[["", "Chưa đánh giá"], ["Draft", "Draft"], ["Reviewed", "Reviewed"], ["Verified", "Verified"], ["Handoff-ready", "Handoff-ready"]]} disabled={disabled} />
         <ScoreField label="Độ mạnh hồ sơ (1-5)" value={values.profile_strength_score} onChange={(v) => setNumber("profile_strength_score", v)} disabled={disabled} />
         <Field label="Trạng thái CV" value={values.cv_status ?? ""} onChange={(v) => setText("cv_status", v)} disabled={disabled} />
         <Field label="Trạng thái Activity List" value={values.activity_list_status ?? ""} onChange={(v) => setText("activity_list_status", v)} disabled={disabled} />
@@ -519,7 +519,7 @@ function IntakeForm({
         <TextArea label="Khoảng trống chính" value={values.key_gaps ?? ""} onChange={(v) => setText("key_gaps", v)} disabled={disabled} />
         <TextArea label="Tóm tắt rủi ro" value={values.risk_summary ?? ""} onChange={(v) => setText("risk_summary", v)} disabled={disabled} />
         <RiskField label="Mức rủi ro tổng thể" value={values.risk_level} onChange={(v) => setValues((c) => ({ ...c, risk_level: v }))} disabled={disabled} />
-        <CheckField label="Cần escalation" checked={values.escalation_required} onChange={(v) => setValues((c) => ({ ...c, escalation_required: v }))} disabled={disabled} />
+        <CheckField label="Cần escalation" checked={Boolean(values.escalation_required)} onChange={(v) => setValues((c) => ({ ...c, escalation_required: v }))} disabled={disabled} />
         <Field label="Escalation tới" value={values.escalation_to ?? ""} onChange={(v) => setText("escalation_to", v)} disabled={disabled} />
         <TextArea label="Kết luận intake theo mẫu cố định" rows={8} className="lg:col-span-2" value={values.intake_conclusion ?? ""} onChange={(v) => setText("intake_conclusion", v)} disabled={disabled} />
       </Section>
@@ -528,8 +528,8 @@ function IntakeForm({
         <TextArea label="Hành động tiếp theo" value={values.next_action ?? ""} onChange={(v) => setText("next_action", v)} disabled={disabled} />
         <SelectField label="Owner tiếp theo" value={values.next_owner_id ?? ""} onChange={(v) => setText("next_owner_id", v)} options={[["", "Chưa giao"], ...staffProfiles.map((s) => [s.id, `${s.full_name} · ${s.role}`])]} disabled={disabled} />
         <Field label="Hạn hoàn thành" type="date" value={values.next_due_date ?? ""} onChange={(v) => setText("next_due_date", v)} disabled={disabled} />
-        <CheckField label="Khuyến nghị tạo lịch tư vấn" checked={values.create_session_recommended} onChange={(v) => setValues((c) => ({ ...c, create_session_recommended: v }))} disabled={disabled} />
-        <CheckField label="Khuyến nghị tạo công việc" checked={values.create_task_recommended} onChange={(v) => setValues((c) => ({ ...c, create_task_recommended: v }))} disabled={disabled} />
+        <CheckField label="Khuyến nghị tạo lịch tư vấn" checked={Boolean(values.create_session_recommended)} onChange={(v) => setValues((c) => ({ ...c, create_session_recommended: v }))} disabled={disabled} />
+        <CheckField label="Khuyến nghị tạo công việc" checked={Boolean(values.create_task_recommended)} onChange={(v) => setValues((c) => ({ ...c, create_task_recommended: v }))} disabled={disabled} />
       </Section>
     </div>
   );
@@ -581,7 +581,7 @@ function ScoreField({ label, value, onChange, disabled }: { label: string; value
 }
 
 function RiskField({ label, value, onChange, disabled }: { label: string; value: StudentIntakeAssessment["risk_level"]; onChange: (value: StudentIntakeAssessment["risk_level"]) => void; disabled: boolean }) {
-  return <SelectField label={label} value={value} onChange={(next) => onChange(next as StudentIntakeAssessment["risk_level"])} options={[["low", "Xanh · thấp"], ["medium", "Vàng · trung bình"], ["high", "Cam · cao"], ["critical", "Đỏ · nghiêm trọng"]]} disabled={disabled} />;
+  return <SelectField label={label} value={value ?? ""} onChange={(next) => onChange(next ? next as NonNullable<StudentIntakeAssessment["risk_level"]> : null)} options={[["", "Chưa đánh giá"], ["low", "Xanh · thấp"], ["medium", "Vàng · trung bình"], ["high", "Cam · cao"], ["critical", "Đỏ · nghiêm trọng"]]} disabled={disabled} />;
 }
 
 function CheckField({ label, checked, onChange, disabled }: { label: string; checked: boolean; onChange: (checked: boolean) => void; disabled: boolean }) {

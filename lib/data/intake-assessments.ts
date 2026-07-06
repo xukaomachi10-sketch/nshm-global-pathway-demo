@@ -49,7 +49,14 @@ function validateReview(values: StudentIntakeAssessmentFormValues) {
 function draftPayloadValues(values: StudentIntakeAssessmentFormValues) {
   return Object.fromEntries(
     Object.entries(values).filter(
-      ([, value]) => value !== null && value !== undefined && value !== "",
+      ([key, value]) =>
+        value !== null &&
+        value !== undefined &&
+        value !== "" &&
+        !(
+          key === "intake_conclusion" &&
+          value === intakeConclusionTemplate
+        ),
     ),
   ) as Partial<StudentIntakeAssessmentFormValues>;
 }

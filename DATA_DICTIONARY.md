@@ -298,8 +298,8 @@ One active pre-counseling assessment per student, aligned to SOP.HT-03 (orientat
 | Linkage | `counseling_case_id` | Nullable FK -> `counseling_cases.id` | Optional case context |
 | Intake | `request_source`, `counseling_branch`, `intake_status` | Checked operational text in UI/schema | Source, counseling branch, and intake stage |
 | Intake | `intake_date` | date, default current date | Formal intake date |
-| Intake | `assigned_counselor_id` | Nullable FK -> `staff_profiles.id`, indexed | Assigned counselor and RLS scope |
-| Intake | `priority_level` | `priority_level`, default `normal` | Operational priority |
+| Intake | `assigned_counselor_id` | Required FK -> `staff_profiles.id`, indexed; defaults to current staff | Assigned counselor and RLS scope |
+| Intake | `priority_level` | Nullable `priority_level` | Optional in Draft; required by application validation for Reviewed |
 | Goals | `post_high_school_goal`, `target_majors_text`, `career_cluster`, `target_countries`, `target_universities_text`, `scholarship_interest`, `goal_note` | Nullable text | Stated goals and options under review |
 | Goals | `orientation_clarity_score` | Integer 1-5 | Clarity of direction |
 | Academic | `gpa_summary`, `strong_subjects`, `weak_subjects`, `academic_track`, `other_certificates`, `academic_gap_note` | Nullable text | Minimum academic profile needed for counseling |
@@ -312,17 +312,17 @@ One active pre-counseling assessment per student, aligned to SOP.HT-03 (orientat
 | Constraints | `parent_involvement_level`, `geography_constraints`, `budget_range`, `safety_or_family_constraints`, `sensitive_note` | Nullable restricted text | Operational constraints only; no contact, health, or diagnostic data |
 | Timeline | `nearest_deadline`, `next_test_date`, `next_due_date` | Nullable date; due date indexed | Time-critical milestones |
 | Timeline | `application_season`, `deadline_action_note` | Nullable text | Application cycle and mitigation |
-| Timeline | `deadline_risk_level` | `risk_level`, default `low` | Deadline-specific escalation risk |
+| Timeline | `deadline_risk_level` | Nullable `risk_level` | Deadline-specific escalation risk |
 | Summary | `overall_readiness_score` | Integer 1-5 | Overall readiness rubric |
 | Summary | `key_strengths`, `key_gaps`, `risk_summary`, `escalation_to`, `intake_conclusion` | Nullable text | Evidence-based conclusion and escalation |
-| Summary | `risk_level` | `risk_level`, default `low`, indexed | Overall assessment risk |
+| Summary | `risk_level` | Nullable `risk_level`, indexed | Optional in Draft; required by application validation for Reviewed |
 | Summary | `escalation_required` | Boolean, default false | Escalation decision |
 | Next action | `next_action` | Nullable text | Agreed next action |
 | Next action | `next_owner_id` | Nullable FK -> `staff_profiles.id` | Responsible staff member |
-| Next action | `create_session_recommended`, `create_task_recommended` | Boolean, default false | Workflow recommendations; no automatic creation yet |
+| Next action | `create_session_recommended`, `create_task_recommended` | Nullable boolean | Workflow recommendations; no automatic creation yet |
 | Status | `assessment_status` | `Draft`, `In Review`, `Reviewed`, or `Closed` | Assessment lifecycle |
 | Audit | `confidentiality_level` | Checked text, default `D2` | Internal restricted handling class |
-| Audit | `created_by`, `updated_by` | Nullable FK -> `staff_profiles.id` | Staff audit attribution |
+| Audit | `created_by`, `updated_by` | Required FK -> `staff_profiles.id` | Staff audit attribution |
 | Audit | `created_at`, `updated_at` | timestamptz; defaults/trigger | Lifecycle timestamps |
 | Audit | `deleted_at` | Nullable timestamptz | Soft-delete marker; application/RLS grants no hard delete |
 
