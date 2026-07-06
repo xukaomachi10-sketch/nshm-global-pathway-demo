@@ -461,4 +461,10 @@ export class MockInternalOperationsRepository
     });
     return Promise.resolve(rows);
   }
+
+  importFakeStudentsTransaction(): Promise<never> {
+    return Promise.reject(
+      new Error("Mock imports use the in-memory pilot transaction path."),
+    );
+  }
 }

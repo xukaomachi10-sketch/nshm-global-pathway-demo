@@ -6,6 +6,7 @@ import {
 import { MockInternalOperationsRepository } from "@/lib/data-access/mock-repository";
 import type { ActivityLog, Json } from "@/types/database";
 import type { InsertOf } from "@/types/database";
+import { getRepositoryAccessToken } from "@/lib/auth/session";
 
 export type DataResult<T> = {
   data: T;
@@ -27,7 +28,9 @@ export async function readWithMockFallback<T>(
   subject: string,
   read: (repository: InternalOperationsRepository) => Promise<T>,
 ): Promise<DataResult<T>> {
-  const selected = createInternalOperationsRepository();
+  const selected = createInternalOperationsRepository(
+    await getRepositoryAccessToken(),
+  );
   try {
     return {
       data: await read(selected.repository),
@@ -51,7 +54,9 @@ export async function mutateWithActivityLog<T>(options: {
   mutate: (repository: InternalOperationsRepository) => Promise<T>;
   activity: (record: T) => InsertOf<"activity_logs">;
 }): Promise<MutationResult<T>> {
-  const selected = createInternalOperationsRepository();
+  const selected = createInternalOperationsRepository(
+    await getRepositoryAccessToken(),
+  );
   let repository = selected.repository;
   let status = selected.status;
   let record: T;

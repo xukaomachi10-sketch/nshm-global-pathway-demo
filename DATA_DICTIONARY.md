@@ -15,6 +15,7 @@
 | Enum | Values | Purpose |
 | --- | --- | --- |
 | `user_role` | `admin`, `manager`, `counselor`, `auditor`, `viewer` | Internal role classification |
+| `staff_role` | `ICCO_HEAD`, `COUNSELOR`, `ADMIN` | Phase 1 authenticated portal authorization |
 | `risk_level` | `low`, `medium`, `high`, `critical` | Operational/student risk |
 | `confidentiality_level` | `internal`, `restricted`, `highly_restricted` | Minimum data handling clearance |
 | `case_status` | `intake`, `assessment`, `active`, `waiting_student`, `waiting_parent`, `on_hold`, `completed`, `cancelled` | Counseling case lifecycle |
@@ -42,6 +43,23 @@ Internal staff profile. `auth_user_id` can be linked to Supabase Auth in a later
 | `deleted_at` | timestamptz | Yes |  | Soft-delete time |
 
 Classification: `internal`; email becomes `restricted` when combined with operational records.
+
+## `staff_profiles`
+
+Authenticated staff authorization profile. One row maps one Supabase Auth user to an active portal role. No student or parent identities belong in this table.
+
+| Column | Type | Null | Key/default | Description |
+| --- | --- | --- | --- | --- |
+| `id` | uuid | No | PK, generated | Staff profile ID |
+| `auth_user_id` | uuid | No | Unique FK -> `auth.users.id` | Supabase Auth identity |
+| `full_name` | text | No |  | Portal display name |
+| `email` | text | No | Unique | Staff work/pilot email |
+| `role` | `staff_role` | No |  | `ICCO_HEAD`, `COUNSELOR`, or `ADMIN` |
+| `is_active` | boolean | No | `true` | Portal eligibility switch |
+| `created_at` | timestamptz | No | `now()` | Creation time |
+| `updated_at` | timestamptz | No | trigger | Last update time |
+
+Classification: `internal`. Authentication passwords and tokens remain in Supabase Auth/cookies and are never stored here.
 
 ## `students`
 
@@ -132,7 +150,7 @@ Validated row snapshot for a batch. Invalid rows are persisted only as sanitized
 | `updated_at` | timestamptz | No | trigger | Last update time |
 | `deleted_at` | timestamptz | Yes |  | Soft-delete time |
 
-Classification: pilot fake data only. Do not use these publishable-key policies for real student data.
+Classification: pilot fake data only. Successful transactional imports immediately scrub `raw_data` and reduce `normalized_data` to a minimal code/status marker. The `purge_student_import_staging()` function soft-purges older staging metadata after the configured retention period.
 
 ## `counseling_cases`
 

@@ -10,7 +10,6 @@ import {
   Download,
   FileClock,
   FilePlus2,
-  FileUp,
   RefreshCw,
   UsersRound,
 } from "lucide-react";
@@ -59,12 +58,6 @@ export default function Dashboard() {
         description="Đây là những việc cần ưu tiên hôm nay. 4 hồ sơ có deadline trong 7 ngày và 6 tài liệu mới đang chờ rà soát."
         actions={
           <>
-            <Link
-              href="/portal/import-students"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-[#23328C] transition hover:bg-slate-50"
-            >
-              <FileUp className="h-4 w-4" /> Import học sinh
-            </Link>
             <Button
               variant="secondary"
               onClick={() => showToast("Đã làm mới dữ liệu lúc 09:42")}

@@ -9,6 +9,7 @@ import type {
 type SupabaseConfig = {
   url: string;
   apiKey: string;
+  accessToken?: string;
 };
 
 export class SupabaseInternalOperationsRepository
@@ -35,7 +36,7 @@ export class SupabaseInternalOperationsRepository
       cache: "no-store",
       headers: {
         apikey: this.config.apiKey,
-        Authorization: `Bearer ${this.config.apiKey}`,
+        Authorization: `Bearer ${this.config.accessToken ?? this.config.apiKey}`,
         Accept: "application/json",
       },
     });
@@ -64,7 +65,7 @@ export class SupabaseInternalOperationsRepository
       cache: "no-store",
       headers: {
         apikey: this.config.apiKey,
-        Authorization: `Bearer ${this.config.apiKey}`,
+        Authorization: `Bearer ${this.config.accessToken ?? this.config.apiKey}`,
         Accept: "application/json",
         "Content-Type": "application/json",
         Prefer: "return=representation",
@@ -97,7 +98,7 @@ export class SupabaseInternalOperationsRepository
       cache: "no-store",
       headers: {
         apikey: this.config.apiKey,
-        Authorization: `Bearer ${this.config.apiKey}`,
+        Authorization: `Bearer ${this.config.accessToken ?? this.config.apiKey}`,
         Accept: "application/json",
         "Content-Type": "application/json",
         Prefer: onConflict
@@ -122,7 +123,7 @@ export class SupabaseInternalOperationsRepository
   listStudents(limit?: number) {
     return this.select("students", limit, {
       deleted_at: "is.null",
-      student_code: "like.FAKE-%",
+      ...(this.config.accessToken ? {} : { student_code: "like.FAKE-%" }),
     });
   }
 
@@ -196,5 +197,44 @@ export class SupabaseInternalOperationsRepository
     input: InsertOf<"student_import_staging">[],
   ) {
     return this.insertMany("student_import_staging", input);
+  }
+
+  async importFakeStudentsTransaction(input: {
+    fileName: string;
+    fileSize: number;
+    rows: import("@/types/database").Json;
+  }) {
+    const endpoint = new URL(
+      "/rest/v1/rpc/import_fake_students_transaction",
+      this.config.url,
+    );
+    const response = await fetch(endpoint, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        apikey: this.config.apiKey,
+        Authorization: `Bearer ${this.config.accessToken ?? this.config.apiKey}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        p_source_file_name: input.fileName,
+        p_source_file_size_bytes: input.fileSize,
+        p_rows: input.rows,
+      }),
+    });
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(`Transactional import failed (${response.status}): ${detail}`);
+    }
+    return (await response.json()) as {
+      batch_id: string;
+      total_rows: number;
+      valid_rows: number;
+      error_rows: number;
+      new_students: number;
+      updated_students: number;
+      imported_students: number;
+    };
   }
 }

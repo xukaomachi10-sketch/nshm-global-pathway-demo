@@ -12,6 +12,7 @@ export type UserRole =
   | "counselor"
   | "auditor"
   | "viewer";
+export type StaffRole = "ICCO_HEAD" | "COUNSELOR" | "ADMIN";
 export type RiskLevel = "low" | "medium" | "high" | "critical";
 export type ConfidentialityLevel =
   | "internal"
@@ -81,6 +82,17 @@ export type InternalUser = {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
+};
+
+export type StaffProfile = {
+  id: string;
+  auth_user_id: string;
+  full_name: string;
+  email: string;
+  role: StaffRole;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
 };
 
 export type StudentRecord = {
@@ -280,6 +292,14 @@ export type Database = {
           deleted_at?: string | null;
         }
       >;
+      staff_profiles: TableDefinition<
+        StaffProfile,
+        Omit<StaffProfile, "id" | "created_at" | "updated_at"> & {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
       students: TableDefinition<
         StudentRecord,
         Omit<StudentRecord, "id" | "created_at" | "updated_at" | "deleted_at"> & {
@@ -370,6 +390,7 @@ export type Database = {
     Functions: Record<string, never>;
     Enums: {
       user_role: UserRole;
+      staff_role: StaffRole;
       risk_level: RiskLevel;
       confidentiality_level: ConfidentialityLevel;
       case_status: CaseStatus;

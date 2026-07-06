@@ -2,6 +2,7 @@ import { getRequestedDataMode, type DataMode } from "./config";
 import { MockInternalOperationsRepository } from "./mock-repository";
 import type { InternalOperationsRepository } from "./repository";
 import { SupabaseInternalOperationsRepository } from "./supabase-repository";
+import { getPublicSupabaseConfig } from "@/lib/supabase/config";
 
 export type DataAccessStatus = {
   requestedMode: DataMode;
@@ -10,25 +11,19 @@ export type DataAccessStatus = {
   fallbackReason?: string;
 };
 
-function getSupabaseConfig() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const apiKey =
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  return url && apiKey ? { url, apiKey } : null;
-}
-
-export function createInternalOperationsRepository(): {
+export function createInternalOperationsRepository(accessToken?: string): {
   repository: InternalOperationsRepository;
   status: DataAccessStatus;
 } {
   const requestedMode = getRequestedDataMode();
-  const config = getSupabaseConfig();
+  const config = getPublicSupabaseConfig();
 
   if (requestedMode === "supabase" && config) {
     return {
-      repository: new SupabaseInternalOperationsRepository(config),
+      repository: new SupabaseInternalOperationsRepository({
+        ...config,
+        accessToken,
+      }),
       status: {
         requestedMode,
         effectiveMode: "supabase",

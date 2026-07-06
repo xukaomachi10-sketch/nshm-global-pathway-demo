@@ -18,14 +18,15 @@ Validate the v1 schema, fake seed data, repository switching, security boundarie
 1. Use a dedicated pilot Supabase project.
 2. Apply `SUPABASE_SCHEMA.sql` to a clean project.
 3. Confirm no real student data is present.
-4. Use only the publishable/anon key in `.env.local`.
+4. Create fake Auth users linked to active `staff_profiles` roles.
+5. Use only the publishable/anon key in `.env.local`.
 5. Record test evidence without copying sensitive credentials.
 
 ## Schema and constraint tests
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| DB-001 | Required tables | Query `information_schema.tables` for all ten names | Ten rows returned |
+| DB-001 | Required tables | Query `information_schema.tables` for all eleven names | Eleven rows returned |
 | DB-002 | Primary keys | Inspect constraints for each table | UUID PK exists on every table |
 | DB-003 | Foreign keys | Inspect `information_schema` or Supabase UI | All documented FKs exist |
 | DB-004 | Updated timestamps | Update one fake mutable row | `updated_at` increases automatically |
@@ -53,7 +54,7 @@ select
 from information_schema.table_constraints tc
 where tc.table_schema = 'public'
   and tc.table_name in (
-    'users', 'students', 'counseling_cases', 'counseling_sessions',
+    'users', 'staff_profiles', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
     'student_import_batches', 'student_import_staging'
   )
@@ -116,8 +117,8 @@ Expected `unsafe_seed_students`: `0`.
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all ten tables |
-| SEC-002 | Anon fake-only boundary | Query REST with anon key | Only policy-approved fake pilot rows/actions succeed |
+| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all eleven tables |
+| SEC-002 | Anonymous boundary | Query REST with anon key | Only narrow fake-student demo read succeeds; portal writes fail |
 | SEC-003 | Non-fake blocked | Query/write non-fake rows with ordinary token | Permission denied/no rows |
 | SEC-004 | No admin credential | Search source and environment files | No admin/secret key is requested or stored |
 | SEC-005 | Vercel disconnected | Inspect `vercel.json` and Production env | No Supabase variables |
@@ -125,6 +126,12 @@ Expected `unsafe_seed_students`: `0`.
 | SEC-007 | No secret logging | Review `activity_logs.metadata` and app logs | No tokens, keys, or raw documents |
 | SEC-008 | Real code blocked | Import a non-`FAKE-*` student code | Row error in UI; no student upsert |
 | SEC-009 | Invalid-row minimization | Inspect staging after a rejected row | Only sanitized rejection metadata is stored |
+| SEC-010 | Portal redirect | Request `/portal` without staff cookie | Redirect to `/login` |
+| SEC-011 | Inactive staff | Authenticate an inactive profile | Portal access denied |
+| SEC-012 | Counselor import | Sign in as `COUNSELOR` and call import action/RPC | Menu hidden and operation denied |
+| SEC-013 | Head import | Sign in as `ICCO_HEAD` and import fake rows | Transaction succeeds |
+| SEC-014 | Atomic rollback | Force an activity-log failure in a test transaction | No batch, staging, or student changes persist |
+| SEC-015 | Staging scrubbing | Inspect completed import staging | Raw PII is removed immediately |
 
 RLS inspection:
 
@@ -134,8 +141,9 @@ from pg_class
 join pg_namespace on pg_namespace.oid = pg_class.relnamespace
 where pg_namespace.nspname = 'public'
   and relname in (
-    'users', 'students', 'counseling_cases', 'counseling_sessions',
-    'internal_tasks', 'test_scores', 'consents', 'activity_logs'
+    'users', 'staff_profiles', 'students', 'counseling_cases', 'counseling_sessions',
+    'internal_tasks', 'test_scores', 'consents', 'activity_logs',
+    'student_import_batches', 'student_import_staging'
   )
 order by relname;
 ```
@@ -147,7 +155,7 @@ order by relname;
 | APP-001 | No data variables | Requested/effective `mock`; routes work |
 | APP-002 | `NEXT_PUBLIC_DATA_MODE=mock` | Effective `mock`; no Supabase request |
 | APP-003 | Invalid mode value | Effective `mock` |
-| APP-004 | `supabase`, no URL/key | Effective `mock`; fallback reason shown |
+| APP-004 | `supabase`, no URL/key | Effective `mock`; `/login` offers mock session |
 | APP-005 | `supabase`, URL only | Effective `mock` |
 | APP-006 | `supabase`, key only | Effective `mock` |
 | APP-007 | `supabase`, valid URL/key | Effective `supabase`; fake `students` rows load |
@@ -155,10 +163,11 @@ order by relname;
 
 ## Route regression tests
 
-Verify these routes render in mock mode:
+Verify public routes render in mock mode. Portal routes must first redirect anonymously to `/login`; after starting the mock staff session, verify each portal route renders:
 
 - `/`
 - `/demo`
+- `/login`
 - `/portal`
 - `/portal/registrations`
 - `/portal/students/NSHM260101`
@@ -185,10 +194,11 @@ The main demo pages must not import `@/lib/data` or the Supabase adapter directl
 | IMP-004 | Existing fake code | Preview shows update; student count does not duplicate |
 | IMP-005 | New fake code | Preview shows new; one student is created |
 | IMP-006 | Mixed valid/error rows | Only valid rows import; batch completes with errors |
-| IMP-007 | Activity audit | One create/update activity entry exists per imported student |
+| IMP-007 | Activity audit | One create/update activity entry exists per imported student in the same transaction |
 | IMP-008 | Mock mode | Workflow completes in mock memory and shows developer warning |
 | IMP-009 | Missing import policies | Supabase rejects confirmation with safe guidance; no key escalation |
 | IMP-010 | No hard delete | Importing inactive status updates the flag; existing row remains stored |
+| IMP-011 | Retention cleanup | Call `purge_student_import_staging(7)` as Head/Admin | Old staging PII/metadata is soft-purged |
 
 ## Build and static checks
 
@@ -224,3 +234,5 @@ The pilot package is accepted when:
 5. No real student data or production Supabase credentials are present.
 6. `pnpm lint` and `pnpm build` pass.
 7. Production Vercel remains in mock mode.
+8. Anonymous portal requests redirect to `/login`; inactive/unmapped Auth users cannot open the portal.
+9. Fake Supabase import succeeds only for `ICCO_HEAD`/`ADMIN` through the transactional RPC.

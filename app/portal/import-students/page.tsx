@@ -1,9 +1,11 @@
 import { StudentImportWorkspace } from "@/components/internal/StudentImportWorkspace";
 import { getStudents } from "@/lib/data/students";
+import { requireStaffRole } from "@/lib/auth/session";
 
 export const dynamic = "force-dynamic";
 
 export default async function ImportStudentsPage() {
+  await requireStaffRole(["ICCO_HEAD", "ADMIN"]);
   const students = await getStudents();
   return (
     <StudentImportWorkspace

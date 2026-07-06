@@ -113,8 +113,8 @@ function fallbackStatus(status: DataAccessStatus): DataAccessStatus {
   };
 }
 
-async function selectRepository() {
-  const selected = createInternalOperationsRepository();
+async function selectRepository(accessToken?: string) {
+  const selected = createInternalOperationsRepository(accessToken);
   try {
     const students = await selected.repository.listStudents(1000);
     return { repository: selected.repository, students, status: selected.status };
@@ -148,6 +148,7 @@ async function failBatch(
 
 export async function confirmStudentImport(
   input: ConfirmStudentImportInput,
+  accessToken?: string,
 ): Promise<StudentImportResult> {
   if (input.fileSize < 0 || input.fileSize > 2 * 1024 * 1024) {
     throw new Error("Tệp CSV phải nhỏ hơn hoặc bằng 2 MB.");
@@ -156,7 +157,7 @@ export async function confirmStudentImport(
   if (!rows.length) throw new Error("Không có dòng dữ liệu để nhập.");
   if (rows.length > 1000) throw new Error("Pilot giới hạn tối đa 1.000 dòng.");
 
-  const selected = await selectRepository();
+  const selected = await selectRepository(accessToken);
   const existingByCode = new Map(
     selected.students.map((student) => [student.student_code.toUpperCase(), student]),
   );
@@ -166,6 +167,42 @@ export async function confirmStudentImport(
 
   const newRows = valid.filter((row) => row.action === "new").length;
   const updatedRows = valid.filter((row) => row.action === "update").length;
+
+  if (selected.repository.mode === "supabase") {
+    const transactionRows = validation.map((row) => ({
+      row_number: row.rowNumber,
+      raw: row.errors.length ? { rejected: true } : row.raw,
+      normalized: row.errors.length
+        ? { pilot_fake: true, rejected: true }
+        : { ...row.normalized, is_fake: true, pilot_fake: true },
+      validation_status: row.errors.length ? "error" : "valid",
+      validation_errors: row.errors,
+      validation_warnings: row.warnings,
+    }));
+    try {
+      const result = await selected.repository.importFakeStudentsTransaction({
+        fileName: safeFileName(input.fileName),
+        fileSize: input.fileSize,
+        rows: transactionRows,
+      });
+      return {
+        batchId: result.batch_id,
+        status: selected.status,
+        totalRows: result.total_rows,
+        validRows: result.valid_rows,
+        errorRows: result.error_rows,
+        newStudents: result.new_students,
+        updatedStudents: result.updated_students,
+        importedStudents: result.imported_students,
+        validation,
+      };
+    } catch {
+      throw new Error(
+        "Transactional fake import was rejected. Confirm staff role, Phase 1 RLS, and the import RPC in the dev Supabase project.",
+      );
+    }
+  }
+
   let batch: StudentImportBatch;
   try {
     batch = await selected.repository.createStudentImportBatch({
@@ -187,11 +224,7 @@ export async function confirmStudentImport(
     });
   } catch (error) {
     throw new Error(
-      selected.repository.mode === "supabase"
-        ? "Supabase chưa có bảng hoặc fake-only RLS cho student import. Hãy chạy lại SUPABASE_SCHEMA.sql trong dev project."
-        : error instanceof Error
-          ? error.message
-          : "Không thể tạo import batch.",
+      error instanceof Error ? error.message : "Không thể tạo import batch.",
     );
   }
 
@@ -282,11 +315,7 @@ export async function confirmStudentImport(
   } catch (error) {
     await failBatch(selected.repository, batch.id, error);
     throw new Error(
-      selected.repository.mode === "supabase"
-        ? "Supabase đã từ chối import. Hãy chạy SQL schema mới và kiểm tra fake-only RLS; không có khóa quản trị nào được sử dụng."
-        : error instanceof Error
-          ? error.message
-          : "Không thể hoàn tất import mock.",
+      error instanceof Error ? error.message : "Không thể hoàn tất import mock.",
     );
   }
 }

@@ -125,7 +125,7 @@ export function StudentImportWorkspace({
         </div>
       )}
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm leading-6 text-blue-900">
-        <strong>Pilot only. Use fake data first.</strong> Pilot chỉ chấp nhận mã giả dạng <strong>FAKE-*</strong>. Import dữ liệu học sinh thật bị RLS chặn cho đến khi có đăng nhập nhân sự và RBAC.
+        <strong>Real student data import is disabled until authentication, RBAC, RLS and transaction checks pass.</strong> Pilot chỉ chấp nhận mã giả dạng <strong>FAKE-*</strong>.
       </div>
 
       {success ? (

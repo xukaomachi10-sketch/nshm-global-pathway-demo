@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   Bell,
   BriefcaseBusiness,
@@ -16,6 +17,7 @@ import {
   FolderLock,
   Globe2,
   LayoutDashboard,
+  LogOut,
   Menu,
   Search,
   Settings2,
@@ -25,8 +27,15 @@ import {
   X,
 } from "lucide-react";
 import { Navbar, Sidebar } from "@/components/brand";
+import type { StaffProfile, StaffRole } from "@/types/database";
 
-const items = [
+const items: Array<{
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  badge?: string;
+  roles?: StaffRole[];
+}> = [
   { href: "/portal", label: "Bàn làm việc", icon: LayoutDashboard },
   {
     href: "/portal/registrations",
@@ -43,6 +52,7 @@ const items = [
     href: "/portal/import-students",
     label: "Import học sinh",
     icon: FileUp,
+    roles: ["ICCO_HEAD", "ADMIN"] as StaffRole[],
   },
   {
     href: "/portal/tasks",
@@ -73,7 +83,19 @@ const items = [
   },
 ];
 
-export default function PortalShell({ children }: { children: ReactNode }) {
+const roleLabels: Record<StaffRole, string> = {
+  ICCO_HEAD: "Trưởng phòng ICCO",
+  COUNSELOR: "Chuyên viên tư vấn",
+  ADMIN: "Quản trị hệ thống",
+};
+
+export default function PortalShell({
+  children,
+  staff,
+}: {
+  children: ReactNode;
+  staff: StaffProfile;
+}) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -107,7 +129,7 @@ export default function PortalShell({ children }: { children: ReactNode }) {
             Không gian làm việc
           </p>
         )}
-        {items.map(({ href, label, icon: Icon, badge }) => {
+        {items.filter((item) => !item.roles || item.roles.includes(staff.role)).map(({ href, label, icon: Icon, badge }) => {
           const active =
             href === "/portal" ? pathname === href : pathname.startsWith(href);
           return (
@@ -155,15 +177,15 @@ export default function PortalShell({ children }: { children: ReactNode }) {
           className={`flex items-center gap-3 rounded-xl bg-white/5 p-3 ${collapsed ? "justify-center" : ""}`}
         >
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FFAD00] text-xs font-black text-[#23328C]">
-            HL
+            {staff.full_name.split(" ").slice(-2).map((part) => part[0]).join("").toUpperCase()}
           </div>
           {!collapsed && (
             <div className="min-w-0">
               <p className="truncate text-xs font-bold text-white">
-                Nguyễn Hà Linh
+                {staff.full_name}
               </p>
               <p className="truncate text-[10px] text-slate-400">
-                Chuyên viên tư vấn
+                {roleLabels[staff.role]}
               </p>
             </div>
           )}
@@ -237,9 +259,15 @@ export default function PortalShell({ children }: { children: ReactNode }) {
               <Bell className="h-5 w-5" />
               <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#D21235] ring-2 ring-white" />
             </button>
-            <div className="ml-1 flex h-9 w-9 items-center justify-center rounded-full bg-[#23328C] text-xs font-black text-white">
-              HL
+            <div className="hidden text-right sm:block">
+              <p className="text-xs font-bold text-[#23328C]">{staff.full_name}</p>
+              <p className="text-[10px] text-slate-400">{roleLabels[staff.role]}</p>
             </div>
+            <form action="/auth/logout" method="post">
+              <button aria-label="Đăng xuất" className="rounded-xl p-2.5 text-slate-500 hover:bg-slate-100">
+                <LogOut className="h-5 w-5" />
+              </button>
+            </form>
           </div>
         </Navbar>
         <main className="mx-auto max-w-[1600px] p-4 lg:p-7">{children}</main>

@@ -11,6 +11,7 @@ import type {
   TestScore,
 } from "@/types/database";
 import type { InsertOf, UpdateOf } from "@/types/database";
+import type { Json } from "@/types/database";
 import type { DataMode } from "./config";
 
 export interface InternalOperationsRepository {
@@ -50,4 +51,17 @@ export interface InternalOperationsRepository {
   createStudentImportStaging(
     input: InsertOf<"student_import_staging">[],
   ): Promise<StudentImportStaging[]>;
+  importFakeStudentsTransaction(input: {
+    fileName: string;
+    fileSize: number;
+    rows: Json;
+  }): Promise<{
+    batch_id: string;
+    total_rows: number;
+    valid_rows: number;
+    error_rows: number;
+    new_students: number;
+    updated_students: number;
+    imported_students: number;
+  }>;
 }

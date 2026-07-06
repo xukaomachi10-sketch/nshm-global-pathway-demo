@@ -12,12 +12,12 @@ This package is for an isolated Supabase pilot. It must not be connected to the 
   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - A missing credential or failed Supabase query falls back to the mock repository.
 - Public website and CMS screens remain fixture-backed. Only the approved Internal Operations routes use the pilot repository.
-- CSV import is restricted to fake `FAKE-*` student codes. Real-data import requires staff authentication and reviewed RBAC first.
+- Portal routes require a Supabase Auth user with an active `staff_profiles` row. CSV import remains restricted to fake `FAKE-*` student codes.
 - The pilot uses only the Supabase publishable/anon key and never uses an admin key.
 
 ## Package contents
 
-- `SUPABASE_SCHEMA.sql`: enums, ten pilot tables, keys, checks, indexes, triggers, fake-only RLS, and fake seed data.
+- `SUPABASE_SCHEMA.sql`: enums, eleven pilot tables, staff RBAC, transactional fake import RPC, retention controls, and fake seed data.
 - `DATA_DICTIONARY.md`: field definitions and data classifications.
 - `RBAC_MATRIX.md`: target role and confidentiality access model.
 - `DATABASE_TEST_PLAN.md`: database, fallback, security, and regression tests.
@@ -43,6 +43,7 @@ The publishable key is constrained by RLS. Store local configuration in `.env.lo
 4. Run the query. It uses `CREATE ... IF NOT EXISTS`, safe `ALTER TABLE ... ADD COLUMN IF NOT EXISTS`, and idempotent policy/trigger definitions; it does not drop or truncate student data.
 5. Confirm these tables exist:
    - `users`
+   - `staff_profiles`
    - `students`
    - `counseling_cases`
    - `counseling_sessions`
@@ -57,9 +58,36 @@ The SQL includes fake records identified by `FAKE-*`, `example.invalid`, and `is
 
 For an existing pilot database, the same script safely adds/backfills these student-master fields without resetting rows: `grade_level`, `gender`, `homeroom_teacher`, `academic_track`, `source_system`, `source_record_id`, `is_active_student`, `is_fake`, `deleted_by`, and `delete_reason`. Existing `FAKE-*` rows are marked `is_fake=true`; other rows are not converted to fake data.
 
-The script is intended for a clean pilot project. If an older pilot schema with `consultation_requests` or `tasks` already exists, create a fresh project or write a reviewed migration; do not drop tables in a shared environment.
+The script is idempotent for the current pilot schema and does not drop student data. Review it before applying to any database outside the isolated dev project.
 
-## 3. Verify the schema
+## 3. Provision the first fake pilot staff account
+
+1. In **Supabase Authentication → Users**, create a test staff user. Do not create student or parent accounts.
+2. Copy its Auth user UUID.
+3. In SQL Editor, create the active staff profile with placeholder/fake pilot identity values:
+
+```sql
+insert into public.staff_profiles (
+  auth_user_id, full_name, email, role, is_active
+) values (
+  'AUTH_USER_UUID', 'Fake Pilot Head', 'fake.pilot.head@example.invalid',
+  'ICCO_HEAD', true
+)
+on conflict (auth_user_id) do update
+set role = excluded.role, is_active = excluded.is_active;
+```
+
+For a `COUNSELOR`, also link the Auth UUID to the matching internal `users` row so assigned-case RLS can resolve ownership:
+
+```sql
+update public.users
+set auth_user_id = 'AUTH_USER_UUID'
+where email = 'fake.counselor1@example.invalid';
+```
+
+Use SQL Editor only for this bootstrap step. The application never requests an admin or service-role key.
+
+## 4. Verify the schema
 
 Run:
 
@@ -68,7 +96,7 @@ select table_name
 from information_schema.tables
 where table_schema = 'public'
   and table_name in (
-    'users', 'students', 'counseling_cases', 'counseling_sessions',
+    'users', 'staff_profiles', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
     'student_import_batches', 'student_import_staging'
   )
@@ -108,7 +136,7 @@ union all select 'activity_logs', count(*) from public.activity_logs;
 
 Use `DATABASE_TEST_PLAN.md` for the complete acceptance suite.
 
-## 4. Run the application in default mock mode
+## 5. Run the application in default mock mode
 
 ```bash
 cp .env.example .env.local
@@ -124,9 +152,9 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
-Open `/`, `/demo`, `/portal`, and `/cms`. They must work without a database. `/demo` should show requested and effective mode as `mock`.
+Open `/login` and choose the mock portal session. Anonymous requests to `/portal/*` redirect to `/login`; public `/`, `/demo`, and `/cms` remain available without a database.
 
-## 5. Enable Supabase locally
+## 6. Enable Supabase locally
 
 Update `.env.local`:
 
@@ -138,26 +166,33 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
-Restart the development server and open `/demo`. Expected:
+Restart the development server, open `/login`, and sign in with the fake staff Auth account. Expected:
 
 - Requested mode: `supabase`
 - Effective mode: `supabase`
-- Fake rows returned from the `students` table
+- Active staff name/role displayed in the portal shell
+- `COUNSELOR` cannot see the Import menu; `ICCO_HEAD` and `ADMIN` can
 
 The public website and CMS remain on the mock facade. Student counseling, tasks, sessions, and the CSV importer use the shared repository with mock fallback.
 
-## 6. Test the fake-only CSV import
+## 7. Test the authenticated transactional fake-only CSV import
 
 1. Re-run the complete `SUPABASE_SCHEMA.sql` in the pilot SQL Editor so the two import tables, student-master columns, grants, and RLS policies exist.
 2. Open `/portal/import-students`.
 3. Download the header-only CSV template.
 4. Add fake rows whose `student_code` begins with `FAKE-`; never use a real export for this pilot.
 5. Upload, review row-level errors/warnings, and confirm only the valid rows.
-6. Verify that existing codes are updated, new codes are created, error rows are skipped, and `activity_logs` contains `student.import_created` or `student.import_updated`.
+6. Verify that the RPC atomically stages, upserts, writes activity logs, completes the batch, and scrubs staging `raw_data`.
 
-The publishable key can write only fake import batches/staging records and fake students. A non-`FAKE-*` code is rejected by both application validation and RLS. Do not weaken these policies to import real data anonymously.
+Only authenticated `ICCO_HEAD` and `ADMIN` staff can call the import RPC. A non-`FAKE-*` code is rejected by application validation and again inside the transaction. Do not weaken this guard for real data.
 
-## 7. Verify automatic fallback
+Staging retention:
+
+- Successful transactions immediately remove row PII from `raw_data` and retain only minimal validation metadata.
+- Run `select public.purge_student_import_staging(7);` as an authenticated `ICCO_HEAD` or `ADMIN` to soft-purge staging metadata older than seven days.
+- Configure a reviewed scheduled job only in the dev pilot after validating this function manually.
+
+## 8. Verify automatic fallback
 
 Keep `NEXT_PUBLIC_DATA_MODE=supabase`, remove the URL or both supported public key variables, and restart the app.
 
@@ -170,7 +205,7 @@ Expected:
 
 Repeat with an invalid `NEXT_PUBLIC_SUPABASE_URL` to verify query-failure fallback.
 
-## 8. Production Vercel restriction
+## 9. Vercel Preview and Production restriction
 
 Do not add these variables to Vercel Production:
 
@@ -181,9 +216,9 @@ Do not add these variables to Vercel Production:
 
 `vercel.json` intentionally contains no Supabase environment values. Production therefore remains in mock mode.
 
-If a hosted pilot is later required, use a separate Vercel Preview environment and a separate Supabase project. Apply the RBAC/RLS implementation described in `RBAC_MATRIX.md` before any non-fake data is introduced.
+Set Supabase variables only for the `database-pilot` Preview environment. Enable Vercel deployment protection or an equivalent access gate before testing any sensitive workflow. Confirm Production has no Supabase variables and resolves to mock mode after every environment change.
 
-## 9. Validation commands
+## 10. Validation commands
 
 ```bash
 pnpm lint

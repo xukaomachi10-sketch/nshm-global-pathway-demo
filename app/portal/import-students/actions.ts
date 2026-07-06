@@ -5,12 +5,14 @@ import {
   confirmStudentImport,
   type ConfirmStudentImportInput,
 } from "@/lib/data/student-import";
+import { requireStaffRole } from "@/lib/auth/session";
 
 export async function confirmStudentImportAction(
   input: ConfirmStudentImportInput,
 ) {
   try {
-    const result = await confirmStudentImport(input);
+    const session = await requireStaffRole(["ICCO_HEAD", "ADMIN"]);
+    const result = await confirmStudentImport(input, session.accessToken);
     revalidatePath("/portal/import-students");
     revalidatePath("/portal/students");
     return { ok: true as const, result };

@@ -133,4 +133,4 @@ public/                          Local brand and hero SVG assets
 
 ## Prototype scope
 
-Interactions are client-side demonstrations. Authentication, persistence, uploads, email, Google Drive, audit log storage, APIs, and role-based permissions are intentionally mocked for the MVP.
+Public/CMS interactions remain demonstrations. Internal portal routes now have Phase 1 staff authentication and RBAC; the database pilot still accepts fake student imports only and is not approved for real student data.
