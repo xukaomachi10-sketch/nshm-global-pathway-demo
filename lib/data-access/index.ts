@@ -9,6 +9,7 @@ export type DataAccessStatus = {
   effectiveMode: DataMode;
   supabaseConfigured: boolean;
   fallbackReason?: string;
+  technicalError?: string;
 };
 
 export function createInternalOperationsRepository(accessToken?: string): {

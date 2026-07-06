@@ -10,7 +10,7 @@ function userFacingMutationError(technicalError: string) {
     return "Supabase từ chối thao tác do quyền RLS. Hãy kiểm tra vai trò nhân sự và assessment được phân công.";
   }
   if (/duplicate key|student_intake_one_active/i.test(technicalError)) {
-    return "Học sinh đã có một Intake Assessment. Hãy tải lại trang để cập nhật bản hiện có.";
+    return "Học sinh đã có Intake Assessment nhưng phiên hiện tại không đọc được bản ghi đó. Hãy kiểm tra policy SELECT head_admin_read_all_intakes và tải lại trang.";
   }
   if (/foreign key|violates.*constraint/i.test(technicalError)) {
     return "Dữ liệu liên kết chưa hợp lệ. Hãy kiểm tra chuyên viên phụ trách và hồ sơ tư vấn.";

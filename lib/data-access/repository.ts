@@ -31,6 +31,9 @@ export interface InternalOperationsRepository {
   listStudentIntakeAssessments(
     limit?: number,
   ): Promise<StudentIntakeAssessment[]>;
+  getActiveStudentIntakeAssessmentByStudentId(
+    studentId: string,
+  ): Promise<StudentIntakeAssessment | null>;
   createInternalTask(input: InsertOf<"internal_tasks">): Promise<InternalTask>;
   updateInternalTask(
     id: string,

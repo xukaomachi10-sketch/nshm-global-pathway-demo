@@ -156,6 +156,7 @@ export function StudentIntakeWorkspace({
   staffProfiles,
   currentStaff,
   status,
+  lastFetchError,
 }: {
   student: StudentRecord;
   cases: CounselingCase[];
@@ -165,6 +166,7 @@ export function StudentIntakeWorkspace({
   staffProfiles: StaffProfile[];
   currentStaff: StaffProfile;
   status: DataAccessStatus;
+  lastFetchError: string;
 }) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>(initialAssessment ? "intake" : "overview");
@@ -175,7 +177,7 @@ export function StudentIntakeWorkspace({
   );
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [technicalError, setTechnicalError] = useState("");
+  const [lastSaveError, setLastSaveError] = useState("");
   const [pending, startTransition] = useTransition();
 
   const canCreate = ["ICCO_HEAD", "ADMIN"].includes(currentStaff.role);
@@ -192,10 +194,9 @@ export function StudentIntakeWorkspace({
   ) => setValues((current) => ({ ...current, [key]: value ? Number(value) : null }));
 
   const submit = (event: "save" | "review") => {
-    const isCreating = !assessmentId;
     setMessage("");
     setError("");
-    setTechnicalError("");
+    setLastSaveError("");
     startTransition(async () => {
       const response = await saveStudentIntakeAssessmentAction({
         assessmentId,
@@ -205,23 +206,22 @@ export function StudentIntakeWorkspace({
       });
       if (!response.ok) {
         setError(response.error);
-        setTechnicalError(response.technicalError);
+        setLastSaveError(response.technicalError);
         return;
       }
       setAssessmentId(response.result.data.id);
       setAssessment(response.result.data);
-      setValues((current) => ({
-        ...current,
-        assigned_counselor_id:
-          response.result.data.assigned_counselor_id,
-        assessment_status: response.result.data.assessment_status,
-      }));
+      setValues(
+        initialValues(response.result.data, student, cases, currentStaff),
+      );
       setMessage(
-        event === "review"
-          ? "Đã rà soát đánh giá và ghi activity log."
-          : isCreating
-            ? "Đã tạo bản Draft assessment và ghi activity log."
-            : "Đã lưu cập nhật assessment và ghi activity log.",
+        response.result.operation === "existing"
+          ? "Đã tìm thấy assessment hiện có và tải lại dữ liệu. Bây giờ bạn có thể lưu cập nhật."
+          : response.result.operation === "reviewed"
+            ? "Đã rà soát assessment và ghi activity log."
+            : response.result.operation === "created"
+              ? "Đã tạo bản Draft assessment và ghi activity log."
+              : "Đã lưu cập nhật assessment và ghi activity log.",
       );
       router.refresh();
     });
@@ -299,6 +299,29 @@ export function StudentIntakeWorkspace({
       )}
       {tab === "intake" && (
         <div className="space-y-5">
+          <DeveloperDiagnostics
+            studentId={student.id}
+            existingAssessmentId={assessmentId ?? ""}
+            effectiveDataMode={status.effectiveMode}
+            currentStaffProfileId={currentStaff.id}
+            lastFetchError={lastFetchError}
+            lastSaveError={lastSaveError}
+          />
+          <Card className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-xs font-black uppercase tracking-wider text-slate-400">
+                Trạng thái Intake Assessment
+              </p>
+              <p className="mt-1 text-sm font-bold text-slate-600">
+                {assessmentId
+                  ? `Đã tải assessment ${assessmentId}`
+                  : "Chưa tải được assessment đang hoạt động"}
+              </p>
+            </div>
+            <Badge tone={assessmentId ? "blue" : "amber"}>
+              {assessmentId ? values.assessment_status : "Chưa có dữ liệu"}
+            </Badge>
+          </Card>
           <div className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
             <p className="font-black">Phạm vi dữ liệu an toàn</p>
             <p className="mt-1 leading-6">
@@ -323,12 +346,12 @@ export function StudentIntakeWorkspace({
           {(message || error) && (
             <div className={`rounded-xl p-4 text-sm font-bold ${error ? "bg-red-50 text-red-700" : "bg-emerald-50 text-emerald-700"}`}>
               {error || message}
-              {error && technicalError && status.requestedMode === "supabase" && (
+              {error && lastSaveError && status.requestedMode === "supabase" && (
                 <details className="mt-3 rounded-lg bg-white/70 p-3 text-left font-mono text-xs font-medium text-slate-700">
                   <summary className="cursor-pointer font-sans font-black text-slate-600">
                     Chi tiết kỹ thuật dành cho IT
                   </summary>
-                  <p className="mt-2 break-words leading-5">{technicalError}</p>
+                  <p className="mt-2 break-words leading-5">{lastSaveError}</p>
                 </details>
               )}
             </div>
@@ -342,18 +365,62 @@ export function StudentIntakeWorkspace({
               <Save className="h-4 w-4" />
               {pending ? "Đang lưu..." : assessmentId ? "Lưu cập nhật" : "Tạo assessment"}
             </Button>
-            <Button
-              disabled={!canEdit || pending || !assessmentId}
-              onClick={() => submit("review")}
-            >
-              <ShieldCheck className="h-4 w-4" /> Đánh dấu đã rà soát
-            </Button>
+            {assessmentId && (
+              <Button
+                disabled={!canEdit || pending}
+                onClick={() => submit("review")}
+              >
+                <ShieldCheck className="h-4 w-4" /> Đánh dấu đã rà soát
+              </Button>
+            )}
           </div>
         </div>
       )}
       {tab === "tasks" && <TasksPanel tasks={tasks} />}
       {tab === "sessions" && <SessionsPanel sessions={sessions} />}
     </div>
+  );
+}
+
+function DeveloperDiagnostics({
+  studentId,
+  existingAssessmentId,
+  effectiveDataMode,
+  currentStaffProfileId,
+  lastFetchError,
+  lastSaveError,
+}: {
+  studentId: string;
+  existingAssessmentId: string;
+  effectiveDataMode: string;
+  currentStaffProfileId: string;
+  lastFetchError: string;
+  lastSaveError: string;
+}) {
+  const rows = [
+    ["studentId", studentId],
+    ["existingAssessmentId", existingAssessmentId || "null"],
+    ["hasExistingAssessment", existingAssessmentId ? "true" : "false"],
+    ["effectiveDataMode", effectiveDataMode],
+    ["currentStaffProfileId", currentStaffProfileId],
+    ["lastFetchError", lastFetchError || "none"],
+    ["lastSaveError", lastSaveError || "none"],
+  ];
+
+  return (
+    <details className="rounded-2xl border border-sky-200 bg-sky-50 p-4 text-sm text-sky-950">
+      <summary className="cursor-pointer font-black">
+        Developer diagnostics · Intake Assessment
+      </summary>
+      <dl className="mt-3 grid gap-2 font-mono text-xs sm:grid-cols-2">
+        {rows.map(([label, value]) => (
+          <div key={label} className="rounded-lg bg-white/75 p-3">
+            <dt className="font-bold text-slate-500">{label}</dt>
+            <dd className="mt-1 break-words text-slate-800">{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </details>
   );
 }
 

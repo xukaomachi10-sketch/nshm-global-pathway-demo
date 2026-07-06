@@ -16,11 +16,14 @@ export type DataResult<T> = {
 function fallbackStatus(
   status: DataAccessStatus,
   subject: string,
+  error?: unknown,
 ): DataAccessStatus {
   return {
     ...status,
     effectiveMode: "mock",
     fallbackReason: `Không thể tải ${subject} từ Supabase. Dữ liệu mock đang được sử dụng.`,
+    technicalError:
+      error instanceof Error ? error.message : error ? String(error) : undefined,
   };
 }
 
@@ -36,11 +39,11 @@ export async function readWithMockFallback<T>(
       data: await read(selected.repository),
       status: selected.status,
     };
-  } catch {
+  } catch (error) {
     const mock = new MockInternalOperationsRepository();
     return {
       data: await read(mock),
-      status: fallbackStatus(selected.status, subject),
+      status: fallbackStatus(selected.status, subject, error),
     };
   }
 }
@@ -63,9 +66,9 @@ export async function mutateWithActivityLog<T>(options: {
 
   try {
     record = await options.mutate(repository);
-  } catch {
+  } catch (error) {
     repository = new MockInternalOperationsRepository();
-    status = fallbackStatus(selected.status, options.subject);
+    status = fallbackStatus(selected.status, options.subject, error);
     record = await options.mutate(repository);
   }
 

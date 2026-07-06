@@ -60,6 +60,12 @@ export default async function StudentDetailPage({
       staffProfiles={result.data.staffProfiles}
       currentStaff={session.staff}
       status={result.status}
+      lastFetchError={
+        result.data.assessmentFetchError ||
+        result.status.technicalError ||
+        result.status.fallbackReason ||
+        ""
+      }
     />
   );
 }

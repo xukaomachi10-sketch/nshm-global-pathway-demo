@@ -331,6 +331,15 @@ export class MockInternalOperationsRepository
     return take(studentIntakeAssessments, limit);
   }
 
+  getActiveStudentIntakeAssessmentByStudentId(studentId: string) {
+    return Promise.resolve(
+      studentIntakeAssessments.find(
+        (assessment) =>
+          assessment.student_id === studentId && !assessment.deleted_at,
+      ) ?? null,
+    );
+  }
+
   createInternalTask(input: InsertOf<"internal_tasks">) {
     const task = timestamps({
       id: input.id ?? createId(),

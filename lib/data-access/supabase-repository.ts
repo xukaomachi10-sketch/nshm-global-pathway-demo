@@ -169,6 +169,32 @@ export class SupabaseInternalOperationsRepository
     });
   }
 
+  async getActiveStudentIntakeAssessmentByStudentId(studentId: string) {
+    const endpoint = new URL(
+      "/rest/v1/rpc/get_student_intake_assessment",
+      this.config.url,
+    );
+    const response = await fetch(endpoint, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        apikey: this.config.apiKey,
+        Authorization: `Bearer ${this.config.accessToken ?? this.config.apiKey}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ p_student_id: studentId }),
+    });
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(
+        `Supabase intake assessment fetch failed (${response.status}): ${detail}`,
+      );
+    }
+    const rows = (await response.json()) as import("@/types/database").StudentIntakeAssessment[];
+    return rows[0] ?? null;
+  }
+
   createInternalTask(input: InsertOf<"internal_tasks">) {
     return this.mutate("internal_tasks", "POST", input);
   }

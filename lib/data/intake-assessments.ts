@@ -63,24 +63,35 @@ function draftPayloadValues(values: StudentIntakeAssessmentFormValues) {
 
 export async function getStudentIntakeWorkspace(studentId: string) {
   return readWithMockFallback("hồ sơ đánh giá đầu vào", async (repository) => {
-    const [student, cases, tasks, sessions, assessments, staffProfiles] =
+    const [student, cases, tasks, sessions, staffProfiles] =
       await Promise.all([
         repository.getStudentById(studentId),
         repository.listCounselingCases(1000),
         repository.listInternalTasks(1000),
         repository.listCounselingSessions(1000),
-        repository.listStudentIntakeAssessments(1000),
         repository.listStaffProfiles(100),
       ]);
     if (!student) return null;
+
+    let assessment: StudentIntakeAssessment | null = null;
+    let assessmentFetchError = "";
+    try {
+      assessment =
+        await repository.getActiveStudentIntakeAssessmentByStudentId(
+          student.id,
+        );
+    } catch (error) {
+      assessmentFetchError =
+        error instanceof Error ? error.message : String(error);
+    }
 
     return {
       student,
       cases: cases.filter((item) => item.student_id === student.id),
       tasks: tasks.filter((item) => item.student_id === student.id),
       sessions: sessions.filter((item) => item.student_id === student.id),
-      assessment:
-        assessments.find((item) => item.student_id === student.id) ?? null,
+      assessment,
+      assessmentFetchError,
       staffProfiles: staffProfiles.filter((item) => item.is_active),
     };
   });
@@ -91,20 +102,38 @@ export async function saveStudentIntakeAssessment(
 ) {
   if (!input.studentId) throw new Error("Không xác định được học sinh.");
   if (!input.values.intake_date) throw new Error("Ngày tiếp nhận là bắt buộc.");
+  const selected = createInternalOperationsRepository(
+    await getRepositoryAccessToken(),
+  );
+  const repository = selected.repository;
+  const existingAssessment =
+    await repository.getActiveStudentIntakeAssessmentByStudentId(
+      input.studentId,
+    );
+  const targetAssessmentId =
+    existingAssessment?.id ?? input.assessmentId;
+
   if (
     input.event === "review" ||
     input.values.assessment_status === "Reviewed"
   ) {
-    if (!input.assessmentId) {
+    if (!targetAssessmentId) {
       throw new Error("Hãy tạo và lưu bản Draft trước khi đánh dấu đã rà soát.");
     }
     validateReview(input.values);
   }
 
-  const selected = createInternalOperationsRepository(
-    await getRepositoryAccessToken(),
-  );
-  const repository = selected.repository;
+  // A stale client may not know that a row already exists. Return that row
+  // instead of attempting a duplicate insert or overwriting it with a blank form.
+  if (existingAssessment && !input.assessmentId) {
+    return {
+      data: existingAssessment,
+      status: selected.status,
+      activityLogged: false,
+      operation: "existing" as const,
+    };
+  }
+
   const values = {
     ...input.values,
     assigned_counselor_id:
@@ -115,11 +144,13 @@ export async function saveStudentIntakeAssessment(
   } satisfies UpdateOf<"student_intake_assessments">;
 
   let assessment: StudentIntakeAssessment;
-  if (input.assessmentId) {
+  let operation: "created" | "updated" | "reviewed";
+  if (targetAssessmentId) {
     assessment = await repository.updateStudentIntakeAssessment(
-      input.assessmentId,
+      targetAssessmentId,
       values,
     );
+    operation = input.event === "review" ? "reviewed" : "updated";
   } else {
     const payload = {
       ...(repository instanceof MockInternalOperationsRepository
@@ -134,6 +165,7 @@ export async function saveStudentIntakeAssessment(
       updated_by: input.staff.id,
     } as InsertOf<"student_intake_assessments">;
     assessment = await repository.createStudentIntakeAssessment(payload);
+    operation = "created";
   }
 
   // Supabase writes its audit event in a database trigger so record + audit are
@@ -145,11 +177,12 @@ export async function saveStudentIntakeAssessment(
         caseId: assessment.counseling_case_id,
         entityType: "student_intake_assessment",
         entityId: assessment.id,
-        action: input.assessmentId
-          ? input.event === "review"
+        action:
+          operation === "reviewed"
             ? "student_intake.reviewed"
-            : "student_intake.updated"
-          : "student_intake.created",
+            : operation === "updated"
+              ? "student_intake.updated"
+              : "student_intake.created",
         record: {
           assessment_status: assessment.assessment_status,
           risk_level: assessment.risk_level,
@@ -160,5 +193,10 @@ export async function saveStudentIntakeAssessment(
     );
   }
 
-  return { data: assessment, status: selected.status, activityLogged: true };
+  return {
+    data: assessment,
+    status: selected.status,
+    activityLogged: true,
+    operation,
+  };
 }

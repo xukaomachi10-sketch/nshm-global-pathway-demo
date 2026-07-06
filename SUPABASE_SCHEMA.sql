@@ -1229,6 +1229,38 @@ with check (
   and updated_by = public.current_staff_profile_id()
 );
 
+-- RLS-aware exact lookup used by the student detail page. SECURITY DEFINER is
+-- limited by explicit active-staff role checks and is never executable by anon.
+create or replace function public.get_student_intake_assessment(
+  p_student_id uuid
+)
+returns setof public.student_intake_assessments
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select sia.*
+  from public.student_intake_assessments sia
+  where sia.student_id = p_student_id
+    and sia.deleted_at is null
+    and public.is_active_staff()
+    and (
+      public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
+      or (
+        public.current_staff_role() = 'COUNSELOR'
+        and sia.assigned_counselor_id = public.current_staff_profile_id()
+      )
+    )
+  order by sia.created_at desc
+  limit 1
+$$;
+
+revoke all on function public.get_student_intake_assessment(uuid)
+from public, anon;
+grant execute on function public.get_student_intake_assessment(uuid)
+to authenticated;
+
 create or replace function public.log_student_intake_change()
 returns trigger
 language plpgsql
