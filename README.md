@@ -52,6 +52,7 @@ The application supports two requested data modes:
 NEXT_PUBLIC_DATA_MODE=mock
 # or
 NEXT_PUBLIC_DATA_MODE=supabase
+NEXT_PUBLIC_REAL_STUDENT_IMPORT_ENABLED=false
 ```
 
 Missing or invalid values always resolve to `mock`. Supabase mode requires `NEXT_PUBLIC_SUPABASE_URL` plus either `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`; if configuration is missing or the fake-student query fails, `/demo` falls back to the mock repository.

@@ -8,9 +8,11 @@ import {
   STUDENT_CSV_HEADERS,
   validateStudentImportRows,
   type ParsedStudentCsvRow,
+  type StudentImportMode,
   type StudentCsvValues,
   type ValidatedStudentImportRow,
 } from "@/lib/import/student-csv";
+import { isRealStudentImportEnabled } from "@/lib/features";
 import type {
   InsertOf,
   Json,
@@ -19,6 +21,7 @@ import type {
 } from "@/types/database";
 
 export type ConfirmStudentImportInput = {
+  mode: StudentImportMode;
   fileName: string;
   fileSize: number;
   rows: ParsedStudentCsvRow[];
@@ -150,6 +153,9 @@ export async function confirmStudentImport(
   input: ConfirmStudentImportInput,
   accessToken?: string,
 ): Promise<StudentImportResult> {
+  if (input.mode !== "fake" && input.mode !== "real") {
+    throw new Error("Import mode is invalid.");
+  }
   if (input.fileSize < 0 || input.fileSize > 2 * 1024 * 1024) {
     throw new Error("Tệp CSV phải nhỏ hơn hoặc bằng 2 MB.");
   }
@@ -157,11 +163,22 @@ export async function confirmStudentImport(
   if (!rows.length) throw new Error("Không có dòng dữ liệu để nhập.");
   if (rows.length > 1000) throw new Error("Pilot giới hạn tối đa 1.000 dòng.");
 
+  if (input.mode === "real" && !isRealStudentImportEnabled()) {
+    throw new Error("Real student import is disabled by the environment feature flag.");
+  }
+
   const selected = await selectRepository(accessToken);
+  if (input.mode === "real" && selected.repository.mode !== "supabase") {
+    throw new Error("Real student import requires the authenticated Supabase Preview.");
+  }
   const existingByCode = new Map(
     selected.students.map((student) => [student.student_code.toUpperCase(), student]),
   );
-  const validation = validateStudentImportRows(rows, existingByCode.keys());
+  const validation = validateStudentImportRows(
+    rows,
+    existingByCode.keys(),
+    input.mode,
+  );
   const valid = validation.filter((row) => !row.errors.length);
   if (!valid.length) throw new Error("Không có dòng hợp lệ để nhập.");
 
@@ -173,18 +190,39 @@ export async function confirmStudentImport(
       row_number: row.rowNumber,
       raw: row.errors.length ? { rejected: true } : row.raw,
       normalized: row.errors.length
-        ? { pilot_fake: true, rejected: true }
-        : { ...row.normalized, is_fake: true, pilot_fake: true },
+        ? input.mode === "fake"
+          ? { pilot_fake: true, rejected: true }
+          : { import_mode: "real", rejected: true }
+        : input.mode === "fake"
+          ? { ...row.normalized, is_fake: true, pilot_fake: true }
+          : {
+              student_code: row.normalized.student_code,
+              full_name: row.normalized.full_name,
+              class_name: row.normalized.class_name,
+              grade_level: row.normalized.grade_level,
+              graduation_year: row.normalized.graduation_year,
+              homeroom_teacher: row.normalized.homeroom_teacher,
+              source_system: row.normalized.source_system,
+              source_record_id: row.normalized.source_record_id,
+              is_active_student: row.normalized.is_active_student,
+              is_fake: false,
+            },
       validation_status: row.errors.length ? "error" : "valid",
       validation_errors: row.errors,
       validation_warnings: row.warnings,
     }));
     try {
-      const result = await selected.repository.importFakeStudentsTransaction({
-        fileName: safeFileName(input.fileName),
-        fileSize: input.fileSize,
-        rows: transactionRows,
-      });
+      const result = await (input.mode === "fake"
+        ? selected.repository.importFakeStudentsTransaction({
+            fileName: safeFileName(input.fileName),
+            fileSize: input.fileSize,
+            rows: transactionRows,
+          })
+        : selected.repository.importRealStudentsTransaction({
+            fileName: safeFileName(input.fileName),
+            fileSize: input.fileSize,
+            rows: transactionRows,
+          }));
       return {
         batchId: result.batch_id,
         status: selected.status,
@@ -198,7 +236,7 @@ export async function confirmStudentImport(
       };
     } catch {
       throw new Error(
-        "Transactional fake import was rejected. Confirm staff role, Phase 1 RLS, and the import RPC in the dev Supabase project.",
+        `Transactional ${input.mode} import was rejected. Confirm feature gates, staff role, RLS, and the Phase 2 RPC in the dev Supabase project.`,
       );
     }
   }
@@ -210,6 +248,7 @@ export async function confirmStudentImport(
       source_file_size_bytes: input.fileSize,
       batch_status: "validated",
       data_mode: selected.repository.mode,
+      import_mode: "fake",
       is_fake_only: true,
       total_rows: validation.length,
       valid_rows: valid.length,

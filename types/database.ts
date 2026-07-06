@@ -135,6 +135,7 @@ export type StudentImportBatch = {
   source_file_size_bytes: number | null;
   batch_status: StudentImportBatchStatus;
   data_mode: "mock" | "supabase";
+  import_mode: "fake" | "real";
   is_fake_only: boolean;
   total_rows: number;
   valid_rows: number;
@@ -149,6 +150,14 @@ export type StudentImportBatch = {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
+};
+
+export type SystemSetting = {
+  setting_key: string;
+  setting_value: Json;
+  description: string | null;
+  created_at: string;
+  updated_at: string;
 };
 
 export type StudentImportStaging = {
@@ -296,6 +305,13 @@ export type Database = {
         StaffProfile,
         Omit<StaffProfile, "id" | "created_at" | "updated_at"> & {
           id?: string;
+          created_at?: string;
+          updated_at?: string;
+        }
+      >;
+      system_settings: TableDefinition<
+        SystemSetting,
+        Omit<SystemSetting, "created_at" | "updated_at"> & {
           created_at?: string;
           updated_at?: string;
         }

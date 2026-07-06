@@ -84,6 +84,14 @@ create table if not exists public.staff_profiles (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.system_settings (
+  setting_key text primary key,
+  setting_value jsonb not null,
+  description text,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.students (
   id uuid primary key default gen_random_uuid(),
   student_code text not null unique check (length(trim(student_code)) >= 3),
@@ -315,7 +323,8 @@ create table if not exists public.student_import_batches (
     batch_status in ('uploaded', 'validated', 'importing', 'completed', 'completed_with_errors', 'failed')
   ),
   data_mode text not null check (data_mode in ('mock', 'supabase')),
-  is_fake_only boolean not null default true check (is_fake_only = true),
+  import_mode text not null default 'fake' check (import_mode in ('fake', 'real')),
+  is_fake_only boolean not null default true,
   total_rows integer not null default 0 check (total_rows >= 0),
   valid_rows integer not null default 0 check (valid_rows >= 0),
   error_rows integer not null default 0 check (error_rows >= 0),
@@ -330,6 +339,20 @@ create table if not exists public.student_import_batches (
   updated_at timestamptz not null default now(),
   deleted_at timestamptz
 );
+
+alter table public.student_import_batches
+  add column if not exists import_mode text not null default 'fake';
+alter table public.student_import_batches
+  drop constraint if exists student_import_batches_is_fake_only_check;
+
+do $$ begin
+  alter table public.student_import_batches
+    add constraint student_import_batches_mode_check
+    check (
+      (import_mode = 'fake' and is_fake_only = true)
+      or (import_mode = 'real' and is_fake_only = false)
+    );
+exception when duplicate_object then null; end $$;
 
 create table if not exists public.student_import_staging (
   id uuid primary key default gen_random_uuid(),
@@ -417,7 +440,7 @@ do $$
 declare table_name text;
 begin
   foreach table_name in array array[
-    'users', 'staff_profiles', 'students', 'counseling_cases', 'counseling_sessions',
+    'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents',
     'student_import_batches', 'student_import_staging'
   ] loop
@@ -452,6 +475,7 @@ for each row execute function public.prevent_activity_log_mutation();
 
 alter table public.users enable row level security;
 alter table public.staff_profiles enable row level security;
+alter table public.system_settings enable row level security;
 alter table public.students enable row level security;
 alter table public.counseling_cases enable row level security;
 alter table public.counseling_sessions enable row level security;
@@ -465,6 +489,7 @@ alter table public.student_import_staging enable row level security;
 -- Pilot security posture: all tables are blocked by default.
 revoke all on table public.users from anon, authenticated;
 revoke all on table public.staff_profiles from anon, authenticated;
+revoke all on table public.system_settings from anon, authenticated;
 revoke all on table public.students from anon, authenticated;
 revoke all on table public.counseling_cases from anon, authenticated;
 revoke all on table public.counseling_sessions from anon, authenticated;
@@ -687,6 +712,20 @@ as $$
   limit 1
 $$;
 
+create or replace function public.current_staff_profile_id()
+returns uuid
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select sp.id
+  from public.staff_profiles sp
+  where sp.auth_user_id = auth.uid()
+    and sp.is_active = true
+  limit 1
+$$;
+
 create or replace function public.current_internal_user_id()
 returns uuid
 language sql
@@ -722,16 +761,41 @@ as $$
   select public.current_staff_role() in ('ICCO_HEAD', 'ADMIN')
 $$;
 
+create or replace function public.is_real_student_import_enabled()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select coalesce(
+    (select ss.setting_value = 'true'::jsonb
+     from public.system_settings ss
+     where ss.setting_key = 'real_student_import_enabled'),
+    false
+  )
+$$;
+
 revoke all on function public.current_staff_role() from public, anon;
+revoke all on function public.current_staff_profile_id() from public, anon;
 revoke all on function public.current_internal_user_id() from public, anon;
 revoke all on function public.is_active_staff() from public, anon;
 revoke all on function public.can_import_students() from public, anon;
+revoke all on function public.is_real_student_import_enabled() from public, anon;
 grant execute on function public.current_staff_role() to authenticated;
+grant execute on function public.current_staff_profile_id() to authenticated;
 grant execute on function public.current_internal_user_id() to authenticated;
 grant execute on function public.is_active_staff() to authenticated;
 grant execute on function public.can_import_students() to authenticated;
+grant execute on function public.is_real_student_import_enabled() to authenticated;
 
 grant select, insert, update on table public.staff_profiles to authenticated;
+grant select on table public.system_settings to authenticated;
+
+drop policy if exists staff_read_system_settings on public.system_settings;
+create policy staff_read_system_settings
+on public.system_settings for select to authenticated
+using (public.current_staff_role() in ('ICCO_HEAD', 'ADMIN'));
 
 drop policy if exists staff_read_profiles on public.staff_profiles;
 create policy staff_read_profiles
@@ -809,7 +873,7 @@ drop policy if exists staff_manage_fake_import_batches on public.student_import_
 drop policy if exists staff_read_fake_import_batches on public.student_import_batches;
 create policy staff_read_fake_import_batches
 on public.student_import_batches for select to authenticated
-using (public.can_import_students() and deleted_at is null and is_fake_only = true);
+using (public.can_import_students() and deleted_at is null);
 
 drop policy if exists pilot_manage_fake_import_staging on public.student_import_staging;
 drop policy if exists staff_manage_fake_import_staging on public.student_import_staging;
@@ -819,7 +883,15 @@ on public.student_import_staging for select to authenticated
 using (
   public.can_import_students()
   and deleted_at is null
-  and (student_code is null or student_code like 'FAKE-%')
+  and exists (
+    select 1 from public.student_import_batches b
+    where b.id = student_import_staging.batch_id
+      and b.deleted_at is null
+      and (
+        (b.import_mode = 'fake' and (student_import_staging.student_code is null or student_import_staging.student_code like 'FAKE-%'))
+        or b.import_mode = 'real'
+      )
+  )
 );
 
 revoke all on table public.counseling_cases from anon;
@@ -945,7 +1017,7 @@ begin
     from jsonb_array_elements(p_rows) item
     where item ->> 'validation_status' = 'valid'
       and (
-        coalesce(item #>> '{normalized,student_code}', '') not like 'FAKE-%'
+        coalesce(item #>> '{normalized,student_code}', '') not like 'FAKE-NSHM-%'
         or coalesce((item #>> '{normalized,is_fake}')::boolean, false) is not true
         or coalesce(item #>> '{normalized,full_name}', '') = ''
         or coalesce(item #>> '{normalized,class_name}', '') = ''
@@ -953,7 +1025,7 @@ begin
         or item #>> '{normalized,graduation_year}' is null
       )
   ) then
-    raise exception 'Only complete FAKE-* rows with is_fake=true are allowed in Phase 1';
+    raise exception 'Only complete FAKE-NSHM-* rows with is_fake=true are allowed in fake mode';
   end if;
 
   if exists (
@@ -973,11 +1045,11 @@ begin
 
   insert into public.student_import_batches (
     source_file_name, source_file_size_bytes, batch_status, data_mode,
-    is_fake_only, total_rows, valid_rows, error_rows, new_rows,
+    import_mode, is_fake_only, total_rows, valid_rows, error_rows, new_rows,
     updated_rows, skipped_rows, created_by, confirmed_at
   ) values (
     left(coalesce(nullif(trim(p_source_file_name), ''), 'students.csv'), 150),
-    p_source_file_size_bytes, 'importing', 'supabase', true,
+    p_source_file_size_bytes, 'importing', 'supabase', 'fake', true,
     v_total, v_valid, v_errors, 0, 0, v_errors,
     public.current_internal_user_id(), now()
   ) returning id into v_batch_id;
@@ -1010,7 +1082,7 @@ begin
     ) values (
       v_batch_id,
       greatest(coalesce((v_row ->> 'row_number')::integer, 2), 2),
-      case when v_code like 'FAKE-%' then v_code else null end,
+      case when v_code like 'FAKE-NSHM-%' then v_code else null end,
       case when v_status = 'valid' then coalesce(v_row -> 'raw', '{}'::jsonb)
            else jsonb_build_object('rejected', true) end,
       case when v_status = 'valid' then coalesce(v_row -> 'normalized', '{}'::jsonb) || '{"pilot_fake":true}'::jsonb
@@ -1081,7 +1153,13 @@ begin
              else 'student.import_updated' end,
         'restricted', null,
         jsonb_build_object('student_code', v_code, 'batch_id', v_batch_id, 'is_fake', true),
-        '{"pilot":true,"is_fake":true,"source":"transactional_csv_import"}'::jsonb
+        jsonb_build_object(
+          'pilot', true,
+          'is_fake', true,
+          'source', 'transactional_csv_import',
+          'staff_profile_id', public.current_staff_profile_id(),
+          'staff_role', public.current_staff_role()
+        )
       );
     end if;
   end loop;
@@ -1118,6 +1196,224 @@ $$;
 revoke all on function public.import_fake_students_transaction(text, bigint, jsonb) from public, anon;
 grant execute on function public.import_fake_students_transaction(text, bigint, jsonb) to authenticated;
 
+create or replace function public.import_real_students_transaction(
+  p_source_file_name text,
+  p_source_file_size_bytes bigint,
+  p_rows jsonb
+)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_batch_id uuid;
+  v_row jsonb;
+  v_staging_id uuid;
+  v_student_id uuid;
+  v_existing_id uuid;
+  v_code text;
+  v_status text;
+  v_total integer;
+  v_valid integer;
+  v_errors integer;
+  v_new integer := 0;
+  v_updated integer := 0;
+begin
+  if not public.can_import_students() then
+    raise exception 'ICCO_HEAD or ADMIN role required' using errcode = '42501';
+  end if;
+  if not public.is_real_student_import_enabled() then
+    raise exception 'Real student import is disabled in database settings' using errcode = '42501';
+  end if;
+  if jsonb_typeof(p_rows) <> 'array' then
+    raise exception 'p_rows must be a JSON array';
+  end if;
+
+  v_total := jsonb_array_length(p_rows);
+  if v_total < 1 or v_total > 1000 then
+    raise exception 'Import must contain between 1 and 1000 rows';
+  end if;
+
+  if exists (
+    select 1
+    from jsonb_array_elements(p_rows) item
+    where item ->> 'validation_status' = 'valid'
+      and (
+        coalesce(item #>> '{normalized,student_code}', '') = ''
+        or upper(item #>> '{normalized,student_code}') like 'FAKE-%'
+        or coalesce((item #>> '{normalized,is_fake}')::boolean, true) is not false
+        or coalesce(item #>> '{normalized,full_name}', '') = ''
+        or coalesce(item #>> '{normalized,class_name}', '') = ''
+        or item #>> '{normalized,grade_level}' is null
+        or item #>> '{normalized,graduation_year}' is null
+        or coalesce(item #>> '{normalized,source_system}', '') = ''
+        or coalesce(item #>> '{normalized,source_record_id}', '') = ''
+        or coalesce(item #>> '{normalized,date_of_birth}', '') <> ''
+        or coalesce(item #>> '{normalized,gender}', '') <> ''
+        or coalesce(item #>> '{normalized,academic_track}', '') <> ''
+        or coalesce(item #>> '{normalized,student_email}', '') <> ''
+        or coalesce(item #>> '{normalized,parent_name}', '') <> ''
+        or coalesce(item #>> '{normalized,parent_phone}', '') <> ''
+        or coalesce(item #>> '{normalized,parent_email}', '') <> ''
+      )
+  ) then
+    raise exception 'Real Import v1 accepts only complete minimal non-sensitive rows';
+  end if;
+
+  if exists (
+    select 1
+    from jsonb_array_elements(p_rows) item
+    where item ->> 'validation_status' = 'valid'
+    group by upper(item #>> '{normalized,student_code}')
+    having count(*) > 1
+  ) then
+    raise exception 'Duplicate student_code in import batch';
+  end if;
+
+  select count(*) filter (where item ->> 'validation_status' = 'valid'),
+         count(*) filter (where item ->> 'validation_status' <> 'valid')
+  into v_valid, v_errors
+  from jsonb_array_elements(p_rows) item;
+
+  insert into public.student_import_batches (
+    source_file_name, source_file_size_bytes, batch_status, data_mode,
+    import_mode, is_fake_only, total_rows, valid_rows, error_rows,
+    new_rows, updated_rows, skipped_rows, created_by, confirmed_at
+  ) values (
+    left(coalesce(nullif(trim(p_source_file_name), ''), 'students.csv'), 150),
+    p_source_file_size_bytes, 'importing', 'supabase', 'real', false,
+    v_total, v_valid, v_errors, 0, 0, v_errors,
+    public.current_internal_user_id(), now()
+  ) returning id into v_batch_id;
+
+  for v_row in select value from jsonb_array_elements(p_rows)
+  loop
+    v_status := coalesce(v_row ->> 'validation_status', 'error');
+    v_code := upper(nullif(v_row #>> '{normalized,student_code}', ''));
+    v_existing_id := null;
+
+    if v_status = 'valid' then
+      if exists (
+        select 1 from public.students s
+        where s.student_code = v_code and s.is_fake is true
+      ) then
+        raise exception 'Real import cannot update a fake student record';
+      end if;
+      select s.id into v_existing_id
+      from public.students s
+      where s.student_code = v_code and s.deleted_at is null;
+      if v_existing_id is null then v_new := v_new + 1;
+      else v_updated := v_updated + 1;
+      end if;
+    end if;
+
+    insert into public.student_import_staging (
+      batch_id, row_number, student_code, raw_data, normalized_data,
+      validation_status, validation_errors, validation_warnings,
+      import_action, imported_student_id, imported_at
+    ) values (
+      v_batch_id,
+      greatest(coalesce((v_row ->> 'row_number')::integer, 2), 2),
+      case when v_status = 'valid' then v_code else null end,
+      case when v_status = 'valid' then coalesce(v_row -> 'raw', '{}'::jsonb)
+           else jsonb_build_object('rejected', true) end,
+      case when v_status = 'valid' then coalesce(v_row -> 'normalized', '{}'::jsonb)
+           else '{"rejected":true,"import_mode":"real"}'::jsonb end,
+      case when v_status = 'valid' then 'valid' else 'error' end,
+      coalesce(v_row -> 'validation_errors', '[]'::jsonb),
+      coalesce(v_row -> 'validation_warnings', '[]'::jsonb),
+      case when v_status <> 'valid' then 'skipped'
+           when v_existing_id is null then 'new' else 'update' end,
+      null, null
+    ) returning id into v_staging_id;
+
+    if v_status = 'valid' then
+      insert into public.students (
+        student_code, full_name, class_name, grade_level, graduation_year,
+        homeroom_teacher, source_system, source_record_id,
+        is_active_student, is_fake
+      ) values (
+        v_code,
+        v_row #>> '{normalized,full_name}',
+        v_row #>> '{normalized,class_name}',
+        (v_row #>> '{normalized,grade_level}')::smallint,
+        (v_row #>> '{normalized,graduation_year}')::smallint,
+        nullif(v_row #>> '{normalized,homeroom_teacher}', ''),
+        v_row #>> '{normalized,source_system}',
+        v_row #>> '{normalized,source_record_id}',
+        coalesce((v_row #>> '{normalized,is_active_student}')::boolean, true),
+        false
+      )
+      on conflict (student_code) do update set
+        full_name = excluded.full_name,
+        class_name = excluded.class_name,
+        grade_level = excluded.grade_level,
+        graduation_year = excluded.graduation_year,
+        homeroom_teacher = excluded.homeroom_teacher,
+        source_system = excluded.source_system,
+        source_record_id = excluded.source_record_id,
+        is_active_student = excluded.is_active_student,
+        is_fake = false
+      returning id into v_student_id;
+
+      update public.student_import_staging
+      set imported_student_id = v_student_id, imported_at = now()
+      where id = v_staging_id;
+
+      insert into public.activity_logs (
+        actor_id, student_id, entity_type, entity_id, action,
+        confidentiality_level, previous_data, new_data, metadata
+      ) values (
+        public.current_internal_user_id(), v_student_id,
+        'student_import_batch', v_batch_id,
+        case when v_existing_id is null then 'student.real_import_created'
+             else 'student.real_import_updated' end,
+        'restricted', null,
+        jsonb_build_object('student_code', v_code, 'batch_id', v_batch_id, 'is_fake', false),
+        jsonb_build_object(
+          'source', 'transactional_real_csv_import',
+          'staff_profile_id', public.current_staff_profile_id(),
+          'staff_role', public.current_staff_role(),
+          'import_mode', 'real'
+        )
+      );
+    end if;
+  end loop;
+
+  update public.student_import_staging
+  set raw_data = jsonb_build_object('purged_after_import', true),
+      normalized_data = jsonb_build_object(
+        'student_code', student_code,
+        'source_system', normalized_data ->> 'source_system',
+        'source_record_id', normalized_data ->> 'source_record_id',
+        'import_mode', 'real',
+        'purged_after_import', true
+      )
+  where batch_id = v_batch_id;
+
+  update public.student_import_batches
+  set batch_status = case when v_errors > 0 then 'completed_with_errors' else 'completed' end,
+      new_rows = v_new,
+      updated_rows = v_updated,
+      completed_at = now()
+  where id = v_batch_id;
+
+  return jsonb_build_object(
+    'batch_id', v_batch_id,
+    'total_rows', v_total,
+    'valid_rows', v_valid,
+    'error_rows', v_errors,
+    'new_students', v_new,
+    'updated_students', v_updated,
+    'imported_students', v_valid
+  );
+end;
+$$;
+
+revoke all on function public.import_real_students_transaction(text, bigint, jsonb) from public, anon;
+grant execute on function public.import_real_students_transaction(text, bigint, jsonb) to authenticated;
+
 create or replace function public.purge_student_import_staging(
   p_retention_days integer default 7
 )
@@ -1153,6 +1449,7 @@ grant execute on function public.purge_student_import_staging(integer) to authen
 
 comment on table public.users is 'Internal operations user profiles; optional Supabase Auth link.';
 comment on table public.staff_profiles is 'Active Supabase Auth staff identity and Phase 1 portal role.';
+comment on table public.system_settings is 'Server-enforced operational feature gates; real import defaults disabled.';
 comment on table public.students is 'Student master records. Pilot seeds are fake only.';
 comment on table public.counseling_cases is 'Case-level counseling workflow and ownership.';
 comment on table public.counseling_sessions is 'Scheduled and completed counseling interactions.';
@@ -1160,12 +1457,20 @@ comment on table public.internal_tasks is 'Operational tasks tied to cases, stud
 comment on table public.test_scores is 'Academic and standardized test score history.';
 comment on table public.consents is 'Consent lifecycle and evidence references.';
 comment on table public.activity_logs is 'Append-only audit trail for internal operations.';
-comment on table public.student_import_batches is 'Fake-only CSV import confirmation batches; source file bytes are not stored.';
-comment on table public.student_import_staging is 'Validated fake-only CSV row staging with sanitized invalid-row payloads.';
+comment on table public.student_import_batches is 'Authenticated fake/real CSV import batches; source file bytes are not stored.';
+comment on table public.student_import_staging is 'Validated CSV row staging; successful transactions scrub row PII immediately.';
 
 -- ---------------------------------------------------------------------------
 -- FAKE PILOT SEED DATA. Never replace these values with real student data.
 -- ---------------------------------------------------------------------------
+
+insert into public.system_settings (
+  setting_key, setting_value, description
+) values (
+  'real_student_import_enabled', 'false'::jsonb,
+  'Database-side Phase 2 gate. Keep false until the reviewed first-five-row import.'
+)
+on conflict (setting_key) do nothing;
 
 insert into public.users (
   id, email, full_name, role, is_active

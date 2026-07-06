@@ -5,6 +5,7 @@ This package is for an isolated Supabase pilot. It must not be connected to the 
 ## Safety model
 
 - `NEXT_PUBLIC_DATA_MODE=mock` is the committed default.
+- `NEXT_PUBLIC_REAL_STUDENT_IMPORT_ENABLED=false` is the committed Phase 2 default.
 - Missing or invalid data mode resolves to `mock`.
 - Supabase is selected only when the mode, URL, and one supported public key exist:
   - `NEXT_PUBLIC_DATA_MODE=supabase`
@@ -12,12 +13,12 @@ This package is for an isolated Supabase pilot. It must not be connected to the 
   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - A missing credential or failed Supabase query falls back to the mock repository.
 - Public website and CMS screens remain fixture-backed. Only the approved Internal Operations routes use the pilot repository.
-- Portal routes require a Supabase Auth user with an active `staff_profiles` row. CSV import remains restricted to fake `FAKE-*` student codes.
+- Portal routes require a Supabase Auth user with an active `staff_profiles` row. Fake import remains available; real import requires two explicit gates that both default to disabled.
 - The pilot uses only the Supabase publishable/anon key and never uses an admin key.
 
 ## Package contents
 
-- `SUPABASE_SCHEMA.sql`: enums, eleven pilot tables, staff RBAC, transactional fake import RPC, retention controls, and fake seed data.
+- `SUPABASE_SCHEMA.sql`: twelve pilot tables, staff RBAC, separate transactional fake/real RPCs, retention controls, and fake seed data.
 - `DATA_DICTIONARY.md`: field definitions and data classifications.
 - `RBAC_MATRIX.md`: target role and confidentiality access model.
 - `DATABASE_TEST_PLAN.md`: database, fallback, security, and regression tests.
@@ -44,6 +45,7 @@ The publishable key is constrained by RLS. Store local configuration in `.env.lo
 5. Confirm these tables exist:
    - `users`
    - `staff_profiles`
+   - `system_settings`
    - `students`
    - `counseling_cases`
    - `counseling_sessions`
@@ -96,7 +98,7 @@ select table_name
 from information_schema.tables
 where table_schema = 'public'
   and table_name in (
-    'users', 'staff_profiles', 'students', 'counseling_cases', 'counseling_sessions',
+    'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
     'student_import_batches', 'student_import_staging'
   )
@@ -147,6 +149,7 @@ Confirm `.env.local` contains:
 
 ```env
 NEXT_PUBLIC_DATA_MODE=mock
+NEXT_PUBLIC_REAL_STUDENT_IMPORT_ENABLED=false
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
@@ -160,6 +163,7 @@ Update `.env.local`:
 
 ```env
 NEXT_PUBLIC_DATA_MODE=supabase
+NEXT_PUBLIC_REAL_STUDENT_IMPORT_ENABLED=false
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY
 # Optional compatibility alias instead of the publishable variable:
@@ -192,7 +196,35 @@ Staging retention:
 - Run `select public.purge_student_import_staging(7);` as an authenticated `ICCO_HEAD` or `ADMIN` to soft-purge staging metadata older than seven days.
 - Configure a reviewed scheduled job only in the dev pilot after validating this function manually.
 
-## 8. Verify automatic fallback
+## 8. Prepare Real Student Import Phase 2 — keep disabled
+
+Real Import v1 accepts only `student_code`, `full_name`, `class_name`, `grade_level`, `graduation_year`, `homeroom_teacher`, `source_system`, `source_record_id`, and `is_active_student`. Date of birth, gender, student/parent contacts, parent name, and other sensitive fields are rejected.
+
+After applying the schema, verify the database gate remains false:
+
+```sql
+select setting_key, setting_value
+from public.system_settings
+where setting_key = 'real_student_import_enabled';
+```
+
+Do **not** enable either gate yet. After the reviewed first-five-row test is approved, enable only the protected `database-pilot` Preview environment:
+
+```env
+NEXT_PUBLIC_REAL_STUDENT_IMPORT_ENABLED=true
+```
+
+Then enable the dev-database gate in SQL Editor:
+
+```sql
+update public.system_settings
+set setting_value = 'true'::jsonb, updated_at = now()
+where setting_key = 'real_student_import_enabled';
+```
+
+Disable either gate immediately after the controlled test.
+
+## 9. Verify automatic fallback
 
 Keep `NEXT_PUBLIC_DATA_MODE=supabase`, remove the URL or both supported public key variables, and restart the app.
 
@@ -205,7 +237,7 @@ Expected:
 
 Repeat with an invalid `NEXT_PUBLIC_SUPABASE_URL` to verify query-failure fallback.
 
-## 9. Vercel Preview and Production restriction
+## 10. Vercel Preview and Production restriction
 
 Do not add these variables to Vercel Production:
 
@@ -213,12 +245,13 @@ Do not add these variables to Vercel Production:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_REAL_STUDENT_IMPORT_ENABLED=true`
 
 `vercel.json` intentionally contains no Supabase environment values. Production therefore remains in mock mode.
 
 Set Supabase variables only for the `database-pilot` Preview environment. Enable Vercel deployment protection or an equivalent access gate before testing any sensitive workflow. Confirm Production has no Supabase variables and resolves to mock mode after every environment change.
 
-## 10. Validation commands
+## 11. Validation commands
 
 ```bash
 pnpm lint

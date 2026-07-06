@@ -26,7 +26,7 @@ Validate the v1 schema, fake seed data, repository switching, security boundarie
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| DB-001 | Required tables | Query `information_schema.tables` for all eleven names | Eleven rows returned |
+| DB-001 | Required tables | Query `information_schema.tables` for all twelve names | Twelve rows returned |
 | DB-002 | Primary keys | Inspect constraints for each table | UUID PK exists on every table |
 | DB-003 | Foreign keys | Inspect `information_schema` or Supabase UI | All documented FKs exist |
 | DB-004 | Updated timestamps | Update one fake mutable row | `updated_at` increases automatically |
@@ -54,7 +54,7 @@ select
 from information_schema.table_constraints tc
 where tc.table_schema = 'public'
   and tc.table_name in (
-    'users', 'staff_profiles', 'students', 'counseling_cases', 'counseling_sessions',
+    'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
     'student_import_batches', 'student_import_staging'
   )
@@ -117,7 +117,7 @@ Expected `unsafe_seed_students`: `0`.
 
 | ID | Test | Procedure | Expected result |
 | --- | --- | --- | --- |
-| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all eleven tables |
+| SEC-001 | RLS enabled | Inspect `pg_class.relrowsecurity` | True for all twelve tables |
 | SEC-002 | Anonymous boundary | Query REST with anon key | Only narrow fake-student demo read succeeds; portal writes fail |
 | SEC-003 | Non-fake blocked | Query/write non-fake rows with ordinary token | Permission denied/no rows |
 | SEC-004 | No admin credential | Search source and environment files | No admin/secret key is requested or stored |
@@ -132,6 +132,11 @@ Expected `unsafe_seed_students`: `0`.
 | SEC-013 | Head import | Sign in as `ICCO_HEAD` and import fake rows | Transaction succeeds |
 | SEC-014 | Atomic rollback | Force an activity-log failure in a test transaction | No batch, staging, or student changes persist |
 | SEC-015 | Staging scrubbing | Inspect completed import staging | Raw PII is removed immediately |
+| SEC-016 | Real UI default | Build without real-import flag | Real tab/button disabled |
+| SEC-017 | Database gate default | Query `system_settings` | `real_student_import_enabled=false` |
+| SEC-018 | Single-gate bypass | Enable only environment or only database gate | Real import remains blocked |
+| SEC-019 | Counselor real RPC | Call real RPC as counselor | Permission denied |
+| SEC-020 | Anonymous real RPC | Call real RPC with publishable key only | Permission denied |
 
 RLS inspection:
 
@@ -141,7 +146,7 @@ from pg_class
 join pg_namespace on pg_namespace.oid = pg_class.relnamespace
 where pg_namespace.nspname = 'public'
   and relname in (
-    'users', 'staff_profiles', 'students', 'counseling_cases', 'counseling_sessions',
+    'users', 'staff_profiles', 'system_settings', 'students', 'counseling_cases', 'counseling_sessions',
     'internal_tasks', 'test_scores', 'consents', 'activity_logs',
     'student_import_batches', 'student_import_staging'
   )
@@ -199,6 +204,11 @@ The main demo pages must not import `@/lib/data` or the Supabase adapter directl
 | IMP-009 | Missing import policies | Supabase rejects confirmation with safe guidance; no key escalation |
 | IMP-010 | No hard delete | Importing inactive status updates the flag; existing row remains stored |
 | IMP-011 | Retention cleanup | Call `purge_student_import_staging(7)` as Head/Admin | Old staging PII/metadata is soft-purged |
+| IMP-012 | Real minimal template | Download real template | Exactly nine approved columns; no sensitive fields |
+| IMP-013 | Real required sources | Omit source system/record ID | Row rejected before confirmation |
+| IMP-014 | Sensitive real field | Populate DOB/contact/parent field | Row rejected and not staged/imported |
+| IMP-015 | Real code collision | Real import targets fake student code | Entire transaction rolls back |
+| IMP-016 | First-five limit procedure | Submit reviewed five-row file with both gates enabled | Counts/audit match exactly; gates disabled afterward |
 
 ## Build and static checks
 
@@ -236,3 +246,4 @@ The pilot package is accepted when:
 7. Production Vercel remains in mock mode.
 8. Anonymous portal requests redirect to `/login`; inactive/unmapped Auth users cannot open the portal.
 9. Fake Supabase import succeeds only for `ICCO_HEAD`/`ADMIN` through the transactional RPC.
+10. Real import remains disabled unless both Preview and database gates are explicitly true.

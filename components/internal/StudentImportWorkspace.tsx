@@ -25,16 +25,20 @@ import {
   parseStudentCsv,
   validateStudentImportRows,
   type ParsedStudentCsvRow,
+  type StudentImportMode,
 } from "@/lib/import/student-csv";
 import type { StudentImportResult } from "@/lib/data/student-import";
 
 export function StudentImportWorkspace({
   existingStudentCodes,
   initialStatus,
+  realImportEnabled,
 }: {
   existingStudentCodes: string[];
   initialStatus: DataAccessStatus;
+  realImportEnabled: boolean;
 }) {
+  const [mode, setMode] = useState<StudentImportMode>("fake");
   const [file, setFile] = useState<File | null>(null);
   const [rows, setRows] = useState<ParsedStudentCsvRow[]>([]);
   const [parseErrors, setParseErrors] = useState<string[]>([]);
@@ -44,8 +48,8 @@ export function StudentImportWorkspace({
   const [reading, setReading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const validation = useMemo(
-    () => validateStudentImportRows(rows, existingStudentCodes),
-    [existingStudentCodes, rows],
+    () => validateStudentImportRows(rows, existingStudentCodes, mode),
+    [existingStudentCodes, mode, rows],
   );
   const validRows = validation.filter((row) => !row.errors.length);
   const errorRows = validation.filter((row) => row.errors.length);
@@ -75,7 +79,7 @@ export function StudentImportWorkspace({
     setFile(selected);
     setReading(true);
     try {
-      const parsed = parseStudentCsv(await selected.text());
+      const parsed = parseStudentCsv(await selected.text(), mode);
       setRows(parsed.rows);
       setParseErrors(parsed.errors);
     } catch {
@@ -91,6 +95,7 @@ export function StudentImportWorkspace({
     setSubmitError("");
     startTransition(async () => {
       const response = await confirmStudentImportAction({
+        mode,
         fileName: file.name,
         fileSize: file.size,
         rows,
@@ -109,7 +114,7 @@ export function StudentImportWorkspace({
         description="Tải CSV, xem trước và sửa lỗi theo từng dòng trước khi xác nhận. Dòng lỗi sẽ luôn bị bỏ qua."
         actions={
           <a
-            href="/api/student-import-template"
+            href={`/api/student-import-template?mode=${mode}`}
             download
             className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-[#23328C] hover:bg-slate-50"
           >
@@ -118,6 +123,23 @@ export function StudentImportWorkspace({
         }
       />
       <DataModeNotice status={status} />
+      <Card className="p-2">
+        <div className="grid gap-2 sm:grid-cols-2">
+          <button
+            onClick={() => { reset(); setMode("fake"); }}
+            className={`rounded-xl px-4 py-3 text-sm font-black ${mode === "fake" ? "bg-[#23328C] text-white" : "bg-slate-50 text-slate-600"}`}
+          >
+            1. Fake import test
+          </button>
+          <button
+            disabled={!realImportEnabled}
+            onClick={() => { reset(); setMode("real"); }}
+            className={`rounded-xl px-4 py-3 text-sm font-black disabled:cursor-not-allowed disabled:opacity-45 ${mode === "real" ? "bg-[#D21235] text-white" : "bg-slate-50 text-slate-600"}`}
+          >
+            2. Real import controlled {!realImportEnabled && "· Disabled"}
+          </button>
+        </div>
+      </Card>
       {status.effectiveMode === "mock" && (
         <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
@@ -125,7 +147,11 @@ export function StudentImportWorkspace({
         </div>
       )}
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm leading-6 text-blue-900">
-        <strong>Real student data import is disabled until authentication, RBAC, RLS and transaction checks pass.</strong> Pilot chỉ chấp nhận mã giả dạng <strong>FAKE-*</strong>.
+        {mode === "real" ? (
+          <strong>Real student import is restricted to ICCO_HEAD/ADMIN and should only be used after data review.</strong>
+        ) : (
+          <><strong>Fake test mode.</strong> Chỉ chấp nhận mã dạng <strong>FAKE-NSHM-*</strong>.</>
+        )}
       </div>
 
       {success ? (
@@ -133,7 +159,7 @@ export function StudentImportWorkspace({
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-700">
             <CheckCircle2 className="h-7 w-7" />
           </div>
-          <h2 className="mt-4 text-2xl font-black text-[#23328C]">Import hoàn tất</h2>
+          <h2 className="mt-4 text-2xl font-black text-[#23328C]">{mode === "real" ? "Real import hoàn tất" : "Fake import hoàn tất"}</h2>
           <p className="mt-2 text-sm text-slate-500">Batch {success.batchId} · {success.importedStudents} học sinh đã được upsert.</p>
           <div className="mx-auto mt-6 grid max-w-3xl gap-3 sm:grid-cols-4">
             {[
@@ -195,7 +221,7 @@ export function StudentImportWorkspace({
               {submitError && <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700">{submitError}</div>}
               <div className="flex flex-wrap justify-end gap-3">
                 <Button variant="secondary" onClick={reset} disabled={isPending}>Hủy</Button>
-                <Button onClick={confirm} disabled={isPending || !validRows.length}>{isPending ? <><LoaderCircle className="h-4 w-4 animate-spin" /> Đang import...</> : <>Xác nhận import {validRows.length} dòng</>}</Button>
+                <Button onClick={confirm} disabled={isPending || !validRows.length || (mode === "real" && !realImportEnabled)}>{isPending ? <><LoaderCircle className="h-4 w-4 animate-spin" /> Đang import...</> : <>Xác nhận {mode === "real" ? "real" : "fake"} import {validRows.length} dòng</>}</Button>
               </div>
             </>
           ) : !reading && !parseErrors.length ? (

@@ -18,6 +18,18 @@ export const STUDENT_CSV_HEADERS = [
 ] as const;
 
 export type StudentCsvField = (typeof STUDENT_CSV_HEADERS)[number];
+export type StudentImportMode = "fake" | "real";
+export const REAL_STUDENT_CSV_HEADERS = [
+  "student_code",
+  "full_name",
+  "class_name",
+  "grade_level",
+  "graduation_year",
+  "homeroom_teacher",
+  "source_system",
+  "source_record_id",
+  "is_active_student",
+] as const satisfies readonly StudentCsvField[];
 export type StudentCsvValues = Record<StudentCsvField, string>;
 
 export type ParsedStudentCsvRow = {
@@ -58,12 +70,26 @@ export type CsvParseResult = {
   errors: string[];
 };
 
-const requiredFields: StudentCsvField[] = [
+const fakeRequiredFields: StudentCsvField[] = [
   "student_code",
   "full_name",
   "class_name",
   "grade_level",
   "graduation_year",
+];
+const realRequiredFields: StudentCsvField[] = [
+  ...fakeRequiredFields,
+  "source_system",
+  "source_record_id",
+];
+const realForbiddenFields: StudentCsvField[] = [
+  "date_of_birth",
+  "gender",
+  "academic_track",
+  "student_email",
+  "parent_name",
+  "parent_phone",
+  "parent_email",
 ];
 
 function emptyValues(): StudentCsvValues {
@@ -110,7 +136,10 @@ function parseMatrix(text: string): string[][] {
   return matrix;
 }
 
-export function parseStudentCsv(text: string): CsvParseResult {
+export function parseStudentCsv(
+  text: string,
+  mode: StudentImportMode = "fake",
+): CsvParseResult {
   const errors: string[] = [];
   let matrix: string[][];
   try {
@@ -126,6 +155,7 @@ export function parseStudentCsv(text: string): CsvParseResult {
   const headers = matrix[0].map((header) => header.trim().toLowerCase());
   const duplicates = headers.filter((header, index) => headers.indexOf(header) !== index);
   if (duplicates.length) errors.push(`Cột bị lặp: ${[...new Set(duplicates)].join(", ")}.`);
+  const requiredFields = mode === "real" ? realRequiredFields : fakeRequiredFields;
   for (const field of requiredFields) {
     if (!headers.includes(field)) errors.push(`Thiếu cột bắt buộc: ${field}.`);
   }
@@ -181,6 +211,7 @@ function validEmail(value: string): boolean {
 export function validateStudentImportRows(
   rows: ParsedStudentCsvRow[],
   existingStudentCodes: Iterable<string>,
+  mode: StudentImportMode = "fake",
 ): ValidatedStudentImportRow[] {
   const existing = new Set(
     [...existingStudentCodes].map((code) => code.trim().toUpperCase()),
@@ -200,11 +231,19 @@ export function validateStudentImportRows(
     const active = parseBoolean(values.is_active_student);
     const gender = parseGender(values.gender);
 
+    const requiredFields = mode === "real" ? realRequiredFields : fakeRequiredFields;
     for (const field of requiredFields) {
       if (!values[field].trim()) errors.push(`${field} là bắt buộc.`);
     }
-    if (code && !/^FAKE-[A-Z0-9_-]{3,40}$/.test(code)) {
-      errors.push("Pilot chỉ cho phép student_code giả theo mẫu FAKE-*.");
+    if (mode === "fake" && code && !/^FAKE-NSHM-[A-Z0-9_-]{1,32}$/.test(code)) {
+      errors.push("Fake mode chỉ cho phép student_code theo mẫu FAKE-NSHM-*.");
+    }
+    if (
+      mode === "real" &&
+      code &&
+      (code.startsWith("FAKE-") || !/^[A-Z0-9][A-Z0-9._-]{2,49}$/.test(code))
+    ) {
+      errors.push("Real mode yêu cầu mã thật hợp lệ và không được bắt đầu bằng FAKE-.");
     }
     if (code && (counts.get(code) ?? 0) > 1) {
       errors.push("student_code bị trùng trong tệp tải lên.");
@@ -225,8 +264,15 @@ export function validateStudentImportRows(
     if (values.student_email && !validEmail(values.student_email)) errors.push("student_email không hợp lệ.");
     if (values.parent_email && !validEmail(values.parent_email)) errors.push("parent_email không hợp lệ.");
     if (active === null) errors.push("is_active_student phải là true/false, 1/0 hoặc yes/no.");
+    if (mode === "real") {
+      for (const field of realForbiddenFields) {
+        if (values[field].trim()) {
+          errors.push(`${field} không được phép trong Real Import v1.`);
+        }
+      }
+    }
     if (code && existing.has(code)) warnings.push("Mã đã tồn tại; dòng này sẽ cập nhật hồ sơ hiện có.");
-    if (!values.source_system) warnings.push("Chưa có source_system.");
+    if (mode === "fake" && !values.source_system) warnings.push("Chưa có source_system.");
 
     const normalized: NormalizedStudentImport = {
       student_code: code,
@@ -234,14 +280,14 @@ export function validateStudentImportRows(
       class_name: values.class_name.trim(),
       grade_level: Number.isInteger(grade) ? grade : null,
       graduation_year: Number.isInteger(graduationYear) ? graduationYear : null,
-      date_of_birth: values.date_of_birth || null,
-      gender: gender === "invalid" ? null : gender,
+      date_of_birth: mode === "real" ? null : values.date_of_birth || null,
+      gender: mode === "real" ? null : gender === "invalid" ? null : gender,
       homeroom_teacher: values.homeroom_teacher || null,
-      academic_track: values.academic_track || null,
-      student_email: values.student_email || null,
-      parent_name: values.parent_name || null,
-      parent_phone: values.parent_phone || null,
-      parent_email: values.parent_email || null,
+      academic_track: mode === "real" ? null : values.academic_track || null,
+      student_email: mode === "real" ? null : values.student_email || null,
+      parent_name: mode === "real" ? null : values.parent_name || null,
+      parent_phone: mode === "real" ? null : values.parent_phone || null,
+      parent_email: mode === "real" ? null : values.parent_email || null,
       source_system: values.source_system || null,
       source_record_id: values.source_record_id || null,
       is_active_student: active ?? true,
@@ -258,3 +304,4 @@ export function validateStudentImportRows(
 }
 
 export const STUDENT_CSV_TEMPLATE = `${STUDENT_CSV_HEADERS.join(",")}\n`;
+export const REAL_STUDENT_CSV_TEMPLATE = `${REAL_STUDENT_CSV_HEADERS.join(",")}\n`;

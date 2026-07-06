@@ -237,4 +237,43 @@ export class SupabaseInternalOperationsRepository
       imported_students: number;
     };
   }
+
+  async importRealStudentsTransaction(input: {
+    fileName: string;
+    fileSize: number;
+    rows: import("@/types/database").Json;
+  }) {
+    const endpoint = new URL(
+      "/rest/v1/rpc/import_real_students_transaction",
+      this.config.url,
+    );
+    const response = await fetch(endpoint, {
+      method: "POST",
+      cache: "no-store",
+      headers: {
+        apikey: this.config.apiKey,
+        Authorization: `Bearer ${this.config.accessToken ?? this.config.apiKey}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        p_source_file_name: input.fileName,
+        p_source_file_size_bytes: input.fileSize,
+        p_rows: input.rows,
+      }),
+    });
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(`Transactional real import failed (${response.status}): ${detail}`);
+    }
+    return (await response.json()) as {
+      batch_id: string;
+      total_rows: number;
+      valid_rows: number;
+      error_rows: number;
+      new_students: number;
+      updated_students: number;
+      imported_students: number;
+    };
+  }
 }

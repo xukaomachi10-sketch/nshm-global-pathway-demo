@@ -23,8 +23,8 @@ Security Phase 1 uses Supabase Auth plus active `staff_profiles`. Portal pages a
 | `counseling_cases` | C/R/U All | C/R/U All | C/R/U assigned |
 | `counseling_sessions` | C/R/U All | C/R/U All | C/R/U own |
 | `internal_tasks` | C/R/U All | C/R/U All | C/R/U own/assigned case |
-| `student_import_batches` | C/R/U fake only | C/R/U fake only | - |
-| `student_import_staging` | C/R/U fake only | C/R/U fake only | - |
+| `student_import_batches` | R; C/U via RPC | R; C/U via RPC | - |
+| `student_import_staging` | R; C/U via RPC | R; C/U via RPC | - |
 | `activity_logs` | C/R All | C/R All | C/R own context |
 
 ## Enforcement helpers
@@ -41,12 +41,14 @@ The publishable key identifies the Supabase project but grants no staff access b
 - The Import menu and page are available only to `ICCO_HEAD` and `ADMIN`.
 - The server action repeats the role check.
 - `import_fake_students_transaction()` repeats authorization and accepts only complete `FAKE-*` rows with `is_fake=true`.
+- `import_real_students_transaction()` requires the same roles plus both the Preview feature flag and the default-false database setting.
+- Real Import v1 accepts only nine minimal, non-sensitive master fields and rejects `FAKE-*` codes.
 - Staging, upsert, activity logs, batch completion, and PII scrubbing run in one transaction.
 - Successful imports immediately scrub staging row PII. `purge_student_import_staging()` provides the reviewed retention cleanup path.
 
 ## Phase 1 restrictions
 
-- Use fake data only; real import remains explicitly blocked.
+- Real import remains disabled by default and must not be enabled before the reviewed first-five-row test.
 - Protect the `database-pilot` Preview before sensitive testing.
 - Access-token sessions expire after at most one hour and require login again; refresh rotation is a later hardening item.
 - No student or parent login exists.

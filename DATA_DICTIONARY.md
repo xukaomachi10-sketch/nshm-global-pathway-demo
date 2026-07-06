@@ -61,6 +61,18 @@ Authenticated staff authorization profile. One row maps one Supabase Auth user t
 
 Classification: `internal`. Authentication passwords and tokens remain in Supabase Auth/cookies and are never stored here.
 
+## `system_settings`
+
+Database-enforced operational gates. The seeded `real_student_import_enabled` value is `false`; it must remain false until the controlled first-five-row review is approved.
+
+| Column | Type | Null | Key/default | Description |
+| --- | --- | --- | --- | --- |
+| `setting_key` | text | No | PK | Stable setting name |
+| `setting_value` | jsonb | No |  | Typed setting value |
+| `description` | text | Yes |  | Operator guidance |
+| `created_at` | timestamptz | No | `now()` | Creation time |
+| `updated_at` | timestamptz | No | trigger | Last controlled change |
+
 ## `students`
 
 Student master record used by all internal operations workflows.
@@ -113,7 +125,8 @@ One auditable confirmation attempt for a CSV file. No source file bytes are stor
 | `source_file_size_bytes` | bigint | Yes | Non-negative | Upload size; file content is not retained |
 | `batch_status` | text | No | Checked lifecycle | `uploaded`, `validated`, `importing`, `completed`, `completed_with_errors`, or `failed` |
 | `data_mode` | text | No | `mock` or `supabase` | Repository used for the confirmation |
-| `is_fake_only` | boolean | No | Must be `true` | Pilot safety marker enforced by RLS |
+| `import_mode` | text | No | `fake` | `fake` or `real` transactional workflow |
+| `is_fake_only` | boolean | No | `true` | Must match import mode: true for fake, false for real |
 | `total_rows` | integer | No | `0` | Non-empty CSV data rows |
 | `valid_rows` | integer | No | `0` | Rows passing server validation |
 | `error_rows` | integer | No | `0` | Rows rejected by validation |
@@ -150,7 +163,9 @@ Validated row snapshot for a batch. Invalid rows are persisted only as sanitized
 | `updated_at` | timestamptz | No | trigger | Last update time |
 | `deleted_at` | timestamptz | Yes |  | Soft-delete time |
 
-Classification: pilot fake data only. Successful transactional imports immediately scrub `raw_data` and reduce `normalized_data` to a minimal code/status marker. The `purge_student_import_staging()` function soft-purges older staging metadata after the configured retention period.
+Classification: restricted import metadata. Both fake and controlled real transactions immediately scrub `raw_data`; real mode retains only student/source identifiers needed for audit. `purge_student_import_staging()` soft-purges older metadata.
+
+Real Import v1 writes only the nine minimal master fields documented in `DATABASE_SETUP.md`. It does not write date of birth, gender, student email, parent name, parent phone, or parent email.
 
 ## `counseling_cases`
 

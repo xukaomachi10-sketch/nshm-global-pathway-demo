@@ -467,4 +467,10 @@ export class MockInternalOperationsRepository
       new Error("Mock imports use the in-memory pilot transaction path."),
     );
   }
+
+  importRealStudentsTransaction(): Promise<never> {
+    return Promise.reject(
+      new Error("Real student import is unavailable in mock mode."),
+    );
+  }
 }

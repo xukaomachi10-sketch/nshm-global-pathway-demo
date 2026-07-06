@@ -64,4 +64,17 @@ export interface InternalOperationsRepository {
     updated_students: number;
     imported_students: number;
   }>;
+  importRealStudentsTransaction(input: {
+    fileName: string;
+    fileSize: number;
+    rows: Json;
+  }): Promise<{
+    batch_id: string;
+    total_rows: number;
+    valid_rows: number;
+    error_rows: number;
+    new_students: number;
+    updated_students: number;
+    imported_students: number;
+  }>;
 }
